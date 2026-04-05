@@ -3,6 +3,7 @@ import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { SiteFinalCta } from "@/components/SiteFinalCta";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased text-black">
         <Navbar />
         <main className="flex-1">{children}</main>
+        <SiteFinalCta />
         <Footer />
       </body>
     </html>

@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  computeHeroHeadlineFontSizePx,
+  HERO_HEADLINE_LINE_HEIGHT_RATIO,
+} from "@/lib/heroHeadlineFont";
 const HERO_IMAGES = [
   "/images/hero.jpg",
   "/images/hero2.jpg",
@@ -36,6 +40,26 @@ const listChild = {
 
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
+  const heroCopyRef = useRef<HTMLDivElement>(null);
+  const [heroHeadlinePx, setHeroHeadlinePx] = useState<number | undefined>(
+    undefined,
+  );
+
+  useLayoutEffect(() => {
+    const el = heroCopyRef.current;
+    if (!el) return;
+
+    const update = () => {
+      const w = el.getBoundingClientRect().width;
+      if (w < 1) return;
+      setHeroHeadlinePx(computeHeroHeadlineFontSizePx(w));
+    };
+
+    update();
+    const ro = new ResizeObserver(() => update());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -78,10 +102,11 @@ export default function Home() {
 
         <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-3 pb-10 pt-20 sm:px-4 sm:pb-12 sm:pt-24 lg:justify-center lg:px-5 lg:pb-14 lg:pt-12">
           <motion.div
+            ref={heroCopyRef}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] as const }}
-            className="max-w-2xl [text-shadow:0_1px_2px_rgba(0,0,0,0.55),0_4px_24px_rgba(0,0,0,0.35)]"
+            className="w-full max-w-2xl [text-shadow:0_1px_2px_rgba(0,0,0,0.55),0_4px_24px_rgba(0,0,0,0.35)]"
           >
             <p className="m-0 max-w-2xl">
               <span className="relative inline-block max-w-[min(100%,22rem)] rounded-full bg-[#e76fab] px-3.5 py-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.28)] ring-1 ring-white/25 [text-shadow:none] sm:px-4 sm:py-2">
@@ -92,7 +117,19 @@ export default function Home() {
             </p>
             <h1
               id="hero-heading"
-              className="mt-5 text-balance text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl sm:leading-[1.08] md:text-6xl lg:text-[3.85rem] lg:leading-[1.06]"
+              className={
+                heroHeadlinePx !== undefined
+                  ? "mt-5 text-pretty font-semibold tracking-tight text-white sm:text-balance"
+                  : "mt-5 text-balance text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl sm:leading-[1.08] md:text-6xl lg:text-[3.85rem] lg:leading-[1.06]"
+              }
+              style={
+                heroHeadlinePx !== undefined
+                  ? {
+                      fontSize: heroHeadlinePx,
+                      lineHeight: HERO_HEADLINE_LINE_HEIGHT_RATIO,
+                    }
+                  : undefined
+              }
             >
               A place for widows to feel supported, understood, and{" "}
               <span className="relative inline-block">
@@ -490,40 +527,6 @@ export default function Home() {
               Join the list
             </button>
           </form>
-        </div>
-      </motion.section>
-
-      {/* ——— FINAL CTA ——— */}
-      <motion.section
-        className="relative overflow-hidden border-t border-[#d85e9a]/30 bg-[#c94d8a] px-3 py-24 sm:px-4 lg:px-5 lg:py-32"
-        aria-labelledby="final-cta-heading"
-        {...fadeUp}
-      >
-        <div className="relative mx-auto max-w-3xl text-center">
-          <h2
-            id="final-cta-heading"
-            className="text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl"
-          >
-            You do not have to navigate this alone.
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white">
-            When you&apos;re ready, there&apos;s a next step that meets you where
-            you are—clear, compassionate, and grounded in lived experience.
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/retreats"
-              className="inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#c94d8a] shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
-            >
-              Join Upcoming Retreat
-            </Link>
-            <Link
-              href="/about"
-              className="inline-flex w-full items-center justify-center rounded-full border-2 border-white bg-white px-8 py-3.5 text-base font-semibold text-black transition-[background-color] duration-200 hover:bg-transparent hover:text-white sm:w-auto"
-            >
-              Learn More About It&apos;s Lifey
-            </Link>
-          </div>
         </div>
       </motion.section>
     </div>
