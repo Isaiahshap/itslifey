@@ -1,7 +1,15 @@
-import Link from "next/link";
+"use client";
 
-/** Global pre-footer CTA (renders from root layout; no Framer Motion). */
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+/** Global pre-footer CTA (renders from root layout; no Framer Motion). Hidden on Summer retreat page — it has its own closing CTA. */
 export function SiteFinalCta() {
+  const pathname = usePathname();
+  if (pathname === "/retreats/upcoming") {
+    return null;
+  }
+
   return (
     <section
       className="relative overflow-hidden border-t border-[#d85e9a]/30 bg-[#c94d8a] px-3 py-24 sm:px-4 lg:px-5 lg:py-32"

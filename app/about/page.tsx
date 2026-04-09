@@ -176,15 +176,15 @@ export default function AboutPage() {
                 community and shared experience, we can find our way through.
               </p>
             </div>
-            <figure className="m-0 w-full shrink-0 lg:max-w-[min(100%,15.5rem)] xl:max-w-[17rem]">
+            <figure className="m-0 mx-auto w-full max-w-[19rem] shrink-0 lg:mx-0 lg:max-w-[min(100%,18rem)] xl:max-w-[20rem]">
               <div className="overflow-hidden rounded-sm bg-[#ebe6df] shadow-sm ring-1 ring-black/[0.06]">
                 <Image
-                  src="/images/jen2.jpg"
-                  alt="Jennifer seated on a light wood floor, smiling warmly in a blue dress"
+                  src="/images/jen4.jpg"
+                  alt="Jennifer, founder of It's Lifey"
                   width={600}
-                  height={600}
-                  className="aspect-square h-auto w-full object-cover"
-                  sizes="(max-width: 1024px) 100vw, 17rem"
+                  height={750}
+                  className="aspect-[4/5] h-auto w-full object-cover"
+                  sizes="(max-width: 1024px) 100vw, 20rem"
                 />
               </div>
             </figure>

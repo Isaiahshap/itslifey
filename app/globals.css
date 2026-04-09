@@ -21,4 +21,31 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-nunito-sans), system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+@keyframes retreat-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.retreat-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: retreat-marquee-scroll 55s linear infinite;
+}
+
+.retreat-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retreat-marquee-track {
+    animation: none;
+    transform: none;
+  }
 }

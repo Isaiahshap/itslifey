@@ -47,5 +47,19 @@ export function computeHeroHeadlineFontSizePx(
     }
   }
 
-  return best;
+  /* Slightly smaller type on phone so the hero stack breathes (CTAs stay full size). */
+  if (w < 480) {
+    best = Math.round(best * 0.84);
+  } else if (w < 640) {
+    best = Math.round(best * 0.9);
+  } else if (w >= 1024) {
+    /* Wider hero column on lg+ — keep type a touch smaller so lines feel airy, not squeezed. */
+    best = Math.round(best * 0.83);
+    best = Math.min(best, 50);
+  } else if (w >= 768) {
+    best = Math.round(best * 0.92);
+    best = Math.min(best, 54);
+  }
+
+  return Math.max(MIN_PX, best);
 }
