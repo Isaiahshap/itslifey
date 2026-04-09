@@ -29,12 +29,19 @@ const retreatSubLinks = [
 const supportSubLinks = [
   { href: "/support-groups", label: "Support Groups" },
   {
-    href: "/hopehub#hopehub-inside-heading",
-    label: "Resources",
+    href: "/support/virtual-healing-experiences",
+    label: "Virtual Healing Experiences",
   },
+  { href: "/resources", label: "Resources" },
 ] as const;
 
 const navHopeHub = { href: "/hopehub", label: "Hope Hub" } as const;
+
+/** Primary header CTA — upcoming retreat (summer). */
+const navPrimaryCta = {
+  href: "/retreats/upcoming",
+  label: "Join our summer retreat",
+} as const;
 
 function pathMatchesHref(pathname: string, href: string) {
   const base = href.split("#")[0] ?? href;
@@ -373,10 +380,10 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/retreats/upcoming"
-            className="hidden rounded-full bg-[#e76fab] px-5 py-2.5 text-[15px] font-semibold text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md sm:inline-flex"
+            href={navPrimaryCta.href}
+            className="hidden rounded-full bg-[#e76fab] px-4 py-2.5 text-[14px] font-semibold leading-snug text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md sm:inline-flex sm:px-5 sm:text-[15px] sm:leading-normal"
           >
-            Join Upcoming Retreat
+            {navPrimaryCta.label}
           </Link>
           <button
             type="button"
@@ -605,11 +612,11 @@ export function Navbar() {
 
                   <motion.div variants={mobileOverlayRow} className="pt-4">
                     <Link
-                      href="/retreats/upcoming"
-                      className="block rounded-full bg-white px-6 py-4 text-center text-[1rem] font-semibold text-[#c43d7a] shadow-[0_16px_40px_rgba(0,0,0,0.12)] transition-[transform,box-shadow,background-color] duration-200 hover:bg-[#fff8fb] hover:shadow-[0_20px_48px_rgba(0,0,0,0.14)] active:scale-[0.99]"
+                      href={navPrimaryCta.href}
+                      className="block rounded-full bg-white px-6 py-4 text-center text-[1rem] font-semibold leading-snug text-[#c43d7a] shadow-[0_16px_40px_rgba(0,0,0,0.12)] transition-[transform,box-shadow,background-color] duration-200 hover:bg-[#fff8fb] hover:shadow-[0_20px_48px_rgba(0,0,0,0.14)] active:scale-[0.99]"
                       onClick={closeMobileNav}
                     >
-                      Join Upcoming Retreat
+                      {navPrimaryCta.label}
                     </Link>
                   </motion.div>
                 </motion.div>

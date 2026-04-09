@@ -1,15 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  BookOpen,
-  CalendarHeart,
-  HeartHandshake,
-  MessageCircle,
-  Mic2,
-  MonitorPlay,
-  Users,
-} from "lucide-react";
+import { HeartHandshake } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "HopeHub — Free online community for widows",
@@ -30,44 +22,11 @@ const HOPEHUB_JOIN_URL =
 
 const HOPEHUB_MEMBER_LOGIN_URL = "https://hopehub.circle.so";
 
-const VIDEO_INTRO =
-  "https://itslifey.com/wp-content/uploads/2026/02/AQPoYR04ZdxlPRzYl_JTjjRX-Vg6TuN2D6yL8ntO1SRRVy-uUIlek2ibpVU5iFIsGKVw8FxuwHfcGbap5bRMI1CKkwGVd9xI98lm3-UTFQ.mp4";
+/** Matches homepage HopeHub section: local preview + YouTube walkthrough */
+const HOPEHUB_PREVIEW_VIDEO_SRC = "/images/hopehub.mp4";
 
-const VIDEO_DEMO =
-  "https://itslifey.com/wp-content/uploads/2026/02/full-demo.mp4";
-
-const insideItems = [
-  {
-    title: "1:1 conversations",
-    body: "A private space to connect with widows who understand—ask questions, share what you’re going through, and know you’re not alone.",
-    icon: MessageCircle,
-  },
-  {
-    title: "Support groups",
-    body: "Hosted multiple times a week—topic-driven (loneliness, the emotional rollercoaster, honoring your person, new skills, solo parenting) and open discussion.",
-    icon: Users,
-  },
-  {
-    title: "Expert Q&A",
-    body: "Live sessions with therapists, financial advisors, attorneys, and healers. Ask in real time or catch the replay—recordings stay in the community.",
-    icon: Mic2,
-  },
-  {
-    title: "Resource library",
-    body: "Vetted professionals, podcast ideas, grief gifts, and more—so you spend less time searching and more time being cared for.",
-    icon: BookOpen,
-  },
-  {
-    title: "Virtual events",
-    body: "Healing sessions, workshops, and chances to be together online when in-person isn’t possible.",
-    icon: MonitorPlay,
-  },
-  {
-    title: "In-person retreats",
-    body: "Pathways to Widow Wellness Retreats and other gatherings when you’re ready to meet face to face.",
-    icon: CalendarHeart,
-  },
-] as const;
+const HOPEHUB_WALKTHROUGH_EMBED_SRC =
+  "https://www.youtube-nocookie.com/embed/k4mm-kM_4Gk?rel=0";
 
 const forYouIf = [
   "You’ve lost your spouse or partner and feel like no one truly understands what you’re going through.",
@@ -132,11 +91,11 @@ export default function HopeHubPage() {
         aria-labelledby="hopehub-hero-heading"
       >
         <Image
-          src="/images/Hopehub/hopehubhero.jpg"
-          alt="Group of women smiling together outdoors among green trees, representing HopeHub community"
+          src="/images/Retreats/fall%202025/IMG_230434_0.webp"
+          alt="Widows together during the fall retreat weekend at Lake Winnipesaukee"
           fill
           priority
-          className="object-cover object-[center_40%]"
+          className="object-cover object-center"
           sizes="100vw"
         />
         <div
@@ -177,62 +136,49 @@ export default function HopeHubPage() {
         </div>
       </section>
 
-      {/* Editorial open: dark panel */}
       <section
-        className="border-b border-white/10 bg-[#2e2e2c] py-16 text-white sm:py-20 lg:py-28"
+        className="relative overflow-hidden border-b border-[#d85e9a] bg-[#e76fab]"
         aria-labelledby="hopehub-connection-heading"
       >
-        <div className={shell}>
-          <h2 id="hopehub-connection-heading" className="sr-only">
-            Why HopeHub exists
-          </h2>
-          <div className="lg:grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16">
-            <div className="lg:col-span-5 xl:col-span-4">
-              <div
-                className="mb-8 h-px w-11 bg-[#e76fab] sm:mb-10"
-                aria-hidden
-              />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-white/55">
-                Free · Online · By a widow
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_70%_at_20%_30%,rgba(255,255,255,0.14),transparent_55%)]"
+          aria-hidden
+        />
+        <div className={`${shell} relative py-14 sm:py-16 lg:py-20`}>
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
+            <div className="max-w-[42rem] border-l-2 border-white/35 pl-6 sm:pl-7 lg:col-span-7 xl:col-span-6">
+              <h2
+                id="hopehub-connection-heading"
+                className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/75 sm:text-xs"
+              >
+                Why HopeHub exists
+              </h2>
+              <p className="mt-5 text-pretty text-2xl font-semibold leading-[1.25] tracking-[-0.02em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.08)] sm:text-[1.65rem] sm:leading-[1.22] lg:text-[1.85rem]">
+                No one was meant to carry grief alone.
               </p>
-              <p className="mt-8 text-pretty text-2xl font-semibold leading-[1.18] tracking-[-0.02em] text-white sm:text-3xl sm:leading-[1.14] lg:text-[2.125rem] lg:leading-[1.12]">
-                Connection isn&apos;t just life-changing—it&apos;s lifesaving.
-              </p>
-            </div>
-            <div
-              className="mt-12 space-y-6 text-pretty text-[1.0625rem] leading-[1.82] text-white/85 sm:text-lg sm:leading-[1.78] lg:col-span-7 lg:mt-0 xl:col-span-8 lg:columns-2 lg:gap-x-12 lg:[column-fill:balance]"
-            >
-              <p className="break-inside-avoid">
-                HopeHub is an online community for widows, by a widow, built on
-                one belief: no woman should grieve alone.
-              </p>
-              <p className="break-inside-avoid">
-                Inside, you&apos;ll find women who speak your language and never
-                judge your feelings—along with access to trusted experts:
-                therapists, financial advisors, attorneys, holistic healers, and
-                fellow widows who can help with the emotional and logistical
-                weight of widowhood.
-              </p>
-              <p className="break-inside-avoid">
-                This space welcomes anyone who has lost a partner—married or not,
-                from every background and identity.
+              <p
+                className={`mt-6 text-pretty text-lg leading-[1.78] text-white/92 sm:text-[1.125rem] sm:leading-[1.76] lg:text-xl lg:leading-[1.72]`}
+              >
+                HopeHub is a free, private online community for widows—created by
+                someone who has lived this loss. Inside, you&apos;ll find women
+                who understand without a long backstory: real conversation, steady
+                encouragement, and space to feel what you feel. When the practical
+                side of life gets heavy, therapists, advisors, and other
+                professionals show up here too. Whether your loss was recent or
+                years ago, you belong.
               </p>
             </div>
-          </div>
-          <div className="mt-14 sm:mt-16 lg:mt-20 lg:grid lg:grid-cols-12 lg:items-stretch lg:gap-10 xl:gap-14">
-            <figure className="border-l-2 border-[#e76fab] pl-6 sm:pl-8 lg:col-span-7">
-              <blockquote className="m-0 text-lg font-medium leading-snug text-white sm:text-xl sm:leading-relaxed lg:text-[1.35rem] lg:leading-relaxed">
-                <p className="m-0">
-                  You may arrive feeling uncertain or alone.
-                  <br />
-                  You can leave knowing you&apos;ve found your people.
-                </p>
-              </blockquote>
-            </figure>
-            <p className="mt-8 text-pretty border border-white/15 bg-white/[0.08] px-6 py-5 text-[1.0625rem] font-medium leading-relaxed text-white/95 shadow-sm backdrop-blur-[2px] sm:px-7 sm:py-6 lg:col-span-5 lg:mt-0 lg:self-center lg:px-8 lg:py-8">
-              No more navigating a world that doesn&apos;t understand you.
-              Let&apos;s do this together.
-            </p>
+            <div className="relative mx-auto w-full max-w-sm lg:col-span-5 xl:col-span-6 lg:mx-0 lg:max-w-none lg:justify-self-end">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-[0_28px_64px_-24px_rgba(0,0,0,0.35)] ring-2 ring-white/30 sm:rounded-[1.35rem] lg:aspect-auto lg:h-[min(72vh,640px)]">
+                <Image
+                  src="/images/33958e9aeb59efedea29fdaba7824398.jpeg"
+                  alt="Group of women together outdoors in autumn, supporting one another"
+                  fill
+                  className="object-cover object-[center_35%]"
+                  sizes="(max-width: 1023px) 100vw, 42vw"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -249,7 +195,7 @@ export default function HopeHubPage() {
             {[
               { stat: "Hundreds", label: "of members" },
               { stat: "Daily", label: "new connections" },
-              { stat: "Weekly", label: "widow meetups" },
+              { stat: "Monthly", label: "widow meetups" },
               { stat: "24/7", label: "community access" },
             ].map(({ stat, label }, i) => (
               <div
@@ -265,55 +211,6 @@ export default function HopeHubPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section
-        className="py-16 sm:py-20 lg:py-28"
-        aria-labelledby="hopehub-inside-heading"
-      >
-        <div className={shell}>
-          <div className="flex flex-col gap-4 border-b border-[#e3ddd4] pb-10 lg:flex-row lg:items-end lg:justify-between lg:pb-12">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#666766]">
-                Inside the community
-              </p>
-              <h2
-                id="hopehub-inside-heading"
-                className="mt-3 max-w-xl text-pretty text-2xl font-semibold tracking-[-0.02em] text-black sm:text-3xl lg:text-[2.125rem] lg:leading-tight"
-              >
-                What you&apos;ll find inside
-              </h2>
-            </div>
-            <p className="max-w-md text-[1.0625rem] leading-relaxed text-[#666766] lg:text-right lg:text-[15px]">
-              Real relationships, structured support, and room to show up exactly
-              as you are.
-            </p>
-          </div>
-          <ul className="mt-0 divide-y divide-[#ebe6df] lg:mt-2">
-            {insideItems.map(({ title, body, icon: Icon }) => (
-              <li
-                key={title}
-                className="flex flex-col gap-5 py-10 sm:flex-row sm:items-start sm:gap-8 lg:gap-12 lg:py-12"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e76fab]/10 text-[#b8457a] sm:mt-0.5 lg:h-14 lg:w-14">
-                  <Icon
-                    className="h-6 w-6 lg:h-7 lg:w-7"
-                    strokeWidth={1.65}
-                    aria-hidden
-                  />
-                </span>
-                <div className="min-w-0 flex-1 lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
-                  <h3 className="text-lg font-semibold tracking-tight text-black sm:text-xl lg:max-w-xs">
-                    {title}
-                  </h3>
-                  <p className={`mt-3 lg:mt-0 lg:border-l lg:border-[#f0ebe4] lg:pl-10 xl:pl-12 ${bodyLede}`}>
-                    {body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
@@ -377,38 +274,40 @@ export default function HopeHubPage() {
             </p>
           </div>
           <div className="mt-12 grid gap-12 lg:mt-14 xl:grid-cols-2 xl:gap-12">
-            <div>
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-                Introduction
+            <figure className="m-0">
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
+                HopeHub preview
               </p>
-              <div className="overflow-hidden rounded-xl bg-black ring-1 ring-white/10 shadow-[0_32px_80px_-32px_rgba(0,0,0,0.9)]">
+              <div className="overflow-hidden rounded-2xl bg-[#1a1a1a] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-[#e3ddd4]">
                 <video
                   className="aspect-video w-full object-cover"
                   controls
                   playsInline
                   preload="metadata"
-                  aria-label="HopeHub introduction video"
+                  aria-label="Short video introducing HopeHub, the free online community for widows"
                 >
-                  <source src={VIDEO_INTRO} type="video/mp4" />
+                  <source src={HOPEHUB_PREVIEW_VIDEO_SRC} type="video/mp4" />
                 </video>
               </div>
-            </div>
-            <div>
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-                Full demo
+            </figure>
+            <figure className="m-0">
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
+                Full walkthrough
               </p>
-              <div className="overflow-hidden rounded-xl bg-black ring-1 ring-white/10 shadow-[0_32px_80px_-32px_rgba(0,0,0,0.9)]">
-                <video
-                  className="aspect-video w-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  aria-label="HopeHub full demo video"
-                >
-                  <source src={VIDEO_DEMO} type="video/mp4" />
-                </video>
+              <div className="overflow-hidden rounded-2xl bg-[#1a1a1a] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-[#e3ddd4]">
+                <div className="relative aspect-video w-full">
+                  <iframe
+                    className="absolute inset-0 h-full w-full border-0"
+                    src={HOPEHUB_WALKTHROUGH_EMBED_SRC}
+                    title="HopeHub full walkthrough"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                  />
+                </div>
               </div>
-            </div>
+            </figure>
           </div>
         </div>
       </section>

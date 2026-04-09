@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { NewsletterSignupForm } from "@/components/NewsletterSignupForm";
 import {
   computeHeroHeadlineFontSizePx,
   HERO_HEADLINE_LINE_HEIGHT_RATIO,
@@ -187,7 +188,7 @@ export default function Home() {
                 Join Upcoming Retreat
               </Link>
               <Link
-                href="/#support-paths"
+                href="/support-groups"
                 className="inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-md [text-shadow:none] transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
               >
                 Explore Support Options
@@ -551,7 +552,7 @@ export default function Home() {
                   {[
                     { stat: "Hundreds", label: "of members" },
                     { stat: "Daily", label: "new connections" },
-                    { stat: "Weekly", label: "widow meetups" },
+                    { stat: "Monthly", label: "widow meetups" },
                     { stat: "24/7", label: "community access" },
                   ].map(({ stat, label }, i) => (
                     <div
@@ -583,95 +584,31 @@ export default function Home() {
         aria-labelledby="groups-heading"
         {...fadeUp}
       >
-        <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white">
-            Support groups
-          </p>
-          <h2
-            id="groups-heading"
-            className="mt-3 max-w-2xl text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl"
-          >
-            Gentle rhythm, honest conversation, zero judgment
-          </h2>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white">
-            Support groups are recurring, accessible, and conversation-centered—a
-            simple way to stay connected when you want steady encouragement
-            without a big trip or commitment you&apos;re not ready for.
-          </p>
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-8 lg:gap-10">
+          <div className="min-w-0 max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white">
+              Support groups
+            </p>
+            <h2
+              id="groups-heading"
+              className="mt-3 text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl"
+            >
+              Gentle rhythm, honest conversation, zero judgment
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-white">
+              Support groups are recurring, accessible, and conversation-centered—a
+              simple way to stay connected when you want steady encouragement
+              without a big trip or commitment you&apos;re not ready for.
+            </p>
+          </div>
           <Link
             href="/support-groups"
-            className="mt-10 inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
+            className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto lg:w-auto"
           >
             Explore Support Groups
           </Link>
         </div>
       </motion.section>
-
-      {/* ——— TESTIMONIALS ——— */}
-      <section
-        className="border-t border-[#ebe6df] bg-[#fffcfa] px-3 py-20 sm:px-4 lg:px-5 lg:py-28"
-        aria-labelledby="testimonials-heading"
-      >
-        <motion.div
-          className="mx-auto max-w-7xl"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-64px" }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as const }}
-        >
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-black">
-            Voices from the community
-          </p>
-          <h2
-            id="testimonials-heading"
-            className="mt-3 text-balance text-3xl font-semibold leading-tight text-black sm:text-4xl"
-          >
-            Real women. Real relief.
-          </h2>
-        </motion.div>
-        <motion.ul
-          className="mx-auto mt-14 grid max-w-7xl gap-6 lg:grid-cols-3"
-          variants={listParent}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
-        >
-          {[
-            {
-              quote:
-                "I didn't have to explain myself. For the first time in a long time, I felt like I could breathe.",
-              name: "Rachel M.",
-              note: "Retreat participant",
-            },
-            {
-              quote:
-                "The groups gave me a rhythm I could handle—gentle, consistent, and kind. I wasn’t alone in my week anymore.",
-              name: "Denise T.",
-              note: "Support group member",
-            },
-            {
-              quote:
-                "It felt premium without feeling cold. I left with connection I didn’t know I still believed was possible.",
-              name: "Angela K.",
-              note: "HopeHub member",
-            },
-          ].map(({ quote, name, note }) => (
-            <motion.li
-              key={name}
-              variants={listChild}
-              className="flex flex-col rounded-2xl border border-[#ebe6df] bg-[#f6f3ee] p-8 shadow-sm"
-            >
-              <p className="text-lg leading-relaxed text-black">
-                &ldquo;{quote}&rdquo;
-              </p>
-              <div className="mt-8 border-t border-[#ebe6df] pt-6">
-                <p className="font-semibold text-black">{name}</p>
-                <p className="mt-1 text-sm text-black">{note}</p>
-              </div>
-            </motion.li>
-          ))}
-        </motion.ul>
-      </section>
 
       {/* ——— EMAIL ——— */}
       <motion.section
@@ -690,29 +627,9 @@ export default function Home() {
             Short notes—no spam. Unsubscribe anytime. If you want a softer way
             to stay close to what&apos;s happening, this is it.
           </p>
-          <form
-            className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row sm:items-stretch"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <label htmlFor="email-signup" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="email-signup"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              placeholder="Your email"
-              className="min-h-12 flex-1 rounded-full border border-[#ebe6df] bg-white px-5 text-base text-black placeholder:text-black/45 outline-none ring-[#e76fab]/30 transition-shadow focus:border-[#e76fab] focus:ring-2 focus:ring-[#e76fab]/35"
-            />
-            <button
-              type="submit"
-              className="min-h-12 w-full rounded-full bg-[#e76fab] px-8 text-base font-semibold text-white transition-[background-color] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:w-auto"
-            >
-              Join the list
-            </button>
-          </form>
+          <div className="mx-auto mt-10 max-w-xl">
+            <NewsletterSignupForm />
+          </div>
         </div>
       </motion.section>
     </div>

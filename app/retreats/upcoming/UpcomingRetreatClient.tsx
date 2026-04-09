@@ -1,5 +1,9 @@
 "use client";
 
+import { FormHoneypot } from "@/components/FormHoneypot";
+import { RecaptchaNotice } from "@/components/RecaptchaNotice";
+import { HONEYPOT_FIELD } from "@/lib/form-spam";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -164,12 +168,24 @@ export function UpcomingRetreatClient() {
     setInquirySubmit("sending");
     setInquiryFeedback("");
     const fd = new FormData(form);
+    let recaptchaToken: string | undefined;
+    try {
+      recaptchaToken = await getRecaptchaToken("retreat_inquiry");
+    } catch {
+      setInquirySubmit("error");
+      setInquiryFeedback(
+        "We couldn’t verify the form. Please refresh the page and try again.",
+      );
+      return;
+    }
     const payload = {
       fullName: String(fd.get("fullName") ?? "").trim(),
       email: String(fd.get("email") ?? "").trim(),
       phone: String(fd.get("phone") ?? "").trim(),
       address: String(fd.get("address") ?? "").trim(),
       whyJoin: String(fd.get("whyJoin") ?? "").trim(),
+      [HONEYPOT_FIELD]: String(fd.get(HONEYPOT_FIELD) ?? "").trim(),
+      ...(recaptchaToken ? { recaptchaToken } : {}),
     };
     try {
       const res = await fetch("/api/retreat-inquiry", {
@@ -265,9 +281,9 @@ export function UpcomingRetreatClient() {
           className={`relative mx-auto flex h-full flex-col justify-end gap-7 pb-10 pt-28 sm:gap-8 sm:pb-14 sm:pt-32 lg:gap-10 lg:pb-14 lg:pt-24 ${shell}`}
         >
           <motion.div
-            initial={{ opacity: 0, y: 26 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
+            transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] as const }}
             className="max-w-4xl lg:max-w-5xl"
           >
             <p className="m-0">
@@ -404,9 +420,10 @@ export function UpcomingRetreatClient() {
               Preferred pricing ($3,999) through April 30, then $4,449.
             </p>
             <form
-              className="mt-8 space-y-5"
+              className="relative mt-8 space-y-5"
               onSubmit={handleInquirySubmit}
             >
+              <FormHoneypot idPrefix="retreat-inquiry" />
               {inquiryFeedback ? (
                 <p
                   role="status"
@@ -511,6 +528,7 @@ export function UpcomingRetreatClient() {
                 >
                   {inquirySubmit === "sending" ? "Sending…" : "I want to attend"}
                 </button>
+                <RecaptchaNotice />
                 <p className="mt-4 text-center text-sm text-[#666766] sm:text-left">
                   Questions? You can also reach out through{" "}
                   <Link

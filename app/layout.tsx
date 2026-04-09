@@ -4,6 +4,7 @@ import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { SiteFinalCta } from "@/components/SiteFinalCta";
+import { VirtualHealingAnnouncementBar } from "@/components/VirtualHealingAnnouncementBar";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -45,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${nunitoSans.variable} h-full scroll-smooth`}>
       <body className="min-h-full flex flex-col antialiased text-black">
+        <VirtualHealingAnnouncementBar />
         <Navbar />
         <main className="flex-1">{children}</main>
         <SiteFinalCta />
