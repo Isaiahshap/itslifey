@@ -37,7 +37,7 @@ const LOCATION_SRC = LOCATION_IMAGES.map(
 );
 
 const RETREAT_VIDEO_SRC =
-  "https://itslifey.com/wp-content/uploads/2025/07/SnapInsta.to_AQM724iKzsU9Wz3BHDtdIx4iDtHXvfkDDOyhnDNp9Z7TcGciAdFqfYrWK2YOm_3NrOjwELawj5gosbMIPZFTH-7IljxTvCU9jUes72Q.mp4";
+  "https://px8.792.myftpupload.com/wp-content/uploads/2025/07/SnapInsta.to_AQM724iKzsU9Wz3BHDtdIx4iDtHXvfkDDOyhnDNp9Z7TcGciAdFqfYrWK2YOm_3NrOjwELawj5gosbMIPZFTH-7IljxTvCU9jUes72Q.mp4";
 
 /** Wide editorial shell — breathes on large screens (aligned with HopeHub spread). */
 const shell =
@@ -55,16 +55,18 @@ const TESTIMONIAL_AWAITS =
   "I learned there is so much power in community and sharing our stories. Grief looks different for everyone, but the loss of a spouse—be it sudden or after a long-term illness—bonds you in a way that is only understood by your widow sisters. Having never met any of these women before stepping foot on the property, I knew them instantly and I SAW them for who they are—for their pain and sorrow, and also their love and light. It's not a club any of us want to be a part of, yet I can't help but feel really special to be a part of this particular group.";
 
 const INVESTMENT_MARQUEE_PARTS = [
-  "What's included",
-  "$4,449 all-inclusive",
-  "$3,999 through April 30 — save $450",
+  "Invest in YOU",
+  "$3,999 single room",
+  "$3,199 triple shared room",
+  "Save $100 — register by April 30",
+  "Payment plans available",
+  "All-inclusive investment",
   "Accommodations (beautiful coastal private home)",
   "All meals and dining experiences",
   "Wellness and reflection sessions",
   "Spa experience",
   "Nantucket or Martha's Vineyard excursion",
   "All retreat programming",
-  "HopeHub members receive a preferred member rate",
 ] as const;
 
 const INVESTMENT_MARQUEE_LINE = INVESTMENT_MARQUEE_PARTS.join("  ·  ");
@@ -207,7 +209,7 @@ export function UpcomingRetreatClient() {
       }
       setInquirySubmit("success");
       setInquiryFeedback(
-        "Thank you—we received your application and will be in touch soon.",
+        "Thank you—we received your interest form and will be in touch soon.",
       );
       form.reset();
     } catch {
@@ -288,7 +290,7 @@ export function UpcomingRetreatClient() {
           >
             <p className="m-0">
               <span className="inline-block rounded-full bg-[#e76fab] px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.2em] text-white ring-2 ring-white/30 sm:text-sm">
-                It&apos;s Lifey · Summer 2026
+                It&apos;s Lifey · July 9th–12th, 2026
               </span>
             </p>
             <h1
@@ -310,8 +312,8 @@ export function UpcomingRetreatClient() {
                 Join us
               </button>
               <p className="max-w-[16rem] text-sm font-medium leading-snug text-white/90 sm:max-w-[18rem]">
-                <span className="text-[#e76fab]">●</span> Save $450 when you
-                apply by April 30.
+                <span className="text-[#e76fab]">●</span> Save $100 when you
+                register by April 30.
               </p>
             </div>
           </motion.div>
@@ -324,6 +326,9 @@ export function UpcomingRetreatClient() {
               />
               <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:gap-0 md:py-0.5">
                 <p className="text-base font-medium italic leading-snug text-white/96 sm:text-lg md:flex-1 md:pr-8 md:leading-relaxed lg:pr-12 lg:text-[1.125rem]">
+                  <span className="font-semibold not-italic text-white">
+                    July 9th–July 12th, 2026.
+                  </span>{" "}
                   Eight women. Four days. One quiet exhale on the coast.
                 </p>
                 <div
@@ -349,246 +354,17 @@ export function UpcomingRetreatClient() {
         </div>
       </section>
 
-      {/* ——— INQUIRY FORM ——— */}
-      <section
-        id="retreat-inquiry"
-        className="scroll-mt-24 relative overflow-hidden border-b border-[#d85e9a] bg-[#e76fab]"
-        aria-labelledby="inquiry-heading"
+      {/* Urgency — directly under hero */}
+      <div
+        className="border-b border-[#e76fab]/35 bg-gradient-to-r from-[#fdf6f9] via-white to-[#fdf6f9] px-4 py-3.5 text-center sm:py-4"
+        role="status"
       >
-        <div className={`${shell} relative py-14 lg:py-24`}>
-          <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
-            <aside className="order-2 flex flex-col gap-8 lg:order-1 lg:col-span-5 xl:col-span-4 lg:sticky lg:top-28 lg:self-start">
-              <div className="rounded-3xl border border-black/[0.06] bg-white p-8 shadow-[0_24px_80px_rgba(0,0,0,0.12)] lg:p-10">
-                <p className="text-2xl font-semibold leading-snug tracking-tight text-black sm:text-3xl">
-                  We read every application with care.
-                </p>
-                <p className="mt-5 text-base leading-relaxed text-[#666766]">
-                  No pressure, no rush—just a gentle next step when you&apos;re
-                  ready.
-                </p>
-                <div className="mt-8 border-t border-black/[0.08] pt-8">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                    Through April 30
-                  </p>
-                  <p className="mt-3 text-3xl font-semibold text-black sm:text-4xl">
-                    $3,999
-                  </p>
-                  <p className="mt-2 text-base leading-relaxed text-[#666766]">
-                    Preferred rate — then $4,449. You save $450.
-                  </p>
-                </div>
-                <div className="mt-8 border-l-4 border-[#e76fab] pl-5">
-                  <p className="text-base font-medium leading-relaxed text-black">
-                    Limited to eight women — so the room stays intimate and
-                    emotionally safe.
-                  </p>
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-white/40 bg-white/95 p-6 shadow-lg shadow-black/10 sm:p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-                  From women who were there
-                </p>
-                <div className="mt-5 space-y-4">
-                  {TESTIMONIAL_FORM_PARTS.map((text, i) => (
-                    <figure
-                      key={i}
-                      className="rounded-xl border border-black/[0.06] bg-[#faf8f5] p-4 text-sm leading-relaxed text-[#666766] sm:p-4"
-                    >
-                      <blockquote className="text-pretty">
-                        <p>{text}</p>
-                      </blockquote>
-                    </figure>
-                  ))}
-                </div>
-              </div>
-            </aside>
-
-            <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-8">
-              <div className="rounded-3xl border border-black/[0.06] bg-white p-6 shadow-[0_20px_70px_rgba(0,0,0,0.12)] sm:p-10 lg:p-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-              Reserve your place
-            </p>
-            <h2
-              id="inquiry-heading"
-              className="mt-3 max-w-xl text-2xl font-semibold leading-tight text-black sm:text-3xl lg:text-4xl"
-            >
-              Apply for the Summer 2026 retreat
-            </h2>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
-              Share a few details—we&apos;ll follow up with next steps.
-              Preferred pricing ($3,999) through April 30, then $4,449.
-            </p>
-            <form
-              className="relative mt-8 space-y-5"
-              onSubmit={handleInquirySubmit}
-            >
-              <FormHoneypot idPrefix="retreat-inquiry" />
-              {inquiryFeedback ? (
-                <p
-                  role="status"
-                  aria-live="polite"
-                  className={`rounded-xl border px-4 py-3 text-sm leading-relaxed ${
-                    inquirySubmit === "success"
-                      ? "border-[#e76fab]/25 bg-[#fdf8fb] text-[#555]"
-                      : "border-red-200 bg-red-50 text-red-900"
-                  }`}
-                >
-                  {inquiryFeedback}
-                </p>
-              ) : null}
-              <div>
-                <label
-                  htmlFor="inquiry-full-name"
-                  className="block text-sm font-semibold text-black"
-                >
-                  Full name
-                </label>
-                <input
-                  id="inquiry-full-name"
-                  name="fullName"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none ring-[#e76fab]/0 transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="inquiry-email"
-                  className="block text-sm font-semibold text-black"
-                >
-                  Email
-                </label>
-                <input
-                  id="inquiry-email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="inquiry-phone"
-                  className="block text-sm font-semibold text-black"
-                >
-                  Phone
-                </label>
-                <input
-                  id="inquiry-phone"
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  required
-                  className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="inquiry-address"
-                  className="block text-sm font-semibold text-black"
-                >
-                  Address
-                </label>
-                <input
-                  id="inquiry-address"
-                  name="address"
-                  type="text"
-                  autoComplete="street-address"
-                  required
-                  className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                />
-                <p className="mt-1.5 text-sm text-[#666766]">
-                  City, state, or full mailing address—whatever you&apos;re
-                  comfortable sharing.
-                </p>
-              </div>
-              <div>
-                <label
-                  htmlFor="inquiry-why"
-                  className="block text-sm font-semibold text-black"
-                >
-                  Why do you want to join this retreat?
-                </label>
-                <textarea
-                  id="inquiry-why"
-                  name="whyJoin"
-                  rows={5}
-                  required
-                  className="mt-2 w-full resize-y rounded-xl border border-black/10 bg-white px-4 py-3 text-base leading-relaxed text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                />
-              </div>
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={inquirySubmit === "sending"}
-                  className="w-full rounded-full bg-[#e76fab] px-8 py-4 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] enabled:active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-                >
-                  {inquirySubmit === "sending" ? "Sending…" : "I want to attend"}
-                </button>
-                <RecaptchaNotice />
-                <p className="mt-4 text-center text-sm text-[#666766] sm:text-left">
-                  Questions? You can also reach out through{" "}
-                  <Link
-                    href="/contact"
-                    className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
-                  >
-                    Contact
-                  </Link>
-                  .
-                </p>
-              </div>
-            </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ——— VIDEO ——— */}
-      <section
-        className="border-b border-black/[0.06] bg-[#f6f3ee]"
-        aria-labelledby="retreat-video-heading"
-      >
-        <div className={`${shell} py-14 lg:py-24`}>
-          <motion.div
-            {...fadeUp}
-            className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16"
-          >
-            <div className="lg:col-span-5 xl:col-span-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                See the feeling
-              </p>
-              <h2
-                id="retreat-video-heading"
-                className="mt-4 text-3xl font-semibold leading-[1.15] tracking-tight text-black sm:text-4xl lg:text-[2.35rem] xl:text-5xl"
-              >
-                A glimpse of what retreat can feel like
-              </h2>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-[#666766] sm:text-lg">
-                Soft, human, real—take a quiet moment with this short video.
-                There&apos;s no pressure here.
-              </p>
-            </div>
-            <div className="lg:col-span-7 xl:col-span-8">
-              <div className="overflow-hidden rounded-2xl border-4 border-[#e76fab] bg-black shadow-xl shadow-black/15 lg:rounded-3xl">
-                <video
-                  className="aspect-video w-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  aria-label="Video introducing the It's Lifey retreat experience"
-                >
-                  <source src={RETREAT_VIDEO_SRC} type="video/mp4" />
-                  Your browser does not support embedded video.
-                </video>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+        <p className="text-[13px] font-semibold leading-snug text-[#b84a82] sm:text-sm">
+          <span className="font-semibold text-[#9a3d6c]">July 9th–July 12th, 2026.</span>{" "}
+          Our last retreat sold out in one week—if this feels like your next
+          step, don&apos;t wait.
+        </p>
+      </div>
 
       {/* ——— STORY + WHO IT'S FOR (editorial, compact) ——— */}
       <section
@@ -608,7 +384,7 @@ export function UpcomingRetreatClient() {
                 id="retreat-story-heading"
                 className="mt-3 text-balance text-4xl font-semibold leading-[1.02] tracking-tight text-black sm:text-5xl lg:text-[3.15rem] lg:leading-[1.03]"
               >
-                Be with people who &ldquo;get it&rdquo;
+                Rest, connection, and room to breathe
               </h2>
               <p className="mt-4 max-w-md text-base leading-snug text-[#666766] sm:text-lg">
                 A luxury coastal retreat for widows ready to exhale
@@ -938,36 +714,80 @@ export function UpcomingRetreatClient() {
         className="border-b border-black/[0.06] bg-[#f6f3ee]"
         aria-labelledby="investment-heading"
       >
-        <div className={`${shell} py-8 sm:py-10 lg:py-12`}>
-          <motion.div {...fadeUp} className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-6">
-            <div>
-              <h2
-                id="investment-heading"
-                className="text-xl font-semibold tracking-tight text-black sm:text-2xl"
-              >
-                Investment
-              </h2>
-              <p className="mt-2 text-3xl font-semibold text-black sm:text-4xl">
-                $4,449
-              </p>
-              <p className="mt-1 text-sm text-[#666766] sm:text-base">
-                All-inclusive retreat experience
-              </p>
+        <div className={`${shell} py-12 sm:py-14 lg:py-16`}>
+          <motion.div {...fadeUp} className="flex flex-col gap-12 lg:gap-14">
+            <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-x-12 xl:gap-x-16">
+              <div className="min-w-0 lg:col-span-7">
+                <h2
+                  id="investment-heading"
+                  className="max-w-xl text-3xl font-semibold leading-[1.15] tracking-tight text-black sm:text-[2rem] lg:text-[2.125rem]"
+                >
+                  Invest in YOU
+                </h2>
+                <p className="mt-3 max-w-xl text-lg font-normal leading-relaxed text-[#666766] sm:text-xl">
+                  (because you can&apos;t keep pouring from empty)
+                </p>
+                <p className="mt-8 max-w-xl text-[1.0625rem] leading-[1.65] text-[#2a2928] sm:text-lg">
+                  The investment is $3,999 per person for a single room and
+                  $3,199 per person for a triple shared room. You&apos;ll receive
+                  $100 off if you register by April 30, and payment plans are
+                  available.
+                </p>
+              </div>
+
+              <div className="min-w-0 border-t border-[#e3ddd4] pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0 xl:pl-12">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#a3a3a3]">
+                  Retreat dates
+                </p>
+                <p
+                  className="mt-3 text-3xl font-semibold leading-tight tracking-tight text-[#7a7b7a] sm:text-4xl lg:text-[2.35rem] lg:leading-[1.1]"
+                  aria-label="Retreat dates: July 9th through July 12th, 2026"
+                >
+                  July 9th
+                  <span className="mx-2 inline-block text-2xl font-normal text-[#b8b8b8] sm:text-3xl">
+                    –
+                  </span>
+                  July 12th
+                </p>
+                <p className="mt-2 text-sm font-medium text-[#888988]">2026</p>
+              </div>
             </div>
-            <p className="max-w-md text-sm font-semibold leading-snug text-[#e76fab] sm:text-right sm:text-base">
-              $3,999 through April 30 — save $450 when you apply in time.
-            </p>
+
+            <div className="border-t border-[#dad6cf] pt-8 lg:pt-10">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#666766]">
+                Retreat Price
+              </p>
+              <div className="mt-6 grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-start lg:gap-8">
+                <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:col-span-7 lg:grid-cols-2 lg:gap-10">
+                  <div className="border-r border-[#e3ddd4] pr-6 sm:pr-8">
+                    <p className="text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
+                      $3,999
+                    </p>
+                    <p className="mt-1.5 text-sm font-medium text-[#666766] sm:text-[15px]">
+                      Single room
+                    </p>
+                  </div>
+                  <div className="pl-2 sm:pl-0">
+                    <p className="text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
+                      $3,199
+                    </p>
+                    <p className="mt-1.5 text-sm font-medium text-[#666766] sm:text-[15px]">
+                      Triple shared room
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-3 border-t border-[#ebe6df] pt-6 text-[15px] leading-snug sm:pt-0 sm:text-base lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0 xl:pl-12">
+                  <p className="text-[#666766]">All-inclusive investment</p>
+                  <p className="font-semibold text-[#e76fab]">
+                    Save $100 when you register by April 30
+                  </p>
+                  <p className="font-semibold text-[#666766]">
+                    Payment plans available
+                  </p>
+                </div>
+              </div>
+            </div>
           </motion.div>
-          <p className="mt-4 text-sm leading-relaxed text-[#666766]">
-            HopeHub members receive a preferred member rate.{" "}
-            <Link
-              href="/hopehub"
-              className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-[3px] hover:decoration-[#e76fab]"
-            >
-              Sign up here for HopeHub
-            </Link>
-            .
-          </p>
         </div>
         <InvestmentMarquee />
       </section>
@@ -990,7 +810,8 @@ export function UpcomingRetreatClient() {
             </p>
             <div className="mx-auto mt-8 max-w-xl border-t border-white/35 pt-8">
               <p className="text-base font-semibold text-white sm:text-lg">
-                Preferred rate ($3,999) ends April 30.
+                Save $100 when you register by April 30 · Payment plans
+                available
               </p>
             </div>
             <div className="mx-auto mt-10 flex justify-center">
@@ -1003,6 +824,291 @@ export function UpcomingRetreatClient() {
               </button>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ——— VIDEO (above interest form) ——— */}
+      <section
+        className="border-b border-black/[0.06] bg-[#f6f3ee]"
+        aria-labelledby="retreat-video-heading"
+      >
+        <div className={`${shell} py-14 lg:py-24`}>
+          <motion.div
+            {...fadeUp}
+            className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16"
+          >
+            <div className="lg:col-span-5 xl:col-span-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
+                See the feeling
+              </p>
+              <h2
+                id="retreat-video-heading"
+                className="mt-4 text-3xl font-semibold leading-[1.15] tracking-tight text-black sm:text-4xl lg:text-[2.35rem] xl:text-5xl"
+              >
+                A glimpse of what retreat can feel like
+              </h2>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-[#666766] sm:text-lg">
+                Soft, human, real—take a quiet moment with this short video.
+                There&apos;s no pressure here.
+              </p>
+            </div>
+            <div className="lg:col-span-7 xl:col-span-8">
+              <div className="overflow-hidden rounded-2xl border-4 border-[#e76fab] bg-black shadow-xl shadow-black/15 lg:rounded-3xl">
+                <video
+                  className="aspect-video w-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  aria-label="Video introducing the It's Lifey retreat experience"
+                >
+                  <source src={RETREAT_VIDEO_SRC} type="video/mp4" />
+                  Your browser does not support embedded video.
+                </video>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ——— BE WITH PEOPLE (lead-in to form) ——— */}
+      <section
+        className="border-b border-black/[0.06] bg-white"
+        aria-labelledby="retreat-get-it-heading"
+      >
+        <div className={`${shell} py-10 text-center sm:py-12 lg:py-14`}>
+          <h2
+            id="retreat-get-it-heading"
+            className="text-balance text-3xl font-semibold leading-tight tracking-tight text-black sm:text-4xl lg:text-[2.35rem]"
+          >
+            Be with people who &ldquo;get it&rdquo;
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#666766] sm:text-lg">
+            When you&apos;re ready, share a little about yourself—we&apos;ll take
+            it from there.
+          </p>
+        </div>
+      </section>
+
+      {/* ——— INQUIRY FORM (last) ——— */}
+      <section
+        id="retreat-inquiry"
+        className="scroll-mt-24 relative overflow-hidden border-b border-[#d85e9a] bg-[#e76fab]"
+        aria-labelledby="inquiry-heading"
+      >
+        <div className={`${shell} relative py-14 lg:py-24`}>
+          <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
+            <aside className="order-2 flex flex-col gap-8 lg:order-1 lg:col-span-5 xl:col-span-4 lg:sticky lg:top-28 lg:self-start">
+              <div className="rounded-3xl border border-black/[0.06] bg-white p-8 shadow-[0_24px_80px_rgba(0,0,0,0.12)] lg:p-10">
+                <p className="text-2xl font-semibold leading-snug tracking-tight text-black sm:text-3xl">
+                  We read every interest form with care.
+                </p>
+                <p className="mt-5 text-base leading-relaxed text-[#666766]">
+                  No pressure, no rush—just a gentle next step when you&apos;re
+                  ready.
+                </p>
+                <div className="mt-8 border-t border-black/[0.08] pt-8">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
+                    Retreat price
+                  </p>
+                  <p className="mt-3 text-lg font-semibold leading-snug text-black">
+                    Invest in YOU
+                    <span className="mt-1 block text-base font-normal text-[#666766]">
+                      (because you can&apos;t keep pouring from empty)
+                    </span>
+                  </p>
+                  <p className="mt-4 text-2xl font-semibold text-black sm:text-3xl">
+                    $3,999{" "}
+                    <span className="text-base font-medium text-[#666766]">
+                      Single Room
+                    </span>
+                  </p>
+                  <p className="mt-2 text-2xl font-semibold text-black sm:text-3xl">
+                    $3,199{" "}
+                    <span className="text-base font-medium text-[#666766]">
+                      Triple Shared Room
+                    </span>
+                  </p>
+                  <p className="mt-3 text-sm font-medium text-[#666766]">
+                    all-inclusive investment
+                  </p>
+                  <p className="mt-4 text-sm font-semibold text-[#e76fab]">
+                    Save $100 when you register by April 30
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-[#666766]">
+                    Payment plans available
+                  </p>
+                </div>
+                <div className="mt-8 border-l-4 border-[#e76fab] pl-5">
+                  <p className="text-base font-medium leading-relaxed text-black">
+                    Limited to eight women — so the room stays intimate and
+                    emotionally safe.
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-white/40 bg-white/95 p-6 shadow-lg shadow-black/10 sm:p-7">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
+                  From women who were there
+                </p>
+                <div className="mt-5 space-y-4">
+                  {TESTIMONIAL_FORM_PARTS.map((text, i) => (
+                    <figure
+                      key={i}
+                      className="rounded-xl border border-black/[0.06] bg-[#faf8f5] p-4 text-sm leading-relaxed text-[#666766] sm:p-4"
+                    >
+                      <blockquote className="text-pretty">
+                        <p>{text}</p>
+                      </blockquote>
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            </aside>
+
+            <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-8">
+              <div className="rounded-3xl border border-black/[0.06] bg-white p-6 shadow-[0_20px_70px_rgba(0,0,0,0.12)] sm:p-10 lg:p-12">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
+                  Reserve your place
+                </p>
+                <h2
+                  id="inquiry-heading"
+                  className="mt-3 max-w-xl text-2xl font-semibold leading-tight text-black sm:text-3xl lg:text-4xl"
+                >
+                  Summer 2026 retreat interest form
+                </h2>
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
+                  Share a few details—we&apos;ll follow up with next steps. The
+                  investment is $3,999 per person for a single room and $3,199 per
+                  person for a triple shared room. You&apos;ll receive $100 off if
+                  you register by April 30, and payment plans are available.
+                </p>
+                <form
+                  className="relative mt-8 space-y-5"
+                  onSubmit={handleInquirySubmit}
+                >
+                  <FormHoneypot idPrefix="retreat-inquiry" />
+                  {inquiryFeedback ? (
+                    <p
+                      role="status"
+                      aria-live="polite"
+                      className={`rounded-xl border px-4 py-3 text-sm leading-relaxed ${
+                        inquirySubmit === "success"
+                          ? "border-[#e76fab]/25 bg-[#fdf8fb] text-[#555]"
+                          : "border-red-200 bg-red-50 text-red-900"
+                      }`}
+                    >
+                      {inquiryFeedback}
+                    </p>
+                  ) : null}
+                  <div>
+                    <label
+                      htmlFor="inquiry-full-name"
+                      className="block text-sm font-semibold text-black"
+                    >
+                      Full name
+                    </label>
+                    <input
+                      id="inquiry-full-name"
+                      name="fullName"
+                      type="text"
+                      autoComplete="name"
+                      required
+                      className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none ring-[#e76fab]/0 transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="inquiry-email"
+                      className="block text-sm font-semibold text-black"
+                    >
+                      Email
+                    </label>
+                    <input
+                      id="inquiry-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="inquiry-phone"
+                      className="block text-sm font-semibold text-black"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      id="inquiry-phone"
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      required
+                      className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="inquiry-address"
+                      className="block text-sm font-semibold text-black"
+                    >
+                      Address
+                    </label>
+                    <input
+                      id="inquiry-address"
+                      name="address"
+                      type="text"
+                      autoComplete="street-address"
+                      required
+                      className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
+                    />
+                    <p className="mt-1.5 text-sm text-[#666766]">
+                      City, state, or full mailing address—whatever you&apos;re
+                      comfortable sharing.
+                    </p>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="inquiry-why"
+                      className="block text-sm font-semibold text-black"
+                    >
+                      Why do you want to join this retreat?
+                    </label>
+                    <textarea
+                      id="inquiry-why"
+                      name="whyJoin"
+                      rows={5}
+                      required
+                      className="mt-2 w-full resize-y rounded-xl border border-black/10 bg-white px-4 py-3 text-base leading-relaxed text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
+                    />
+                  </div>
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={inquirySubmit === "sending"}
+                      className="w-full rounded-full bg-[#e76fab] px-8 py-4 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] enabled:active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                    >
+                      {inquirySubmit === "sending"
+                        ? "Sending…"
+                        : "I want to attend"}
+                    </button>
+                    <RecaptchaNotice />
+                    <p className="mt-4 text-center text-sm text-[#666766] sm:text-left">
+                      Questions? You can also reach out through{" "}
+                      <Link
+                        href="/contact"
+                        className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
+                      >
+                        Contact
+                      </Link>
+                      .
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

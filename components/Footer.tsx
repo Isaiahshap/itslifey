@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SocialMediaLinks } from "@/components/SocialMediaLinks";
 
 const exploreLinks = [
   { href: "/about", label: "About" },
@@ -68,6 +69,10 @@ export function Footer() {
               You deserve clarity, warmth, and a path forward that feels human—not
               rushed, not clinical.
             </p>
+            <SocialMediaLinks
+              className="mt-8 flex flex-wrap items-center gap-2"
+              linkClassName="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#666766] transition-[color,background-color,box-shadow] duration-200 hover:bg-[#e76fab]/12 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+            />
           </div>
 
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-8 lg:col-span-7 lg:grid-cols-3 xl:col-span-8">

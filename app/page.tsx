@@ -120,7 +120,8 @@ export default function Home() {
           />
         </div>
 
-        <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-3 pb-10 pt-20 sm:px-4 sm:pb-12 sm:pt-24 lg:justify-center lg:px-5 lg:pb-14 lg:pt-12">
+        <div className="relative mx-auto grid h-full max-w-7xl grid-rows-[minmax(0,1fr)_auto] px-3 pb-6 pt-20 sm:px-4 sm:pb-8 sm:pt-24 lg:px-5 lg:pb-10 lg:pt-12">
+          <div className="flex min-h-0 flex-col justify-end lg:justify-center">
           <motion.div
             ref={heroCopyRef}
             initial={{ opacity: 0, y: 28 }}
@@ -194,10 +195,11 @@ export default function Home() {
                 Explore Support Options
               </Link>
             </div>
-            <p className="mt-8 text-[13px] font-medium leading-snug text-white sm:text-base sm:leading-normal">
-              You do not have to carry this alone.
-            </p>
           </motion.div>
+          </div>
+          <p className="mx-auto mt-6 max-w-3xl text-balance text-center text-2xl font-medium italic leading-snug text-[#e76fab] [text-shadow:0_1px_12px_rgba(0,0,0,0.45)] sm:mt-8 sm:text-3xl sm:leading-relaxed lg:mt-10 lg:text-4xl lg:leading-relaxed">
+            You do not have to carry this alone.
+          </p>
         </div>
       </section>
 
@@ -332,6 +334,13 @@ export default function Home() {
                   intentional pause from isolation with women who understand
                   what you&apos;ve walked through.
                 </p>
+                <p className="mt-5 text-sm font-semibold tracking-wide text-white sm:text-[15px]">
+                  Summer 2026 · July 9th–July 12th
+                </p>
+                <p className="mt-3 max-w-xl text-sm font-medium leading-snug text-white/90 sm:text-[15px]">
+                  Our last retreat sold out in one week—when you&apos;re ready,
+                  we&apos;d love to see you there.
+                </p>
 
                 <motion.ul
                   className="mt-10 space-y-3 sm:space-y-3.5"
@@ -407,195 +416,24 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ——— HOPEHUB ——— */}
-      <section
-        className="border-t border-[#ebe6df] bg-[#f6f3ee]"
-        aria-labelledby="hopehub-heading"
-      >
-        <motion.div
-          className="relative overflow-hidden px-3 py-16 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] sm:px-4 sm:py-20 lg:px-5 lg:py-24"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-64px" }}
-          transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] as const }}
-        >
-          <div
-            className="pointer-events-none absolute -right-20 top-1/2 h-[24rem] w-[24rem] -translate-y-1/2 rounded-full bg-[#e76fab]/[0.06] blur-3xl"
-            aria-hidden
-          />
-
-          <div className="relative mx-auto max-w-7xl">
-            <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
-              <div className="min-w-0 lg:col-span-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#c2528c] sm:text-sm">
-                  HopeHub
-                </p>
-                <h2
-                  id="hopehub-heading"
-                  className="mt-3 text-pretty text-3xl font-semibold leading-[1.15] tracking-tight text-black sm:text-4xl"
-                >
-                  Ongoing support between the big moments
-                </h2>
-                <p className="mt-6 text-[1.0625rem] leading-relaxed text-[#2a2928] sm:text-lg">
-                  HopeHub is a continuation of care—steady connection,
-                  resources, and community that helps you feel less alone after a
-                  retreat or during seasons when life still feels heavy.
-                </p>
-                <p className="mt-5 text-[1.0625rem] leading-relaxed text-[#2a2928] sm:text-lg">
-                  Think of it as a gentle anchor: not noisy, not demanding—just
-                  a place to return to when you need encouragement and
-                  understanding.
-                </p>
-                <div className="mt-10">
-                  <Link
-                    href="/hopehub"
-                    className="inline-flex w-full items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:w-auto"
-                  >
-                    Explore HopeHub
-                  </Link>
-                </div>
-
-                <figure className="mt-10 m-0 sm:mt-12">
-                  <p className="m-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666766] sm:text-xs">
-                    HopeHub preview
-                  </p>
-                  <div className="mt-3 overflow-hidden rounded-2xl bg-[#1a1a1a] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-[#e3ddd4]">
-                    <video
-                      className="aspect-video w-full object-cover"
-                      controls
-                      playsInline
-                      preload="metadata"
-                      aria-label="Short video introducing HopeHub, the free online community for widows"
-                    >
-                      <source src="/images/hopehub.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                </figure>
-
-                <figure className="mt-8 m-0 sm:mt-10">
-                  <p className="m-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666766] sm:text-xs">
-                    Full walkthrough
-                  </p>
-                  <div className="mt-3 overflow-hidden rounded-2xl bg-[#1a1a1a] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-[#e3ddd4]">
-                    <div className="relative aspect-video w-full">
-                      <iframe
-                        className="absolute inset-0 h-full w-full border-0"
-                        src="https://www.youtube-nocookie.com/embed/k4mm-kM_4Gk?rel=0"
-                        title="HopeHub full walkthrough"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        loading="lazy"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                      />
-                    </div>
-                  </div>
-                </figure>
-              </div>
-
-              <div className="min-w-0 lg:col-span-7">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#666766] sm:text-sm">
-                  What you&apos;ll find inside
-                </p>
-                <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-[#666766] sm:text-base">
-                  Real relationships, structured support, and room to show up
-                  exactly as you are—free, online, and built by a widow who
-                  understands.
-                </p>
-
-                <dl className="mt-8 divide-y divide-[#e3ddd4] border-t border-[#e3ddd4]">
-                  {[
-                    {
-                      term: "Continuity after retreats",
-                      desc: "Support that doesn't disappear Monday morning—community that fits real life and respects your capacity.",
-                    },
-                    {
-                      term: "1:1 conversations",
-                      desc: "A private space to connect with widows who understand—ask questions and share without judgment.",
-                    },
-                    {
-                      term: "Support groups",
-                      desc: "Hosted multiple times a week—topic-driven groups and open discussion when you want steady rhythm.",
-                    },
-                    {
-                      term: "Expert Q&A",
-                      desc: "Live sessions with therapists, financial advisors, attorneys, and healers; replays stay in the community.",
-                    },
-                    {
-                      term: "Resource library",
-                      desc: "Vetted professionals, podcast ideas, and practical help so you spend less time searching.",
-                    },
-                    {
-                      term: "Virtual events",
-                      desc: "Workshops and healing sessions when in-person isn't possible—still together, still seen.",
-                    },
-                    {
-                      term: "In-person pathways",
-                      desc: "Widow Wellness Retreats and other gatherings when you're ready to meet face to face.",
-                    },
-                    {
-                      term: "Always free",
-                      desc: "Full access to the community, groups, expert sessions, resources, and events—no paid tier or surprise fees.",
-                    },
-                  ].map(({ term, desc }) => (
-                    <div key={term} className="py-5 sm:py-6">
-                      <dt className="text-[15px] font-semibold tracking-tight text-black sm:text-base">
-                        {term}
-                      </dt>
-                      <dd className="mt-2 m-0 text-[14px] leading-relaxed text-[#666766] sm:text-[15px]">
-                        {desc}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-
-                <div className="mt-10 grid grid-cols-2 gap-6 border-t border-[#e3ddd4] pt-10 sm:grid-cols-4 sm:gap-4">
-                  {[
-                    { stat: "Hundreds", label: "of members" },
-                    { stat: "Daily", label: "new connections" },
-                    { stat: "Monthly", label: "widow meetups" },
-                    { stat: "24/7", label: "community access" },
-                  ].map(({ stat, label }, i) => (
-                    <div
-                      key={label}
-                      className={
-                        i > 0
-                          ? "sm:border-l sm:border-[#e76fab]/25 sm:pl-6 lg:pl-8"
-                          : ""
-                      }
-                    >
-                      <p className="text-2xl font-semibold tracking-tight text-[#c2528c] sm:text-3xl">
-                        {stat}
-                      </p>
-                      <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-[#666766] sm:text-xs">
-                        {label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
       {/* ——— SUPPORT GROUPS ——— */}
       <motion.section
-        className="border-t border-[#d85e9a]/30 bg-[#e76fab] px-3 py-20 sm:px-4 lg:px-5 lg:py-28"
+        className="border-t border-[#ebe6df] bg-[#f6f3ee] px-3 py-20 sm:px-4 lg:px-5 lg:py-28"
         aria-labelledby="groups-heading"
         {...fadeUp}
       >
         <div className="mx-auto flex max-w-7xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-8 lg:gap-10">
           <div className="min-w-0 max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#c2528c]">
               Support groups
             </p>
             <h2
               id="groups-heading"
-              className="mt-3 text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl"
+              className="mt-3 text-balance text-3xl font-semibold leading-tight text-black sm:text-4xl"
             >
               Gentle rhythm, honest conversation, zero judgment
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-white">
+            <p className="mt-5 text-lg leading-relaxed text-[#2a2928]">
               Support groups are recurring, accessible, and conversation-centered—a
               simple way to stay connected when you want steady encouragement
               without a big trip or commitment you&apos;re not ready for.
@@ -603,12 +441,51 @@ export default function Home() {
           </div>
           <Link
             href="/support-groups"
-            className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto lg:w-auto"
+            className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:w-auto lg:w-auto"
           >
             Explore Support Groups
           </Link>
         </div>
       </motion.section>
+
+      {/* ——— HOPEHUB ——— */}
+      <section
+        className="border-t border-white/20 bg-gradient-to-br from-[#df68a3] via-[#e76fab] to-[#d85e9a] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+        aria-labelledby="hopehub-heading"
+      >
+        <motion.div
+          className="relative mx-auto max-w-xl px-3 py-10 text-center sm:px-4 sm:py-12 lg:px-5 lg:py-14"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-48px" }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as const }}
+        >
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90 sm:text-xs">
+            HopeHub
+          </p>
+          <h2
+            id="hopehub-heading"
+            className="mt-2 text-pretty text-xl font-semibold leading-snug tracking-tight text-white sm:text-2xl"
+          >
+            Ongoing support between the big moments
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-white/95 sm:text-[15px]">
+            Free online{" "}
+            <span className="font-medium text-white">community</span> and{" "}
+            <span className="font-medium text-white">resources</span> for widows—so
+            you have a place to connect and find help between retreats and hard
+            days.
+          </p>
+          <div className="mt-6">
+            <Link
+              href="/hopehub"
+              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:px-7 sm:py-3 sm:text-[15px]"
+            >
+              Explore HopeHub
+            </Link>
+          </div>
+        </motion.div>
+      </section>
 
       {/* ——— EMAIL ——— */}
       <motion.section

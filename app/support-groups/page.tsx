@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WP_EVENTS_EMBED_URL } from "@/lib/wp-config";
 
 export const metadata: Metadata = {
   title: "Support groups & events for widows",
   description:
-    "Upcoming HopeHub and community events—virtual and in-person gatherings, expert sessions, and connection with women who understand.",
+    "Upcoming It's Lifey gatherings—virtual and in-person sessions, expert events, and connection with women who understand.",
 };
 
 const shell =
   "mx-auto w-full max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,calc(100vw-4rem))]";
-
-/** WordPress The Events Calendar — list view (checkout & tickets load here). */
-const EVENTS_EMBED_SRC = "https://px8.792.myftpupload.com/event/";
 
 export default function SupportGroupsPage() {
   return (
@@ -31,9 +29,9 @@ export default function SupportGroupsPage() {
             Support groups &amp; events
           </h1>
           <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[#2a2928]">
-            Upcoming gatherings and sessions hosted through HopeHub and
-            It&apos;s Lifey—browse the calendar below, register, and complete
-            checkout on our secure event pages.
+            Upcoming gatherings and sessions hosted by It&apos;s Lifey—browse the
+            calendar below, register, and complete checkout on our secure event
+            pages.
           </p>
         </div>
       </section>
@@ -42,7 +40,7 @@ export default function SupportGroupsPage() {
         <div className="overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-md shadow-black/[0.06]">
           <iframe
             title="It's Lifey — upcoming events calendar"
-            src={EVENTS_EMBED_SRC}
+            src={WP_EVENTS_EMBED_URL}
             className="block min-h-[min(85vh,900px)] w-full border-0 sm:min-h-[min(88vh,1000px)]"
             loading="lazy"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -52,7 +50,7 @@ export default function SupportGroupsPage() {
         <p className="mt-6 text-center text-sm leading-relaxed text-[#666766]">
           Prefer the full site?{" "}
           <a
-            href={EVENTS_EMBED_SRC}
+            href={WP_EVENTS_EMBED_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"

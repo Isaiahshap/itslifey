@@ -13,6 +13,7 @@ import {
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { SocialMediaLinks } from "@/components/SocialMediaLinks";
 
 const aboutSubLinks = [
   { href: "/about", label: "About Me" },
@@ -378,7 +379,12 @@ export function Navbar() {
           />
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <SocialMediaLinks
+            className="hidden items-center gap-0.5 sm:flex"
+            linkClassName="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#666766] transition-[color,background-color] duration-200 hover:bg-[#e76fab]/10 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:h-10 sm:w-10"
+            iconSizeClassName="h-[1.15rem] w-[1.15rem] sm:h-[1.3rem] sm:w-[1.3rem]"
+          />
           <Link
             href={navPrimaryCta.href}
             className="hidden rounded-full bg-[#e76fab] px-4 py-2.5 text-[14px] font-semibold leading-snug text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md sm:inline-flex sm:px-5 sm:text-[15px] sm:leading-normal"

@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { HeartHandshake } from "lucide-react";
+import {
+  HOPEHUB_MEMBER_LOGIN_URL,
+  HOPEHUB_SIGNUP_URL,
+} from "@/lib/hopehub";
 
 export const metadata: Metadata = {
   title: "HopeHub — Free online community for widows",
@@ -16,11 +20,6 @@ export const metadata: Metadata = {
  */
 const shell =
   "mx-auto w-full max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,calc(100vw-4rem))]";
-
-const HOPEHUB_JOIN_URL =
-  "https://login.circle.so/sign_up?request_host=hopehub.circle.so&user%5Binvitation_token%5D=947aa1f252e04c03277aa4ecc32ab3747f11b503-49bc1d95-158d-4c38-9554-fa6340a7d8cd#email";
-
-const HOPEHUB_MEMBER_LOGIN_URL = "https://hopehub.circle.so";
 
 /** Matches homepage HopeHub section: local preview + YouTube walkthrough */
 const HOPEHUB_PREVIEW_VIDEO_SRC = "/images/hopehub.mp4";
@@ -122,7 +121,7 @@ export default function HopeHubPage() {
             </h1>
           </div>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-            <a href={HOPEHUB_JOIN_URL} className={joinButtonClass()}>
+            <a href={HOPEHUB_SIGNUP_URL} className={joinButtonClass()}>
               Join the community (free)
             </a>
             <a
@@ -371,7 +370,7 @@ export default function HopeHubPage() {
                     ))}
                   </ul>
                   <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                    <a href={HOPEHUB_JOIN_URL} className={joinButtonClass()}>
+                    <a href={HOPEHUB_SIGNUP_URL} className={joinButtonClass()}>
                       Join free today
                     </a>
                     <Link href="/retreats" className={secondaryButtonClass()}>
@@ -429,7 +428,7 @@ export default function HopeHubPage() {
             ))}
           </div>
           <p className="mt-12 lg:mt-14">
-            <a href={HOPEHUB_JOIN_URL} className={joinButtonClass()}>
+            <a href={HOPEHUB_SIGNUP_URL} className={joinButtonClass()}>
               Create your free account
             </a>
           </p>
