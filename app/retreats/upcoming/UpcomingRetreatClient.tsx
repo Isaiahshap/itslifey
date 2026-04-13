@@ -46,6 +46,12 @@ const shell =
 const shellGallery =
   "mx-auto w-full min-w-0 max-w-7xl px-3 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(96rem,100%)]";
 
+/** Summer 2026 coastal retreat — use these everywhere pricing or early-bird promos appear. */
+const RETREAT_SINGLE_PRICE = "$4,199";
+const RETREAT_TRIPLE_PRICE = "$3,499";
+const RETREAT_EARLY_BIRD_LINE =
+  "Save $100 when you register by April 30th";
+
 const TESTIMONIAL_FORM_PARTS = [
   `Although the "It's Lifey" retreat had a weekend structure, it was completely flexible and your participation in any of the activities or groups was your choice. There was zero pressure or judgment for not participating—or participating a lot.`,
   `The layout was amazing: a group session followed by a fun short outing, with time to relax and eat before another round. The thoughtfulness behind the details of planning a weekend that had the potential to be pretty heavy, but somehow remained pretty light and beautiful, was unparalleled.`,
@@ -56,9 +62,9 @@ const TESTIMONIAL_AWAITS =
 
 const INVESTMENT_MARQUEE_PARTS = [
   "Invest in YOU",
-  "$3,999 single room",
-  "$3,199 triple shared room",
-  "Save $100 — register by April 30",
+  `${RETREAT_SINGLE_PRICE} single room`,
+  `${RETREAT_TRIPLE_PRICE} triple room`,
+  "Save $100 — register by April 30th",
   "Payment plans available",
   "All-inclusive investment",
   "Accommodations (beautiful coastal private home)",
@@ -312,8 +318,7 @@ export function UpcomingRetreatClient() {
                 Join us
               </button>
               <p className="max-w-[16rem] text-sm font-medium leading-snug text-white/90 sm:max-w-[18rem]">
-                <span className="text-[#e76fab]">●</span> Save $100 when you
-                register by April 30.
+                <span className="text-[#e76fab]">●</span> {RETREAT_EARLY_BIRD_LINE}.
               </p>
             </div>
           </motion.div>
@@ -728,10 +733,10 @@ export function UpcomingRetreatClient() {
                   (because you can&apos;t keep pouring from empty)
                 </p>
                 <p className="mt-8 max-w-xl text-[1.0625rem] leading-[1.65] text-[#2a2928] sm:text-lg">
-                  The investment is $3,999 per person for a single room and
-                  $3,199 per person for a triple shared room. You&apos;ll receive
-                  $100 off if you register by April 30, and payment plans are
-                  available.
+                  The investment is {RETREAT_SINGLE_PRICE} per person for a single
+                  room and {RETREAT_TRIPLE_PRICE} per person for a triple room.
+                  You&apos;ll receive $100 off if you register by April 30th, and
+                  payment plans are available.
                 </p>
               </div>
 
@@ -761,7 +766,7 @@ export function UpcomingRetreatClient() {
                 <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:col-span-7 lg:grid-cols-2 lg:gap-10">
                   <div className="border-r border-[#e3ddd4] pr-6 sm:pr-8">
                     <p className="text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
-                      $3,999
+                      {RETREAT_SINGLE_PRICE}
                     </p>
                     <p className="mt-1.5 text-sm font-medium text-[#666766] sm:text-[15px]">
                       Single room
@@ -769,17 +774,17 @@ export function UpcomingRetreatClient() {
                   </div>
                   <div className="pl-2 sm:pl-0">
                     <p className="text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
-                      $3,199
+                      {RETREAT_TRIPLE_PRICE}
                     </p>
                     <p className="mt-1.5 text-sm font-medium text-[#666766] sm:text-[15px]">
-                      Triple shared room
+                      Triple room
                     </p>
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 border-t border-[#ebe6df] pt-6 text-[15px] leading-snug sm:pt-0 sm:text-base lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0 xl:pl-12">
                   <p className="text-[#666766]">All-inclusive investment</p>
                   <p className="font-semibold text-[#e76fab]">
-                    Save $100 when you register by April 30
+                    {RETREAT_EARLY_BIRD_LINE}
                   </p>
                   <p className="font-semibold text-[#666766]">
                     Payment plans available
@@ -810,8 +815,7 @@ export function UpcomingRetreatClient() {
             </p>
             <div className="mx-auto mt-8 max-w-xl border-t border-white/35 pt-8">
               <p className="text-base font-semibold text-white sm:text-lg">
-                Save $100 when you register by April 30 · Payment plans
-                available
+                {RETREAT_EARLY_BIRD_LINE} · Payment plans available
               </p>
             </div>
             <div className="mx-auto mt-10 flex justify-center">
@@ -917,22 +921,22 @@ export function UpcomingRetreatClient() {
                     </span>
                   </p>
                   <p className="mt-4 text-2xl font-semibold text-black sm:text-3xl">
-                    $3,999{" "}
+                    {RETREAT_SINGLE_PRICE}{" "}
                     <span className="text-base font-medium text-[#666766]">
-                      Single Room
+                      Single room
                     </span>
                   </p>
                   <p className="mt-2 text-2xl font-semibold text-black sm:text-3xl">
-                    $3,199{" "}
+                    {RETREAT_TRIPLE_PRICE}{" "}
                     <span className="text-base font-medium text-[#666766]">
-                      Triple Shared Room
+                      Triple room
                     </span>
                   </p>
                   <p className="mt-3 text-sm font-medium text-[#666766]">
                     all-inclusive investment
                   </p>
                   <p className="mt-4 text-sm font-semibold text-[#e76fab]">
-                    Save $100 when you register by April 30
+                    {RETREAT_EARLY_BIRD_LINE}
                   </p>
                   <p className="mt-1 text-sm font-semibold text-[#666766]">
                     Payment plans available
@@ -978,9 +982,10 @@ export function UpcomingRetreatClient() {
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
                   Share a few details—we&apos;ll follow up with next steps. The
-                  investment is $3,999 per person for a single room and $3,199 per
-                  person for a triple shared room. You&apos;ll receive $100 off if
-                  you register by April 30, and payment plans are available.
+                  investment is {RETREAT_SINGLE_PRICE} per person for a single room
+                  and {RETREAT_TRIPLE_PRICE} per person for a triple room.
+                  You&apos;ll receive $100 off if you register by April 30th, and
+                  payment plans are available.
                 </p>
                 <form
                   className="relative mt-8 space-y-5"
