@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { getPosts } from "@/lib/wordpress";
 
@@ -86,12 +85,11 @@ export default async function BlogArchivePage() {
                       href={`/blog/${post.slug}`}
                       className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-2xl bg-[#ebe6df] sm:aspect-square sm:max-w-[280px]"
                     >
-                      <Image
+                      {/* eslint-disable-next-line @next/next/no-img-element -- Featured image URLs come from WP/CDN; next/image 500s in prod when host is not allowlisted. */}
+                      <img
                         src={post.featuredImageUrl}
                         alt=""
-                        fill
-                        className="object-cover transition-transform duration-500 hover:scale-[1.03]"
-                        sizes="(max-width: 640px) 100vw, 280px"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
                       />
                     </Link>
                   ) : null}

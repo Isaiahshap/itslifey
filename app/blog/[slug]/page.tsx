@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { WpHtml } from "@/components/WpHtml";
@@ -80,13 +79,13 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {post.featuredImageUrl ? (
           <div className="relative mx-auto aspect-[21/9] max-h-[min(52vh,520px)] w-full max-w-6xl overflow-hidden bg-[#1a1918] sm:px-5 lg:px-8">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element -- Featured image URLs come from WP/CDN; next/image 500s in prod when host is not allowlisted. */}
+            <img
               src={post.featuredImageUrl}
               alt=""
-              fill
-              priority
-              className="object-cover object-center"
-              sizes="(max-width: 1280px) 100vw, 1152px"
+              loading="eager"
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover object-center"
             />
           </div>
         ) : null}
