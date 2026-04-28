@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+import { MetaPixel } from "@/components/MetaPixel";
 import { Navbar } from "@/components/Navbar";
 import { SiteFinalCta } from "@/components/SiteFinalCta";
 import { VirtualHealingAnnouncementBar } from "@/components/VirtualHealingAnnouncementBar";
@@ -84,6 +85,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${nunitoSans.variable} h-full scroll-smooth`}>
       <body className="min-h-full flex flex-col antialiased text-black">
+        <MetaPixel />
         <VirtualHealingAnnouncementBar />
         <Navbar />
         <main className="flex-1">{children}</main>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { VirtualHealingPixelEvents } from "@/components/VirtualHealingPixelEvents";
 import { VirtualHealingSignupForm } from "@/components/VirtualHealingSignupForm";
 
 export const metadata: Metadata = {
@@ -47,6 +48,7 @@ const sectionTitle =
 export default function VirtualHealingExperiencesPage() {
   return (
     <div className="bg-[#f6f3ee]">
+      <VirtualHealingPixelEvents />
       <section
         className="relative overflow-hidden border-b border-[#e8d4df]/80"
         aria-labelledby="vhe-hero-heading"

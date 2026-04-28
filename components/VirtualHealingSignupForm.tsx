@@ -69,6 +69,14 @@ export function VirtualHealingSignupForm({
       setFeedback(
         "Thank you—we received your request. Check your email for a confirmation, and we’ll be in touch about your spot.",
       );
+      if (typeof window.fbq === "function") {
+        window.fbq("track", "Lead", {
+          content_name: "Virtual Healing Experiences",
+          content_category: "Support",
+          value: 899,
+          currency: "USD",
+        });
+      }
       form.reset();
     } catch {
       setStatus("error");
