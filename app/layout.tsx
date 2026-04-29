@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { MetaPixel } from "@/components/MetaPixel";
@@ -85,6 +86,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${nunitoSans.variable} h-full scroll-smooth`}>
       <body className="min-h-full flex flex-col antialiased text-black">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-962038QD51"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-962038QD51');
+          `}
+        </Script>
         <MetaPixel />
         <VirtualHealingAnnouncementBar />
         <Navbar />
