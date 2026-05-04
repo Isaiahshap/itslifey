@@ -107,7 +107,7 @@ export default function VirtualHealingExperiencesPage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_min(26rem,100%)] lg:items-start lg:gap-14 xl:gap-20">
 
             {/* Left column */}
-            <div className="order-2 max-w-2xl lg:order-1 lg:pt-1">
+            <div className="max-w-2xl lg:pt-1">
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#7a6a72] sm:text-[11px]">
                 A 6-week virtual experience for widows · with Tina Walsh
               </p>
@@ -208,7 +208,7 @@ export default function VirtualHealingExperiencesPage() {
             {/* Right column — sticky form */}
             <div
               id="signup"
-              className="order-1 scroll-mt-28 lg:order-2 lg:sticky lg:top-28"
+              className="scroll-mt-28 lg:sticky lg:top-28"
             >
               <div className="relative rounded-[1.35rem] border border-white/90 bg-white/90 p-6 shadow-[0_28px_70px_-24px_rgba(180,60,120,0.35)] ring-1 ring-[#e76fab]/10 backdrop-blur-md sm:p-8">
                 <div
