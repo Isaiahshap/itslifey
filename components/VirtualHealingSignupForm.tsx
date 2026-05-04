@@ -20,27 +20,27 @@ type VirtualHealingSignupFormProps = {
 export function VirtualHealingSignupForm({
   idPrefix = "vhe",
 }: VirtualHealingSignupFormProps) {
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "success" | "error"
-  >("idle");
-  const [feedback, setFeedback] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     setStatus("sending");
-    setFeedback("");
+    setErrorMessage("");
+
     const fd = new FormData(form);
     let recaptchaToken: string | undefined;
     try {
       recaptchaToken = await getRecaptchaToken("virtual_healing");
     } catch {
       setStatus("error");
-      setFeedback(
-        "We couldn’t verify the form. Please refresh the page and try again.",
+      setErrorMessage(
+        "We couldn't verify the form. Please refresh the page and try again.",
       );
       return;
     }
+
     const payload = {
       name: String(fd.get("name") ?? "").trim(),
       email: String(fd.get("email") ?? "").trim(),
@@ -49,44 +49,52 @@ export function VirtualHealingSignupForm({
       [HONEYPOT_FIELD]: String(fd.get(HONEYPOT_FIELD) ?? "").trim(),
       ...(recaptchaToken ? { recaptchaToken } : {}),
     };
+
     try {
-      const res = await fetch("/api/virtual-healing-inquiry", {
+      const res = await fetch("/api/virtual-healing-checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
+
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+        url?: string;
+      };
+
       if (!res.ok) {
         setStatus("error");
-        setFeedback(
+        setErrorMessage(
           typeof data.error === "string"
             ? data.error
             : "Something went wrong. Please try again.",
         );
         return;
       }
-      setStatus("success");
-      setFeedback(
-        "Thank you—we received your request. Check your email for a confirmation, and we’ll be in touch about your spot.",
-      );
+
       if (typeof window.fbq === "function") {
-        window.fbq("track", "Lead", {
+        window.fbq("track", "InitiateCheckout", {
           content_name: "Virtual Healing Experiences",
           content_category: "Support",
-          value: 899,
+          value: 200,
           currency: "USD",
         });
       }
-      form.reset();
+
+      // Redirect to Stripe payment page
+      if (data.url) {
+        window.location.href = data.url;
+      }
     } catch {
       setStatus("error");
-      setFeedback(
-        "We couldn’t reach the server. Check your connection and try again.",
+      setErrorMessage(
+        "We couldn't reach the server. Check your connection and try again.",
       );
     }
   }
 
   const pid = idPrefix;
+  const isSending = status === "sending";
 
   return (
     <form
@@ -96,19 +104,17 @@ export function VirtualHealingSignupForm({
       id={`${pid}-virtual-healing-signup`}
     >
       <FormHoneypot idPrefix={pid} />
-      {feedback ? (
+
+      {status === "error" && errorMessage ? (
         <p
-          role="status"
-          aria-live="polite"
-          className={`rounded-xl border px-4 py-3 text-sm leading-relaxed ${
-            status === "success"
-              ? "border-[#e76fab]/25 bg-[#fdf8fb] text-[#555]"
-              : "border-red-200 bg-red-50 text-red-900"
-          }`}
+          role="alert"
+          aria-live="assertive"
+          className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm leading-relaxed text-red-900"
         >
-          {feedback}
+          {errorMessage}
         </p>
       ) : null}
+
       <div>
         <label
           htmlFor={`${pid}-name`}
@@ -167,19 +173,24 @@ export function VirtualHealingSignupForm({
         <textarea
           id={`${pid}-note`}
           name="note"
-          rows={4}
+          rows={3}
           className={`${inputClass} resize-y leading-relaxed`}
-          placeholder="Questions, accessibility needs, or what you’re hoping for from this experience."
+          placeholder="Questions, accessibility needs, or what you're hoping for from this experience."
         />
       </div>
+
       <div className="pt-1">
         <button
           type="submit"
-          disabled={status === "sending"}
+          disabled={isSending}
           className="w-full rounded-full bg-[#e76fab] px-8 py-4 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] enabled:active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
-          {status === "sending" ? "Sending…" : "Request my spot"}
+          {isSending ? "Taking you to payment…" : "Reserve my spot — $200 deposit"}
         </button>
+        <p className="mt-3 text-xs leading-relaxed text-[#888]">
+          You&apos;ll be taken to a secure Stripe checkout for your $200 deposit,
+          which goes toward your total program investment.
+        </p>
         <RecaptchaNotice />
       </div>
     </form>
