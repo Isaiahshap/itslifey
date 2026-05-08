@@ -169,9 +169,15 @@ export default function VirtualHealingExperiencesPage() {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
                   Investment
                 </p>
+                <p className="mt-2 max-w-md text-[0.88rem] font-medium leading-snug text-[#b8457e]">
+                  We just significantly lowered the price of this experience.
+                </p>
                 <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-[1.8rem] font-semibold leading-none tracking-tight text-[#141413]">
+                  <span className="text-[1.15rem] font-medium leading-none tracking-tight text-[#888] line-through decoration-[#888]/80">
                     $899
+                  </span>
+                  <span className="text-[1.8rem] font-semibold leading-none tracking-tight text-[#141413]">
+                    $399
                   </span>
                   <span className="text-[0.95rem] text-[#666766]">
                     — all six sessions included
@@ -227,7 +233,7 @@ export default function VirtualHealingExperiencesPage() {
                       </span>
                     </p>
                     <p className="mt-1 text-xs text-[#888]">
-                      Applied toward $899/$849 total
+                      Applied toward $399/$349 total
                     </p>
                   </div>
                   <span className="mt-0.5 flex shrink-0 items-center gap-1.5 rounded-full border border-[#e76fab]/30 bg-[#fdf6fb] px-3 py-1.5 text-xs font-semibold text-[#b8457e]">
@@ -390,12 +396,18 @@ export default function VirtualHealingExperiencesPage() {
                 </h2>
                 <div className="mt-3 h-px max-w-[3rem] bg-gradient-to-r from-[#e76fab]/70 to-transparent" />
                 <ul className={`${body} mt-5 list-none space-y-3 p-0`}>
-                  <li className="flex items-baseline gap-2">
-                    <span className="font-semibold text-[#141413]">$899</span>
-                    <span className="text-[0.88rem] text-[#666766]">full price</span>
+                  <li className="text-[0.88rem] leading-snug text-[#555]">
+                    We recently lowered the full price significantly — same six-week experience, gentler investment.
+                  </li>
+                  <li className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    <span className="text-[0.95rem] font-medium text-[#888] line-through decoration-[#888]/80">
+                      $899
+                    </span>
+                    <span className="font-semibold text-[#141413]">$399</span>
+                    <span className="text-[0.88rem] text-[#666766]">full price · six sessions</span>
                   </li>
                   <li className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                    <span className="font-semibold text-[#141413]">$849</span>
+                    <span className="font-semibold text-[#141413]">$349</span>
                     <span className="rounded-md border border-[#e76fab]/30 bg-[#fdf6fb] px-1.5 py-0.5 font-mono text-[0.78em] font-bold text-[#b8457e]">ITSLIFEY50</span>
                     <span className="text-[0.88rem] text-[#b8457e]">ends May 10</span>
                   </li>
@@ -404,7 +416,9 @@ export default function VirtualHealingExperiencesPage() {
                     reserves your spot · applied toward total
                   </li>
                   <li className="text-[0.88rem] text-[#666766]">
-                    + <strong className="font-semibold text-[#141413]">$100 off</strong> any It&apos;s Lifey retreat
+                    +{" "}
+                    <strong className="font-semibold text-[#141413]">$100 off</strong>{" "}
+                    any It&apos;s Lifey retreat
                   </li>
                 </ul>
               </div>

@@ -72,8 +72,8 @@ export default function VirtualHealingThankYouPage() {
                 </li>
                 <li className="flex gap-2.5">
                   <span className="mt-0.5 text-[#e76fab]" aria-hidden>→</span>
-                  Your deposit applies toward your $899/$849
-                  total — nothing more is owed until you hear from us.
+                  Your deposit applies toward your program total ($399, or $349
+                  with code ITSLIFEY50 — recently reduced from $899) — nothing more is owed until you hear from us.
                 </li>
               </ul>
             </div>

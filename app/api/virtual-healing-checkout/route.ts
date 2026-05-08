@@ -157,7 +157,7 @@ export async function POST(request: Request) {
     Reserve my spot — $200 deposit &rarr;
   </a>
 </p>
-<p style="margin:0 0 16px;font-size:14px;color:#666766;">Use code <strong style="font-family:monospace;color:#b8457e;">ITSLIFEY50</strong> at checkout for $50 off your total (offer ends May 10). Your deposit applies toward your $899/$849 program investment.</p>
+<p style="margin:0 0 16px;font-size:14px;color:#666766;">Program investment is now <strong style="color:#1a1918;">$399</strong> <span style="text-decoration:line-through;color:#888;">$899</span> — we&rsquo;ve significantly lowered the price. Use code <strong style="font-family:monospace;color:#b8457e;">ITSLIFEY50</strong> at checkout for $50 off (<strong style="color:#1a1918;">$349</strong> total; offer ends May 10). Your deposit applies toward this amount.</p>
 <p style="margin:0;font-size:14px;color:#888;">Only 3 spots are available. Questions? Reply to this email.</p>`;
 
   const userHtml = wrapBrandedEmail({
@@ -176,8 +176,9 @@ export async function POST(request: Request) {
     "If you haven't yet paid your deposit, here's the link:",
     depositLink,
     "",
-    "Use code ITSLIFEY50 at checkout for $50 off (offer ends May 10).",
-    "Your deposit applies toward your $899/$849 program investment.",
+    "Program investment is now $399 (was $899 — we've significantly lowered the price).",
+    "Use code ITSLIFEY50 at checkout for $50 off ($349 total; offer ends May 10).",
+    "Your deposit applies toward this amount.",
     "",
     `— Jennifer & the It's Lifey team`,
     "",

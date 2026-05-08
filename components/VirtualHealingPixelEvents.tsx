@@ -13,7 +13,7 @@ export function VirtualHealingPixelEvents() {
     window.fbq("track", "ViewContent", {
       content_name: "Virtual Healing Experiences",
       content_category: "Support",
-      value: 899,
+      value: 399,
       currency: "USD",
     });
   }, []);

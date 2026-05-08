@@ -149,7 +149,7 @@ export async function POST(request: Request) {
 <p style="margin:0 0 16px;">Hi ${escapeHtml(greet)},</p>
 <p style="margin:0 0 16px;">Your <strong style="color:#1a1918;">${depositAmount} deposit</strong> for <strong style="color:#1a1918;">The Body Keeps the Story</strong> has been received. Your spot in the cohort is officially reserved.</p>
 <p style="margin:0 0 16px;"><strong style="color:#1a1918;">Jennifer will be in touch</strong> with everything you need — Zoom link, schedule, and preparation notes — before the cohort begins on <strong style="color:#1a1918;">Wednesday, May 20</strong>.</p>
-<p style="margin:0 0 16px;font-size:15px;color:#666766;">Your deposit is applied toward your total program investment ($899, or $849 with code ITSLIFEY50). If you have any questions or need to make changes, just reply to this email.</p>
+<p style="margin:0 0 16px;font-size:15px;color:#666766;">Your deposit is applied toward your total program investment (<strong style="color:#1a1918;">$399</strong> <span style="text-decoration:line-through;color:#888;">$899</span> — we&rsquo;ve significantly lowered the price — or <strong style="color:#1a1918;">$349</strong> with code ITSLIFEY50). If you have any questions or need to make changes, just reply to this email.</p>
 <p style="margin:0;font-size:15px;color:#666766;">We can&rsquo;t wait to hold space for you.</p>`;
 
   const applicantHtml = wrapBrandedEmail({
@@ -164,7 +164,7 @@ export async function POST(request: Request) {
     "",
     "Jennifer will be in touch with everything you need — Zoom link, schedule, and preparation notes — before the cohort begins on Wednesday, May 20.",
     "",
-    "Your deposit is applied toward your total program investment ($899, or $849 with code ITSLIFEY50).",
+    "Your deposit is applied toward your total program investment ($399, was $899 — we've significantly lowered the price — or $349 with code ITSLIFEY50).",
     "Questions? Reply to this email.",
     "",
     `— Jennifer & the It's Lifey team`,

@@ -29,25 +29,35 @@ function pad(n: number) {
 
 export function EarlyBirdCountdown() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const initial = getTimeLeft();
-    setTimeLeft(initial);
-    if (!initial) return;
+    let intervalId: ReturnType<typeof setInterval> | undefined;
 
-    const id = setInterval(() => {
+    const tick = () => {
       const next = getTimeLeft();
       setTimeLeft(next);
-      if (!next) clearInterval(id);
-    }, 1000);
+      return next;
+    };
 
-    return () => clearInterval(id);
+    const timeoutId = globalThis.setTimeout(() => {
+      const initial = tick();
+      if (!initial) return;
+      intervalId = globalThis.setInterval(() => {
+        if (!tick()) {
+          if (intervalId !== undefined) globalThis.clearInterval(intervalId);
+          intervalId = undefined;
+        }
+      }, 1000);
+    }, 0);
+
+    return () => {
+      globalThis.clearTimeout(timeoutId);
+      if (intervalId !== undefined) globalThis.clearInterval(intervalId);
+    };
   }, []);
 
-  // Nothing during SSR or after deadline
-  if (!mounted || !timeLeft) return null;
+  // Nothing during SSR / first paint, or after deadline
+  if (!timeLeft) return null;
 
   const units = [
     { label: timeLeft.days === 1 ? "day" : "days", value: timeLeft.days },
