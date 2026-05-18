@@ -6,7 +6,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "FIRST40 Workshop (Mockup)",
   description:
-    "Draft page for a gentle virtual workshop with FIRST40 and It's Lifey—supporting widows and the professionals who care for them. Not indexed in search.",
+    "Draft page for a gentle virtual workshop with FIRST40 and It's Lifey—supporting widows navigating the emotional and practical realities of life after loss. Not indexed in search.",
   robots: {
     index: false,
     follow: false,
@@ -20,19 +20,13 @@ const shell =
 const body =
   "text-[0.98rem] leading-[1.78] text-[#2a2928] sm:text-[1.0625rem] sm:leading-[1.76]";
 
-const advisorBullets = [
-  "Better support widowed clients with compassion and emotional intelligence",
-  "Strengthen trust and communication during difficult life transitions",
-  "Position themselves as a trusted part of a client\u2019s broader support system",
-  "Navigate sensitive conversations in a more human and approachable way",
-] as const;
-
 const widowBullets = [
-  "Feel more organized and prepared without fear or overwhelm",
-  "Learn how to communicate with professionals and support teams",
-  "Receive practical tools, prompts, and guidance around planning and legacy",
-  "Begin documenting important information, wishes, memories, and traditions",
-  "Connect with others who understand how loss changes everything",
+  "Feel more organized and prepared without fear or pressure",
+  "Begin documenting important information, wishes, and practical details",
+  "Preserve memories, traditions, values, and stories for loved ones",
+  "Learn simple tools that make difficult conversations feel easier",
+  "Reflect on what truly matters most after loss",
+  "Connect with other widows who understand how deeply loss changes everything",
 ] as const;
 
 function SectionEyebrow({ children }: { children: ReactNode }) {
@@ -169,14 +163,13 @@ export default function First40MockupPage() {
               </div>
 
               <p className={`mt-8 max-w-xl ${body}`}>
-                A gentle virtual workshop for widows—and the professionals who
-                care for them—through the emotional and practical realities of life
-                after loss. Grief brings paperwork, decisions, and moments no one
-                prepares us for; this is a bridge between{" "}
+                A gentle virtual workshop for widows navigating the emotional and
+                practical realities of life after loss. Grief brings paperwork,
+                decisions, and moments no one prepares us for—this is a space to
+                begin organizing what matters most, with{" "}
                 <em className="font-medium not-italic text-[#141413]">
-                  what you are holding
-                </em>{" "}
-                and the clarity of a plan that feels human.
+                  compassion, clarity, and no pressure.
+                </em>
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -242,11 +235,7 @@ export default function First40MockupPage() {
                 <div className="space-y-3 border-t border-black/[0.06] pt-5 text-[0.9rem] leading-relaxed text-[#555]">
                   <p>
                     <strong className="font-semibold text-[#141413]">For widows</strong>{" "}
-                    navigating loss—and{" "}
-                    <strong className="font-semibold text-[#141413]">
-                      for professionals
-                    </strong>{" "}
-                    who want to show up with more confidence in hard conversations.
+                    navigating the emotional and practical realities of life after loss—whether newly widowed or years into this journey.
                   </p>
                 </div>
                 <a
@@ -268,76 +257,57 @@ export default function First40MockupPage() {
           <SectionTitle id="f40-intro">No one hands us a map</SectionTitle>
           <PinkRule />
           <p className={`${body} mt-8`}>
-            Grief comes with so many things no one prepares you for—the paperwork,
-            the decisions, the &ldquo;who do I call?&rdquo; moments, and all the
-            things left tucked away in drawers, folders, and memories.
+            When someone you love dies, there are so many things no one prepares
+            you for. The paperwork. The passwords. The &ldquo;where is
+            everything?&rdquo; moments. The decisions you suddenly have to make
+            while your heart is still trying to catch up to your reality.
           </p>
           <p className={`${body} mt-5`}>
-            And when you lose someone you love, it changes the way you think about
-            your own life and often, quietly, about your own mortality too.
+            And somewhere in the middle of grief, many widows quietly begin
+            thinking something else too:
+          </p>
+          <p className={`${body} mt-5 pl-4 border-l-2 border-[#e76fab]/40 italic text-[#444]`}>
+            If something happened to me tomorrow, would the people I love know
+            what matters most? Would they know where important things are? Would
+            they know my wishes? Would they know the stories, traditions, and
+            little things I never want forgotten?
           </p>
           <p className={`${body} mt-5`}>
-            Many widows find themselves wondering: If something happened to me
-            tomorrow, would the people I love know what matters most? Would they
-            know where things are?
+            This workshop was created to gently help widows navigate those
+            conversations and begin organizing the things that matter
+            most—emotionally and practically—without fear, pressure, or overwhelm.
           </p>
           <p className={`${body} mt-5`}>
-            At the same time, financial advisors and professionals supporting widowed
-            clients often want to help beyond the financial pieces—but may not always
-            know how to navigate these deeply emotional conversations in a way that
-            feels human and supportive.
-          </p>
-          <p className={`${body} mt-5`}>
-            This workshop, led by the experts at FIRST40, along with widow and
-            It&apos;s Lifey founder, Jennifer Newberg, is designed to bridge the gap
-            between widows and financial professionals who help widows.
+            Led by the founders of FIRST40 and hosted by widow, speaker, and
+            founder of It&apos;s Lifey, Jen Newberg, this experience combines
+            compassionate conversation, practical guidance, and meaningful
+            reflection in a supportive community setting.
           </p>
 
-          {/* Two audiences */}
+          {/* Why this matters */}
           <div className="mt-16 sm:mt-20">
-            <SectionEyebrow>Two paths, one workshop</SectionEyebrow>
-            <SectionTitle id="f40-advisors">
-              Why this matters—for professionals &amp; for widows
+            <SectionEyebrow>Why this matters</SectionEyebrow>
+            <SectionTitle id="f40-why">
+              Why this matters for widows
             </SectionTitle>
             <PinkRule />
-            <div className="mt-10 grid gap-5 sm:grid-cols-1">
-              <div className="rounded-2xl border border-black/[0.055] bg-white/70 p-6 backdrop-blur-[2px] sm:p-7">
-                <h3 className="text-[1.05rem] font-semibold text-[#141413]">
-                  Financial professionals
-                </h3>
-                <p className={`${body} mt-4 text-[#555]`}>
-                  An estimated $124 trillion in wealth is expected to transfer to
-                  heirs and charities by 2048—including $54 trillion transferring to
-                  spouses, with more than 95% going to women. Yet studies show many
-                  widows change financial advisors within the first year after losing
-                  a partner.
-                </p>
-                <p className={`${body} mt-4 text-[#555]`}>
-                  Widowed clients are not just navigating finances; they are
-                  navigating grief, overwhelm, identity shifts, decision fatigue, and
-                  fear. They need your help—and this can help you.
-                </p>
-                <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#b8457e]">
-                  This workshop helps you
-                </p>
-                <VheStyleList items={advisorBullets} />
-              </div>
-
-              <div className="rounded-2xl border border-black/[0.055] bg-white/70 p-6 backdrop-blur-[2px] sm:p-7">
-                <h3 className="text-[1.05rem] font-semibold text-[#141413]">
-                  Widows
-                </h3>
-                <p className={`${body} mt-4 text-[#555]`}>
-                  After loss, even simple decisions can feel overwhelming. Alongside
-                  grief comes paperwork, planning, unanswered questions, and the
-                  emotional weight of trying to hold everything together.
-                </p>
-                <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#b8457e]">
-                  A gentle space to
-                </p>
-                <VheStyleList items={widowBullets} />
-              </div>
-            </div>
+            <p className={`${body} mt-6 text-[#555]`}>
+              After loss, even the smallest decisions can feel exhausting. You
+              are grieving while also trying to manage paperwork, finances,
+              memories, logistics, relationships, and an entirely new version of
+              life you never asked for.
+            </p>
+            <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#b8457e]">
+              This workshop offers a supportive space to
+            </p>
+            <VheStyleList items={widowBullets} />
+            <p className={`${body} mt-8 font-medium text-[#141413]`}>
+              This is not about preparing for the worst.
+            </p>
+            <p className={`${body} mt-2`}>
+              It&apos;s about creating more clarity, connection, peace of mind,
+              and support for yourself and the people you love.
+            </p>
           </div>
 
           {/* Closure Map — gradient feature card */}
@@ -391,8 +361,8 @@ export default function First40MockupPage() {
                   </p>
                   <p className="mt-4 text-[1.0rem] leading-[1.82] text-[#2a2928] sm:text-[1.05rem]">
                     This evening is about honest conversation—no jargon, no pressure.
-                    Whether you are in the fog of loss or walking beside someone who
-                    is, you deserve a space that feels{" "}
+                    Whether you are newly widowed or years into this journey, you
+                    deserve a space that feels{" "}
                     <em className="font-medium not-italic text-[#141413]">
                       steady, kind, and practical
                     </em>
@@ -465,9 +435,9 @@ export default function First40MockupPage() {
               </h2>
               <PinkRule />
               <p className={`${body} mx-auto mt-6 max-w-xl text-[#555] lg:mx-0`}>
-                Whether you are navigating loss yourself or supporting widowed clients
-                through it, this workshop offers thoughtful guidance around the
-                conversations and planning no one prepares us for.
+                Whether you are newly widowed or years into this journey, this
+                workshop offers thoughtful guidance around the conversations and
+                planning no one prepares us for.
               </p>
             </div>
 
@@ -507,26 +477,32 @@ export default function First40MockupPage() {
                 </li>
                 <li className="relative flex flex-col rounded-2xl border border-[#e76fab]/35 bg-white p-5 shadow-md shadow-[#e76fab]/[0.12] ring-1 ring-[#e76fab]/15 backdrop-blur-[2px] sm:p-6">
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#e76fab]">
-                    Small group
+                    Package of 5 attendees
                   </p>
                   <p className="mt-2 text-2xl font-semibold tracking-tight text-[#141413]">
-                    $99
+                    $98
+                  </p>
+                  <p className={`mt-1 text-[0.82rem] font-semibold text-[#e76fab]`}>
+                    Buy 2, get 3 free
                   </p>
                   <p className={`mt-3 flex-1 text-[0.9rem] leading-relaxed text-[#555]`}>
-                    Up to 5 attendees—support groups, teams, or small offices supporting
-                    widowed clients.
+                    Perfect for widow groups, friends, family members, or support
+                    circles who want to attend together.
                   </p>
                 </li>
                 <li className="flex flex-col rounded-2xl border border-black/[0.055] bg-white/80 p-5 backdrop-blur-[2px] sm:p-6">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                    Professional team
+                    Package of 10 attendees
                   </p>
                   <p className="mt-2 text-2xl font-semibold tracking-tight text-[#141413]">
-                    $199
+                    $196
+                  </p>
+                  <p className={`mt-1 text-[0.82rem] font-semibold text-[#e76fab]`}>
+                    Buy 4, get 6 free
                   </p>
                   <p className={`mt-3 flex-1 text-[0.9rem] leading-relaxed text-[#555]`}>
-                    Up to 10 attendees—firms and teams supporting widowed clients with
-                    compassion and confidence.
+                    A meaningful option for larger communities, organizations, or
+                    groups of widows who want shared support and conversation.
                   </p>
                 </li>
               </ul>
@@ -561,8 +537,8 @@ export default function First40MockupPage() {
                 The conversations &amp; planning no one prepares us for
               </h2>
               <p className="mx-auto mt-4 max-w-md text-[0.95rem] leading-relaxed text-white/85">
-                Join widows and the professionals who support them—one gentle workshop,
-                practical tools, and space for real questions.
+                One gentle workshop for widows—practical tools, meaningful reflection,
+                and space for real questions.
               </p>
               <a
                 href="#pricing"
