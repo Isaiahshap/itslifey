@@ -5,14 +5,9 @@ import Link from "next/link";
 import { First40SignupForm } from "@/components/First40SignupForm";
 
 export const metadata: Metadata = {
-  title: "First40 Workshop (Mockup)",
+  title: "First40 Workshop — Virtual workshop for widows",
   description:
-    "Draft page for a gentle virtual workshop with First40 and It's Lifey—supporting widows navigating the emotional and practical realities of life after loss. Not indexed in search.",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: { index: false, follow: false },
-  },
+    "A gentle virtual workshop with First40 and It's Lifey—supporting widows navigating the emotional and practical realities of life after loss. June 18.",
 };
 
 const shell =
@@ -99,16 +94,9 @@ const ctaArrow = (
   </svg>
 );
 
-export default function First40MockupPage() {
+export default function First40Page() {
   return (
     <div className="bg-[#f6f3ee]">
-      <div
-        className="border-b border-[#e8d4df]/90 bg-[#2a2928]/[0.06] py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5c5258] sm:text-xs"
-        role="status"
-      >
-        Draft mockup · not indexed · pending First40 review
-      </div>
-
       {/* ── HERO (aligned with Virtual Healing Experiences) ── */}
       <section
         className="relative overflow-hidden border-b border-[#e8d4df]/80"

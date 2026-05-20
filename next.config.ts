@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "px8.792.myftpupload.com",
         pathname: "/wp-content/**",
       },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        pathname: "/vi/**",
+      },
     ],
   },
 };

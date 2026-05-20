@@ -25,6 +25,36 @@ const RETREAT_SHOWCASE_IMAGES = [
   "/images/Retreats/Summer2025/IMG_1908.webp",
 ] as const;
 
+const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@ItsLifey-co";
+
+const YOUTUBE_CONVERSATIONS = [
+  {
+    id: "51RdueWbby8",
+    title: "Your Story Matters",
+    guest: "Mark Carpenter",
+  },
+  {
+    id: "Ed-S6C8pIOY",
+    title: "Grief, Gratitude & Healing",
+    guest: "Dr. Peggy DeLong",
+  },
+  {
+    id: "xRS5QOZPxl0",
+    title: "End of Life Planning",
+    guest: "First40",
+  },
+  {
+    id: "d5lqHsTRgcM",
+    title: "Navigating Finances After Loss",
+    guest: "Deborah Cartisser",
+  },
+  {
+    id: "bZHfbL5YXtY",
+    title: "Compassion-Focused Therapy",
+    guest: "Lenore Mewton",
+  },
+] as const;
+
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
@@ -51,6 +81,7 @@ const listChild = {
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [retreatShowcaseIndex, setRetreatShowcaseIndex] = useState(0);
+  const [videoIndex, setVideoIndex] = useState(0);
   const heroCopyRef = useRef<HTMLDivElement>(null);
   const [heroHeadlinePx, setHeroHeadlinePx] = useState<number | undefined>(
     undefined,
@@ -87,6 +118,21 @@ export default function Home() {
     }, 6500);
     return () => window.clearInterval(id);
   }, []);
+
+  const activeVideo = YOUTUBE_CONVERSATIONS[videoIndex];
+  const videoCount = YOUTUBE_CONVERSATIONS.length;
+
+  const goToPrevVideo = () => {
+    setVideoIndex((i) => (i - 1 + videoCount) % videoCount);
+  };
+
+  const goToNextVideo = () => {
+    setVideoIndex((i) => (i + 1) % videoCount);
+  };
+
+  const prevVideo =
+    YOUTUBE_CONVERSATIONS[(videoIndex - 1 + videoCount) % videoCount];
+  const nextVideo = YOUTUBE_CONVERSATIONS[(videoIndex + 1) % videoCount];
 
   return (
     <div className="bg-[#f6f3ee]">
@@ -189,10 +235,10 @@ export default function Home() {
                 Join Upcoming Retreat
               </Link>
               <Link
-                href="/support-groups"
+                href="/hopehub"
                 className="inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-md [text-shadow:none] transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
               >
-                Explore Support Options
+                Explore HopeHub
               </Link>
             </div>
           </motion.div>
@@ -295,14 +341,14 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* ——— RETREATS ——— */}
+      {/* ——— RETREATS + YOUTUBE (shared pink → light gradient) ——— */}
+      <div className="bg-[linear-gradient(to_bottom,#df68a3_0%,#e76fab_32%,#d85e9a_40%,#e76fab_46%,#f0dfe8_70%,#f6f3ee_100%)]">
       <section
         id="support-paths"
-        className="border-t border-white/20"
         aria-labelledby="retreats-heading"
       >
         <motion.div
-          className="relative overflow-hidden bg-gradient-to-br from-[#df68a3] via-[#e76fab] to-[#d85e9a] px-3 py-16 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] sm:px-4 sm:py-20 lg:px-5 lg:py-24"
+          className="relative overflow-hidden px-3 py-16 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] sm:px-4 sm:py-20 lg:px-5 lg:py-24"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-64px" }}
@@ -416,80 +462,259 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ——— SUPPORT GROUPS ——— */}
+      {/* ——— YOUTUBE CONVERSATIONS ——— */}
       <motion.section
-        className="border-t border-[#ebe6df] bg-[#f6f3ee] px-3 py-20 sm:px-4 lg:px-5 lg:py-28"
-        aria-labelledby="groups-heading"
+        className="relative overflow-hidden px-3 pb-20 pt-4 sm:px-4 sm:pb-28 lg:px-5"
+        aria-labelledby="videos-heading"
         {...fadeUp}
       >
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-8 lg:gap-10">
-          <div className="min-w-0 max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#c2528c]">
-              Support groups
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
+              Watch &amp; listen
             </p>
             <h2
-              id="groups-heading"
-              className="mt-3 text-balance text-3xl font-semibold leading-tight text-black sm:text-4xl"
+              id="videos-heading"
+              className="mt-3 text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl"
             >
-              Gentle rhythm, honest conversation, zero judgment
+              Conversations, resources, and support
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-[#2a2928]">
-              Support groups are recurring, accessible, and conversation-centered—a
-              simple way to stay connected when you want steady encouragement
-              without a big trip or commitment you&apos;re not ready for.
+            <p className="mt-5 text-lg leading-relaxed text-white/95">
+              Honest talks with experts and widows who understand—on grief,
+              planning, finances, therapy, and the everyday realities of life
+              after losing a spouse.
             </p>
           </div>
-          <Link
-            href="/support-groups"
-            className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:w-auto lg:w-auto"
-          >
-            Explore Support Groups
-          </Link>
+
+          <div className="mx-auto mt-12 max-w-6xl">
+            <div className="relative">
+              <div className="hidden items-end justify-center gap-4 md:flex lg:gap-5">
+                <button
+                  type="button"
+                  onClick={goToPrevVideo}
+                  className="group w-[24%] max-w-[14rem] shrink-0 cursor-pointer text-left transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] lg:max-w-[15rem]"
+                  aria-label={`Previous: ${prevVideo.title}`}
+                >
+                  <div className="overflow-hidden rounded-xl bg-black shadow-sm ring-1 ring-black/10 transition-[box-shadow,opacity] duration-200 group-hover:shadow-md group-hover:opacity-100 opacity-80">
+                    <div className="relative aspect-video w-full">
+                      <Image
+                        src={`https://img.youtube.com/vi/${prevVideo.id}/hqdefault.jpg`}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="15rem"
+                      />
+                      <div
+                        className="absolute inset-0 bg-black/15 transition-colors duration-200 group-hover:bg-black/5"
+                        aria-hidden
+                      />
+                    </div>
+                  </div>
+                  <p className="mt-2.5 line-clamp-2 text-[0.8rem] font-semibold leading-snug text-[#555] transition-colors duration-200 group-hover:text-[#141413]">
+                    {prevVideo.title}
+                  </p>
+                  <p className="mt-0.5 text-[0.72rem] font-medium text-[#888]">
+                    × {prevVideo.guest}
+                  </p>
+                </button>
+
+                <div className="w-[52%] max-w-[32rem] shrink-0">
+                  <div className="overflow-hidden rounded-[1.15rem] bg-black shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/10">
+                    <div className="relative aspect-video w-full">
+                      <iframe
+                        key={activeVideo.id}
+                        src={`https://www.youtube-nocookie.com/embed/${activeVideo.id}?rel=0`}
+                        title={`${activeVideo.title} | It's Lifey x ${activeVideo.guest}`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        className="absolute inset-0 h-full w-full border-0"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-4 text-center">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
+                      Now playing
+                    </p>
+                    <p className="mt-2 text-pretty text-lg font-semibold leading-snug text-[#141413] sm:text-xl">
+                      {activeVideo.title}
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-[#666766]">
+                      It&apos;s Lifey × {activeVideo.guest}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={goToNextVideo}
+                  className="group w-[24%] max-w-[14rem] shrink-0 cursor-pointer text-left transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] lg:max-w-[15rem]"
+                  aria-label={`Next: ${nextVideo.title}`}
+                >
+                  <div className="overflow-hidden rounded-xl bg-black shadow-sm ring-1 ring-black/10 transition-[box-shadow,opacity] duration-200 group-hover:shadow-md group-hover:opacity-100 opacity-80">
+                    <div className="relative aspect-video w-full">
+                      <Image
+                        src={`https://img.youtube.com/vi/${nextVideo.id}/hqdefault.jpg`}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="15rem"
+                      />
+                      <div
+                        className="absolute inset-0 bg-black/15 transition-colors duration-200 group-hover:bg-black/5"
+                        aria-hidden
+                      />
+                    </div>
+                  </div>
+                  <p className="mt-2.5 line-clamp-2 text-[0.8rem] font-semibold leading-snug text-[#555] transition-colors duration-200 group-hover:text-[#141413]">
+                    {nextVideo.title}
+                  </p>
+                  <p className="mt-0.5 text-[0.72rem] font-medium text-[#888]">
+                    × {nextVideo.guest}
+                  </p>
+                </button>
+              </div>
+
+              <div className="md:hidden">
+                <div className="overflow-hidden rounded-[1.15rem] bg-black shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/10">
+                  <div className="relative aspect-video w-full">
+                    <iframe
+                      key={activeVideo.id}
+                      src={`https://www.youtube-nocookie.com/embed/${activeVideo.id}?rel=0`}
+                      title={`${activeVideo.title} | It's Lifey x ${activeVideo.guest}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full border-0"
+                    />
+                  </div>
+                </div>
+                <div className="mt-4 text-center">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
+                    Video {videoIndex + 1} of {videoCount}
+                  </p>
+                  <p className="mt-2 text-pretty text-lg font-semibold leading-snug text-[#141413]">
+                    {activeVideo.title}
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-[#666766]">
+                    It&apos;s Lifey × {activeVideo.guest}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 flex items-center justify-center gap-4">
+                <button
+                  type="button"
+                  onClick={goToPrevVideo}
+                  className="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-[#141413] shadow-sm transition-[background-color,border-color,transform] duration-200 hover:border-[#e76fab]/35 hover:bg-[#fdf8fb] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+                  aria-label="Previous video"
+                >
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    className="h-4 w-4"
+                  >
+                    <path
+                      d="M10 3L5 8l5 5"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  className="flex flex-wrap justify-center gap-2"
+                  role="tablist"
+                  aria-label="Select a video"
+                >
+                  {YOUTUBE_CONVERSATIONS.map((video, i) => {
+                    const isActive = videoIndex === i;
+                    return (
+                      <button
+                        key={video.id}
+                        type="button"
+                        role="tab"
+                        aria-selected={isActive}
+                        onClick={() => setVideoIndex(i)}
+                        className={`cursor-pointer rounded-full px-3 py-1.5 text-xs font-medium transition-[background-color,border-color,color] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:px-4 sm:py-2 sm:text-sm ${
+                          isActive
+                            ? "border border-[#e76fab]/45 bg-white text-[#b8457e] shadow-sm"
+                            : "border border-black/10 bg-white/70 text-[#555] hover:border-[#e76fab]/30 hover:bg-white hover:text-[#141413]"
+                        }`}
+                      >
+                        {video.title}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={goToNextVideo}
+                  className="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-[#141413] shadow-sm transition-[background-color,border-color,transform] duration-200 hover:border-[#e76fab]/35 hover:bg-[#fdf8fb] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+                  aria-label="Next video"
+                >
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    className="h-4 w-4"
+                  >
+                    <path
+                      d="M6 3l5 5-5 5"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-14 max-w-2xl text-center">
+            <p className="text-lg leading-relaxed text-[#2a2928]">
+              Our YouTube channel has{" "}
+              <strong className="font-semibold text-[#141413]">
+                30+ videos
+              </strong>{" "}
+              of conversations, resources, and support for those navigating the
+              loss of a spouse—whenever you need something steady to listen to.
+            </p>
+            <a
+              href={YOUTUBE_CHANNEL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md transition-[background-color,box-shadow,transform] duration-200 hover:bg-[#d85e9a] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] active:scale-[0.99]"
+            >
+              Watch more on YouTube
+              <svg
+                aria-hidden
+                viewBox="0 0 16 16"
+                fill="none"
+                className="h-3.5 w-3.5 opacity-90"
+              >
+                <path
+                  d="M8 1l7 7-7 7M1 8h14"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
       </motion.section>
-
-      {/* ——— HOPEHUB ——— */}
-      <section
-        className="border-t border-white/20 bg-gradient-to-br from-[#df68a3] via-[#e76fab] to-[#d85e9a] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
-        aria-labelledby="hopehub-heading"
-      >
-        <motion.div
-          className="relative mx-auto max-w-xl px-3 py-10 text-center sm:px-4 sm:py-12 lg:px-5 lg:py-14"
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-48px" }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as const }}
-        >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90 sm:text-xs">
-            HopeHub
-          </p>
-          <h2
-            id="hopehub-heading"
-            className="mt-2 text-pretty text-xl font-semibold leading-snug tracking-tight text-white sm:text-2xl"
-          >
-            Ongoing support between the big moments
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-white/95 sm:text-[15px]">
-            Free online{" "}
-            <span className="font-medium text-white">community</span> and{" "}
-            <span className="font-medium text-white">resources</span> for widows—so
-            you have a place to connect and find help between retreats and hard
-            days.
-          </p>
-          <div className="mt-6">
-            <Link
-              href="/hopehub"
-              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:px-7 sm:py-3 sm:text-[15px]"
-            >
-              Explore HopeHub
-            </Link>
-          </div>
-        </motion.div>
-      </section>
+      </div>
 
       {/* ——— EMAIL ——— */}
       <motion.section
-        className="border-t border-[#ebe6df] bg-[#f6f3ee] px-3 py-20 sm:px-4 lg:px-5 lg:py-24"
+        className="bg-[#f6f3ee] px-3 py-20 sm:px-4 lg:px-5 lg:py-24"
         aria-labelledby="email-heading"
         {...fadeUp}
       >

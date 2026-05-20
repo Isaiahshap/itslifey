@@ -14,11 +14,6 @@ const programsLinks = [
   { href: "/retreats", label: "Retreats" },
   { href: "/retreats/upcoming", label: "Upcoming Retreats" },
   { href: "/retreats/past", label: "Past Retreats" },
-  { href: "/support-groups", label: "Support Groups" },
-  {
-    href: "/support/virtual-healing-experiences",
-    label: "Virtual Healing Experiences",
-  },
   { href: "/resources", label: "Resources" },
 ] as const;
 
@@ -117,21 +112,21 @@ export function Footer() {
                 Next step
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-[#2a2928]">
-                When you&apos;re ready, start with what feels kindest—limited
-                cohort experiences, a retreat weekend, HopeHub, or a support group.
+                When you&apos;re ready, start with what feels kindest—a retreat
+                weekend, HopeHub, or a workshop.
               </p>
               <Link
-                href="/support/virtual-healing-experiences"
+                href="/retreats/upcoming"
                 className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#e76fab] px-6 py-2.5 text-center text-[15px] font-semibold text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:w-auto"
               >
-                Virtual Healing Experiences
+                Join Upcoming Retreat
               </Link>
               <p className="mt-4">
                 <Link
-                  href="/retreats/upcoming"
+                  href="/hopehub"
                   className={`${footerLinkClass()} text-[14px]`}
                 >
-                  Upcoming retreat →
+                  Explore HopeHub →
                 </Link>
               </p>
             </div>
