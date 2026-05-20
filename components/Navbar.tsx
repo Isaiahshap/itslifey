@@ -33,6 +33,7 @@ const supportSubLinks = [
     href: "/support/virtual-healing-experiences",
     label: "Virtual Healing Experiences",
   },
+  { href: "/first-40", label: "First40 Workshop" },
   { href: "/resources", label: "Resources" },
 ] as const;
 

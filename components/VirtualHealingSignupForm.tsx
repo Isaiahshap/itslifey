@@ -15,12 +15,20 @@ const inputClass =
 type VirtualHealingSignupFormProps = {
   /** Prefix for input ids when multiple forms exist on one page (e.g. homepage modal). */
   idPrefix?: string;
+  /**
+   * `interest` — collect waitlist signups (no Stripe).
+   * `checkout` — $200 deposit via Stripe (when registration is open).
+   */
+  mode?: "interest" | "checkout";
 };
 
 export function VirtualHealingSignupForm({
   idPrefix = "vhe",
+  mode = "interest",
 }: VirtualHealingSignupFormProps) {
-  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "error" | "success">(
+    "idle",
+  );
   const [errorMessage, setErrorMessage] = useState("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -50,8 +58,13 @@ export function VirtualHealingSignupForm({
       ...(recaptchaToken ? { recaptchaToken } : {}),
     };
 
+    const endpoint =
+      mode === "checkout"
+        ? "/api/virtual-healing-checkout"
+        : "/api/virtual-healing-inquiry";
+
     try {
-      const res = await fetch("/api/virtual-healing-checkout", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -72,19 +85,30 @@ export function VirtualHealingSignupForm({
         return;
       }
 
+      if (mode === "checkout") {
+        if (typeof window.fbq === "function") {
+          window.fbq("track", "InitiateCheckout", {
+            content_name: "Virtual Healing Experiences",
+            content_category: "Support",
+            value: 200,
+            currency: "USD",
+          });
+        }
+        if (data.url) {
+          window.location.href = data.url;
+        }
+        return;
+      }
+
       if (typeof window.fbq === "function") {
-        window.fbq("track", "InitiateCheckout", {
-          content_name: "Virtual Healing Experiences",
+        window.fbq("track", "Lead", {
+          content_name: "Virtual Healing Experiences — August interest",
           content_category: "Support",
-          value: 200,
-          currency: "USD",
         });
       }
 
-      // Redirect to Stripe payment page
-      if (data.url) {
-        window.location.href = data.url;
-      }
+      setStatus("success");
+      form.reset();
     } catch {
       setStatus("error");
       setErrorMessage(
@@ -95,6 +119,33 @@ export function VirtualHealingSignupForm({
 
   const pid = idPrefix;
   const isSending = status === "sending";
+  const isInterest = mode === "interest";
+
+  if (status === "success" && isInterest) {
+    return (
+      <div
+        role="status"
+        className="rounded-xl border border-[#e76fab]/25 bg-[#fdf8fb] px-5 py-6 text-center"
+      >
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
+          You&apos;re on the list
+        </p>
+        <p className="mt-3 text-[1.05rem] font-semibold leading-snug text-[#141413]">
+          Thank you—we&apos;ll reach out about the August cohort.
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-[#666766]">
+          We read every note with care. If you have questions in the meantime,{" "}
+          <a
+            href="/contact"
+            className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2"
+          >
+            contact us
+          </a>
+          .
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form
@@ -175,7 +226,11 @@ export function VirtualHealingSignupForm({
           name="note"
           rows={3}
           className={`${inputClass} resize-y leading-relaxed`}
-          placeholder="Questions, accessibility needs, or what you're hoping for from this experience."
+          placeholder={
+            isInterest
+              ? "Questions, accessibility needs, or what you're hoping for from the August cohort."
+              : "Questions, accessibility needs, or what you're hoping for from this experience."
+          }
         />
       </div>
 
@@ -185,11 +240,16 @@ export function VirtualHealingSignupForm({
           disabled={isSending}
           className="w-full rounded-full bg-[#e76fab] px-8 py-4 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] enabled:active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
-          {isSending ? "Taking you to payment…" : "Reserve my spot — $200 deposit"}
+          {isSending
+            ? "Sending…"
+            : isInterest
+              ? "Notify me about August"
+              : "Reserve my spot — $200 deposit"}
         </button>
         <p className="mt-3 text-xs leading-relaxed text-[#888]">
-          You&apos;ll be taken to a secure Stripe checkout for your $200 deposit,
-          which goes toward your total program investment.
+          {isInterest
+            ? "We'll email you when registration opens for the August cohort. No payment today."
+            : "You'll be taken to a secure Stripe checkout for your $200 deposit, which goes toward your total program investment."}
         </p>
         <RecaptchaNotice />
       </div>

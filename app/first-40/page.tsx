@@ -2,11 +2,12 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { First40SignupForm } from "@/components/First40SignupForm";
 
 export const metadata: Metadata = {
-  title: "FIRST40 Workshop (Mockup)",
+  title: "First40 Workshop (Mockup)",
   description:
-    "Draft page for a gentle virtual workshop with FIRST40 and It's Lifey—supporting widows navigating the emotional and practical realities of life after loss. Not indexed in search.",
+    "Draft page for a gentle virtual workshop with First40 and It's Lifey—supporting widows navigating the emotional and practical realities of life after loss. Not indexed in search.",
   robots: {
     index: false,
     follow: false,
@@ -105,7 +106,7 @@ export default function First40MockupPage() {
         className="border-b border-[#e8d4df]/90 bg-[#2a2928]/[0.06] py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5c5258] sm:text-xs"
         role="status"
       >
-        Draft mockup · not indexed · pending FIRST40 review
+        Draft mockup · not indexed · pending First40 review
       </div>
 
       {/* ── HERO (aligned with Virtual Healing Experiences) ── */}
@@ -137,7 +138,7 @@ export default function First40MockupPage() {
         <div className={`relative py-14 sm:py-16 lg:py-20 ${shell}`}>
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_min(26rem,100%)] lg:items-start lg:gap-14 xl:gap-20">
             <div className="max-w-2xl lg:pt-1">
-              <SectionEyebrow>FIRST40 × It&apos;s Lifey · Virtual workshop</SectionEyebrow>
+              <SectionEyebrow>First40 × It&apos;s Lifey · Virtual workshop</SectionEyebrow>
               <h1
                 id="f40-hero-heading"
                 className="mt-5 text-pretty text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-[#141413] sm:text-4xl sm:leading-[1.08] lg:text-[2.5rem] lg:leading-[1.05] xl:text-[2.65rem]"
@@ -174,11 +175,17 @@ export default function First40MockupPage() {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="#pricing"
+                  href="#reserve"
                   className="inline-flex items-center gap-2 rounded-full bg-[#e76fab] px-7 py-3.5 text-[0.95rem] font-semibold text-white shadow-md shadow-[#e76fab]/25 transition-[background-color,transform] duration-200 hover:bg-[#d85e9a] active:scale-[0.98]"
                 >
-                  View pricing &amp; reserve
+                  Reserve my spot
                   {ctaArrow}
+                </a>
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#e76fab]/35 bg-white/80 px-7 py-3.5 text-[0.95rem] font-semibold text-[#b8457e] transition-[background-color,transform] duration-200 hover:bg-[#fce8f2] active:scale-[0.98]"
+                >
+                  View pricing
                 </a>
               </div>
 
@@ -188,7 +195,7 @@ export default function First40MockupPage() {
                 </p>
                 <p className="mt-3 text-[0.9rem] leading-relaxed text-[#444]">
                   Led by the founders of{" "}
-                  <strong className="font-semibold text-[#141413]">FIRST40</strong>
+                  <strong className="font-semibold text-[#141413]">First40</strong>
                   , with{" "}
                   <strong className="font-semibold text-[#141413]">
                     Jennifer Newberg
@@ -239,10 +246,10 @@ export default function First40MockupPage() {
                   </p>
                 </div>
                 <a
-                  href="#pricing"
+                  href="#reserve"
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-[#e76fab]/35 bg-[#fdf6fb] py-3.5 text-[0.9rem] font-semibold text-[#b8457e] transition hover:bg-[#fce8f2] active:scale-[0.99]"
                 >
-                  See packages from $49
+                  Reserve my spot from $49
                   {ctaArrow}
                 </a>
               </div>
@@ -278,7 +285,7 @@ export default function First40MockupPage() {
             most—emotionally and practically—without fear, pressure, or overwhelm.
           </p>
           <p className={`${body} mt-5`}>
-            Led by the founders of FIRST40 and hosted by widow, speaker, and
+            Led by the founders of First40 and hosted by widow, speaker, and
             founder of It&apos;s Lifey, Jen Newberg, this experience combines
             compassionate conversation, practical guidance, and meaningful
             reflection in a supportive community setting.
@@ -387,7 +394,7 @@ export default function First40MockupPage() {
             <div className="mt-10 space-y-6">
               <div className="rounded-2xl border border-black/[0.055] bg-white/70 p-6 backdrop-blur-[2px] sm:p-7">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                  FIRST40
+                  First40
                 </p>
                 <p className="mt-2 text-lg font-semibold text-[#141413]">
                   Mikalee Byerman
@@ -398,7 +405,7 @@ export default function First40MockupPage() {
               </div>
               <div className="rounded-2xl border border-black/[0.055] bg-white/70 p-6 backdrop-blur-[2px] sm:p-7">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                  FIRST40
+                  First40
                 </p>
                 <p className="mt-2 text-lg font-semibold text-[#141413]">
                   Heidi Struve Currey
@@ -457,7 +464,7 @@ export default function First40MockupPage() {
                   <p>Virtual · 45 minutes + live Q&amp;A</p>
                   <p className="pt-2 text-[0.88rem] leading-relaxed text-[#666766]">
                     Worksheets, reflection prompts, and facilitator stories—with
-                    FIRST40 founders, facilitated by Jennifer.
+                    First40 founders, facilitated by Jennifer.
                   </p>
                 </div>
               </div>
@@ -509,16 +516,33 @@ export default function First40MockupPage() {
             </div>
 
             <div className="mx-auto mt-10 max-w-md lg:mx-0">
-              <Link
-                href="/contact"
+              <a
+                href="#reserve"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#e76fab] px-8 py-3.5 text-[0.95rem] font-semibold text-white shadow-md shadow-[#e76fab]/25 transition-[background-color,transform] hover:bg-[#d85e9a] active:scale-[0.98]"
               >
-                Reserve your spot (link TBD)
+                Reserve your spot
                 {ctaArrow}
-              </Link>
-              <p className="mt-3 text-center text-sm text-[#666766] lg:text-left">
-                Mockup routes to contact until registration URL is live.
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Registration form ── */}
+        <div className="mx-auto mt-16 max-w-[min(52rem,100%)] sm:mt-20">
+          <div className="rounded-3xl border border-black/[0.06] bg-white/55 p-8 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.12)] backdrop-blur-[2px] sm:p-10">
+            <div className="mx-auto max-w-[42rem]">
+              <SectionEyebrow>Registration</SectionEyebrow>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[#141413] sm:text-[1.65rem]">
+                Register for the workshop
+              </h2>
+              <PinkRule />
+              <p className={`${body} mt-5 text-[#555]`}>
+                Select your package, fill in your details, and you&apos;ll be
+                taken to secure checkout. Confirmation sent to your email.
               </p>
+              <div className="mt-8">
+                <First40SignupForm />
+              </div>
             </div>
           </div>
         </div>
@@ -531,7 +555,7 @@ export default function First40MockupPage() {
             />
             <div className="relative">
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/70 sm:text-[11px]">
-                June 18 · Virtual · FIRST40 × It&apos;s Lifey
+                June 18 · Virtual · First40 × It&apos;s Lifey
               </p>
               <h2 className="mt-3 text-2xl font-semibold leading-tight tracking-tight text-white sm:text-[1.7rem]">
                 The conversations &amp; planning no one prepares us for
@@ -541,10 +565,10 @@ export default function First40MockupPage() {
                 and space for real questions.
               </p>
               <a
-                href="#pricing"
+                href="#reserve"
                 className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-[0.95rem] font-semibold text-[#b8457e] shadow-lg shadow-black/15 transition-[transform,opacity] duration-200 hover:opacity-95 active:scale-[0.98]"
               >
-                View packages
+                Reserve my spot
                 {ctaArrow}
               </a>
             </div>

@@ -49,8 +49,13 @@ const shellGallery =
 /** Summer 2026 coastal retreat — use these everywhere pricing or early-bird promos appear. */
 const RETREAT_SINGLE_PRICE = "$4,199";
 const RETREAT_TRIPLE_PRICE = "$3,499";
-const RETREAT_EARLY_BIRD_LINE =
-  "Save $100 when you register by April 30th";
+const RETREAT_EARLY_BIRD_DISCOUNT = "$250";
+const RETREAT_EARLY_BIRD_DEADLINE = "June 1st";
+const RETREAT_EARLY_BIRD_LINE = `Save ${RETREAT_EARLY_BIRD_DISCOUNT} when you register by ${RETREAT_EARLY_BIRD_DEADLINE}`;
+const RETREAT_EARLY_BIRD_RECEIVE = `You\u2019ll receive ${RETREAT_EARLY_BIRD_DISCOUNT} off if you register by ${RETREAT_EARLY_BIRD_DEADLINE}`;
+
+/** Used for Meta Pixel ViewContent value (single occupancy). */
+const RETREAT_PIXEL_VALUE = 4199;
 
 const TESTIMONIAL_FORM_PARTS = [
   `Although the "It's Lifey" retreat had a weekend structure, it was completely flexible and your participation in any of the activities or groups was your choice. There was zero pressure or judgment for not participating—or participating a lot.`,
@@ -64,7 +69,7 @@ const INVESTMENT_MARQUEE_PARTS = [
   "Invest in YOU",
   `${RETREAT_SINGLE_PRICE} single room`,
   `${RETREAT_TRIPLE_PRICE} triple room`,
-  "Save $100 — register by April 30th",
+  `Save ${RETREAT_EARLY_BIRD_DISCOUNT} — register by ${RETREAT_EARLY_BIRD_DEADLINE}`,
   "Payment plans available",
   "All-inclusive investment",
   "Accommodations (beautiful coastal private home)",
@@ -168,6 +173,16 @@ export function UpcomingRetreatClient() {
     return () => window.clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    if (typeof window.fbq !== "function") return;
+    window.fbq("track", "ViewContent", {
+      content_name: "Summer 2026 Widow Wellness Retreat",
+      content_category: "Retreat",
+      value: RETREAT_PIXEL_VALUE,
+      currency: "USD",
+    });
+  }, []);
+
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
 
   async function handleInquirySubmit(e: FormEvent<HTMLFormElement>) {
@@ -212,6 +227,12 @@ export function UpcomingRetreatClient() {
             : "Something went wrong. Please try again.",
         );
         return;
+      }
+      if (typeof window.fbq === "function") {
+        window.fbq("track", "Lead", {
+          content_name: "Summer 2026 Retreat Inquiry",
+          content_category: "Retreat",
+        });
       }
       setInquirySubmit("success");
       setInquiryFeedback(
@@ -734,9 +755,8 @@ export function UpcomingRetreatClient() {
                 </p>
                 <p className="mt-8 max-w-xl text-[1.0625rem] leading-[1.65] text-[#2a2928] sm:text-lg">
                   The investment is {RETREAT_SINGLE_PRICE} per person for a single
-                  room and {RETREAT_TRIPLE_PRICE} per person for a triple room.
-                  You&apos;ll receive $100 off if you register by April 30th, and
-                  payment plans are available.
+                  room and {RETREAT_TRIPLE_PRICE} per person for a triple room.{" "}
+                  {RETREAT_EARLY_BIRD_RECEIVE}, and payment plans are available.
                 </p>
               </div>
 
@@ -983,9 +1003,8 @@ export function UpcomingRetreatClient() {
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
                   Share a few details—we&apos;ll follow up with next steps. The
                   investment is {RETREAT_SINGLE_PRICE} per person for a single room
-                  and {RETREAT_TRIPLE_PRICE} per person for a triple room.
-                  You&apos;ll receive $100 off if you register by April 30th, and
-                  payment plans are available.
+                  and {RETREAT_TRIPLE_PRICE} per person for a triple room.{" "}
+                  {RETREAT_EARLY_BIRD_RECEIVE}, and payment plans are available.
                 </p>
                 <form
                   className="relative mt-8 space-y-5"

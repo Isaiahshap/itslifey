@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { EarlyBirdCountdown } from "@/components/EarlyBirdCountdown";
 import { VirtualHealingPixelEvents } from "@/components/VirtualHealingPixelEvents";
 import { VirtualHealingSignupForm } from "@/components/VirtualHealingSignupForm";
 
 export const metadata: Metadata = {
   title: "Virtual Healing Experiences — The Body Keeps the Story | It's Lifey",
   description:
-    "A 6-week virtual experience with Tina Walsh: grief, trauma, and the nervous system—gentle education and body-based practices. Only 3 spots left. Created for widows.",
+    "A 6-week virtual experience with Tina Walsh for widows—postponed; join the interest list for the August 2026 cohort. Grief, trauma, and gentle body-based practices.",
 };
 
 const shell =
@@ -77,6 +76,20 @@ export default function VirtualHealingExperiencesPage() {
     <div className="bg-[#f6f3ee]">
       <VirtualHealingPixelEvents />
 
+      <div
+        className="border-b border-[#e8d4df]/90 bg-[#2a2928]/[0.06] py-3 text-center"
+        role="status"
+      >
+        <p className="mx-auto max-w-2xl px-4 text-sm font-medium leading-relaxed text-[#3a3938] sm:text-[0.95rem]">
+          <strong className="font-semibold text-[#141413]">Postponed.</strong>{" "}
+          The May cohort has been rescheduled—we&apos;re planning a new cohort
+          in{" "}
+          <strong className="font-semibold text-[#b8457e]">August 2026</strong>.
+          Use the form to share your interest and we&apos;ll reach out when
+          registration opens.
+        </p>
+      </div>
+
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden border-b border-[#e8d4df]/80"
@@ -121,17 +134,12 @@ export default function VirtualHealingExperiencesPage() {
                 Grief, trauma &amp; the nervous system — healing from the inside out
               </p>
 
-              {/* Urgency + date row */}
               <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                <p className="inline-flex items-center gap-1.5 rounded-full border border-[#e76fab]/35 bg-white/90 px-4 py-2 text-sm font-semibold text-[#b8457e] shadow-[0_6px_24px_-6px_rgba(199,77,138,0.22)] backdrop-blur-sm">
-                  <span
-                    className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#e76fab]"
-                    aria-hidden
-                  />
-                  Only 3 spots remaining
+                <p className="inline-flex items-center rounded-full border border-[#5c5258]/20 bg-white/90 px-4 py-2 text-sm font-semibold text-[#3a3938] backdrop-blur-sm">
+                  Event postponed
                 </p>
-                <p className="inline-flex items-center rounded-full border border-black/10 bg-white/75 px-4 py-2 text-sm font-medium text-[#3a3938] backdrop-blur-sm">
-                  Begins May 20, 2026
+                <p className="inline-flex items-center rounded-full border border-[#e76fab]/35 bg-white/90 px-4 py-2 text-sm font-semibold text-[#b8457e] shadow-[0_6px_24px_-6px_rgba(199,77,138,0.22)] backdrop-blur-sm">
+                  August 2026 cohort — interest list open
                 </p>
               </div>
 
@@ -157,7 +165,7 @@ export default function VirtualHealingExperiencesPage() {
                   href="#signup"
                   className="inline-flex items-center gap-2 rounded-full bg-[#e76fab] px-7 py-3.5 text-[0.95rem] font-semibold text-white shadow-md shadow-[#e76fab]/25 transition-[background-color,transform] duration-200 hover:bg-[#d85e9a] active:scale-[0.98]"
                 >
-                  Reserve my spot — $200 deposit
+                  Join the August interest list
                   <svg aria-hidden viewBox="0 0 16 16" fill="currentColor" className="h-3.5 w-3.5 opacity-80">
                     <path d="M8 1l7 7-7 7M1 8h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                   </svg>
@@ -167,38 +175,16 @@ export default function VirtualHealingExperiencesPage() {
               {/* Pricing card */}
               <div className="mt-8 rounded-2xl border border-[#e76fab]/18 bg-white/60 p-5 backdrop-blur-[2px] sm:p-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                  Investment
+                  August cohort
                 </p>
-                <p className="mt-2 max-w-md text-[0.88rem] font-medium leading-snug text-[#b8457e]">
-                  We just significantly lowered the price of this experience.
+                <p className={`mt-3 max-w-md ${body} text-[#444]`}>
+                  Registration for the May cohort is closed while we reschedule.
+                  Share your interest below—we&apos;ll email you when the{" "}
+                  <strong className="font-semibold text-[#141413]">
+                    August 2026
+                  </strong>{" "}
+                  cohort opens, with updated dates and pricing.
                 </p>
-                <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-[1.15rem] font-medium leading-none tracking-tight text-[#888] line-through decoration-[#888]/80">
-                    $899
-                  </span>
-                  <span className="text-[1.8rem] font-semibold leading-none tracking-tight text-[#141413]">
-                    $399
-                  </span>
-                  <span className="text-[0.95rem] text-[#666766]">
-                    — all six sessions included
-                  </span>
-                </div>
-                <div className="mt-3 space-y-2 text-[0.9rem] leading-relaxed text-[#444]">
-                  <p>
-                    Use code{" "}
-                    <strong className="rounded-md border border-[#e76fab]/30 bg-[#fdf6fb] px-1.5 py-0.5 font-mono text-[0.85em] font-bold text-[#b8457e]">
-                      ITSLIFEY50
-                    </strong>{" "}
-                    at checkout for{" "}
-                    <strong className="text-[#141413]">$50 off</strong> — offer
-                    ends <strong className="text-[#141413]">May 10</strong>.
-                  </p>
-                  <p className="text-[#666766]">
-                    A <strong className="text-[#141413]">$200 deposit</strong>{" "}
-                    reserves your spot and applies toward your total.
-                  </p>
-                </div>
-                <EarlyBirdCountdown />
               </div>
 
               <p className="mt-6">
@@ -221,40 +207,19 @@ export default function VirtualHealingExperiencesPage() {
                   className="pointer-events-none absolute inset-x-6 -top-px h-px bg-gradient-to-r from-transparent via-[#e76fab]/40 to-transparent opacity-80 sm:inset-x-8"
                   aria-hidden
                 />
-                <div className="mb-5 flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                      Reserve your spot
-                    </p>
-                    <p className="mt-1 text-[1.55rem] font-semibold leading-none tracking-tight text-[#141413]">
-                      $200{" "}
-                      <span className="text-base font-normal text-[#666766]">
-                        deposit
-                      </span>
-                    </p>
-                    <p className="mt-1 text-xs text-[#888]">
-                      Applied toward $399/$349 total
-                    </p>
-                  </div>
-                  <span className="mt-0.5 flex shrink-0 items-center gap-1.5 rounded-full border border-[#e76fab]/30 bg-[#fdf6fb] px-3 py-1.5 text-xs font-semibold text-[#b8457e]">
-                    <span
-                      className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-[#e76fab]"
-                      aria-hidden
-                    />
-                    3 spots left
-                  </span>
-                </div>
-                <div className="mb-5 rounded-xl border border-[#e76fab]/18 bg-[#fdf8fb] px-4 py-3">
-                  <p className="text-[0.82rem] leading-relaxed text-[#555]">
-                    Use code{" "}
-                    <strong className="font-mono text-[#b8457e]">
-                      ITSLIFEY50
-                    </strong>{" "}
-                    at Stripe checkout — $50 off your total.{" "}
-                    <span className="text-[#888]">Ends May 10.</span>
+                <div className="mb-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
+                    August interest list
+                  </p>
+                  <p className="mt-2 text-[1.35rem] font-semibold leading-snug tracking-tight text-[#141413]">
+                    Future event — August 2026
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-[#666766]">
+                    No payment today. We&apos;ll reach out when registration
+                    opens for the rescheduled cohort.
                   </p>
                 </div>
-                <VirtualHealingSignupForm />
+                <VirtualHealingSignupForm mode="interest" />
               </div>
             </div>
           </div>
@@ -381,44 +346,37 @@ export default function VirtualHealingExperiencesPage() {
                   Timing
                 </h2>
                 <div className="mt-3 h-px max-w-[3rem] bg-gradient-to-r from-[#e76fab]/70 to-transparent" />
-                <div className={`${body} mt-5 space-y-1.5`}>
+                <div className={`${body} mt-5 space-y-2`}>
                   <p>
-                    <strong className="font-semibold text-[#141413]">Every Wednesday</strong>
+                    <strong className="font-semibold text-[#141413]">
+                      Postponed — August 2026
+                    </strong>
                   </p>
-                  <p className="text-[#555]">6:00–7:30 pm</p>
-                  <p className="text-[#555]">6 weeks · begins <strong className="font-semibold text-[#141413]">May 20, 2026</strong></p>
-                  <p className="text-[#555]">Virtual — join from anywhere</p>
+                  <p className="text-[#555]">
+                    The May cohort has been rescheduled. We&apos;re finalizing
+                    dates for a six-week virtual experience in August.
+                  </p>
+                  <p className="text-[#555]">
+                    Six weekly sessions · virtual · join from anywhere
+                  </p>
                 </div>
               </div>
               <div>
                 <h2 className="text-xl font-semibold tracking-tight text-[#141413]">
-                  Investment
+                  Registration
                 </h2>
                 <div className="mt-3 h-px max-w-[3rem] bg-gradient-to-r from-[#e76fab]/70 to-transparent" />
                 <ul className={`${body} mt-5 list-none space-y-3 p-0`}>
-                  <li className="text-[0.88rem] leading-snug text-[#555]">
-                    We recently lowered the full price significantly — same six-week experience, gentler investment.
+                  <li className="text-[0.9rem] leading-relaxed text-[#555]">
+                    The interest form collects your name and email so we can
+                    reach out when the August cohort opens.
                   </li>
-                  <li className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <span className="text-[0.95rem] font-medium text-[#888] line-through decoration-[#888]/80">
-                      $899
-                    </span>
-                    <span className="font-semibold text-[#141413]">$399</span>
-                    <span className="text-[0.88rem] text-[#666766]">full price · six sessions</span>
-                  </li>
-                  <li className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                    <span className="font-semibold text-[#141413]">$349</span>
-                    <span className="rounded-md border border-[#e76fab]/30 bg-[#fdf6fb] px-1.5 py-0.5 font-mono text-[0.78em] font-bold text-[#b8457e]">ITSLIFEY50</span>
-                    <span className="text-[0.88rem] text-[#b8457e]">ends May 10</span>
-                  </li>
-                  <li className="border-t border-black/[0.06] pt-3 text-[0.9rem] text-[#555]">
-                    <strong className="font-semibold text-[#141413]">$200 deposit</strong>{" "}
-                    reserves your spot · applied toward total
+                  <li className="text-[0.9rem] leading-relaxed text-[#555]">
+                    No payment or deposit today.
                   </li>
                   <li className="text-[0.88rem] text-[#666766]">
-                    +{" "}
-                    <strong className="font-semibold text-[#141413]">$100 off</strong>{" "}
-                    any It&apos;s Lifey retreat
+                    Pricing and session dates will be shared when registration
+                    reopens.
                   </li>
                 </ul>
               </div>
@@ -516,22 +474,20 @@ export default function VirtualHealingExperiencesPage() {
               />
               <div className="relative">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/70 sm:text-[11px]">
-                  Only 3 spots · Cohort begins May 20
+                  Postponed · August 2026 cohort
                 </p>
                 <h2 className="mt-3 text-2xl font-semibold leading-tight tracking-tight text-white sm:text-[1.7rem]">
-                  Ready to gently come home to your body?
+                  Interested in the rescheduled experience?
                 </h2>
                 <p className="mx-auto mt-4 max-w-md text-[0.95rem] leading-relaxed text-white/85">
-                  Reserve your spot with a $200 deposit. Applied toward your
-                  total. Use code{" "}
-                  <strong className="font-bold text-white">ITSLIFEY50</strong>{" "}
-                  at checkout for $50 off — ends May 10.
+                  Join the interest list and we&apos;ll reach out when
+                  registration opens for the August cohort.
                 </p>
                 <a
                   href="#signup"
                   className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-[0.95rem] font-semibold text-[#b8457e] shadow-lg shadow-black/15 transition-[transform,opacity] duration-200 hover:opacity-95 active:scale-[0.98]"
                 >
-                  Reserve my spot
+                  Join the August interest list
                   <svg aria-hidden viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5">
                     <path d="M8 1l7 7-7 7M1 8h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
@@ -550,7 +506,7 @@ export default function VirtualHealingExperiencesPage() {
           >
             HopeHub
           </Link>{" "}
-          is free—and you can still join this experience when it feels right.
+          is free—and you can join the August interest list when it feels right.
         </p>
       </article>
     </div>
