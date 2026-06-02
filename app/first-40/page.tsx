@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { First40PixelEvents } from "@/components/First40PixelEvents";
 import { First40SignupForm } from "@/components/First40SignupForm";
 
 export const metadata: Metadata = {
@@ -97,6 +98,7 @@ const ctaArrow = (
 export default function First40Page() {
   return (
     <div className="bg-[#f6f3ee]">
+      <First40PixelEvents />
       {/* ── HERO (aligned with Virtual Healing Experiences) ── */}
       <section
         className="relative overflow-hidden border-b border-[#e8d4df]/80"

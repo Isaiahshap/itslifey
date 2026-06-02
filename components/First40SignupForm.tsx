@@ -32,6 +32,22 @@ const PACKAGES = [
 
 type PackageKey = (typeof PACKAGES)[number]["key"];
 
+const PACKAGE_VALUES_USD: Record<PackageKey, number> = {
+  individual: 49,
+  five: 98,
+  ten: 196,
+};
+
+function trackFirst40Lead(packageKey: PackageKey) {
+  if (typeof window.fbq !== "function") return;
+  window.fbq("track", "Lead", {
+    content_name: `First40 Workshop — ${packageKey}`,
+    content_category: "Workshop",
+    value: PACKAGE_VALUES_USD[packageKey],
+    currency: "USD",
+  });
+}
+
 export function First40SignupForm() {
   const [selected, setSelected] = useState<PackageKey>("individual");
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
@@ -87,13 +103,7 @@ export function First40SignupForm() {
         return;
       }
 
-      if (typeof window.fbq === "function") {
-        window.fbq("track", "InitiateCheckout", {
-          content_name: `First40 Workshop — ${selected}`,
-          content_category: "Workshop",
-          currency: "USD",
-        });
-      }
+      trackFirst40Lead(selected);
 
       if (data.url) {
         window.location.href = data.url;
