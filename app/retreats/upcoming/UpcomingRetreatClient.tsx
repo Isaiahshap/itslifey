@@ -54,8 +54,13 @@ const RETREAT_EARLY_BIRD_DEADLINE = "June 1st";
 const RETREAT_EARLY_BIRD_LINE = `Save ${RETREAT_EARLY_BIRD_DISCOUNT} when you register by ${RETREAT_EARLY_BIRD_DEADLINE}`;
 const RETREAT_EARLY_BIRD_RECEIVE = `You\u2019ll receive ${RETREAT_EARLY_BIRD_DISCOUNT} off if you register by ${RETREAT_EARLY_BIRD_DEADLINE}`;
 
-/** Used for Meta Pixel ViewContent value (single occupancy). */
-const RETREAT_PIXEL_VALUE = 4199;
+/** Used for Meta Pixel ViewContent value (remaining shared-room rate). */
+const RETREAT_PIXEL_VALUE = 3499;
+
+const RETREAT_SPOTS_LEFT = 2;
+const RETREAT_ALMOST_SOLD_OUT =
+  "Almost sold out — only 2 spots left for Summer 2026";
+const RETREAT_SHARED_ROOM_ONLY_LINE = `Only shared triple rooms remain at ${RETREAT_TRIPLE_PRICE} per person. Single rooms are sold out.`;
 
 const TESTIMONIAL_FORM_PARTS = [
   `Although the "It's Lifey" retreat had a weekend structure, it was completely flexible and your participation in any of the activities or groups was your choice. There was zero pressure or judgment for not participating—or participating a lot.`,
@@ -67,8 +72,9 @@ const TESTIMONIAL_AWAITS =
 
 const INVESTMENT_MARQUEE_PARTS = [
   "Invest in YOU",
-  `${RETREAT_SINGLE_PRICE} single room`,
-  `${RETREAT_TRIPLE_PRICE} triple room`,
+  "Almost sold out — 2 spots left",
+  `Shared triple room ${RETREAT_TRIPLE_PRICE}`,
+  "Single rooms sold out",
   `Save ${RETREAT_EARLY_BIRD_DISCOUNT} — register by ${RETREAT_EARLY_BIRD_DEADLINE}`,
   "Payment plans available",
   "All-inclusive investment",
@@ -315,9 +321,12 @@ export function UpcomingRetreatClient() {
             transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] as const }}
             className="max-w-4xl lg:max-w-5xl"
           >
-            <p className="m-0">
+            <p className="m-0 flex flex-wrap items-center gap-2.5">
               <span className="inline-block rounded-full bg-[#e76fab] px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.2em] text-white ring-2 ring-white/30 sm:text-sm">
                 It&apos;s Lifey · July 9th–12th, 2026
+              </span>
+              <span className="inline-block rounded-full bg-white/95 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#9a3d6c] ring-2 ring-white/40 sm:text-[13px]">
+                Only {RETREAT_SPOTS_LEFT} spots left
               </span>
             </p>
             <h1
@@ -338,8 +347,11 @@ export function UpcomingRetreatClient() {
               >
                 Join us
               </button>
-              <p className="max-w-[16rem] text-sm font-medium leading-snug text-white/90 sm:max-w-[18rem]">
-                <span className="text-[#e76fab]">●</span> {RETREAT_EARLY_BIRD_LINE}.
+              <p className="max-w-xs text-sm font-medium leading-snug text-white/92 sm:max-w-sm">
+                <span className="text-[#f5b8dc]">●</span> {RETREAT_ALMOST_SOLD_OUT}.{" "}
+                <span className="text-white/85">
+                  Shared room only — {RETREAT_TRIPLE_PRICE}/person.
+                </span>
               </p>
             </div>
           </motion.div>
@@ -355,7 +367,8 @@ export function UpcomingRetreatClient() {
                   <span className="font-semibold not-italic text-white">
                     July 9th–July 12th, 2026.
                   </span>{" "}
-                  Eight women. Four days. One quiet exhale on the coast.
+                  Eight women. Four days. Only {RETREAT_SPOTS_LEFT} spots left —
+                  almost sold out.
                 </p>
                 <div
                   className="h-px w-16 shrink-0 rounded-full bg-gradient-to-r from-[#e76fab] to-[#f5a8d4]/90 md:hidden"
@@ -385,10 +398,10 @@ export function UpcomingRetreatClient() {
         className="border-b border-[#e76fab]/35 bg-gradient-to-r from-[#fdf6f9] via-white to-[#fdf6f9] px-4 py-3.5 text-center sm:py-4"
         role="status"
       >
-        <p className="text-[13px] font-semibold leading-snug text-[#b84a82] sm:text-sm">
-          <span className="font-semibold text-[#9a3d6c]">July 9th–July 12th, 2026.</span>{" "}
-          Our last retreat sold out in one week—if this feels like your next
-          step, don&apos;t wait.
+        <p className="text-[13px] font-semibold leading-snug text-[#9a3d6c] sm:text-sm">
+          <span className="text-[#7a2f55]">Almost sold out.</span>{" "}
+          Only {RETREAT_SPOTS_LEFT} spots remain — single rooms are gone; shared
+          triple room at {RETREAT_TRIPLE_PRICE}/person is what&apos;s left.
         </p>
       </div>
 
@@ -753,9 +766,10 @@ export function UpcomingRetreatClient() {
                 <p className="mt-3 max-w-xl text-lg font-normal leading-relaxed text-[#666766] sm:text-xl">
                   (because you can&apos;t keep pouring from empty)
                 </p>
-                <p className="mt-8 max-w-xl text-[1.0625rem] leading-[1.65] text-[#2a2928] sm:text-lg">
-                  The investment is {RETREAT_SINGLE_PRICE} per person for a single
-                  room and {RETREAT_TRIPLE_PRICE} per person for a triple room.{" "}
+                <p className="mt-6 max-w-xl rounded-2xl border border-[#e76fab]/35 bg-[#fdf6f9] px-5 py-4 text-[15px] font-semibold leading-relaxed text-[#9a3d6c] sm:text-base">
+                  {RETREAT_ALMOST_SOLD_OUT}. {RETREAT_SHARED_ROOM_ONLY_LINE}
+                </p>
+                <p className="mt-6 max-w-xl text-[1.0625rem] leading-[1.65] text-[#2a2928] sm:text-lg">
                   {RETREAT_EARLY_BIRD_RECEIVE}, and payment plans are available.
                 </p>
               </div>
@@ -783,21 +797,30 @@ export function UpcomingRetreatClient() {
                 Retreat Price
               </p>
               <div className="mt-6 grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-start lg:gap-8">
-                <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:col-span-7 lg:grid-cols-2 lg:gap-10">
-                  <div className="border-r border-[#e3ddd4] pr-6 sm:pr-8">
-                    <p className="text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
+                <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:col-span-7">
+                  <div className="rounded-2xl border border-[#e3ddd4] bg-[#f0eeea]/80 px-5 py-5 opacity-90 sm:px-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#888988]">
+                      Sold out
+                    </p>
+                    <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-[#a8a8a8] line-through decoration-[#c4c4c4] sm:text-4xl lg:text-[2.35rem]">
                       {RETREAT_SINGLE_PRICE}
                     </p>
-                    <p className="mt-1.5 text-sm font-medium text-[#666766] sm:text-[15px]">
-                      Single room
+                    <p className="mt-1.5 text-sm font-medium text-[#888988] sm:text-[15px]">
+                      Single room — no longer available
                     </p>
                   </div>
-                  <div className="pl-2 sm:pl-0">
-                    <p className="text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
+                  <div className="rounded-2xl border-2 border-[#e76fab]/45 bg-white px-5 py-5 shadow-[0_12px_40px_-20px_rgba(231,111,171,0.45)] sm:px-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
+                      Only {RETREAT_SPOTS_LEFT} spots left
+                    </p>
+                    <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
                       {RETREAT_TRIPLE_PRICE}
                     </p>
-                    <p className="mt-1.5 text-sm font-medium text-[#666766] sm:text-[15px]">
-                      Triple room
+                    <p className="mt-1.5 text-sm font-semibold text-[#2a2928] sm:text-[15px]">
+                      Shared triple room
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-[#666766]">
+                      The only room type still available — almost sold out.
                     </p>
                   </div>
                 </div>
@@ -829,9 +852,9 @@ export function UpcomingRetreatClient() {
               people who truly understand.
             </p>
             <p className="mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-white/95">
-              Spots are limited! Secure your place today and take the first step
-              toward a weekend of healing, inspiration, and meaningful new
-              friendships.
+              {RETREAT_ALMOST_SOLD_OUT}. Single rooms are sold out — only shared
+              triple rooms at {RETREAT_TRIPLE_PRICE}/person remain. Secure one of
+              the last spots when you&apos;re ready.
             </p>
             <div className="mx-auto mt-8 max-w-xl border-t border-white/35 pt-8">
               <p className="text-base font-semibold text-white sm:text-lg">
@@ -940,20 +963,26 @@ export function UpcomingRetreatClient() {
                       (because you can&apos;t keep pouring from empty)
                     </span>
                   </p>
-                  <p className="mt-4 text-2xl font-semibold text-black sm:text-3xl">
-                    {RETREAT_SINGLE_PRICE}{" "}
-                    <span className="text-base font-medium text-[#666766]">
-                      Single room
+                  <p className="mt-4 rounded-xl border border-[#e76fab]/30 bg-[#fdf6f9] px-4 py-3.5">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#e76fab]">
+                      Almost sold out
+                    </span>
+                    <span className="mt-1 block text-lg font-semibold text-[#9a3d6c]">
+                      Only {RETREAT_SPOTS_LEFT} spots left
                     </span>
                   </p>
-                  <p className="mt-2 text-2xl font-semibold text-black sm:text-3xl">
+                  <p className="mt-4 text-xl font-medium text-[#a8a8a8] line-through decoration-[#c4c4c4]">
+                    {RETREAT_SINGLE_PRICE}{" "}
+                    <span className="text-base">Single room — sold out</span>
+                  </p>
+                  <p className="mt-3 text-2xl font-semibold text-black sm:text-3xl">
                     {RETREAT_TRIPLE_PRICE}{" "}
                     <span className="text-base font-medium text-[#666766]">
-                      Triple room
+                      Shared triple room — available
                     </span>
                   </p>
                   <p className="mt-3 text-sm font-medium text-[#666766]">
-                    all-inclusive investment
+                    all-inclusive investment · only room type left
                   </p>
                   <p className="mt-4 text-sm font-semibold text-[#e76fab]">
                     {RETREAT_EARLY_BIRD_LINE}
@@ -963,9 +992,12 @@ export function UpcomingRetreatClient() {
                   </p>
                 </div>
                 <div className="mt-8 border-l-4 border-[#e76fab] pl-5">
-                  <p className="text-base font-medium leading-relaxed text-black">
-                    Limited to eight women — so the room stays intimate and
-                    emotionally safe.
+                  <p className="text-base font-semibold leading-relaxed text-[#9a3d6c]">
+                    {RETREAT_ALMOST_SOLD_OUT}
+                  </p>
+                  <p className="mt-2 text-base font-medium leading-relaxed text-black">
+                    Intimate group of eight women — {RETREAT_SPOTS_LEFT} shared-room
+                    spots remain.
                   </p>
                 </div>
               </div>
@@ -1000,10 +1032,11 @@ export function UpcomingRetreatClient() {
                 >
                   Summer 2026 retreat interest form
                 </h2>
+                <p className="mt-5 max-w-2xl rounded-2xl border border-[#e76fab]/25 bg-[#fdf6f9] px-4 py-3.5 text-base font-semibold leading-relaxed text-[#9a3d6c] sm:px-5 sm:py-4 sm:text-[17px]">
+                  {RETREAT_ALMOST_SOLD_OUT}. {RETREAT_SHARED_ROOM_ONLY_LINE}
+                </p>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
-                  Share a few details—we&apos;ll follow up with next steps. The
-                  investment is {RETREAT_SINGLE_PRICE} per person for a single room
-                  and {RETREAT_TRIPLE_PRICE} per person for a triple room.{" "}
+                  Share a few details—we&apos;ll follow up with next steps.{" "}
                   {RETREAT_EARLY_BIRD_RECEIVE}, and payment plans are available.
                 </p>
                 <form
