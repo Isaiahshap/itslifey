@@ -49,6 +49,8 @@ const shellGallery =
 /** Summer 2026 coastal retreat — use these everywhere pricing or early-bird promos appear. */
 const RETREAT_SINGLE_PRICE = "$4,199";
 const RETREAT_TRIPLE_PRICE = "$3,499";
+const RETREAT_EXPERIENCE_ONLY_PRICE = "$1,499";
+const RETREAT_EXPERIENCE_ONLY_SPOTS = 5;
 const RETREAT_EARLY_BIRD_DISCOUNT = "$250";
 const RETREAT_EARLY_BIRD_DEADLINE = "June 1st";
 const RETREAT_EARLY_BIRD_LINE = `Save ${RETREAT_EARLY_BIRD_DISCOUNT} when you register by ${RETREAT_EARLY_BIRD_DEADLINE}`;
@@ -62,6 +64,26 @@ const RETREAT_ALMOST_SOLD_OUT =
   "Almost sold out — only 2 spots left for Summer 2026";
 const RETREAT_SHARED_ROOM_ONLY_LINE = `Only shared triple rooms remain at ${RETREAT_TRIPLE_PRICE} per person. Single rooms are sold out.`;
 
+const RETREAT_EXPERIENCE_ONLY_LINE = `New option: join the full retreat experience for ${RETREAT_EXPERIENCE_ONLY_PRICE} if you arrange your own stay — limited to ${RETREAT_EXPERIENCE_ONLY_SPOTS} spots.`;
+
+const NEARBY_LODGING_SUGGESTIONS = [
+  {
+    name: "Chapter House Cape Cod",
+    area: "Cape Cod",
+    href: "https://www.chapterhousecapecod.com/",
+  },
+  {
+    name: "Liberty Hill Inn",
+    area: "Main House rooms",
+    href: "https://www.libertyhillinn.com/rooms-rates/main-house/",
+  },
+  {
+    name: "Anchor Inn",
+    area: "Hyannis waterfront",
+    href: "https://www.anchorin.com/",
+  },
+] as const;
+
 const TESTIMONIAL_FORM_PARTS = [
   `Although the "It's Lifey" retreat had a weekend structure, it was completely flexible and your participation in any of the activities or groups was your choice. There was zero pressure or judgment for not participating—or participating a lot.`,
   `The layout was amazing: a group session followed by a fun short outing, with time to relax and eat before another round. The thoughtfulness behind the details of planning a weekend that had the potential to be pretty heavy, but somehow remained pretty light and beautiful, was unparalleled.`,
@@ -74,6 +96,7 @@ const INVESTMENT_MARQUEE_PARTS = [
   "Invest in YOU",
   "Almost sold out — 2 spots left",
   `Shared triple room ${RETREAT_TRIPLE_PRICE}`,
+  `Retreat experience only ${RETREAT_EXPERIENCE_ONLY_PRICE}`,
   "Single rooms sold out",
   `Save ${RETREAT_EARLY_BIRD_DISCOUNT} — register by ${RETREAT_EARLY_BIRD_DEADLINE}`,
   "Payment plans available",
@@ -636,8 +659,9 @@ export function UpcomingRetreatClient() {
                 Want a preview of the location?
               </h2>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#666766] sm:text-xl">
-                Coastal calm, room to breathe, and space that feels like a gentle
-                exhale. Tap an image to see it larger.
+                A beautiful private coastal home in West Barnstable—coastal calm,
+                room to breathe, and space that feels like a gentle exhale. Tap an
+                image to see it larger.
               </p>
             </div>
             <ul className="mt-12 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4 lg:grid-rows-3 lg:gap-4">
@@ -748,6 +772,94 @@ export function UpcomingRetreatClient() {
         </div>
       )}
 
+      {/* ——— RETREAT-ONLY + NEARBY STAY ——— */}
+      <section
+        className="border-b border-black/[0.06] bg-white"
+        aria-labelledby="retreat-only-heading"
+      >
+        <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
+          <motion.div {...fadeUp} className="lg:grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
+                New option
+              </p>
+              <h2
+                id="retreat-only-heading"
+                className="mt-4 text-3xl font-semibold leading-[1.1] text-black sm:text-4xl lg:text-[2.35rem]"
+              >
+                Join the full retreat—stay on your own
+              </h2>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#666766] sm:text-xl">
+                Ideal if you live on Cape Cod, want your own space at night, or
+                simply prefer to arrange your own accommodations.
+              </p>
+              <div className="mt-8 max-w-xl rounded-2xl border-2 border-[#e76fab]/40 bg-[#fdf6f9] p-6 sm:p-7">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
+                  Retreat experience only · {RETREAT_EXPERIENCE_ONLY_SPOTS} spots
+                </p>
+                <p className="mt-3 text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl">
+                  {RETREAT_EXPERIENCE_ONLY_PRICE}
+                </p>
+                <p className="mt-3 text-[15px] leading-relaxed text-[#2a2928] sm:text-base sm:leading-[1.65]">
+                  Morning through evening at the retreat home in{" "}
+                  <span className="font-semibold text-black">West Barnstable</span>
+                  —all sessions, meals during retreat hours, the day trip, spa, and
+                  full programming. You cover your own lodging separately.
+                </p>
+                <p className="mt-4 text-sm font-semibold text-[#9a3d6c]">
+                  Limited to {RETREAT_EXPERIENCE_ONLY_SPOTS} people for this option.
+                </p>
+              </div>
+              <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#666766] sm:text-base sm:leading-[1.65]">
+                Mention this option in your interest form if it sounds like a better
+                fit—we&apos;re happy to talk it through.
+              </p>
+              <div className="mt-8">
+                <AttendButton />
+              </div>
+            </div>
+
+            <aside className="mt-12 border-t border-black/10 pt-10 lg:col-span-5 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-2 xl:pl-12">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-black">
+                Nearby lodging ideas
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#666766]">
+                Jennifer found these while searching Hotels.com for stays near West
+                Barnstable. She hasn&apos;t personally stayed at any of them and
+                can&apos;t vouch for them—but sharing in case they&apos;re helpful
+                as you explore your own arrangements.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {NEARBY_LODGING_SUGGESTIONS.map((place) => (
+                  <li key={place.href}>
+                    <a
+                      href={place.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex flex-col rounded-xl border border-[#e76fab]/15 bg-[#faf8f5] px-4 py-4 transition-[border-color,background-color,box-shadow] duration-200 hover:border-[#e76fab]/35 hover:bg-white hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+                    >
+                      <span className="text-base font-semibold text-black group-hover:text-[#9a3d6c]">
+                        {place.name}
+                      </span>
+                      <span className="mt-0.5 text-sm text-[#666766]">
+                        {place.area}
+                      </span>
+                      <span className="mt-2 text-sm font-semibold text-[#e76fab]">
+                        Visit website →
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-sm leading-relaxed text-[#888988]">
+                These are suggestions only—not endorsed or vetted by It&apos;s
+                Lifey. Search the wider Cape Cod area for what feels right for you.
+              </p>
+            </aside>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ——— INVESTMENT ——— */}
       <section
         className="border-b border-black/[0.06] bg-[#f6f3ee]"
@@ -768,6 +880,10 @@ export function UpcomingRetreatClient() {
                 </p>
                 <p className="mt-6 max-w-xl rounded-2xl border border-[#e76fab]/35 bg-[#fdf6f9] px-5 py-4 text-[15px] font-semibold leading-relaxed text-[#9a3d6c] sm:text-base">
                   {RETREAT_ALMOST_SOLD_OUT}. {RETREAT_SHARED_ROOM_ONLY_LINE}
+                </p>
+                <p className="mt-4 max-w-xl rounded-2xl border border-[#e76fab]/20 bg-white px-5 py-4 text-[15px] leading-relaxed text-[#2a2928] sm:text-base">
+                  <span className="font-semibold text-[#e76fab]">New:</span>{" "}
+                  {RETREAT_EXPERIENCE_ONLY_LINE}
                 </p>
                 <p className="mt-6 max-w-xl text-[1.0625rem] leading-[1.65] text-[#2a2928] sm:text-lg">
                   {RETREAT_EARLY_BIRD_RECEIVE}, and payment plans are available.
@@ -797,7 +913,7 @@ export function UpcomingRetreatClient() {
                 Retreat Price
               </p>
               <div className="mt-6 grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-start lg:gap-8">
-                <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:col-span-7">
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 lg:col-span-7">
                   <div className="rounded-2xl border border-[#e3ddd4] bg-[#f0eeea]/80 px-5 py-5 opacity-90 sm:px-6">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#888988]">
                       Sold out
@@ -820,7 +936,21 @@ export function UpcomingRetreatClient() {
                       Shared triple room
                     </p>
                     <p className="mt-2 text-sm leading-relaxed text-[#666766]">
-                      The only room type still available — almost sold out.
+                      All-inclusive with lodging at the retreat home.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border-2 border-[#e76fab]/30 bg-[#fdf6f9] px-5 py-5 sm:col-span-2 lg:col-span-1 sm:px-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
+                      New · {RETREAT_EXPERIENCE_ONLY_SPOTS} spots
+                    </p>
+                    <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
+                      {RETREAT_EXPERIENCE_ONLY_PRICE}
+                    </p>
+                    <p className="mt-1.5 text-sm font-semibold text-[#2a2928] sm:text-[15px]">
+                      Retreat experience only
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-[#666766]">
+                      Full programming—your own lodging. West Barnstable.
                     </p>
                   </div>
                 </div>
@@ -852,9 +982,10 @@ export function UpcomingRetreatClient() {
               people who truly understand.
             </p>
             <p className="mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-white/95">
-              {RETREAT_ALMOST_SOLD_OUT}. Single rooms are sold out — only shared
-              triple rooms at {RETREAT_TRIPLE_PRICE}/person remain. Secure one of
-              the last spots when you&apos;re ready.
+              {RETREAT_ALMOST_SOLD_OUT}. Shared triple rooms at{" "}
+              {RETREAT_TRIPLE_PRICE}/person remain—or join for{" "}
+              {RETREAT_EXPERIENCE_ONLY_PRICE} with your own stay (limited to{" "}
+              {RETREAT_EXPERIENCE_ONLY_SPOTS} spots).
             </p>
             <div className="mx-auto mt-8 max-w-xl border-t border-white/35 pt-8">
               <p className="text-base font-semibold text-white sm:text-lg">
@@ -982,7 +1113,22 @@ export function UpcomingRetreatClient() {
                     </span>
                   </p>
                   <p className="mt-3 text-sm font-medium text-[#666766]">
-                    all-inclusive investment · only room type left
+                    all-inclusive investment · lodging at the retreat home
+                  </p>
+                  <p className="mt-5 rounded-xl border border-[#e76fab]/20 bg-[#faf8f5] px-4 py-3.5">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#e76fab]">
+                      New option
+                    </span>
+                    <span className="mt-1 block text-xl font-semibold text-black">
+                      {RETREAT_EXPERIENCE_ONLY_PRICE}{" "}
+                      <span className="text-base font-medium text-[#666766]">
+                        retreat experience only
+                      </span>
+                    </span>
+                    <span className="mt-1 block text-sm leading-relaxed text-[#666766]">
+                      Full programming if you arrange your own stay · limited to{" "}
+                      {RETREAT_EXPERIENCE_ONLY_SPOTS} spots
+                    </span>
                   </p>
                   <p className="mt-4 text-sm font-semibold text-[#e76fab]">
                     {RETREAT_EARLY_BIRD_LINE}
@@ -1034,6 +1180,11 @@ export function UpcomingRetreatClient() {
                 </h2>
                 <p className="mt-5 max-w-2xl rounded-2xl border border-[#e76fab]/25 bg-[#fdf6f9] px-4 py-3.5 text-base font-semibold leading-relaxed text-[#9a3d6c] sm:px-5 sm:py-4 sm:text-[17px]">
                   {RETREAT_ALMOST_SOLD_OUT}. {RETREAT_SHARED_ROOM_ONLY_LINE}
+                </p>
+                <p className="mt-4 max-w-2xl rounded-2xl border border-[#e76fab]/15 bg-white px-4 py-3.5 text-base leading-relaxed text-[#2a2928] sm:px-5 sm:py-4 sm:text-[17px]">
+                  <span className="font-semibold text-[#e76fab]">New:</span>{" "}
+                  {RETREAT_EXPERIENCE_ONLY_LINE} Mention it below if you&apos;d
+                  like your own lodging near West Barnstable.
                 </p>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
                   Share a few details—we&apos;ll follow up with next steps.{" "}
