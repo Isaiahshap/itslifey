@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Summer 2026 Widow Wellness Retreat — New England coast",
   description:
-    "Four restorative days for widows on the New England coast—luxury accommodations, wellness, spa, and connection with women who truly understand. Limited to eight. Apply to reserve your place.",
+    "Summer 2026 widow wellness retreat is sold out. Two day-attendance spots remain—stay at a nearby hotel and join during the day on the New England coast.",
 };
 
 export default function UpcomingRetreatLayout({

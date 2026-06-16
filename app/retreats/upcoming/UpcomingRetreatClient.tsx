@@ -36,9 +36,6 @@ const LOCATION_SRC = LOCATION_IMAGES.map(
   (name) => `/images/Retreats/Summer2026/${encodeURIComponent(name)}`,
 );
 
-const RETREAT_VIDEO_SRC =
-  "https://px8.792.myftpupload.com/wp-content/uploads/2025/07/SnapInsta.to_AQM724iKzsU9Wz3BHDtdIx4iDtHXvfkDDOyhnDNp9Z7TcGciAdFqfYrWK2YOm_3NrOjwELawj5gosbMIPZFTH-7IljxTvCU9jUes72Q.mp4";
-
 /** Wide editorial shell — breathes on large screens (aligned with HopeHub spread). */
 const shell =
   "mx-auto w-full min-w-0 max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,100%)]";
@@ -46,25 +43,19 @@ const shell =
 const shellGallery =
   "mx-auto w-full min-w-0 max-w-7xl px-3 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(96rem,100%)]";
 
-/** Summer 2026 coastal retreat — use these everywhere pricing or early-bird promos appear. */
+/** Summer 2026 coastal retreat pricing. */
 const RETREAT_SINGLE_PRICE = "$4,199";
 const RETREAT_TRIPLE_PRICE = "$3,499";
 const RETREAT_EXPERIENCE_ONLY_PRICE = "$1,499";
-const RETREAT_EXPERIENCE_ONLY_SPOTS = 5;
-const RETREAT_EARLY_BIRD_DISCOUNT = "$250";
-const RETREAT_EARLY_BIRD_DEADLINE = "June 1st";
-const RETREAT_EARLY_BIRD_LINE = `Save ${RETREAT_EARLY_BIRD_DISCOUNT} when you register by ${RETREAT_EARLY_BIRD_DEADLINE}`;
-const RETREAT_EARLY_BIRD_RECEIVE = `You\u2019ll receive ${RETREAT_EARLY_BIRD_DISCOUNT} off if you register by ${RETREAT_EARLY_BIRD_DEADLINE}`;
+const RETREAT_EXPERIENCE_ONLY_SPOTS = 2;
 
-/** Used for Meta Pixel ViewContent value (remaining shared-room rate). */
-const RETREAT_PIXEL_VALUE = 3499;
+/** Used for Meta Pixel ViewContent value (day-attendance rate). */
+const RETREAT_PIXEL_VALUE = 1499;
 
-const RETREAT_SPOTS_LEFT = 2;
-const RETREAT_ALMOST_SOLD_OUT =
-  "Almost sold out — only 2 spots left for Summer 2026";
-const RETREAT_SHARED_ROOM_ONLY_LINE = `Only shared triple rooms remain at ${RETREAT_TRIPLE_PRICE} per person. Single rooms are sold out.`;
-
-const RETREAT_EXPERIENCE_ONLY_LINE = `New option: join the full retreat experience for ${RETREAT_EXPERIENCE_ONLY_PRICE} if you arrange your own stay — limited to ${RETREAT_EXPERIENCE_ONLY_SPOTS} spots.`;
+const RETREAT_SOLD_OUT_HEADLINE = "Sold out — Summer 2026";
+const RETREAT_SOLD_OUT_DETAIL =
+  "Lodging at the retreat home is full.";
+const RETREAT_DAY_ONLY_LINE = `${RETREAT_EXPERIENCE_ONLY_SPOTS} spots remain for day attendance only (${RETREAT_EXPERIENCE_ONLY_PRICE}) — stay at a nearby hotel and join us during the day.`;
 
 const NEARBY_LODGING_SUGGESTIONS = [
   {
@@ -84,40 +75,14 @@ const NEARBY_LODGING_SUGGESTIONS = [
   },
 ] as const;
 
-const TESTIMONIAL_FORM_PARTS = [
-  `Although the "It's Lifey" retreat had a weekend structure, it was completely flexible and your participation in any of the activities or groups was your choice. There was zero pressure or judgment for not participating—or participating a lot.`,
-  `The layout was amazing: a group session followed by a fun short outing, with time to relax and eat before another round. The thoughtfulness behind the details of planning a weekend that had the potential to be pretty heavy, but somehow remained pretty light and beautiful, was unparalleled.`,
-] as const;
-
-const TESTIMONIAL_AWAITS =
-  "I learned there is so much power in community and sharing our stories. Grief looks different for everyone, but the loss of a spouse—be it sudden or after a long-term illness—bonds you in a way that is only understood by your widow sisters. Having never met any of these women before stepping foot on the property, I knew them instantly and I SAW them for who they are—for their pain and sorrow, and also their love and light. It's not a club any of us want to be a part of, yet I can't help but feel really special to be a part of this particular group.";
-
 const INVESTMENT_MARQUEE_PARTS = [
-  "Invest in YOU",
-  "Almost sold out — 2 spots left",
-  `Shared triple room ${RETREAT_TRIPLE_PRICE}`,
-  `Retreat experience only ${RETREAT_EXPERIENCE_ONLY_PRICE}`,
-  "Single rooms sold out",
-  `Save ${RETREAT_EARLY_BIRD_DISCOUNT} — register by ${RETREAT_EARLY_BIRD_DEADLINE}`,
-  "Payment plans available",
-  "All-inclusive investment",
-  "Accommodations (beautiful coastal private home)",
-  "All meals and dining experiences",
-  "Wellness and reflection sessions",
-  "Spa experience",
-  "Nantucket or Martha's Vineyard excursion",
-  "All retreat programming",
+  "Sold out — retreat home lodging full",
+  `Day attendance only — ${RETREAT_EXPERIENCE_ONLY_SPOTS} spots at ${RETREAT_EXPERIENCE_ONLY_PRICE}`,
+  "Stay at a nearby hotel · join during the day",
+  "July 9th–12th, 2026",
 ] as const;
 
 const INVESTMENT_MARQUEE_LINE = INVESTMENT_MARQUEE_PARTS.join("  ·  ");
-
-const WHO_FOR_BULLETS = [
-  "Feel exhausted from carrying everything on your own",
-  "Long to be around women who truly understand widowhood",
-  "Want time to reflect, rest, and reconnect with yourself",
-  "Are ready for meaningful conversation and real connection",
-  "Simply need a few days to step away and breathe",
-] as const;
 
 const fadeUp = {
   initial: { opacity: 0, y: 22 },
@@ -151,7 +116,7 @@ function scrollToInquiry() {
 
 function AttendButton({
   className = "",
-  children = "I want to attend",
+  children = "Ask about day attendance",
 }: {
   className?: string;
   children?: React.ReactNode;
@@ -349,18 +314,17 @@ export function UpcomingRetreatClient() {
                 It&apos;s Lifey · July 9th–12th, 2026
               </span>
               <span className="inline-block rounded-full bg-white/95 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#9a3d6c] ring-2 ring-white/40 sm:text-[13px]">
-                Only {RETREAT_SPOTS_LEFT} spots left
+                Sold out
               </span>
             </p>
             <h1
               id="retreat-hero-heading"
               className="mt-5 max-w-[22ch] text-balance text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl lg:max-w-none lg:text-6xl xl:text-7xl [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_12px_rgba(0,0,0,0.75),0_4px_28px_rgba(0,0,0,0.6),0_12px_56px_rgba(0,0,0,0.45)]"
             >
-              Upcoming Summer retreat 2026
+              Summer retreat 2026
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/92 sm:max-w-2xl sm:text-xl lg:text-[1.35rem] lg:leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.88),0_2px_10px_rgba(0,0,0,0.68),0_4px_24px_rgba(0,0,0,0.52),0_10px_40px_rgba(0,0,0,0.38)]">
-              A luxury coastal retreat for widows ready to exhale—with women who
-              truly get it.
+              {RETREAT_SOLD_OUT_DETAIL} {RETREAT_DAY_ONLY_LINE}
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
               <button
@@ -368,14 +332,8 @@ export function UpcomingRetreatClient() {
                 onClick={scrollToInquiry}
                 className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-9 py-4 text-base font-semibold text-white shadow-lg shadow-black/20 ring-2 ring-white/30 transition-[background-color,transform] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.99]"
               >
-                Join us
+                Ask about day attendance
               </button>
-              <p className="max-w-xs text-sm font-medium leading-snug text-white/92 sm:max-w-sm">
-                <span className="text-[#f5b8dc]">●</span> {RETREAT_ALMOST_SOLD_OUT}.{" "}
-                <span className="text-white/85">
-                  Shared room only — {RETREAT_TRIPLE_PRICE}/person.
-                </span>
-              </p>
             </div>
           </motion.div>
 
@@ -390,8 +348,7 @@ export function UpcomingRetreatClient() {
                   <span className="font-semibold not-italic text-white">
                     July 9th–July 12th, 2026.
                   </span>{" "}
-                  Eight women. Four days. Only {RETREAT_SPOTS_LEFT} spots left —
-                  almost sold out.
+                  {RETREAT_SOLD_OUT_HEADLINE}. {RETREAT_DAY_ONLY_LINE}
                 </p>
                 <div
                   className="h-px w-16 shrink-0 rounded-full bg-gradient-to-r from-[#e76fab] to-[#f5a8d4]/90 md:hidden"
@@ -422,9 +379,8 @@ export function UpcomingRetreatClient() {
         role="status"
       >
         <p className="text-[13px] font-semibold leading-snug text-[#9a3d6c] sm:text-sm">
-          <span className="text-[#7a2f55]">Almost sold out.</span>{" "}
-          Only {RETREAT_SPOTS_LEFT} spots remain — single rooms are gone; shared
-          triple room at {RETREAT_TRIPLE_PRICE}/person is what&apos;s left.
+          <span className="text-[#7a2f55]">Sold out.</span>{" "}
+          {RETREAT_DAY_ONLY_LINE}
         </p>
       </div>
 
@@ -436,110 +392,26 @@ export function UpcomingRetreatClient() {
         <div className={`${shell} py-11 sm:py-14 lg:py-16`}>
           <motion.div
             {...fadeUp}
-            className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-10 xl:gap-x-14"
+            className="max-w-2xl"
           >
-            <div className="lg:col-span-7">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#e76fab] sm:text-[11px]">
-                Widow Wellness Retreat
-              </p>
-              <h2
-                id="retreat-story-heading"
-                className="mt-3 text-balance text-4xl font-semibold leading-[1.02] tracking-tight text-black sm:text-5xl lg:text-[3.15rem] lg:leading-[1.03]"
-              >
-                Rest, connection, and room to breathe
-              </h2>
-              <p className="mt-4 max-w-md text-base leading-snug text-[#666766] sm:text-lg">
-                A luxury coastal retreat for widows ready to exhale
-              </p>
-
-              <p className="mt-8 max-w-xl border-l-2 border-[#e76fab] pl-5 text-[15px] italic leading-relaxed text-[#666766] sm:text-base">
-                You don&apos;t have to perform grief &ldquo;the right
-                way&rdquo; here.{" "}
-                <span className="font-semibold not-italic text-black">
-                  Come as you are.
-                </span>
-              </p>
-
-              <div className="mt-8 max-w-xl space-y-4 text-[15px] leading-relaxed text-[#666766] sm:text-base sm:leading-[1.65]">
-                <p className="text-pretty font-medium text-black">
-                  If your heart has been craving rest, connection, and a place
-                  where you don&apos;t have to explain your story…
-                </p>
-                <p className="text-pretty font-semibold text-[#e76fab]">
-                  This retreat was created for you.
-                </p>
-                <p className="text-pretty">
-                  Four restorative days on the New England coast for widows who
-                  need space to breathe, reflect, and reconnect with themselves—and
-                  with women who truly understand.
-                </p>
-                <p className="text-pretty">
-                  Step away from the noise of everyday life and immerse yourself in
-                  a peaceful retreat filled with meaningful conversation, beautiful
-                  surroundings, and genuine connection.
-                </p>
-                <p className="text-pretty font-semibold text-black">
-                  Women arrive as strangers… and leave as lifelong friends.
-                </p>
-              </div>
-            </div>
-
-            <aside
-              className="mt-11 border-t border-black/10 pt-10 lg:col-span-5 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-1 xl:pl-12"
-              id="who-this-is-for"
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#e76fab] sm:text-[11px]">
+              Widow Wellness Retreat
+            </p>
+            <h2
+              id="retreat-story-heading"
+              className="mt-3 text-balance text-4xl font-semibold leading-[1.02] tracking-tight text-black sm:text-5xl lg:text-[3.15rem] lg:leading-[1.03]"
             >
-              <h3
-                id="who-for-heading"
-                className="text-xs font-semibold uppercase tracking-[0.22em] text-black"
-              >
-                Who this retreat is for
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-[#666766]">
-                This retreat may be right for you if you:
-              </p>
-
-              <motion.ul
-                className="mt-5 space-y-2.5"
-                variants={listParent}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-32px" }}
-              >
-                {WHO_FOR_BULLETS.map((item) => (
-                  <motion.li
-                    key={item}
-                    variants={listChild}
-                    className="flex gap-2.5 text-pretty text-[14px] leading-snug text-[#555] sm:text-[15px] sm:leading-relaxed"
-                  >
-                    <span className="mt-[0.35em] font-medium text-[#e76fab]" aria-hidden>
-                      ·
-                    </span>
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </motion.ul>
-
-              <div className="mt-7 border-t border-black/10 pt-6">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                  Emotional safety first
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-[#666766]">
-                  No explaining. No performing. Just women who get it.
-                </p>
-              </div>
-
-              <p className="mt-7 text-base font-semibold leading-snug text-black">
-                You don&apos;t have to explain your story here.
-              </p>
-              <p className="mt-1 text-sm text-[#666766]">
-                Everyone in the room understands.
-              </p>
-            </aside>
+              Sold out for Summer 2026
+            </h2>
+            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#666766] sm:text-base sm:leading-[1.65]">
+              {RETREAT_SOLD_OUT_DETAIL} If you&apos;d like to stay at a nearby
+              hotel and attend during the day, {RETREAT_EXPERIENCE_ONLY_SPOTS}{" "}
+              spots remain at {RETREAT_EXPERIENCE_ONLY_PRICE}.
+            </p>
+            <div className="mt-8">
+              <AttendButton />
+            </div>
           </motion.div>
-
-          <div className="mt-10 border-t border-black/10 pt-10 sm:mt-11 sm:pt-11">
-            <AttendButton />
-          </div>
         </div>
       </section>
 
@@ -548,93 +420,55 @@ export function UpcomingRetreatClient() {
         className="border-b border-[#d85e9a] bg-[#e76fab]"
         aria-labelledby="what-awaits-heading"
       >
-        <div className={`${shell} py-16 sm:py-20 lg:py-28`}>
+        <div className={`${shell} py-12 sm:py-16 lg:py-20`}>
           <motion.div
             {...fadeUp}
             className="overflow-hidden rounded-[2rem] border border-black/[0.06] bg-white shadow-sm lg:rounded-[2.25rem]"
           >
-            <div className="lg:grid lg:grid-cols-12 lg:gap-0">
-              <div className="border-b border-black/[0.06] bg-[#fdfaf7] px-6 py-10 sm:px-10 sm:py-12 lg:col-span-5 lg:border-b-0 lg:border-r lg:px-10 lg:py-14 xl:px-12">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                  The experience
-                </p>
-                <h2
-                  id="what-awaits-heading"
-                  className="mt-4 text-3xl font-semibold leading-[1.1] text-black sm:text-4xl"
-                >
-                  What awaits you
-                </h2>
-                <p className="mt-6 text-lg leading-relaxed text-[#666766] sm:text-xl">
-                  A retreat designed to feel like a gentle exhale—for your heart
-                  and your nervous system. Nothing to prove; just space to be.
-                </p>
-                <p className="mt-6 text-base leading-relaxed text-[#666766] sm:text-lg">
-                  Everything is taken care of so you can arrive, exhale, and be
-                  present. You don&apos;t have to hold it all together here.
-                </p>
-                <div className="mt-8 rounded-2xl border border-[#e76fab]/25 bg-white p-5 sm:p-6">
-                  <p className="text-base leading-relaxed text-[#666766] sm:text-lg">
-                    We keep the group small on purpose—{" "}
-                    <span className="font-semibold text-black">eight women</span>
-                    —so connection can feel real, not rushed, and the room stays
-                    emotionally safe.
-                  </p>
-                </div>
-                <div className="mt-10">
-                  <AttendButton />
-                  <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#666766]">
-                    No obligation when you reach out. We&apos;ll answer questions
-                    and help you decide if the timing feels right—for you.
-                  </p>
-                </div>
-              </div>
-
-              <div className="px-6 py-10 sm:px-10 sm:py-12 lg:col-span-7 lg:px-10 lg:py-14 xl:px-12">
-                <p className="text-sm font-semibold text-black">
-                  Held for you in this retreat
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-[#666766]">
-                  Details that matter—so you can focus on rest and connection.
-                </p>
-                <motion.ul
-                  className="mt-8 space-y-3"
-                  variants={listParent}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-48px" }}
-                >
-                  {[
-                    "Luxury coastal accommodations",
-                    "Wellness and reflection sessions",
-                    "A rejuvenating spa experience",
-                    "A day trip to Nantucket or Martha's Vineyard",
-                    "Exceptional meals and relaxed oceanfront time",
-                    "Honest conversations and laughter with women who truly get it",
-                  ].map((item) => (
-                    <motion.li
-                      key={item}
-                      variants={listChild}
-                      className="flex gap-4 rounded-xl border border-[#e76fab]/12 bg-[#faf8f5] py-3.5 pl-4 pr-4 sm:gap-4 sm:py-4 sm:pl-5 sm:pr-5"
-                    >
-                      <span
-                        className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#e76fab]"
-                        aria-hidden
-                      />
-                      <span className="text-pretty text-[15px] font-medium leading-snug text-[#555] sm:text-base sm:leading-relaxed">
-                        {item}
-                      </span>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-
-                <figure className="mt-10 rounded-2xl border border-[#e76fab]/20 bg-[#fdf8fb] p-6 sm:p-7">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                    From women who were there
-                  </p>
-                  <blockquote className="mt-4 text-base leading-relaxed text-[#666766] sm:text-[1.05rem] sm:leading-relaxed">
-                    <p className="text-pretty">{TESTIMONIAL_AWAITS}</p>
-                  </blockquote>
-                </figure>
+            <div className="px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
+                The experience
+              </p>
+              <h2
+                id="what-awaits-heading"
+                className="mt-4 text-3xl font-semibold leading-[1.1] text-black sm:text-4xl"
+              >
+                What the retreat includes
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
+                Sessions, meals during retreat hours, spa, day trip, and time with
+                women who understand—on the New England coast.
+              </p>
+              <motion.ul
+                className="mt-8 grid gap-3 sm:grid-cols-2"
+                variants={listParent}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-48px" }}
+              >
+                {[
+                  "Wellness and reflection sessions",
+                  "Spa experience",
+                  "Nantucket or Martha's Vineyard day trip",
+                  "Meals during retreat hours",
+                ].map((item) => (
+                  <motion.li
+                    key={item}
+                    variants={listChild}
+                    className="flex gap-3 rounded-xl border border-[#e76fab]/12 bg-[#faf8f5] py-3.5 pl-4 pr-4"
+                  >
+                    <span
+                      className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#e76fab]"
+                      aria-hidden
+                    />
+                    <span className="text-pretty text-[15px] font-medium leading-snug text-[#555]">
+                      {item}
+                    </span>
+                  </motion.li>
+                ))}
+              </motion.ul>
+              <div className="mt-8">
+                <AttendButton />
               </div>
             </div>
           </motion.div>
@@ -659,9 +493,7 @@ export function UpcomingRetreatClient() {
                 Want a preview of the location?
               </h2>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#666766] sm:text-xl">
-                A beautiful private coastal home in West Barnstable—coastal calm,
-                room to breathe, and space that feels like a gentle exhale. Tap an
-                image to see it larger.
+                West Barnstable, Cape Cod. Tap an image to see it larger.
               </p>
             </div>
             <ul className="mt-12 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4 lg:grid-rows-3 lg:gap-4">
@@ -781,39 +613,29 @@ export function UpcomingRetreatClient() {
           <motion.div {...fadeUp} className="lg:grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16">
             <div className="lg:col-span-7">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-                New option
+                Still available
               </p>
               <h2
                 id="retreat-only-heading"
                 className="mt-4 text-3xl font-semibold leading-[1.1] text-black sm:text-4xl lg:text-[2.35rem]"
               >
-                Join the full retreat—stay on your own
+                Day attendance — stay at a hotel
               </h2>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#666766] sm:text-xl">
-                Ideal if you live on Cape Cod, want your own space at night, or
-                simply prefer to arrange your own accommodations.
+                {RETREAT_DAY_ONLY_LINE}
               </p>
               <div className="mt-8 max-w-xl rounded-2xl border-2 border-[#e76fab]/40 bg-[#fdf6f9] p-6 sm:p-7">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                  Retreat experience only · {RETREAT_EXPERIENCE_ONLY_SPOTS} spots
+                  Day attendance · {RETREAT_EXPERIENCE_ONLY_SPOTS} spots
                 </p>
                 <p className="mt-3 text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl">
                   {RETREAT_EXPERIENCE_ONLY_PRICE}
                 </p>
-                <p className="mt-3 text-[15px] leading-relaxed text-[#2a2928] sm:text-base sm:leading-[1.65]">
-                  Morning through evening at the retreat home in{" "}
-                  <span className="font-semibold text-black">West Barnstable</span>
-                  —all sessions, meals during retreat hours, the day trip, spa, and
-                  full programming. You cover your own lodging separately.
-                </p>
-                <p className="mt-4 text-sm font-semibold text-[#9a3d6c]">
-                  Limited to {RETREAT_EXPERIENCE_ONLY_SPOTS} people for this option.
+                <p className="mt-3 text-[15px] leading-relaxed text-[#2a2928] sm:text-base">
+                  Join morning through evening at the retreat home. You arrange
+                  your own hotel nearby.
                 </p>
               </div>
-              <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#666766] sm:text-base sm:leading-[1.65]">
-                Mention this option in your interest form if it sounds like a better
-                fit—we&apos;re happy to talk it through.
-              </p>
               <div className="mt-8">
                 <AttendButton />
               </div>
@@ -821,13 +643,11 @@ export function UpcomingRetreatClient() {
 
             <aside className="mt-12 border-t border-black/10 pt-10 lg:col-span-5 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-2 xl:pl-12">
               <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-black">
-                Nearby lodging ideas
+                Nearby hotels
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-[#666766]">
-                Jennifer found these while searching Hotels.com for stays near West
-                Barnstable. She hasn&apos;t personally stayed at any of them and
-                can&apos;t vouch for them—but sharing in case they&apos;re helpful
-                as you explore your own arrangements.
+                A few places near West Barnstable—suggestions only, not vetted by
+                It&apos;s Lifey.
               </p>
               <ul className="mt-6 space-y-3">
                 {NEARBY_LODGING_SUGGESTIONS.map((place) => (
@@ -851,10 +671,6 @@ export function UpcomingRetreatClient() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-sm leading-relaxed text-[#888988]">
-                These are suggestions only—not endorsed or vetted by It&apos;s
-                Lifey. Search the wider Cape Cod area for what feels right for you.
-              </p>
             </aside>
           </motion.div>
         </div>
@@ -873,20 +689,13 @@ export function UpcomingRetreatClient() {
                   id="investment-heading"
                   className="max-w-xl text-3xl font-semibold leading-[1.15] tracking-tight text-black sm:text-[2rem] lg:text-[2.125rem]"
                 >
-                  Invest in YOU
+                  Pricing
                 </h2>
-                <p className="mt-3 max-w-xl text-lg font-normal leading-relaxed text-[#666766] sm:text-xl">
-                  (because you can&apos;t keep pouring from empty)
-                </p>
                 <p className="mt-6 max-w-xl rounded-2xl border border-[#e76fab]/35 bg-[#fdf6f9] px-5 py-4 text-[15px] font-semibold leading-relaxed text-[#9a3d6c] sm:text-base">
-                  {RETREAT_ALMOST_SOLD_OUT}. {RETREAT_SHARED_ROOM_ONLY_LINE}
+                  {RETREAT_SOLD_OUT_HEADLINE}. {RETREAT_SOLD_OUT_DETAIL}
                 </p>
                 <p className="mt-4 max-w-xl rounded-2xl border border-[#e76fab]/20 bg-white px-5 py-4 text-[15px] leading-relaxed text-[#2a2928] sm:text-base">
-                  <span className="font-semibold text-[#e76fab]">New:</span>{" "}
-                  {RETREAT_EXPERIENCE_ONLY_LINE}
-                </p>
-                <p className="mt-6 max-w-xl text-[1.0625rem] leading-[1.65] text-[#2a2928] sm:text-lg">
-                  {RETREAT_EARLY_BIRD_RECEIVE}, and payment plans are available.
+                  {RETREAT_DAY_ONLY_LINE}
                 </p>
               </div>
 
@@ -912,8 +721,7 @@ export function UpcomingRetreatClient() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#666766]">
                 Retreat Price
               </p>
-              <div className="mt-6 grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-start lg:gap-8">
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 lg:col-span-7">
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 lg:col-span-7">
                   <div className="rounded-2xl border border-[#e3ddd4] bg-[#f0eeea]/80 px-5 py-5 opacity-90 sm:px-6">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#888988]">
                       Sold out
@@ -922,48 +730,35 @@ export function UpcomingRetreatClient() {
                       {RETREAT_SINGLE_PRICE}
                     </p>
                     <p className="mt-1.5 text-sm font-medium text-[#888988] sm:text-[15px]">
-                      Single room — no longer available
+                      Single room
                     </p>
                   </div>
-                  <div className="rounded-2xl border-2 border-[#e76fab]/45 bg-white px-5 py-5 shadow-[0_12px_40px_-20px_rgba(231,111,171,0.45)] sm:px-6">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                      Only {RETREAT_SPOTS_LEFT} spots left
+                  <div className="rounded-2xl border border-[#e3ddd4] bg-[#f0eeea]/80 px-5 py-5 opacity-90 sm:px-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#888988]">
+                      Sold out
                     </p>
-                    <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
+                    <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-[#a8a8a8] line-through decoration-[#c4c4c4] sm:text-4xl lg:text-[2.35rem]">
                       {RETREAT_TRIPLE_PRICE}
                     </p>
-                    <p className="mt-1.5 text-sm font-semibold text-[#2a2928] sm:text-[15px]">
+                    <p className="mt-1.5 text-sm font-medium text-[#888988] sm:text-[15px]">
                       Shared triple room
                     </p>
-                    <p className="mt-2 text-sm leading-relaxed text-[#666766]">
-                      All-inclusive with lodging at the retreat home.
-                    </p>
                   </div>
-                  <div className="rounded-2xl border-2 border-[#e76fab]/30 bg-[#fdf6f9] px-5 py-5 sm:col-span-2 lg:col-span-1 sm:px-6">
+                  <div className="rounded-2xl border-2 border-[#e76fab]/45 bg-white px-5 py-5 shadow-[0_12px_40px_-20px_rgba(231,111,171,0.45)] sm:col-span-2 lg:col-span-1 sm:px-6">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                      New · {RETREAT_EXPERIENCE_ONLY_SPOTS} spots
+                      {RETREAT_EXPERIENCE_ONLY_SPOTS} spots left
                     </p>
                     <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
                       {RETREAT_EXPERIENCE_ONLY_PRICE}
                     </p>
                     <p className="mt-1.5 text-sm font-semibold text-[#2a2928] sm:text-[15px]">
-                      Retreat experience only
+                      Day attendance only
                     </p>
                     <p className="mt-2 text-sm leading-relaxed text-[#666766]">
-                      Full programming—your own lodging. West Barnstable.
+                      Hotel on your own · join during the day.
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col gap-3 border-t border-[#ebe6df] pt-6 text-[15px] leading-snug sm:pt-0 sm:text-base lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0 xl:pl-12">
-                  <p className="text-[#666766]">All-inclusive investment</p>
-                  <p className="font-semibold text-[#e76fab]">
-                    {RETREAT_EARLY_BIRD_LINE}
-                  </p>
-                  <p className="font-semibold text-[#666766]">
-                    Payment plans available
-                  </p>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
@@ -972,98 +767,24 @@ export function UpcomingRetreatClient() {
 
       {/* ——— FINAL CTA ——— */}
       <section className="border-t border-white/20 bg-[#e76fab]">
-        <div className={`${shell} py-16 text-center sm:py-20 lg:py-28`}>
-          <motion.div {...fadeUp} className="mx-auto max-w-4xl">
-            <h2 className="text-balance text-3xl font-semibold leading-[1.15] text-white sm:text-4xl lg:text-5xl">
-              This retreat isn&apos;t about comparison—
+        <div className={`${shell} py-14 text-center sm:py-16 lg:py-20`}>
+          <motion.div {...fadeUp} className="mx-auto max-w-3xl">
+            <h2 className="text-balance text-3xl font-semibold leading-[1.15] text-white sm:text-4xl">
+              Sold out — with one option left
             </h2>
-            <p className="mt-6 text-xl leading-relaxed text-white sm:text-2xl lg:text-[1.65rem] lg:leading-snug">
-              it&apos;s about connection, comfort, and feeling at home with
-              people who truly understand.
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/95 sm:text-xl">
+              {RETREAT_DAY_ONLY_LINE}
             </p>
-            <p className="mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-white/95">
-              {RETREAT_ALMOST_SOLD_OUT}. Shared triple rooms at{" "}
-              {RETREAT_TRIPLE_PRICE}/person remain—or join for{" "}
-              {RETREAT_EXPERIENCE_ONLY_PRICE} with your own stay (limited to{" "}
-              {RETREAT_EXPERIENCE_ONLY_SPOTS} spots).
-            </p>
-            <div className="mx-auto mt-8 max-w-xl border-t border-white/35 pt-8">
-              <p className="text-base font-semibold text-white sm:text-lg">
-                {RETREAT_EARLY_BIRD_LINE} · Payment plans available
-              </p>
-            </div>
             <div className="mx-auto mt-10 flex justify-center">
               <button
                 type="button"
                 onClick={scrollToInquiry}
                 className="inline-flex w-full max-w-sm items-center justify-center rounded-full bg-white px-10 py-4 text-base font-semibold text-[#e76fab] shadow-md shadow-black/10 transition-[background-color,transform] duration-200 hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto active:scale-[0.99]"
               >
-                I want to attend
+                Ask about day attendance
               </button>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ——— VIDEO (above interest form) ——— */}
-      <section
-        className="border-b border-black/[0.06] bg-[#f6f3ee]"
-        aria-labelledby="retreat-video-heading"
-      >
-        <div className={`${shell} py-14 lg:py-24`}>
-          <motion.div
-            {...fadeUp}
-            className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16"
-          >
-            <div className="lg:col-span-5 xl:col-span-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                See the feeling
-              </p>
-              <h2
-                id="retreat-video-heading"
-                className="mt-4 text-3xl font-semibold leading-[1.15] tracking-tight text-black sm:text-4xl lg:text-[2.35rem] xl:text-5xl"
-              >
-                A glimpse of what retreat can feel like
-              </h2>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-[#666766] sm:text-lg">
-                Soft, human, real—take a quiet moment with this short video.
-                There&apos;s no pressure here.
-              </p>
-            </div>
-            <div className="lg:col-span-7 xl:col-span-8">
-              <div className="overflow-hidden rounded-2xl border-4 border-[#e76fab] bg-black shadow-xl shadow-black/15 lg:rounded-3xl">
-                <video
-                  className="aspect-video w-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  aria-label="Video introducing the It's Lifey retreat experience"
-                >
-                  <source src={RETREAT_VIDEO_SRC} type="video/mp4" />
-                  Your browser does not support embedded video.
-                </video>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ——— BE WITH PEOPLE (lead-in to form) ——— */}
-      <section
-        className="border-b border-black/[0.06] bg-white"
-        aria-labelledby="retreat-get-it-heading"
-      >
-        <div className={`${shell} py-10 text-center sm:py-12 lg:py-14`}>
-          <h2
-            id="retreat-get-it-heading"
-            className="text-balance text-3xl font-semibold leading-tight tracking-tight text-black sm:text-4xl lg:text-[2.35rem]"
-          >
-            Be with people who &ldquo;get it&rdquo;
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#666766] sm:text-lg">
-            When you&apos;re ready, share a little about yourself—we&apos;ll take
-            it from there.
-          </p>
         </div>
       </section>
 
@@ -1078,91 +799,34 @@ export function UpcomingRetreatClient() {
             <aside className="order-2 flex flex-col gap-8 lg:order-1 lg:col-span-5 xl:col-span-4 lg:sticky lg:top-28 lg:self-start">
               <div className="rounded-3xl border border-black/[0.06] bg-white p-8 shadow-[0_24px_80px_rgba(0,0,0,0.12)] lg:p-10">
                 <p className="text-2xl font-semibold leading-snug tracking-tight text-black sm:text-3xl">
-                  We read every interest form with care.
+                  Sold out
                 </p>
                 <p className="mt-5 text-base leading-relaxed text-[#666766]">
-                  No pressure, no rush—just a gentle next step when you&apos;re
-                  ready.
+                  {RETREAT_SOLD_OUT_DETAIL}
                 </p>
                 <div className="mt-8 border-t border-black/[0.08] pt-8">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                    Retreat price
-                  </p>
-                  <p className="mt-3 text-lg font-semibold leading-snug text-black">
-                    Invest in YOU
-                    <span className="mt-1 block text-base font-normal text-[#666766]">
-                      (because you can&apos;t keep pouring from empty)
-                    </span>
+                    Still available
                   </p>
                   <p className="mt-4 rounded-xl border border-[#e76fab]/30 bg-[#fdf6f9] px-4 py-3.5">
                     <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#e76fab]">
-                      Almost sold out
+                      Day attendance
                     </span>
-                    <span className="mt-1 block text-lg font-semibold text-[#9a3d6c]">
-                      Only {RETREAT_SPOTS_LEFT} spots left
+                    <span className="mt-1 block text-2xl font-semibold text-black">
+                      {RETREAT_EXPERIENCE_ONLY_PRICE}
+                    </span>
+                    <span className="mt-1 block text-sm leading-relaxed text-[#666766]">
+                      {RETREAT_EXPERIENCE_ONLY_SPOTS} spots · hotel on your own
                     </span>
                   </p>
                   <p className="mt-4 text-xl font-medium text-[#a8a8a8] line-through decoration-[#c4c4c4]">
                     {RETREAT_SINGLE_PRICE}{" "}
-                    <span className="text-base">Single room — sold out</span>
+                    <span className="text-base">Single room</span>
                   </p>
-                  <p className="mt-3 text-2xl font-semibold text-black sm:text-3xl">
+                  <p className="mt-3 text-xl font-medium text-[#a8a8a8] line-through decoration-[#c4c4c4]">
                     {RETREAT_TRIPLE_PRICE}{" "}
-                    <span className="text-base font-medium text-[#666766]">
-                      Shared triple room — available
-                    </span>
+                    <span className="text-base">Shared triple room</span>
                   </p>
-                  <p className="mt-3 text-sm font-medium text-[#666766]">
-                    all-inclusive investment · lodging at the retreat home
-                  </p>
-                  <p className="mt-5 rounded-xl border border-[#e76fab]/20 bg-[#faf8f5] px-4 py-3.5">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#e76fab]">
-                      New option
-                    </span>
-                    <span className="mt-1 block text-xl font-semibold text-black">
-                      {RETREAT_EXPERIENCE_ONLY_PRICE}{" "}
-                      <span className="text-base font-medium text-[#666766]">
-                        retreat experience only
-                      </span>
-                    </span>
-                    <span className="mt-1 block text-sm leading-relaxed text-[#666766]">
-                      Full programming if you arrange your own stay · limited to{" "}
-                      {RETREAT_EXPERIENCE_ONLY_SPOTS} spots
-                    </span>
-                  </p>
-                  <p className="mt-4 text-sm font-semibold text-[#e76fab]">
-                    {RETREAT_EARLY_BIRD_LINE}
-                  </p>
-                  <p className="mt-1 text-sm font-semibold text-[#666766]">
-                    Payment plans available
-                  </p>
-                </div>
-                <div className="mt-8 border-l-4 border-[#e76fab] pl-5">
-                  <p className="text-base font-semibold leading-relaxed text-[#9a3d6c]">
-                    {RETREAT_ALMOST_SOLD_OUT}
-                  </p>
-                  <p className="mt-2 text-base font-medium leading-relaxed text-black">
-                    Intimate group of eight women — {RETREAT_SPOTS_LEFT} shared-room
-                    spots remain.
-                  </p>
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-white/40 bg-white/95 p-6 shadow-lg shadow-black/10 sm:p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-                  From women who were there
-                </p>
-                <div className="mt-5 space-y-4">
-                  {TESTIMONIAL_FORM_PARTS.map((text, i) => (
-                    <figure
-                      key={i}
-                      className="rounded-xl border border-black/[0.06] bg-[#faf8f5] p-4 text-sm leading-relaxed text-[#666766] sm:p-4"
-                    >
-                      <blockquote className="text-pretty">
-                        <p>{text}</p>
-                      </blockquote>
-                    </figure>
-                  ))}
                 </div>
               </div>
             </aside>
@@ -1170,25 +834,17 @@ export function UpcomingRetreatClient() {
             <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-8">
               <div className="rounded-3xl border border-black/[0.06] bg-white p-6 shadow-[0_20px_70px_rgba(0,0,0,0.12)] sm:p-10 lg:p-12">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                  Reserve your place
+                  Day attendance inquiry
                 </p>
                 <h2
                   id="inquiry-heading"
                   className="mt-3 max-w-xl text-2xl font-semibold leading-tight text-black sm:text-3xl lg:text-4xl"
                 >
-                  Summer 2026 retreat interest form
+                  Summer 2026 — day attendance
                 </h2>
-                <p className="mt-5 max-w-2xl rounded-2xl border border-[#e76fab]/25 bg-[#fdf6f9] px-4 py-3.5 text-base font-semibold leading-relaxed text-[#9a3d6c] sm:px-5 sm:py-4 sm:text-[17px]">
-                  {RETREAT_ALMOST_SOLD_OUT}. {RETREAT_SHARED_ROOM_ONLY_LINE}
-                </p>
-                <p className="mt-4 max-w-2xl rounded-2xl border border-[#e76fab]/15 bg-white px-4 py-3.5 text-base leading-relaxed text-[#2a2928] sm:px-5 sm:py-4 sm:text-[17px]">
-                  <span className="font-semibold text-[#e76fab]">New:</span>{" "}
-                  {RETREAT_EXPERIENCE_ONLY_LINE} Mention it below if you&apos;d
-                  like your own lodging near West Barnstable.
-                </p>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
-                  Share a few details—we&apos;ll follow up with next steps.{" "}
-                  {RETREAT_EARLY_BIRD_RECEIVE}, and payment plans are available.
+                  {RETREAT_DAY_ONLY_LINE} Share a few details and we&apos;ll
+                  follow up.
                 </p>
                 <form
                   className="relative mt-8 space-y-5"
@@ -1299,7 +955,7 @@ export function UpcomingRetreatClient() {
                     >
                       {inquirySubmit === "sending"
                         ? "Sending…"
-                        : "I want to attend"}
+                        : "Ask about day attendance"}
                     </button>
                     <RecaptchaNotice />
                     <p className="mt-4 text-center text-sm text-[#666766] sm:text-left">

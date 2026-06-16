@@ -24,17 +24,15 @@ export function VirtualHealingAnnouncementBar() {
             <span className="mr-1 inline-block rounded bg-white/20 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-white sm:mr-2 sm:px-2 sm:text-[11px]">
               Summer 2026
             </span>
+            <span className="font-bold text-white">Sold out.</span>{" "}
             <Link
               href="/retreats/upcoming"
               className="underline decoration-white/50 underline-offset-2 transition-colors hover:text-white hover:decoration-white"
             >
-              Join the upcoming retreat
+              2 day-attendance spots remain
             </Link>
             {" · "}
-            New England coast ·{" "}
-            <span className="font-bold text-white">
-              save $250 when you register by June 1st
-            </span>
+            Stay at a nearby hotel · join during the day
           </p>
         </div>
         <button
