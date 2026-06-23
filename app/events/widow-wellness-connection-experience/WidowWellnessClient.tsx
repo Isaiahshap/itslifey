@@ -494,13 +494,7 @@ export function WidowWellnessClient() {
                     </div>
                     <div className="px-5 py-5 sm:px-7 sm:py-6">
                       {"intro" in block && block.intro ? (
-                        <p
-                          className={`mb-4 text-[15px] leading-relaxed ${
-                            block.variant === "closing"
-                              ? "text-white/85"
-                              : "text-[#666766]"
-                          }`}
-                        >
+                        <p className="mb-4 text-[15px] leading-relaxed text-[#666766]">
                           {block.intro}
                         </p>
                       ) : null}
@@ -522,20 +516,10 @@ export function WidowWellnessClient() {
                             ) : (
                               <li
                                 key={item}
-                                className={`flex gap-3 text-[15px] leading-relaxed ${
-                                  block.variant === "closing"
-                                    ? "text-white/88"
-                                    : "text-[#2a2928]"
-                                }`}
+                                className="flex gap-3 text-[15px] leading-relaxed text-[#2a2928]"
                               >
                                 <span
-                                  className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
-                                    block.variant === "vip"
-                                      ? "bg-[#e76fab]"
-                                      : block.variant === "closing"
-                                        ? "bg-[#f5b8dc]"
-                                        : "bg-[#e76fab]"
-                                  }`}
+                                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#e76fab]"
                                   aria-hidden
                                 />
                                 {item}
