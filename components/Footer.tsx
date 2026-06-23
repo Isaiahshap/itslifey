@@ -7,6 +7,7 @@ const exploreLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },
+  { href: "/resources", label: "Resources" },
 ] as const;
 
 const programsLinks = [
@@ -14,7 +15,14 @@ const programsLinks = [
   { href: "/retreats", label: "Retreats" },
   { href: "/retreats/upcoming", label: "Upcoming Retreats" },
   { href: "/retreats/past", label: "Past Retreats" },
-  { href: "/resources", label: "Resources" },
+  {
+    href: "/events/widow-wellness-connection-experience",
+    label: "Widow Wellness & Connection Experience",
+  },
+  {
+    href: "/events/widow-wellness-connection-experience/sponsorship",
+    label: "Event Sponsorship",
+  },
 ] as const;
 
 const legalLinks = [

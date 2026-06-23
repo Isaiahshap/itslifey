@@ -6,7 +6,10 @@ import { usePathname } from "next/navigation";
 /** Global pre-footer CTA (renders from root layout; no Framer Motion). Hidden on Summer retreat page — it has its own closing CTA. */
 export function SiteFinalCta() {
   const pathname = usePathname();
-  if (pathname === "/retreats/upcoming") {
+  if (
+    pathname === "/retreats/upcoming" ||
+    pathname.startsWith("/events/widow-wellness-connection-experience")
+  ) {
     return null;
   }
 

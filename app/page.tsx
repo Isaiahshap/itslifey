@@ -41,7 +41,7 @@ const YOUTUBE_CONVERSATIONS = [
   {
     id: "xRS5QOZPxl0",
     title: "End of Life Planning",
-    guest: "First40",
+    guest: "Guest speakers",
   },
   {
     id: "d5lqHsTRgcM",

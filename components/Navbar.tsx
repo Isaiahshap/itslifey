@@ -20,6 +20,7 @@ const aboutSubLinks = [
   { href: "/blog", label: "Blog/Insights" },
   { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },
+  { href: "/resources", label: "Resources" },
 ] as const;
 
 const retreatSubLinks = [
@@ -27,17 +28,19 @@ const retreatSubLinks = [
   { href: "/retreats/past", label: "Past Retreats" },
 ] as const;
 
-const supportSubLinks = [
-  { href: "/first-40", label: "First40 Workshop" },
-  { href: "/resources", label: "Resources" },
+const eventsSubLinks = [
+  {
+    href: "/events/widow-wellness-connection-experience",
+    label: "Widow Wellness & Connection Experience",
+  },
 ] as const;
 
 const navHopeHub = { href: "/hopehub", label: "Hope Hub" } as const;
 
-/** Primary header CTA — upcoming retreat (summer). */
+/** Primary header CTA — Widow Wellness & Connection Experience. */
 const navPrimaryCta = {
-  href: "/retreats/upcoming",
-  label: "Join our summer retreat",
+  href: "/events/widow-wellness-connection-experience",
+  label: "Join Widow Wellness & Connection Experience",
 } as const;
 
 function pathMatchesHref(pathname: string, href: string) {
@@ -56,8 +59,8 @@ function retreatSectionActive(pathname: string) {
   return retreatSubLinks.some(({ href }) => pathMatchesHref(pathname, href));
 }
 
-function supportSectionActive(pathname: string) {
-  return supportSubLinks.some(({ href }) => pathMatchesHref(pathname, href));
+function eventsSectionActive(pathname: string) {
+  return eventsSubLinks.some(({ href }) => pathMatchesHref(pathname, href));
 }
 
 function useHydrated(): boolean {
@@ -277,14 +280,14 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileRetreatsOpen, setMobileRetreatsOpen] = useState(false);
-  const [mobileSupportOpen, setMobileSupportOpen] = useState(false);
+  const [mobileEventsOpen, setMobileEventsOpen] = useState(false);
   const hydrated = useHydrated();
 
   const closeMobileNav = useCallback(() => {
     setOpen(false);
     setMobileAboutOpen(false);
     setMobileRetreatsOpen(false);
-    setMobileSupportOpen(false);
+    setMobileEventsOpen(false);
   }, []);
 
   useEffect(() => {
@@ -364,14 +367,14 @@ export function Navbar() {
           />
 
           <DesktopHoverMenu
-            key={`nav-desktop-support-${pathname}`}
+            key={`nav-desktop-events-${pathname}`}
             pathname={pathname}
-            label="Support"
-            menuId="nav-support-menu"
-            ariaLabel="Support"
-            links={supportSubLinks}
-            sectionActive={supportSectionActive(pathname)}
-            menuShellExtra="min-w-[14rem]"
+            label="Events"
+            menuId="nav-events-menu"
+            ariaLabel="Events"
+            links={eventsSubLinks}
+            sectionActive={eventsSectionActive(pathname)}
+            menuShellExtra="min-w-[18rem]"
           />
         </nav>
 
@@ -383,7 +386,7 @@ export function Navbar() {
           />
           <Link
             href={navPrimaryCta.href}
-            className="hidden rounded-full bg-[#e76fab] px-4 py-2.5 text-[14px] font-semibold leading-snug text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md sm:inline-flex sm:px-5 sm:text-[15px] sm:leading-normal"
+            className="hidden max-w-[14.5rem] rounded-full bg-[#e76fab] px-4 py-2.5 text-center text-[12px] font-semibold leading-snug text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md sm:inline-flex sm:max-w-[17rem] sm:px-4 sm:text-[13px] lg:max-w-none lg:px-5 lg:text-[14px]"
           >
             {navPrimaryCta.label}
           </Link>
@@ -570,19 +573,19 @@ export function Navbar() {
                   <motion.div variants={mobileOverlayRow}>
                     <button
                       type="button"
-                      className={`flex w-full items-center justify-between text-left ${mobileNavLinkClass(supportSectionActive(pathname))}`}
-                      aria-expanded={mobileSupportOpen}
-                      onClick={() => setMobileSupportOpen((v) => !v)}
+                      className={`flex w-full items-center justify-between text-left ${mobileNavLinkClass(eventsSectionActive(pathname))}`}
+                      aria-expanded={mobileEventsOpen}
+                      onClick={() => setMobileEventsOpen((v) => !v)}
                     >
-                      Support
+                      Events
                       <ChevronDown
-                        className={`h-5 w-5 shrink-0 text-current opacity-80 transition-transform duration-300 ease-out ${mobileSupportOpen ? "rotate-180" : ""}`}
+                        className={`h-5 w-5 shrink-0 text-current opacity-80 transition-transform duration-300 ease-out ${mobileEventsOpen ? "rotate-180" : ""}`}
                         aria-hidden
                         strokeWidth={2}
                       />
                     </button>
                     <AnimatePresence initial={false}>
-                      {mobileSupportOpen ? (
+                      {mobileEventsOpen ? (
                         <motion.ul
                           role="list"
                           className="mt-1 flex flex-col gap-1 overflow-hidden pl-1"
@@ -594,7 +597,7 @@ export function Navbar() {
                             ease: mobileOverlayEase,
                           }}
                         >
-                          {supportSubLinks.map(({ href, label }) => (
+                          {eventsSubLinks.map(({ href, label }) => (
                             <li key={href}>
                               <Link
                                 href={href}

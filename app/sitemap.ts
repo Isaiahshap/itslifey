@@ -19,7 +19,8 @@ function priorityForPath(path: string): number {
   if (path === "/") return 1;
   if (
     path === "/retreats/upcoming" ||
-    path === "/support/virtual-healing-experiences" ||
+    path === "/events/widow-wellness-connection-experience" ||
+    path === "/events/widow-wellness-connection-experience/sponsorship" ||
     path === "/hopehub"
   )
     return 0.95;
