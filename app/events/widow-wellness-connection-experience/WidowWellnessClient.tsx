@@ -46,7 +46,7 @@ const sessionTopics = [
   "Meditation",
   "Tarot",
   "Mediumship",
-  "Journaling",
+  "Dating coach",
   "Grief support conversations",
   "Financial, legal, or life-after-loss resource sessions",
 ] as const;
@@ -351,8 +351,7 @@ export function WidowWellnessClient() {
       {/* Kelley Lynn */}
       <section className="border-b border-black/10 bg-[#faf8f5]" aria-labelledby="ww-vip-heading">
         <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_min(22rem,100%)] lg:items-start lg:gap-14">
-            <motion.div {...fadeUp}>
+          <motion.div {...fadeUp} className="max-w-3xl">
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#666766]">
                 VIP evening · November 13
               </p>
@@ -379,37 +378,7 @@ export function WidowWellnessClient() {
               <p className="mt-6 text-sm font-semibold text-[#b8457e]">
                 Included with the $169 VIP ticket
               </p>
-            </motion.div>
-            <motion.div
-              {...fadeUp}
-              className="rounded-2xl border border-[#e76fab]/20 bg-white p-6 shadow-sm sm:p-8"
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-                Ticket options
-              </p>
-              <ul className="mt-5 space-y-4">
-                <li className="border-b border-black/[0.06] pb-4">
-                  <p className="font-semibold text-[#141413]">VIP — $169</p>
-                  <p className="mt-1 text-sm leading-relaxed text-[#666766]">
-                    Mocktail hour with Kelley Lynn + full main event on November 14.
-                  </p>
-                </li>
-                <li>
-                  <p className="font-semibold text-[#141413]">General Admission — $129</p>
-                  <p className="mt-1 text-sm leading-relaxed text-[#666766]">
-                    Full main event — keynotes, breakouts, lunch, and The Hope Mic.
-                  </p>
-                </li>
-              </ul>
-              <button
-                type="button"
-                onClick={scrollToRegister}
-                className="mt-6 w-full rounded-full bg-[#e76fab] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#d85e9a]"
-              >
-                Choose your ticket
-              </button>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -499,33 +468,19 @@ export function WidowWellnessClient() {
                         </p>
                       ) : null}
                       {"items" in block && block.items ? (
-                        <ul
-                          className={
-                            block.variant === "breakouts"
-                              ? "flex flex-wrap gap-2"
-                              : "space-y-2.5"
-                          }
-                        >
-                          {block.items.map((item) =>
-                            block.variant === "breakouts" ? (
-                              <li key={item}>
-                                <span className="inline-block rounded-full border border-[#e76fab]/30 bg-[#fdf8fb] px-3.5 py-1.5 text-sm font-medium text-[#9a3d6c]">
-                                  {item}
-                                </span>
-                              </li>
-                            ) : (
-                              <li
-                                key={item}
-                                className="flex gap-3 text-[15px] leading-relaxed text-[#2a2928]"
-                              >
-                                <span
-                                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#e76fab]"
-                                  aria-hidden
-                                />
-                                {item}
-                              </li>
-                            ),
-                          )}
+                        <ul className="space-y-2.5">
+                          {block.items.map((item) => (
+                            <li
+                              key={item}
+                              className="flex gap-3 text-[15px] leading-relaxed text-[#2a2928]"
+                            >
+                              <span
+                                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#e76fab]"
+                                aria-hidden
+                              />
+                              {item}
+                            </li>
+                          ))}
                         </ul>
                       ) : null}
                       {"prose" in block && block.prose ? (
@@ -601,19 +556,19 @@ export function WidowWellnessClient() {
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-black/[0.08] bg-white p-5 sm:p-6">
+              <div className="space-y-5 border-t border-black/[0.08] pt-8">
+                <div>
                   <p className="font-semibold text-[#141413]">VIP — $169</p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#666766]">
+                  <p className={`mt-2 ${body} text-[#666766]`}>
                     Cocktail hour with Kelley Lynn on November 13, plus the full
                     main event on November 14.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-black/[0.08] bg-white p-5 sm:p-6">
+                <div>
                   <p className="font-semibold text-[#141413]">
                     General Admission — $129
                   </p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#666766]">
+                  <p className={`mt-2 ${body} text-[#666766]`}>
                     The full main event — welcome, keynotes, breakouts, lunch,
                     and The Hope Mic Story Slam.
                   </p>

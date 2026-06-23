@@ -17,7 +17,7 @@ export const TICKET_TIERS = {
     price: 169,
     stripeUrl: "https://buy.stripe.com/7sYdRa18B29W3gggn65Rm0f",
     description:
-      "The evening before with Kelley Lynn, plus the full day on November 14.",
+      "Cocktail hour with Kelley Lynn on November 13, plus the full main event on November 14.",
   },
   regular: {
     key: "regular",
@@ -25,7 +25,8 @@ export const TICKET_TIERS = {
     shortLabel: "General Admission",
     price: 129,
     stripeUrl: "https://buy.stripe.com/dRmfZicRjdSEcQQ2wg5Rm0e",
-    description: "Full day on November 14 — keynotes, breakouts, lunch, and The Hope Mic.",
+    description:
+      "The full main event — welcome, keynotes, breakouts, lunch, and The Hope Mic Story Slam.",
   },
 } as const;
 

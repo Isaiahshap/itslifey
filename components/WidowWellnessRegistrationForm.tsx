@@ -111,17 +111,17 @@ export function WidowWellnessRegistrationForm() {
         <legend className="text-sm font-semibold text-black">
           Choose your ticket
         </legend>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        <div className="mt-4 space-y-4">
           {(Object.keys(TICKET_TIERS) as TicketTierKey[]).map((key) => {
             const tier = TICKET_TIERS[key];
             const active = ticketTier === key;
             return (
               <label
                 key={key}
-                className={`cursor-pointer rounded-2xl border p-4 transition-[border-color,box-shadow,background-color] duration-200 ${
+                className={`flex cursor-pointer gap-3 border-l-2 py-1 pl-4 transition-colors duration-200 ${
                   active
-                    ? "border-[#e76fab] bg-[#fdf8fb] shadow-[0_8px_28px_-8px_rgba(231,111,171,0.35)]"
-                    : "border-black/10 bg-white hover:border-[#e76fab]/35"
+                    ? "border-[#e76fab]"
+                    : "border-transparent hover:border-[#e76fab]/40"
                 }`}
               >
                 <input
@@ -130,17 +130,16 @@ export function WidowWellnessRegistrationForm() {
                   value={key}
                   checked={active}
                   onChange={() => setTicketTier(key)}
-                  className="sr-only"
+                  className="mt-1 h-4 w-4 shrink-0 accent-[#e76fab]"
                 />
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#b8457e]">
-                  {tier.shortLabel}
-                </p>
-                <p className="mt-1 text-2xl font-semibold text-[#141413]">
-                  ${tier.price}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-[#666766]">
-                  {tier.description}
-                </p>
+                <span className="min-w-0">
+                  <span className="block font-semibold text-[#141413]">
+                    {tier.shortLabel} — ${tier.price}
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-[#666766]">
+                    {tier.description}
+                  </span>
+                </span>
               </label>
             );
           })}
