@@ -268,6 +268,71 @@ export function SponsorshipClient() {
         </div>
       </section>
 
+      {/* Ideal sponsors */}
+      <section className="border-b border-black/10 bg-white" aria-labelledby="sponsor-ideal-heading">
+        <div className={`${shell} py-14 sm:py-16`}>
+          <motion.div {...fadeUp} className="max-w-2xl">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab]">
+              Ideal sponsors
+            </p>
+            <h2
+              id="sponsor-ideal-heading"
+              className="mt-3 text-3xl font-semibold text-black sm:text-4xl"
+            >
+              Especially meaningful for professionals who support widows
+            </h2>
+          </motion.div>
+          <ul className="mt-8 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+            {idealSponsors.map((item) => (
+              <li
+                key={item}
+                className="flex gap-2.5 rounded-xl border border-black/[0.06] bg-[#faf8f5] px-4 py-3 text-[15px] text-[#2a2928]"
+              >
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#e76fab]" aria-hidden />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Why it matters */}
+      <section className="relative border-b border-black/10 overflow-hidden" aria-labelledby="sponsor-why-heading">
+        <div className="absolute inset-0" aria-hidden>
+          <Image
+            src={IMPACT_IMAGE}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-[#2a2928]/90" />
+        </div>
+        <div className={`relative ${shell} py-14 sm:py-16 lg:py-20`}>
+          <motion.div {...fadeUp} className="max-w-3xl text-white">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#f5b8dc]">
+              Why this event matters
+            </p>
+            <h2
+              id="sponsor-why-heading"
+              className="mt-3 text-3xl font-semibold sm:text-4xl"
+            >
+              When someone becomes a widow, everything changes
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-white/88">
+              The emotional weight. The financial questions. The paperwork. The
+              loneliness. The decisions. The identity shift. The ache of
+              rebuilding a life you never asked for.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-white/72">
+              Widows need safe spaces, trusted guidance, healing resources, and
+              community — all in one room. Your sponsorship helps make that
+              possible.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Overview */}
       <section className="border-b border-black/10 bg-white" aria-labelledby="sponsor-overview-heading">
         <div className={`${shell} grid gap-12 py-14 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-20`}>
@@ -354,43 +419,6 @@ export function SponsorshipClient() {
         </div>
       </section>
 
-      {/* Why it matters */}
-      <section className="relative border-b border-black/10 overflow-hidden" aria-labelledby="sponsor-why-heading">
-        <div className="absolute inset-0" aria-hidden>
-          <Image
-            src={IMPACT_IMAGE}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-[#2a2928]/90" />
-        </div>
-        <div className={`relative ${shell} py-14 sm:py-16 lg:py-20`}>
-          <motion.div {...fadeUp} className="max-w-3xl text-white">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#f5b8dc]">
-              Why this event matters
-            </p>
-            <h2
-              id="sponsor-why-heading"
-              className="mt-3 text-3xl font-semibold sm:text-4xl"
-            >
-              When someone becomes a widow, everything changes
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-white/88">
-              The emotional weight. The financial questions. The paperwork. The
-              loneliness. The decisions. The identity shift. The ache of
-              rebuilding a life you never asked for.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-white/72">
-              Widows need safe spaces, trusted guidance, healing resources, and
-              community — all in one room. Your sponsorship helps make that
-              possible.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Why sponsor */}
       <section className="border-b border-black/10 bg-[#faf8f5]" aria-labelledby="sponsor-benefits-heading">
         <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
@@ -421,34 +449,6 @@ export function SponsorshipClient() {
               </motion.article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Ideal sponsors */}
-      <section className="border-b border-black/10 bg-white" aria-labelledby="sponsor-ideal-heading">
-        <div className={`${shell} py-14 sm:py-16`}>
-          <motion.div {...fadeUp} className="max-w-2xl">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab]">
-              Ideal sponsors
-            </p>
-            <h2
-              id="sponsor-ideal-heading"
-              className="mt-3 text-3xl font-semibold text-black sm:text-4xl"
-            >
-              Especially meaningful for professionals who support widows
-            </h2>
-          </motion.div>
-          <ul className="mt-8 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-            {idealSponsors.map((item) => (
-              <li
-                key={item}
-                className="flex gap-2.5 rounded-xl border border-black/[0.06] bg-[#faf8f5] px-4 py-3 text-[15px] text-[#2a2928]"
-              >
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#e76fab]" aria-hidden />
-                {item}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 

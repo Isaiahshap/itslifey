@@ -9,6 +9,13 @@ import {
   computeHeroHeadlineFontSizePx,
   HERO_HEADLINE_LINE_HEIGHT_RATIO,
 } from "@/lib/heroHeadlineFont";
+import {
+  EVENT_DATES,
+  EVENT_LOCATION,
+  EVENT_PATH,
+  EVENT_SHORT_TAGLINE,
+  SPONSORSHIP_PATH,
+} from "@/lib/widow-wellness-event";
 const HERO_IMAGES = [
   "/images/hero.jpg",
   "/images/hero2.jpg",
@@ -60,22 +67,6 @@ const fadeUp = {
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-72px" },
   transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const },
-};
-
-const listParent = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.09, delayChildren: 0.06 },
-  },
-};
-
-const listChild = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
-  },
 };
 
 export default function Home() {
@@ -229,10 +220,10 @@ export default function Home() {
             </h1>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
               <Link
-                href="/retreats"
+                href={EVENT_PATH}
                 className="inline-flex w-full items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#2a2928]/20 transition-[transform,background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
               >
-                Join Upcoming Retreat
+                Join Widow Wellness &amp; Connection Experience
               </Link>
               <Link
                 href="/hopehub"
@@ -341,11 +332,11 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* ——— RETREATS + YOUTUBE (shared pink → light gradient) ——— */}
+      {/* ——— WIDOW WELLNESS EVENT + YOUTUBE (shared pink → light gradient) ——— */}
       <div className="bg-[linear-gradient(to_bottom,#df68a3_0%,#e76fab_32%,#d85e9a_40%,#e76fab_46%,#f0dfe8_70%,#f6f3ee_100%)]">
       <section
         id="support-paths"
-        aria-labelledby="retreats-heading"
+        aria-labelledby="event-heading"
       >
         <motion.div
           className="relative overflow-hidden px-3 py-16 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] sm:px-4 sm:py-20 lg:px-5 lg:py-24"
@@ -367,58 +358,35 @@ export default function Home() {
             <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
               <div className="min-w-0">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/90 sm:text-sm">
-                  Retreats
+                  Widow Wellness &amp; Connection Experience
                 </p>
                 <h2
-                  id="retreats-heading"
+                  id="event-heading"
                   className="mt-3 max-w-xl text-pretty text-3xl font-semibold leading-[1.15] tracking-tight text-white sm:text-4xl lg:max-w-[26rem] lg:text-[2.35rem] lg:leading-[1.12]"
                 >
-                  Space to breathe, connect, and feel held
+                  Join the event
                 </h2>
                 <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-white/95 sm:text-lg">
-                  Retreats are designed to feel safe and restorative—an
-                  intentional pause from isolation with women who understand
-                  what you&apos;ve walked through.
+                  A one-day gathering for widows across New England—inspiration,
+                  education, healing, and women who truly understand.{" "}
+                  {EVENT_SHORT_TAGLINE}
                 </p>
                 <p className="mt-5 text-sm font-semibold tracking-wide text-white sm:text-[15px]">
-                  Summer 2026 · July 9th–July 12th
-                </p>
-                <p className="mt-3 max-w-xl text-sm font-medium leading-snug text-white/90 sm:text-[15px]">
-                  Our last retreat sold out in one week—when you&apos;re ready,
-                  we&apos;d love to see you there.
+                  {EVENT_DATES} · {EVENT_LOCATION}
                 </p>
 
-                <motion.ul
-                  className="mt-10 space-y-3 sm:space-y-3.5"
-                  variants={listParent}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-40px" }}
-                >
-                  {[
-                    "Real connection with women who understand",
-                    "Room to step away from isolation—without pressure to perform",
-                    "Guided support in a compassionate, emotionally safe environment",
-                    "A meaningful path forward after loss—honoring grief and hope together",
-                  ].map((text) => (
-                    <motion.li
-                      key={text}
-                      variants={listChild}
-                      className="rounded-2xl border border-white/20 bg-white/[0.1] px-4 py-3.5 backdrop-blur-[6px] sm:px-5 sm:py-4"
-                    >
-                      <p className="text-[15px] leading-relaxed text-white sm:text-base">
-                        {text}
-                      </p>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-
-                <div className="mt-10">
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
                   <Link
-                    href="/retreats"
+                    href={EVENT_PATH}
                     className="inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-[0_12px_40px_rgba(0,0,0,0.18)] transition-[background-color,box-shadow,transform] duration-200 hover:bg-neutral-100 hover:shadow-[0_16px_48px_rgba(0,0,0,0.22)] active:scale-[0.99] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
                   >
-                    Join Upcoming Retreat
+                    Join the event
+                  </Link>
+                  <Link
+                    href={SPONSORSHIP_PATH}
+                    className="inline-flex w-full items-center justify-center rounded-full border-2 border-white/80 bg-white/10 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
+                  >
+                    Sponsor the event
                   </Link>
                 </div>
               </div>
@@ -426,7 +394,7 @@ export default function Home() {
               <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
                 <figure
                   className="relative mx-auto aspect-[4/5] w-full max-w-[22rem] overflow-hidden rounded-[1.35rem] shadow-[0_28px_70px_rgba(0,0,0,0.28)] ring-1 ring-white/30 sm:max-w-lg lg:max-w-none lg:rounded-[1.5rem]"
-                  aria-label="Moments from past retreats"
+                  aria-label="Moments from past It's Lifey gatherings"
                 >
                   {RETREAT_SHOWCASE_IMAGES.map((src, i) => (
                     <motion.div
@@ -455,7 +423,7 @@ export default function Home() {
                   className="sr-only"
                   aria-live="polite"
                   aria-atomic="true"
-                >{`Retreat photo ${retreatShowcaseIndex + 1} of ${RETREAT_SHOWCASE_IMAGES.length}`}</p>
+                >{`Event photo ${retreatShowcaseIndex + 1} of ${RETREAT_SHOWCASE_IMAGES.length}`}</p>
               </div>
             </div>
           </div>
@@ -723,7 +691,8 @@ export default function Home() {
             id="email-heading"
             className="text-balance text-3xl font-semibold leading-tight text-black sm:text-4xl"
           >
-            Stay connected for retreat updates, support, and community news
+            Stay connected for Widow Wellness event updates, support, and
+            community news
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-black">
             Short notes—no spam. Unsubscribe anytime. If you want a softer way
