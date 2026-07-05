@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SocialMediaLinks } from "@/components/SocialMediaLinks";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 const exploreLinks = [
   { href: "/about", label: "About" },
@@ -120,14 +121,14 @@ export function Footer() {
                 Next step
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-[#2a2928]">
-                When you&apos;re ready, start with what feels kindest—a retreat
-                weekend, HopeHub, or a workshop.
+                When you&apos;re ready, start with what feels kindest—the Widow
+                Wellness &amp; Connection Experience, HopeHub, or a workshop.
               </p>
               <Link
-                href="/retreats/upcoming"
+                href={EVENT_PATH}
                 className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#e76fab] px-6 py-2.5 text-center text-[15px] font-semibold text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:w-auto"
               >
-                Join Upcoming Retreat
+                Join Widow Wellness &amp; Connection Experience
               </Link>
               <p className="mt-4">
                 <Link

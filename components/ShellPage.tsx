@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 type ShellPageProps = {
   title: string;
@@ -14,8 +15,8 @@ type ShellPageProps = {
 export function ShellPage({
   title,
   description,
-  ctaHref = "/retreats",
-  ctaLabel = "Join Upcoming Retreat",
+  ctaHref = EVENT_PATH,
+  ctaLabel = "Join Widow Wellness & Connection Experience",
 }: ShellPageProps) {
   return (
     <div className="bg-[#f6f3ee]">
@@ -29,8 +30,8 @@ export function ShellPage({
         <p className="mt-8 text-lg leading-relaxed text-black">{description}</p>
         <p className="mt-6 text-lg leading-relaxed text-black">
           We&apos;re preparing something thoughtful for this space. In the
-          meantime, you can explore the homepage or join us for an upcoming
-          retreat when you&apos;re ready.
+          meantime, you can explore the homepage or join us for the Widow
+          Wellness &amp; Connection Experience when you&apos;re ready.
         </p>
         <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
           <Link

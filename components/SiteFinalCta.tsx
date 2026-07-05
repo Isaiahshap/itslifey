@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
-/** Global pre-footer CTA (renders from root layout; no Framer Motion). Hidden on Summer retreat page — it has its own closing CTA. */
+/** Global pre-footer CTA (renders from root layout; no Framer Motion). Hidden on event pages — they have their own closing CTAs. */
 export function SiteFinalCta() {
   const pathname = usePathname();
   if (
@@ -32,10 +33,10 @@ export function SiteFinalCta() {
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            href="/retreats"
+            href={EVENT_PATH}
             className="inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#c94d8a] shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
           >
-            Join Upcoming Retreat
+            Join Widow Wellness &amp; Connection Experience
           </Link>
           <Link
             href="/about"

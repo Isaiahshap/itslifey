@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PAST_RETREATS } from "@/lib/past-retreats";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 const shell =
   "mx-auto w-full max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,calc(100vw-4rem))]";
@@ -52,11 +53,11 @@ export default function PastRetreatsPage() {
                     ) : (
                       <div className="flex h-full flex-col items-center justify-center bg-gradient-to-br from-[#fdf8fb] to-[#f5e8ef] px-6 text-center">
                         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                          Photos after early May 2026
+                          Photos coming soon
                         </p>
                         <p className="mt-3 text-sm leading-relaxed text-[#666766]">
-                          This retreat hasn&apos;t happened yet — gallery will go
-                          live here afterward.
+                          We&apos;ll add images from this retreat here once the
+                          gallery is ready.
                         </p>
                       </div>
                     )}
@@ -101,10 +102,10 @@ export default function PastRetreatsPage() {
 
           <div className="mt-16 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
             <Link
-              href="/retreats/upcoming"
+              href={EVENT_PATH}
               className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
             >
-              Summer 2026 coastal retreat
+              Join Widow Wellness &amp; Connection Experience
             </Link>
             <Link
               href="/"

@@ -6,6 +6,7 @@ import {
   getPastRetreat,
   getPastRetreatSlugs,
 } from "@/lib/past-retreats";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 const shell =
   "mx-auto w-full max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,calc(100vw-4rem))]";
@@ -195,10 +196,10 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
             ← All past retreats
           </Link>
           <Link
-            href="/retreats/upcoming"
+            href={EVENT_PATH}
             className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:text-base"
           >
-            View upcoming coastal retreat
+            Join Widow Wellness &amp; Connection Experience
           </Link>
         </div>
       </section>

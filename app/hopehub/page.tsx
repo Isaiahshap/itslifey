@@ -6,6 +6,7 @@ import {
   HOPEHUB_MEMBER_LOGIN_URL,
   HOPEHUB_SIGNUP_URL,
 } from "@/lib/hopehub";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 export const metadata: Metadata = {
   title: "HopeHub — Free online community for widows",
@@ -63,7 +64,7 @@ const faqs = [
   },
   {
     q: "Are there in-person events?",
-    a: "Yes. There are Widow Wellness Retreats and other meetups through the year. Details and registration are shared inside HopeHub.",
+    a: "Yes. There are in-person gatherings like the Widow Wellness & Connection Experience and other meetups through the year. Details and registration are shared inside HopeHub.",
   },
   {
     q: "How do I get started?",
@@ -373,8 +374,8 @@ export default function HopeHubPage() {
                     <a href={HOPEHUB_SIGNUP_URL} className={joinButtonClass()}>
                       Join free today
                     </a>
-                    <Link href="/retreats" className={secondaryButtonClass()}>
-                      Widow Wellness Retreats
+                    <Link href={EVENT_PATH} className={secondaryButtonClass()}>
+                      Widow Wellness &amp; Connection Experience
                     </Link>
                   </div>
                 </div>

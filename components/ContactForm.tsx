@@ -4,6 +4,7 @@ import { FormHoneypot } from "@/components/FormHoneypot";
 import { RecaptchaNotice } from "@/components/RecaptchaNotice";
 import { HONEYPOT_FIELD } from "@/lib/form-spam";
 import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
 import Link from "next/link";
 import {
   useState,
@@ -158,10 +159,10 @@ export function ContactForm() {
           </Link>{" "}
           and{" "}
           <Link
-            href="/retreats/upcoming"
+            href={EVENT_PATH}
             className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
           >
-            upcoming retreats
+            the Widow Wellness &amp; Connection Experience
           </Link>{" "}
           are a gentle next step.
         </p>

@@ -61,7 +61,7 @@ const fall2025Files = [
 export const PAST_RETREATS: PastRetreat[] = [
   {
     slug: "spring-2026",
-    kind: "upcoming",
+    kind: "past",
     cardBadge: "Sold out in 10 days",
     cardEyebrow: "Early May 2026 · Cape Cod",
     cardTitle: "Spring retreat with Lisa Pontius",
