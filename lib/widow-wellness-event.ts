@@ -9,6 +9,37 @@ export const SPONSORSHIP_PATH =
 export const SPONSORSHIP_PDF =
   "/Sponsorship_Opportunities_Widow_Wellness_2026.pdf";
 
+export const HOTEL_NAME = "Lakeside Inn";
+export const HOTEL_BLOCK_URL =
+  "https://www.skywaresystems.net/SkyBook?PropertyRowID=261&HotelID=1&Code=JEN2026";
+
+export const EVENT_SPONSORS = [
+  {
+    name: "LRVS Advisory Group",
+    tier: "Presenting Sponsor",
+    href: "https://www.lrvsadvisory.com/",
+    logo: "/images/sponsors/lrvs-advisory-group.png",
+    featured: true,
+    surface: "light" as const,
+  },
+  {
+    name: "Aussemista Style",
+    tier: "Connection Sponsor",
+    href: "https://www.aussemistastyle.com/",
+    logo: "/images/sponsors/aussemista-style.png",
+    featured: false,
+    surface: "light" as const,
+  },
+  {
+    name: "Howe2Organize",
+    tier: "Scholarship Sponsor",
+    href: "https://www.howe2organize.com/",
+    logo: "/images/sponsors/howe2organize.png",
+    featured: false,
+    surface: "light" as const,
+  },
+] as const;
+
 export const TICKET_TIERS = {
   vip: {
     key: "vip",

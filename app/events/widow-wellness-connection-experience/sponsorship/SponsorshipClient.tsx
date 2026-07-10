@@ -8,6 +8,8 @@ import {
   EVENT_NAME,
   EVENT_PATH,
   EVENT_SHORT_TAGLINE,
+  HOTEL_BLOCK_URL,
+  HOTEL_NAME,
   SPONSORSHIP_PDF,
 } from "@/lib/widow-wellness-event";
 import Link from "next/link";
@@ -639,6 +641,29 @@ export function SponsorshipClient() {
                   Download sponsorship packet (PDF)
                 </a>
               </div>
+
+              <div className="mt-8 rounded-2xl border border-black/[0.08] bg-white p-6 shadow-sm sm:p-7">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
+                  Where to stay
+                </p>
+                <p className="mt-2 text-lg font-semibold text-[#141413]">
+                  Hotel block at {HOTEL_NAME}
+                </p>
+                <p className={`mt-4 ${body}`}>
+                  Traveling in for the event? We&apos;ve reserved a nearby hotel
+                  block at {HOTEL_NAME}. Book through our group link to reserve
+                  your room.
+                </p>
+                <a
+                  href={HOTEL_BLOCK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center justify-center rounded-full bg-[#e76fab] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+                >
+                  Book {HOTEL_NAME}
+                </a>
+              </div>
+
               <p className="mt-8 text-sm text-[#666766]">
                 Questions?{" "}
                 <a

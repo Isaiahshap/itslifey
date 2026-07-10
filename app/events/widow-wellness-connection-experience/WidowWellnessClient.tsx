@@ -7,6 +7,9 @@ import {
   EVENT_LOCATION,
   EVENT_NAME,
   EVENT_SHORT_TAGLINE,
+  EVENT_SPONSORS,
+  HOTEL_BLOCK_URL,
+  HOTEL_NAME,
   SPONSORSHIP_PATH,
 } from "@/lib/widow-wellness-event";
 import Image from "next/image";
@@ -14,6 +17,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const HERO_IMAGE = "/images/hero3.webp";
+
+const presentingSponsors = EVENT_SPONSORS.filter((s) => s.featured);
+const supportingSponsors = EVENT_SPONSORS.filter((s) => !s.featured);
 
 const DAY_INCLUDES = [
   "Powerful keynote speakers",
@@ -205,6 +211,116 @@ export function WidowWellnessClient() {
                 Sponsorship opportunities
               </Link>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Sponsors */}
+      <section
+        className="border-b border-black/[0.08] bg-[#faf8f5]"
+        aria-labelledby="ww-sponsors-heading"
+      >
+        <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
+          <motion.div {...fadeUp} className="mx-auto max-w-3xl text-center">
+            <p
+              id="ww-sponsors-heading"
+              className="text-[10px] font-semibold uppercase tracking-[0.32em] text-[#b8457e] sm:text-[11px]"
+            >
+              Sponsored by
+            </p>
+            <div
+              className="mx-auto mt-5 h-px w-12 bg-[#e76fab]/55"
+              aria-hidden
+            />
+          </motion.div>
+
+          <div className="mx-auto mt-10 max-w-4xl sm:mt-12">
+            {presentingSponsors.map((sponsor) => (
+              <motion.div
+                key={sponsor.name}
+                {...fadeUp}
+                className="flex flex-col items-center text-center"
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#7a6a72]">
+                  {sponsor.tier}
+                </p>
+                <a
+                  href={sponsor.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-5 block w-full max-w-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e76fab]"
+                  aria-label={`${sponsor.name} — ${sponsor.tier} (opens in a new tab)`}
+                >
+                  <span className="relative mx-auto block h-24 w-full transition-opacity duration-300 group-hover:opacity-80 sm:h-28 md:h-32">
+                    <Image
+                      src={sponsor.logo}
+                      alt=""
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 90vw, 576px"
+                    />
+                  </span>
+                </a>
+              </motion.div>
+            ))}
+
+            {supportingSponsors.length > 0 ? (
+              <>
+                <div
+                  className="mx-auto my-10 h-px w-full max-w-md bg-black/[0.08] sm:my-12"
+                  aria-hidden
+                />
+                <div className="grid items-start gap-10 sm:grid-cols-2 sm:gap-0">
+                  {supportingSponsors.map((sponsor, index) => (
+                    <motion.div
+                      key={sponsor.name}
+                      {...fadeUp}
+                      className={`flex flex-col items-center text-center sm:px-8 lg:px-12 ${
+                        index > 0
+                          ? "border-t border-black/[0.08] pt-10 sm:border-l sm:border-t-0 sm:pt-0"
+                          : ""
+                      }`}
+                    >
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#7a6a72]">
+                        {sponsor.tier}
+                      </p>
+                      <a
+                        href={sponsor.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group mt-5 block w-full max-w-[15rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e76fab] sm:max-w-[17rem]"
+                        aria-label={`${sponsor.name} — ${sponsor.tier} (opens in a new tab)`}
+                      >
+                        <span className="relative mx-auto block h-20 w-full transition-opacity duration-300 group-hover:opacity-80 sm:h-24">
+                          <Image
+                            src={sponsor.logo}
+                            alt=""
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 640px) 60vw, 272px"
+                          />
+                        </span>
+                      </a>
+                    </motion.div>
+                  ))}
+                </div>
+              </>
+            ) : null}
+          </div>
+
+          <motion.div
+            {...fadeUp}
+            className="mt-12 flex flex-col items-center gap-5 text-center sm:mt-14"
+          >
+            <p className="text-sm text-[#666766]">
+              Limited sponsorships available
+            </p>
+            <Link
+              href={SPONSORSHIP_PATH}
+              className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+            >
+              Interested in sponsoring?
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -554,6 +670,28 @@ export function WidowWellnessClient() {
                   evening with Kelley Lynn, you&apos;ll step into a space built
                   for widows — real talk, real connection, and real hope.
                 </p>
+              </div>
+
+              <div className="rounded-2xl border border-black/[0.08] bg-white p-6 shadow-sm sm:p-7">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
+                  Where to stay
+                </p>
+                <p className="mt-2 text-lg font-semibold text-[#141413]">
+                  Hotel block at {HOTEL_NAME}
+                </p>
+                <p className={`mt-4 ${body}`}>
+                  We&apos;ve reserved a nearby hotel block at {HOTEL_NAME} for
+                  guests traveling in for the weekend. Book through our group
+                  link to reserve your room.
+                </p>
+                <a
+                  href={HOTEL_BLOCK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center justify-center rounded-full bg-[#e76fab] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+                >
+                  Book {HOTEL_NAME}
+                </a>
               </div>
 
               <div className="space-y-5 border-t border-black/[0.08] pt-8">
