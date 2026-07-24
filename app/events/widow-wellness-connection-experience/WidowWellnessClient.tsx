@@ -61,10 +61,10 @@ const EVENT_FLOW = [
   {
     step: "01",
     when: "November 13 · Evening",
-    title: "VIP Evening Event · Cocktail Hour with Kelley Lynn",
+    title: "VIP Evening Event · Mocktail Hour with Kelley Lynn",
     items: [
       "Welcome and connection",
-      "Cocktails and light bites",
+      "Mocktails and light bites",
       "Conversation with Kelley Lynn",
       "Laughter, honesty, and hope",
       "Time for widows, sponsors, and VIP guests to connect",
@@ -698,7 +698,7 @@ export function WidowWellnessClient() {
                 <div>
                   <p className="font-semibold text-[#141413]">VIP — $169</p>
                   <p className={`mt-2 ${body} text-[#666766]`}>
-                    Cocktail hour with Kelley Lynn on November 13, plus the full
+                    Mocktail hour with Kelley Lynn on November 13, plus the full
                     main event on November 14.
                   </p>
                 </div>
@@ -769,7 +769,7 @@ export function WidowWellnessClient() {
               <p className={`mt-5 ${body}`}>
                 Help widows feel less alone while connecting your brand with
                 women actively seeking trusted support, resources, and community.
-                Sponsorship levels start at $550 — with meaningful visibility
+                Sponsorship levels start at $250 — with meaningful visibility
                 across the event, marketing channels, and attendee experience.
               </p>
               <Link

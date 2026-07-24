@@ -13,7 +13,6 @@ const exploreLinks = [
 
 const programsLinks = [
   { href: "/hopehub", label: "HopeHub" },
-  { href: "/retreats", label: "Retreats" },
   { href: "/retreats/upcoming", label: "Upcoming Retreats" },
   { href: "/retreats/past", label: "Past Retreats" },
   {

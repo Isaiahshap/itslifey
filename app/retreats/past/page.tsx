@@ -25,9 +25,8 @@ export default function PastRetreatsPage() {
             Past retreats
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#666766] sm:text-xl">
-            A look at where we&apos;ve gathered — including the spring 2026
-            weekend (sold out) before photos are added. Tap a card for the full
-            story and gallery.
+            A look at where we&apos;ve gathered — summer, spring, and fall
+            weekends for widows. Tap a card for the full story and gallery.
           </p>
         </div>
       </section>

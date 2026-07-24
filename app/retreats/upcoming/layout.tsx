@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Summer 2026 Widow Wellness Retreat — New England coast",
+  title: "Spring 2027 Widow Wellness Retreat — Coming Soon",
   description:
-    "Summer 2026 widow wellness retreat is sold out. Two day-attendance spots remain—stay at a nearby hotel and join during the day on the New England coast.",
+    "Join the interest list for the Spring 2027 Widow Wellness Retreat. Be first to receive details, early registration, and exclusive updates from It's Lifey.",
 };
 
 export default function UpcomingRetreatLayout({

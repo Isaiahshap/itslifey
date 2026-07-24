@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PastRetreatPhotoGallery } from "@/components/PastRetreatPhotoGallery";
 import {
   getPastRetreat,
   getPastRetreatSlugs,
@@ -34,10 +34,6 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
   const r = getPastRetreat(slug);
   if (!r) notFound();
 
-  const galleryWithoutHero = r.coverImage
-    ? r.gallery.filter((g) => g.src !== r.coverImage)
-    : r.gallery;
-
   return (
     <div className="bg-[#f6f3ee]">
       <section className="border-b border-[#e3ddd4] bg-[#faf8f5]">
@@ -61,13 +57,12 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
 
       {r.coverImage ? (
         <div className="relative h-[min(56vh,520px)] min-h-[220px] w-full overflow-hidden bg-[#1a1918]">
-          <Image
+          {/* Native img keeps EXIF/pixel orientation consistent with the gallery lightbox. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={r.coverImage}
             alt={r.coverAlt ?? ""}
-            fill
-            priority
-            className={`object-cover ${r.coverHeroObjectPosition ?? "object-center"}`}
-            sizes="100vw"
+            className={`absolute inset-0 h-full w-full object-cover ${r.coverHeroObjectPosition ?? "object-center"}`}
           />
           <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/25"
@@ -142,8 +137,7 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
               >
                 {r.venueLabel ?? "Retreat venue"}
               </a>
-              {" — "}for a sense of the setting (photos from our weekend will be
-              added after early May).
+              .
             </p>
           ) : null}
 
@@ -159,29 +153,10 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
             </div>
           ) : null}
 
-          {galleryWithoutHero.length > 0 ? (
-            <div className="mx-auto mt-14 max-w-5xl sm:mt-16">
-              <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-[#666766]">
-                Photos
-              </h2>
-              <ul className="mt-6 grid list-none grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3">
-                {galleryWithoutHero.map((photo) => (
-                  <li
-                    key={photo.src}
-                    className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#ede8e2] sm:rounded-2xl"
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 50vw, 33vw"
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
+          <PastRetreatPhotoGallery
+            photos={r.gallery}
+            coverSrc={r.coverImage}
+          />
         </div>
       </article>
 

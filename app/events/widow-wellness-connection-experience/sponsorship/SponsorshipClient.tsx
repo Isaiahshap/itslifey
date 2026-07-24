@@ -41,24 +41,31 @@ const mainTiers = [
     price: "$7,500",
     availability: "Only 1 available",
     highlight: true,
+    blurb:
+      "For a leading brand that wants to stand at the heart of the Widow Wellness Experience.",
     includes: [
       '"Presented by" recognition on event materials',
-      "5–7 minute stage opportunity for you or your brand",
-      "Premium sponsor table & top-tier logo placement",
-      "Speaking opportunity during the main program",
+      "You or a brand representative on stage (5–7 minutes)",
+      "Present at a breakout session",
+      "Premium sponsor table",
+      "Top-tier logo placement across signage, webpage, emails, and printed materials",
       "Featured email spotlight (700 recipients)",
       "2–3 social media spotlights",
-      "Included in paid social ads if confirmed by July 31",
+      "Branded gift or insert in attendee bags",
       "3 complimentary event tickets",
+      "Included in paid social ads promoting the event if confirmed by July 31",
     ],
   },
   {
     name: "Healing Sponsor",
     price: "$3,500",
-    availability: "Only 4 available",
+    availability: "4 slots left",
+    blurb:
+      "For sponsors who want a stronger presence and deeper alignment with the event experience.",
     includes: [
-      "All Connection Sponsor benefits, plus:",
+      "All Community and Connection Sponsor benefits, plus:",
       "Premium sponsor table placement",
+      "Premium logo placement",
       "Recognition from stage",
       "Featured email spotlight (700 recipients)",
       "2 complimentary event tickets",
@@ -67,22 +74,29 @@ const mainTiers = [
   {
     name: "Connection Sponsor",
     price: "$2,500",
-    availability: "Only 5 available",
+    availability: "4 slots left",
+    blurb:
+      "For brands that want meaningful visibility and direct connection with attendees.",
     includes: [
       "All Community Supporter benefits, plus:",
       "Sponsor table placement",
       "Featured social media spotlight",
+      "Logo on event webpage & all event materials",
+      "Branded gift or insert in attendee bags",
       "1 complimentary event ticket",
     ],
   },
   {
     name: "Community Supporter",
     price: "$1,000",
-    availability: "Only 5 available",
+    availability: "4 slots left",
+    blurb:
+      "For businesses that want to support widows and be part of the It's Lifey mission.",
     includes: [
-      "Logo on event webpage & all event materials",
-      "Promotional item in attendee gift bags",
-      "Social media thank-you mention",
+      "Logo on event webpage",
+      "Logo included in all event materials",
+      "Branded gift or insert in attendee bags",
+      "Social shout-out",
       "1 complimentary event ticket",
     ],
   },
@@ -90,27 +104,35 @@ const mainTiers = [
 
 const specialtyTiers = [
   {
-    name: "VIP Mocktail & Comedy Hour Sponsor",
+    name: "VIP Cocktail Hour Sponsor",
     price: "$1,500",
     availability: "Only 1 available",
+    subtitle: "Featuring Kelley Lynn · Evening before the main event",
     includes: [
-      "Exclusive recognition at the VIP evening event",
-      "Signage at the VIP evening · sponsor table",
+      "Exclusive recognition as VIP Cocktail Hour Sponsor",
+      "Signage at the VIP evening event",
+      "Logo on all event materials & event webpage",
       "5-minute welcome remarks",
+      "Sponsor table at VIP event",
       "4 VIP tickets",
+      "Social media spotlight",
       "Recognition during the main event the following day",
+      "Branded gift or insert in attendee bags",
     ],
   },
   {
     name: "The Hope Mic Story Slam Sponsor",
     price: "$1,500",
     availability: "Only 1 available",
+    subtitle: "Closing event · Stories of experience, strength & hope",
     includes: [
-      "Exclusive recognition at the closing Story Slam",
+      "Exclusive recognition as The Hope Mic Story Slam Sponsor",
       "Special signage at the closing event",
+      "Logo on event materials & event webpage",
       "5-minute welcome remarks before the Story Slam",
       "2 complimentary event tickets",
       "Social media spotlight",
+      "Branded gift or insert in attendee bags",
     ],
   },
 ] as const;
@@ -122,10 +144,12 @@ const hospitalityTiers = [
     availability: "Only 1 available",
     note: "Catering by Liora's Catering",
     includes: [
-      "Logo on event webpage & materials",
+      "Logo on event webpage",
+      "Logo included in event materials",
       "Branded gift or insert in attendee bags",
       "Social media thank-you mention",
       "1 complimentary event ticket",
+      "Inclusion in gift bag",
     ],
   },
   {
@@ -133,10 +157,22 @@ const hospitalityTiers = [
     price: "$550",
     availability: "Only 1 available",
     includes: [
-      "Recognition at the coffee station",
-      "Signage at coffee & connection area",
+      "Recognition as Coffee & Connection Sponsor",
+      "Signage at coffee station",
+      "Social media thank-you mention",
       "Logo on event materials",
       "Inclusion in gift bag",
+    ],
+  },
+  {
+    name: "Widow Scholarship Sponsor",
+    price: "$250+",
+    availability: "Help remove barriers",
+    note: "Sponsor one or multiple widows — contact Jennifer to arrange.",
+    includes: [
+      "Recognition as Scholarship Sponsor",
+      "Option to sponsor one or multiple widows",
+      "Social media thank-you mention",
     ],
   },
 ] as const;
@@ -350,22 +386,25 @@ export function SponsorshipClient() {
             </h2>
             <div className={`mt-6 space-y-5 ${body}`}>
               <p>
-                At It&apos;s Lifey, we believe widows need more than sympathy.
-                They need safe spaces, trusted guidance, healing resources, and
-                community. This event brings those pieces together in one
-                powerful experience.
+                At It&apos;s Lifey, we believe grief was never meant to be
+                carried alone. This experience is designed to help widows
+                exhale — to step into a room where they do not have to explain
+                their grief, meet other women who understand, and connect with
+                trusted professionals who can help them navigate life after
+                loss.
               </p>
               <p>
                 The Widow Wellness Experience brings together keynote speakers,
-                real conversations, and restorative wellness breakout sessions —
-                yoga, Reiki, tarot, mediumship, journaling, and guided
-                connection. The day closes with The Hope Mic Story Slam, where
-                widows share 3-minute stories of experience, strength, and hope.
+                real conversations, and restorative wellness breakout sessions
+                including yoga, Reiki, mediumship, financial wellness, dating
+                and relationship advice, and guided healing. The day closes with
+                The Hope Mic Story Slam, where widows share 3-minute stories of
+                experience, strength, and hope.
               </p>
               <p>
-                The evening before, VIP guests gather for a cocktail hour
-                featuring Kelley Lynn — a powerful night of laughter, honesty,
-                connection, and hope.
+                The evening before, VIP guests gather for an intimate mocktail
+                hour featuring widow, comedian, writer, and speaker Kelley Lynn
+                — a powerful night of laughter, honesty, connection, and hope.
               </p>
             </div>
           </motion.div>
@@ -390,7 +429,7 @@ export function SponsorshipClient() {
               },
               {
                 label: "VIP Event",
-                title: "Cocktail Hour with Kelley Lynn",
+                title: "Mocktail Hour with Kelley Lynn",
                 when: "November 13 — evening before",
               },
               {
@@ -487,7 +526,12 @@ export function SponsorshipClient() {
                 <h3 className="mt-1 text-2xl font-semibold text-[#141413]">
                   {tier.name}
                 </h3>
-                <p className="mt-1 text-3xl font-semibold text-[#b8457e]">
+                {"blurb" in tier && tier.blurb ? (
+                  <p className="mt-2 text-[15px] leading-relaxed text-[#666766]">
+                    {tier.blurb}
+                  </p>
+                ) : null}
+                <p className="mt-3 text-3xl font-semibold text-[#b8457e]">
                   {tier.price}
                 </p>
                 <p className="mt-1 text-sm font-medium text-[#666766]">
@@ -534,6 +578,11 @@ export function SponsorshipClient() {
                 <h3 className="text-xl font-semibold text-[#141413]">
                   {tier.name}
                 </h3>
+                {"subtitle" in tier && tier.subtitle ? (
+                  <p className="mt-1 text-sm font-medium text-[#9a3d6c]">
+                    {tier.subtitle}
+                  </p>
+                ) : null}
                 <p className="mt-1 text-2xl font-semibold text-[#b8457e]">
                   {tier.price}
                 </p>
@@ -551,6 +600,14 @@ export function SponsorshipClient() {
                     </li>
                   ))}
                 </ul>
+                {tier.name === "Widow Scholarship Sponsor" ? (
+                  <a
+                    href="mailto:jennifer@itslifey.com?subject=Widow%20Scholarship%20Sponsor"
+                    className="mt-5 inline-flex items-center justify-center rounded-full bg-[#e76fab] px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#d85e9a]"
+                  >
+                    Contact Jennifer to sponsor
+                  </a>
+                ) : null}
               </motion.article>
             ))}
           </div>
@@ -573,23 +630,52 @@ export function SponsorshipClient() {
           </motion.div>
           <div className="mt-10 space-y-4">
             {[
-              "VIP Evening — cocktails, light bites, conversation with Kelley Lynn",
-              "Morning welcome — coffee, connection, opening keynote",
-              "Mid-morning breakouts — yoga, Reiki, journaling, grief support, resources",
-              "Lunch & connection — shared meal, sponsor tables, relaxed networking",
-              "Afternoon program — keynote, additional wellness sessions",
-              "The Hope Mic Story Slam — stories of experience, strength & hope",
+              {
+                title: "VIP Evening · Mocktail Hour with Kelley Lynn",
+                detail:
+                  "Welcome and connection, mocktails and light bites, conversation with Kelley Lynn, and time for VIPs to connect.",
+              },
+              {
+                title: "Morning welcome",
+                detail:
+                  "Arrival, coffee, and connection · Welcome from It's Lifey · Grounding moment / candle lighting · Opening keynote",
+              },
+              {
+                title: "Mid-morning breakout sessions",
+                detail:
+                  "Yoga, meditation, Reiki, grief support conversations, financial wellness, dating & relationships, and other healing modalities.",
+              },
+              {
+                title: "Lunch & connection",
+                detail:
+                  "Shared lunch, sponsor/resource table visits, and time for widows to connect in a relaxed, supportive setting.",
+              },
+              {
+                title: "Afternoon program",
+                detail:
+                  "Afternoon keynote, additional wellness breakout sessions, and guided reflection or community conversation.",
+              },
+              {
+                title: "Closing · The Hope Mic Story Slam",
+                detail:
+                  "Stories of experience, strength & hope — widows share three minutes in a supportive, judgment-free space.",
+              },
             ].map((step, i) => (
               <div
-                key={step}
+                key={step.title}
                 className="flex gap-4 rounded-xl border border-black/[0.06] bg-[#faf8f5] px-5 py-4"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e76fab] text-sm font-semibold text-white">
                   {i + 1}
                 </span>
-                <p className="pt-1 text-[15px] leading-relaxed text-[#2a2928]">
-                  {step}
-                </p>
+                <div className="pt-0.5">
+                  <p className="text-[15px] font-semibold leading-snug text-[#141413]">
+                    {step.title}
+                  </p>
+                  <p className="mt-1 text-[15px] leading-relaxed text-[#666766]">
+                    {step.detail}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -615,10 +701,10 @@ export function SponsorshipClient() {
                 Become a sponsor
               </h2>
               <p className={`mt-5 ${body}`}>
-                Your sponsorship is more than brand visibility. It helps widows
-                feel less alone, connects them with resources they may not know
-                they need, and brings healing, guidance, and hope into a room
-                full of women rebuilding their lives.
+                Your sponsorship is more than brand visibility. It is a way to
+                help widows feel less alone, connect them with resources they
+                may not know they need, and bring healing, guidance, and hope
+                into a room full of women rebuilding their lives.
               </p>
               <p className={`mt-5 ${body}`}>
                 Choose your level below — you&apos;ll be redirected to secure

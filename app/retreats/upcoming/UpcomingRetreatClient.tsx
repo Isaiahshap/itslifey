@@ -1,88 +1,30 @@
 "use client";
 
-import { FormHoneypot } from "@/components/FormHoneypot";
-import { RecaptchaNotice } from "@/components/RecaptchaNotice";
-import { HONEYPOT_FIELD } from "@/lib/form-spam";
-import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { Spring2027RetreatInterestForm } from "@/components/Spring2027RetreatInterestForm";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  useCallback,
-  useEffect,
-  useState,
-  type FormEvent,
-} from "react";
+import { useEffect, useState } from "react";
 
 const HERO_IMAGES = [
-  "/images/Retreats/Summer2025/IMG_0683.webp",
+  "/images/Retreats/Summer2025/IMG_1832.webp",
+  "/images/Retreats/fall 2025/IMG_0978.webp",
   "/images/Retreats/Summer2025/IMG_1698.webp",
-  "/images/Retreats/Summer2025/IMG_1845.webp",
-  "/images/Retreats/Summer2025/IMG_1908.webp",
-  "/images/Retreats/Summer2025/Jen Kitchen Table Horizontal.webp",
+  "/images/Retreats/fall 2025/IMG_0966.webp",
 ] as const;
 
-const LOCATION_IMAGES = [
-  "Summer Retreat House.webp",
-  "Summer retreat House 2.webp",
-  "Summer Retreat House 3.webp",
-  "Summer Retreat House 4.webp",
-  "Summer Retreat House 5.webp",
-  "Summer Retreat House 6.webp",
-  "Summer Retreat House 7.webp",
+const INTEREST_PERKS = [
+  "Retreat details and location",
+  "Early registration before it's released to the public",
+  "Pricing and payment information",
+  "Exclusive updates as plans unfold",
 ] as const;
 
-const LOCATION_SRC = LOCATION_IMAGES.map(
-  (name) => `/images/Retreats/Summer2026/${encodeURIComponent(name)}`,
-);
-
-/** Wide editorial shell — breathes on large screens (aligned with HopeHub spread). */
 const shell =
   "mx-auto w-full min-w-0 max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,100%)]";
 
-const shellGallery =
-  "mx-auto w-full min-w-0 max-w-7xl px-3 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(96rem,100%)]";
-
-/** Summer 2026 coastal retreat pricing. */
-const RETREAT_SINGLE_PRICE = "$4,199";
-const RETREAT_TRIPLE_PRICE = "$3,499";
-const RETREAT_EXPERIENCE_ONLY_PRICE = "$1,499";
-const RETREAT_EXPERIENCE_ONLY_SPOTS = 2;
-
-/** Used for Meta Pixel ViewContent value (day-attendance rate). */
-const RETREAT_PIXEL_VALUE = 1499;
-
-const RETREAT_SOLD_OUT_HEADLINE = "Sold out — Summer 2026";
-const RETREAT_SOLD_OUT_DETAIL =
-  "Lodging at the retreat home is full.";
-const RETREAT_DAY_ONLY_LINE = `${RETREAT_EXPERIENCE_ONLY_SPOTS} spots remain for day attendance only (${RETREAT_EXPERIENCE_ONLY_PRICE}) — stay at a nearby hotel and join us during the day.`;
-
-const NEARBY_LODGING_SUGGESTIONS = [
-  {
-    name: "Chapter House Cape Cod",
-    area: "Cape Cod",
-    href: "https://www.chapterhousecapecod.com/",
-  },
-  {
-    name: "Liberty Hill Inn",
-    area: "Main House rooms",
-    href: "https://www.libertyhillinn.com/rooms-rates/main-house/",
-  },
-  {
-    name: "Anchor Inn",
-    area: "Hyannis waterfront",
-    href: "https://www.anchorin.com/",
-  },
-] as const;
-
-const INVESTMENT_MARQUEE_PARTS = [
-  "Sold out — retreat home lodging full",
-  `Day attendance only — ${RETREAT_EXPERIENCE_ONLY_SPOTS} spots at ${RETREAT_EXPERIENCE_ONLY_PRICE}`,
-  "Stay at a nearby hotel · join during the day",
-  "July 9th–12th, 2026",
-] as const;
-
-const INVESTMENT_MARQUEE_LINE = INVESTMENT_MARQUEE_PARTS.join("  ·  ");
+const body =
+  "text-[0.98rem] leading-[1.78] text-[#2a2928] sm:text-[1.0625rem] sm:leading-[1.76]";
 
 const fadeUp = {
   initial: { opacity: 0, y: 22 },
@@ -91,184 +33,37 @@ const fadeUp = {
   transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const },
 };
 
-const listParent = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
-  },
-};
-
-const listChild = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
-function scrollToInquiry() {
-  document.getElementById("retreat-inquiry")?.scrollIntoView({
+function scrollToInterestForm() {
+  document.getElementById("spring-2027-interest")?.scrollIntoView({
     behavior: "smooth",
     block: "start",
   });
 }
 
-function AttendButton({
-  className = "",
-  children = "Ask about day attendance",
-}: {
-  className?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={scrollToInquiry}
-      className={`inline-flex items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,box-shadow,transform] duration-200 hover:bg-[#d85e9a] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] active:scale-[0.99] ${className}`}
-    >
-      {children}
-    </button>
-  );
-}
-
-function InvestmentMarquee() {
-  return (
-    <div
-      className="w-full overflow-hidden border-y border-black/[0.08] bg-[#faf8f5] py-2.5"
-      role="region"
-      aria-label="What is included: scrolling summary of pricing and retreat inclusions"
-    >
-      <p className="sr-only">What&apos;s included: {INVESTMENT_MARQUEE_LINE}</p>
-      <div className="retreat-marquee-track">
-        <span className="shrink-0 whitespace-nowrap px-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#666766] sm:text-xs sm:tracking-[0.18em]">
-          {INVESTMENT_MARQUEE_LINE}
-        </span>
-        <span className="shrink-0 whitespace-nowrap px-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#666766] sm:text-xs sm:tracking-[0.18em]">
-          {INVESTMENT_MARQUEE_LINE}
-        </span>
-      </div>
-    </div>
-  );
-}
-
 export function UpcomingRetreatClient() {
   const [heroIndex, setHeroIndex] = useState(0);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [inquirySubmit, setInquirySubmit] = useState<
-    "idle" | "sending" | "success" | "error"
-  >("idle");
-  const [inquiryFeedback, setInquiryFeedback] = useState("");
 
   useEffect(() => {
     const id = window.setInterval(() => {
       setHeroIndex((i) => (i + 1) % HERO_IMAGES.length);
-    }, 7500);
+    }, 7000);
     return () => window.clearInterval(id);
   }, []);
 
   useEffect(() => {
     if (typeof window.fbq !== "function") return;
     window.fbq("track", "ViewContent", {
-      content_name: "Summer 2026 Widow Wellness Retreat",
+      content_name: "Spring 2027 Widow Wellness Retreat",
       content_category: "Retreat",
-      value: RETREAT_PIXEL_VALUE,
-      currency: "USD",
     });
   }, []);
 
-  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
-
-  async function handleInquirySubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    setInquirySubmit("sending");
-    setInquiryFeedback("");
-    const fd = new FormData(form);
-    let recaptchaToken: string | undefined;
-    try {
-      recaptchaToken = await getRecaptchaToken("retreat_inquiry");
-    } catch {
-      setInquirySubmit("error");
-      setInquiryFeedback(
-        "We couldn’t verify the form. Please refresh the page and try again.",
-      );
-      return;
-    }
-    const payload = {
-      fullName: String(fd.get("fullName") ?? "").trim(),
-      email: String(fd.get("email") ?? "").trim(),
-      phone: String(fd.get("phone") ?? "").trim(),
-      address: String(fd.get("address") ?? "").trim(),
-      whyJoin: String(fd.get("whyJoin") ?? "").trim(),
-      [HONEYPOT_FIELD]: String(fd.get(HONEYPOT_FIELD) ?? "").trim(),
-      ...(recaptchaToken ? { recaptchaToken } : {}),
-    };
-    try {
-      const res = await fetch("/api/retreat-inquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = (await res.json().catch(() => ({}))) as {
-        error?: string;
-      };
-      if (!res.ok) {
-        setInquirySubmit("error");
-        setInquiryFeedback(
-          typeof data.error === "string"
-            ? data.error
-            : "Something went wrong. Please try again.",
-        );
-        return;
-      }
-      if (typeof window.fbq === "function") {
-        window.fbq("track", "Lead", {
-          content_name: "Summer 2026 Retreat Inquiry",
-          content_category: "Retreat",
-        });
-      }
-      setInquirySubmit("success");
-      setInquiryFeedback(
-        "Thank you—we received your interest form and will be in touch soon.",
-      );
-      form.reset();
-    } catch {
-      setInquirySubmit("error");
-      setInquiryFeedback(
-        "We couldn’t reach the server. Check your connection and try again.",
-      );
-    }
-  }
-
-  useEffect(() => {
-    if (lightboxIndex === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight")
-        setLightboxIndex((i) =>
-          i === null ? null : (i + 1) % LOCATION_SRC.length,
-        );
-      if (e.key === "ArrowLeft")
-        setLightboxIndex((i) =>
-          i === null ? null : (i - 1 + LOCATION_SRC.length) % LOCATION_SRC.length,
-        );
-    };
-    window.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [lightboxIndex, closeLightbox]);
-
   return (
     <div className="min-w-0 overflow-x-clip bg-[#f6f3ee]">
-      {/* ——— HERO ——— */}
+      {/* Hero */}
       <section
-        className="relative w-full min-w-0 overflow-hidden min-h-[min(86vh,700px)] lg:h-[min(86vh,920px)] lg:min-h-[600px]"
-        aria-labelledby="retreat-hero-heading"
+        className="relative w-full min-w-0 overflow-hidden min-h-[min(88vh,720px)] lg:h-[min(88vh,900px)] lg:min-h-[620px]"
+        aria-labelledby="spring-2027-hero-heading"
       >
         <div className="absolute inset-0">
           {HERO_IMAGES.map((src, i) => (
@@ -289,690 +84,215 @@ export function UpcomingRetreatClient() {
               />
             </motion.div>
           ))}
-          {/* Soft darken + hope-tinged vignette */}
           <div
-            className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/70"
+            className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/72"
             aria-hidden
           />
           <div
-            className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_45%,rgba(0,0,0,0.55)_100%)]"
+            className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_45%,rgba(0,0,0,0.5)_100%)]"
             aria-hidden
           />
         </div>
 
         <div
-          className={`relative mx-auto flex h-full flex-col justify-end gap-7 pb-10 pt-28 sm:gap-8 sm:pb-14 sm:pt-32 lg:gap-10 lg:pb-14 lg:pt-24 ${shell}`}
+          className={`relative mx-auto flex h-full flex-col justify-end gap-8 pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-16 lg:pt-24 ${shell}`}
         >
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] as const }}
-            className="max-w-4xl lg:max-w-5xl"
+            className="max-w-3xl"
           >
             <p className="m-0 flex flex-wrap items-center gap-2.5">
               <span className="inline-block rounded-full bg-[#e76fab] px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.2em] text-white ring-2 ring-white/30 sm:text-sm">
-                It&apos;s Lifey · July 9th–12th, 2026
+                It&apos;s Lifey
               </span>
               <span className="inline-block rounded-full bg-white/95 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#9a3d6c] ring-2 ring-white/40 sm:text-[13px]">
-                Sold out
+                Coming soon
               </span>
             </p>
             <h1
-              id="retreat-hero-heading"
-              className="mt-5 max-w-[22ch] text-balance text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl lg:max-w-none lg:text-6xl xl:text-7xl [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_12px_rgba(0,0,0,0.75),0_4px_28px_rgba(0,0,0,0.6),0_12px_56px_rgba(0,0,0,0.45)]"
+              id="spring-2027-hero-heading"
+              className="mt-5 max-w-[18ch] text-balance text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl lg:max-w-none lg:text-6xl xl:text-7xl [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_12px_rgba(0,0,0,0.75),0_4px_28px_rgba(0,0,0,0.6)]"
             >
-              Summer retreat 2026
+              Spring 2027 Widow Wellness Retreat
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/92 sm:max-w-2xl sm:text-xl lg:text-[1.35rem] lg:leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.88),0_2px_10px_rgba(0,0,0,0.68),0_4px_24px_rgba(0,0,0,0.52),0_10px_40px_rgba(0,0,0,0.38)]">
-              {RETREAT_SOLD_OUT_DETAIL} {RETREAT_DAY_ONLY_LINE}
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/92 sm:max-w-2xl sm:text-xl [text-shadow:0_1px_2px_rgba(0,0,0,0.88),0_2px_10px_rgba(0,0,0,0.68)]">
+              Imagine a weekend where you don&apos;t have to explain your grief
+              — where healing happens through connection, rest, laughter, and
+              hope.
             </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <div className="mt-9">
               <button
                 type="button"
-                onClick={scrollToInquiry}
+                onClick={scrollToInterestForm}
                 className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-9 py-4 text-base font-semibold text-white shadow-lg shadow-black/20 ring-2 ring-white/30 transition-[background-color,transform] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.99]"
               >
-                Ask about day attendance
+                Join the interest list
               </button>
             </div>
           </motion.div>
-
-          <aside className="relative w-full max-w-none">
-            <div className="relative isolate w-full overflow-hidden rounded-2xl border border-white/[0.14] bg-black/45 px-5 py-5 shadow-[0_28px_80px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.12)] backdrop-blur-2xl backdrop-saturate-150 ring-1 ring-inset ring-white/[0.06] sm:rounded-[1.35rem] sm:px-7 sm:py-5 md:px-10 md:py-6 lg:rounded-3xl lg:px-12 lg:py-6">
-              <div
-                className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.1] via-transparent to-[#e76fab]/[0.07] sm:rounded-[1.35rem] lg:rounded-3xl"
-                aria-hidden
-              />
-              <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:gap-0 md:py-0.5">
-                <p className="text-base font-medium italic leading-snug text-white/96 sm:text-lg md:flex-1 md:pr-8 md:leading-relaxed lg:pr-12 lg:text-[1.125rem]">
-                  <span className="font-semibold not-italic text-white">
-                    July 9th–July 12th, 2026.
-                  </span>{" "}
-                  {RETREAT_SOLD_OUT_HEADLINE}. {RETREAT_DAY_ONLY_LINE}
-                </p>
-                <div
-                  className="h-px w-16 shrink-0 rounded-full bg-gradient-to-r from-[#e76fab] to-[#f5a8d4]/90 md:hidden"
-                  aria-hidden
-                />
-                <div
-                  className="hidden shrink-0 self-stretch md:block md:w-px md:bg-gradient-to-b md:from-transparent md:via-white/20 md:to-transparent"
-                  aria-hidden
-                />
-                <div className="md:flex-1 md:pl-8 lg:pl-12">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#f5b8dc] sm:text-xs">
-                    By a widow, for widows
-                  </p>
-                  <p className="mt-2 text-sm leading-snug text-white/78 sm:mt-2.5 sm:text-[15px] sm:leading-relaxed">
-                    Intentionally small so conversation can go deep—and rest can
-                    feel real.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </aside>
         </div>
       </section>
 
-      {/* Urgency — directly under hero */}
-      <div
-        className="border-b border-[#e76fab]/35 bg-gradient-to-r from-[#fdf6f9] via-white to-[#fdf6f9] px-4 py-3.5 text-center sm:py-4"
-        role="status"
-      >
-        <p className="text-[13px] font-semibold leading-snug text-[#9a3d6c] sm:text-sm">
-          <span className="text-[#7a2f55]">Sold out.</span>{" "}
-          {RETREAT_DAY_ONLY_LINE}
-        </p>
-      </div>
-
-      {/* ——— STORY + WHO IT'S FOR (editorial, compact) ——— */}
+      {/* Invitation */}
       <section
         className="border-b border-black/10 bg-white"
-        aria-labelledby="retreat-story-heading"
-      >
-        <div className={`${shell} py-11 sm:py-14 lg:py-16`}>
-          <motion.div
-            {...fadeUp}
-            className="max-w-2xl"
-          >
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#e76fab] sm:text-[11px]">
-              Widow Wellness Retreat
-            </p>
-            <h2
-              id="retreat-story-heading"
-              className="mt-3 text-balance text-4xl font-semibold leading-[1.02] tracking-tight text-black sm:text-5xl lg:text-[3.15rem] lg:leading-[1.03]"
-            >
-              Sold out for Summer 2026
-            </h2>
-            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#666766] sm:text-base sm:leading-[1.65]">
-              {RETREAT_SOLD_OUT_DETAIL} If you&apos;d like to stay at a nearby
-              hotel and attend during the day, {RETREAT_EXPERIENCE_ONLY_SPOTS}{" "}
-              spots remain at {RETREAT_EXPERIENCE_ONLY_PRICE}.
-            </p>
-            <div className="mt-8">
-              <AttendButton />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ——— WHAT AWAITS ——— */}
-      <section
-        className="border-b border-[#d85e9a] bg-[#e76fab]"
-        aria-labelledby="what-awaits-heading"
-      >
-        <div className={`${shell} py-12 sm:py-16 lg:py-20`}>
-          <motion.div
-            {...fadeUp}
-            className="overflow-hidden rounded-[2rem] border border-black/[0.06] bg-white shadow-sm lg:rounded-[2.25rem]"
-          >
-            <div className="px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                The experience
-              </p>
-              <h2
-                id="what-awaits-heading"
-                className="mt-4 text-3xl font-semibold leading-[1.1] text-black sm:text-4xl"
-              >
-                What the retreat includes
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
-                Sessions, meals during retreat hours, spa, day trip, and time with
-                women who understand—on the New England coast.
-              </p>
-              <motion.ul
-                className="mt-8 grid gap-3 sm:grid-cols-2"
-                variants={listParent}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-48px" }}
-              >
-                {[
-                  "Wellness and reflection sessions",
-                  "Spa experience",
-                  "Nantucket or Martha's Vineyard day trip",
-                  "Meals during retreat hours",
-                ].map((item) => (
-                  <motion.li
-                    key={item}
-                    variants={listChild}
-                    className="flex gap-3 rounded-xl border border-[#e76fab]/12 bg-[#faf8f5] py-3.5 pl-4 pr-4"
-                  >
-                    <span
-                      className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#e76fab]"
-                      aria-hidden
-                    />
-                    <span className="text-pretty text-[15px] font-medium leading-snug text-[#555]">
-                      {item}
-                    </span>
-                  </motion.li>
-                ))}
-              </motion.ul>
-              <div className="mt-8">
-                <AttendButton />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ——— LOCATION GALLERY ——— */}
-      <section
-        className="border-b border-black/[0.06] bg-[#ede4df]"
-        aria-labelledby="location-gallery-heading"
-      >
-        <div className={`${shellGallery} py-16 sm:py-20 lg:py-24`}>
-          <motion.div {...fadeUp}>
-            <div className="max-w-2xl lg:max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-                Summer 2026 home
-              </p>
-              <h2
-                id="location-gallery-heading"
-                className="mt-4 text-3xl font-semibold leading-[1.1] text-black sm:text-4xl lg:text-5xl"
-              >
-                Want a preview of the location?
-              </h2>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#666766] sm:text-xl">
-                West Barnstable, Cape Cod. Tap an image to see it larger.
-              </p>
-            </div>
-            <ul className="mt-12 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4 lg:grid-rows-3 lg:gap-4">
-              {LOCATION_SRC.map((src, index) => {
-                const featured = index === 0;
-                return (
-                  <li
-                    key={src}
-                    className={`relative min-h-[140px] sm:min-h-[180px] ${
-                      featured
-                        ? "col-span-2 row-span-2 min-h-[220px] sm:min-h-[280px] lg:min-h-0"
-                        : ""
-                    }`}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setLightboxIndex(index)}
-                      className={`group relative h-full min-h-[inherit] w-full overflow-hidden rounded-2xl border-2 border-white bg-black/5 text-left shadow-md transition-[transform,box-shadow] duration-300 hover:border-[#e76fab] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] lg:rounded-3xl ${
-                        featured ? "lg:rounded-[2rem]" : ""
-                      }`}
-                      aria-label={`Open location photo ${index + 1} in large view`}
-                    >
-                      <Image
-                        src={src}
-                        alt={`Summer 2026 retreat location, photo ${index + 1}`}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                        sizes={
-                          featured
-                            ? "(max-width:1024px) 100vw, 50vw"
-                            : "(max-width:640px) 50vw, 25vw"
-                        }
-                      />
-                      <span
-                        className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"
-                        aria-hidden
-                      />
-                      {featured ? (
-                        <span className="absolute bottom-4 left-4 rounded-full bg-[#e76fab] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white">
-                          Coastal retreat home
-                        </span>
-                      ) : null}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Lightbox */}
-      {lightboxIndex !== null && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Location photo enlarged"
-          onClick={closeLightbox}
-        >
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              closeLightbox();
-            }}
-            className="absolute right-4 top-4 z-[110] rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/25 transition-colors hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            Close
-          </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex(
-                (lightboxIndex - 1 + LOCATION_SRC.length) % LOCATION_SRC.length,
-              );
-            }}
-            className="absolute left-2 top-1/2 z-[110] -translate-y-1/2 rounded-full bg-white/10 p-3 text-lg leading-none text-white ring-1 ring-white/20 transition-colors hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:left-3 md:left-4"
-            aria-label="Previous image"
-          >
-            ‹
-          </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex((lightboxIndex + 1) % LOCATION_SRC.length);
-            }}
-            className="absolute right-2 top-1/2 z-[110] -translate-y-1/2 rounded-full bg-white/10 p-3 text-lg leading-none text-white ring-1 ring-white/20 transition-colors hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-3 md:right-4"
-            aria-label="Next image"
-          >
-            ›
-          </button>
-          <div
-            className="relative h-[min(78vh,820px)] w-full max-w-5xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={LOCATION_SRC[lightboxIndex]!}
-              alt={`Summer 2026 retreat location, photo ${lightboxIndex + 1}`}
-              fill
-              className="object-contain"
-              sizes="100vw"
-              priority
-            />
-          </div>
-        </div>
-      )}
-
-      {/* ——— RETREAT-ONLY + NEARBY STAY ——— */}
-      <section
-        className="border-b border-black/[0.06] bg-white"
-        aria-labelledby="retreat-only-heading"
+        aria-labelledby="spring-2027-invite-heading"
       >
         <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
-          <motion.div {...fadeUp} className="lg:grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16">
-            <div className="lg:col-span-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-                Still available
+          <motion.div {...fadeUp} className="max-w-2xl">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab] sm:text-[11px]">
+              Coming soon
+            </p>
+            <h2
+              id="spring-2027-invite-heading"
+              className="mt-3 text-balance text-3xl font-semibold leading-[1.08] tracking-tight text-black sm:text-4xl lg:text-[2.75rem]"
+            >
+              A weekend surrounded by women who truly understand
+            </h2>
+            <p className={`mt-6 ${body}`}>
+              Imagine a weekend where you don&apos;t have to explain your grief,
+              where you&apos;re surrounded by women who truly understand, and
+              where healing happens through connection, rest, laughter, and
+              hope.
+            </p>
+            <p className={`mt-5 ${body}`}>
+              Our Spring 2027 Widow Wellness Retreat is currently in the works,
+              and we can&apos;t wait to share it with you.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* What you'll receive + early bird */}
+      <section
+        className="border-b border-[#d85e9a] bg-[#e76fab]"
+        aria-labelledby="spring-2027-perks-heading"
+      >
+        <div className={`${shell} py-12 sm:py-16 lg:py-20`}>
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-14">
+            <motion.div {...fadeUp} className="text-white">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/85">
+                Interest list
               </p>
               <h2
-                id="retreat-only-heading"
-                className="mt-4 text-3xl font-semibold leading-[1.1] text-black sm:text-4xl lg:text-[2.35rem]"
+                id="spring-2027-perks-heading"
+                className="mt-3 text-3xl font-semibold sm:text-4xl"
               >
-                Day attendance — stay at a hotel
+                Be the first to know
               </h2>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#666766] sm:text-xl">
-                {RETREAT_DAY_ONLY_LINE}
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
+                Join the interest list to be the first to receive:
               </p>
-              <div className="mt-8 max-w-xl rounded-2xl border-2 border-[#e76fab]/40 bg-[#fdf6f9] p-6 sm:p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                  Day attendance · {RETREAT_EXPERIENCE_ONLY_SPOTS} spots
-                </p>
-                <p className="mt-3 text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl">
-                  {RETREAT_EXPERIENCE_ONLY_PRICE}
-                </p>
-                <p className="mt-3 text-[15px] leading-relaxed text-[#2a2928] sm:text-base">
-                  Join morning through evening at the retreat home. You arrange
-                  your own hotel nearby.
-                </p>
-              </div>
-              <div className="mt-8">
-                <AttendButton />
-              </div>
-            </div>
-
-            <aside className="mt-12 border-t border-black/10 pt-10 lg:col-span-5 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-2 xl:pl-12">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-black">
-                Nearby hotels
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-[#666766]">
-                A few places near West Barnstable—suggestions only, not vetted by
-                It&apos;s Lifey.
-              </p>
-              <ul className="mt-6 space-y-3">
-                {NEARBY_LODGING_SUGGESTIONS.map((place) => (
-                  <li key={place.href}>
-                    <a
-                      href={place.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex flex-col rounded-xl border border-[#e76fab]/15 bg-[#faf8f5] px-4 py-4 transition-[border-color,background-color,box-shadow] duration-200 hover:border-[#e76fab]/35 hover:bg-white hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
-                    >
-                      <span className="text-base font-semibold text-black group-hover:text-[#9a3d6c]">
-                        {place.name}
-                      </span>
-                      <span className="mt-0.5 text-sm text-[#666766]">
-                        {place.area}
-                      </span>
-                      <span className="mt-2 text-sm font-semibold text-[#e76fab]">
-                        Visit website →
-                      </span>
-                    </a>
+              <ul className="mt-8 space-y-3">
+                {INTEREST_PERKS.map((item) => (
+                  <li
+                    key={item}
+                    className="flex gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 backdrop-blur-sm"
+                  >
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white"
+                      aria-hidden
+                    />
+                    <span className="text-[15px] font-medium leading-snug text-white sm:text-base">
+                      {item}
+                    </span>
                   </li>
                 ))}
               </ul>
-            </aside>
-          </motion.div>
-        </div>
-      </section>
+            </motion.div>
 
-      {/* ——— INVESTMENT ——— */}
-      <section
-        className="border-b border-black/[0.06] bg-[#f6f3ee]"
-        aria-labelledby="investment-heading"
-      >
-        <div className={`${shell} py-12 sm:py-14 lg:py-16`}>
-          <motion.div {...fadeUp} className="flex flex-col gap-12 lg:gap-14">
-            <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-x-12 xl:gap-x-16">
-              <div className="min-w-0 lg:col-span-7">
-                <h2
-                  id="investment-heading"
-                  className="max-w-xl text-3xl font-semibold leading-[1.15] tracking-tight text-black sm:text-[2rem] lg:text-[2.125rem]"
-                >
-                  Pricing
-                </h2>
-                <p className="mt-6 max-w-xl rounded-2xl border border-[#e76fab]/35 bg-[#fdf6f9] px-5 py-4 text-[15px] font-semibold leading-relaxed text-[#9a3d6c] sm:text-base">
-                  {RETREAT_SOLD_OUT_HEADLINE}. {RETREAT_SOLD_OUT_DETAIL}
-                </p>
-                <p className="mt-4 max-w-xl rounded-2xl border border-[#e76fab]/20 bg-white px-5 py-4 text-[15px] leading-relaxed text-[#2a2928] sm:text-base">
-                  {RETREAT_DAY_ONLY_LINE}
-                </p>
-              </div>
-
-              <div className="min-w-0 border-t border-[#e3ddd4] pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0 xl:pl-12">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#a3a3a3]">
-                  Retreat dates
-                </p>
-                <p
-                  className="mt-3 text-3xl font-semibold leading-tight tracking-tight text-[#7a7b7a] sm:text-4xl lg:text-[2.35rem] lg:leading-[1.1]"
-                  aria-label="Retreat dates: July 9th through July 12th, 2026"
-                >
-                  July 9th
-                  <span className="mx-2 inline-block text-2xl font-normal text-[#b8b8b8] sm:text-3xl">
-                    –
-                  </span>
-                  July 12th
-                </p>
-                <p className="mt-2 text-sm font-medium text-[#888988]">2026</p>
-              </div>
-            </div>
-
-            <div className="border-t border-[#dad6cf] pt-8 lg:pt-10">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#666766]">
-                Retreat Price
+            <motion.aside
+              {...fadeUp}
+              className="rounded-[1.75rem] border border-white/25 bg-white p-7 shadow-xl shadow-black/10 sm:p-8"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
+                Early bird bonus
               </p>
-              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 lg:col-span-7">
-                  <div className="rounded-2xl border border-[#e3ddd4] bg-[#f0eeea]/80 px-5 py-5 opacity-90 sm:px-6">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#888988]">
-                      Sold out
-                    </p>
-                    <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-[#a8a8a8] line-through decoration-[#c4c4c4] sm:text-4xl lg:text-[2.35rem]">
-                      {RETREAT_SINGLE_PRICE}
-                    </p>
-                    <p className="mt-1.5 text-sm font-medium text-[#888988] sm:text-[15px]">
-                      Single room
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-[#e3ddd4] bg-[#f0eeea]/80 px-5 py-5 opacity-90 sm:px-6">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#888988]">
-                      Sold out
-                    </p>
-                    <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-[#a8a8a8] line-through decoration-[#c4c4c4] sm:text-4xl lg:text-[2.35rem]">
-                      {RETREAT_TRIPLE_PRICE}
-                    </p>
-                    <p className="mt-1.5 text-sm font-medium text-[#888988] sm:text-[15px]">
-                      Shared triple room
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border-2 border-[#e76fab]/45 bg-white px-5 py-5 shadow-[0_12px_40px_-20px_rgba(231,111,171,0.45)] sm:col-span-2 lg:col-span-1 sm:px-6">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                      {RETREAT_EXPERIENCE_ONLY_SPOTS} spots left
-                    </p>
-                    <p className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-black sm:text-4xl lg:text-[2.35rem]">
-                      {RETREAT_EXPERIENCE_ONLY_PRICE}
-                    </p>
-                    <p className="mt-1.5 text-sm font-semibold text-[#2a2928] sm:text-[15px]">
-                      Day attendance only
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-[#666766]">
-                      Hotel on your own · join during the day.
-                    </p>
-                  </div>
-                </div>
-            </div>
-          </motion.div>
-        </div>
-        <InvestmentMarquee />
-      </section>
-
-      {/* ——— FINAL CTA ——— */}
-      <section className="border-t border-white/20 bg-[#e76fab]">
-        <div className={`${shell} py-14 text-center sm:py-16 lg:py-20`}>
-          <motion.div {...fadeUp} className="mx-auto max-w-3xl">
-            <h2 className="text-balance text-3xl font-semibold leading-[1.15] text-white sm:text-4xl">
-              Sold out — with one option left
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/95 sm:text-xl">
-              {RETREAT_DAY_ONLY_LINE}
-            </p>
-            <div className="mx-auto mt-10 flex justify-center">
+              <h3 className="mt-3 text-2xl font-semibold leading-snug text-[#141413]">
+                First 5 women get 20% off
+              </h3>
+              <p className={`mt-4 ${body}`}>
+                The first 5 women who register when enrollment opens will
+                receive 20% off their retreat registration.
+              </p>
+              <p className={`mt-4 ${body}`}>
+                If you&apos;re even thinking about joining us, sign up today.
+                There&apos;s no obligation — just early access and the chance to
+                reserve your spot before the retreat fills.
+              </p>
               <button
                 type="button"
-                onClick={scrollToInquiry}
-                className="inline-flex w-full max-w-sm items-center justify-center rounded-full bg-white px-10 py-4 text-base font-semibold text-[#e76fab] shadow-md shadow-black/10 transition-[background-color,transform] duration-200 hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto active:scale-[0.99]"
+                onClick={scrollToInterestForm}
+                className="mt-7 inline-flex w-full items-center justify-center rounded-full bg-[#e76fab] px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#d85e9a] sm:w-auto"
               >
-                Ask about day attendance
+                Sign up for early access
               </button>
-            </div>
-          </motion.div>
+            </motion.aside>
+          </div>
         </div>
       </section>
 
-      {/* ——— INQUIRY FORM (last) ——— */}
+      {/* Form */}
       <section
-        id="retreat-inquiry"
-        className="scroll-mt-24 relative overflow-hidden border-b border-[#d85e9a] bg-[#e76fab]"
-        aria-labelledby="inquiry-heading"
+        id="spring-2027-interest"
+        className="border-b border-black/10 bg-[#faf8f5]"
+        aria-labelledby="spring-2027-form-heading"
       >
-        <div className={`${shell} relative py-14 lg:py-24`}>
-          <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
-            <aside className="order-2 flex flex-col gap-8 lg:order-1 lg:col-span-5 xl:col-span-4 lg:sticky lg:top-28 lg:self-start">
-              <div className="rounded-3xl border border-black/[0.06] bg-white p-8 shadow-[0_24px_80px_rgba(0,0,0,0.12)] lg:p-10">
-                <p className="text-2xl font-semibold leading-snug tracking-tight text-black sm:text-3xl">
-                  Sold out
-                </p>
-                <p className="mt-5 text-base leading-relaxed text-[#666766]">
-                  {RETREAT_SOLD_OUT_DETAIL}
-                </p>
-                <div className="mt-8 border-t border-black/[0.08] pt-8">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                    Still available
-                  </p>
-                  <p className="mt-4 rounded-xl border border-[#e76fab]/30 bg-[#fdf6f9] px-4 py-3.5">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#e76fab]">
-                      Day attendance
-                    </span>
-                    <span className="mt-1 block text-2xl font-semibold text-black">
-                      {RETREAT_EXPERIENCE_ONLY_PRICE}
-                    </span>
-                    <span className="mt-1 block text-sm leading-relaxed text-[#666766]">
-                      {RETREAT_EXPERIENCE_ONLY_SPOTS} spots · hotel on your own
-                    </span>
-                  </p>
-                  <p className="mt-4 text-xl font-medium text-[#a8a8a8] line-through decoration-[#c4c4c4]">
-                    {RETREAT_SINGLE_PRICE}{" "}
-                    <span className="text-base">Single room</span>
-                  </p>
-                  <p className="mt-3 text-xl font-medium text-[#a8a8a8] line-through decoration-[#c4c4c4]">
-                    {RETREAT_TRIPLE_PRICE}{" "}
-                    <span className="text-base">Shared triple room</span>
-                  </p>
-                </div>
-              </div>
-            </aside>
-
-            <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-8">
-              <div className="rounded-3xl border border-black/[0.06] bg-white p-6 shadow-[0_20px_70px_rgba(0,0,0,0.12)] sm:p-10 lg:p-12">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e76fab]">
-                  Day attendance inquiry
-                </p>
-                <h2
-                  id="inquiry-heading"
-                  className="mt-3 max-w-xl text-2xl font-semibold leading-tight text-black sm:text-3xl lg:text-4xl"
-                >
-                  Summer 2026 — day attendance
-                </h2>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#666766] sm:text-lg">
-                  {RETREAT_DAY_ONLY_LINE} Share a few details and we&apos;ll
-                  follow up.
-                </p>
-                <form
-                  className="relative mt-8 space-y-5"
-                  onSubmit={handleInquirySubmit}
-                >
-                  <FormHoneypot idPrefix="retreat-inquiry" />
-                  {inquiryFeedback ? (
-                    <p
-                      role="status"
-                      aria-live="polite"
-                      className={`rounded-xl border px-4 py-3 text-sm leading-relaxed ${
-                        inquirySubmit === "success"
-                          ? "border-[#e76fab]/25 bg-[#fdf8fb] text-[#555]"
-                          : "border-red-200 bg-red-50 text-red-900"
-                      }`}
-                    >
-                      {inquiryFeedback}
-                    </p>
-                  ) : null}
-                  <div>
-                    <label
-                      htmlFor="inquiry-full-name"
-                      className="block text-sm font-semibold text-black"
-                    >
-                      Full name
-                    </label>
-                    <input
-                      id="inquiry-full-name"
-                      name="fullName"
-                      type="text"
-                      autoComplete="name"
-                      required
-                      className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none ring-[#e76fab]/0 transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="inquiry-email"
-                      className="block text-sm font-semibold text-black"
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="inquiry-email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="inquiry-phone"
-                      className="block text-sm font-semibold text-black"
-                    >
-                      Phone
-                    </label>
-                    <input
-                      id="inquiry-phone"
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      required
-                      className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="inquiry-address"
-                      className="block text-sm font-semibold text-black"
-                    >
-                      Address
-                    </label>
-                    <input
-                      id="inquiry-address"
-                      name="address"
-                      type="text"
-                      autoComplete="street-address"
-                      required
-                      className="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                    />
-                    <p className="mt-1.5 text-sm text-[#666766]">
-                      City, state, or full mailing address—whatever you&apos;re
-                      comfortable sharing.
-                    </p>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="inquiry-why"
-                      className="block text-sm font-semibold text-black"
-                    >
-                      Why do you want to join this retreat?
-                    </label>
-                    <textarea
-                      id="inquiry-why"
-                      name="whyJoin"
-                      rows={5}
-                      required
-                      className="mt-2 w-full resize-y rounded-xl border border-black/10 bg-white px-4 py-3 text-base leading-relaxed text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15"
-                    />
-                  </div>
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      disabled={inquirySubmit === "sending"}
-                      className="w-full rounded-full bg-[#e76fab] px-8 py-4 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] enabled:active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-                    >
-                      {inquirySubmit === "sending"
-                        ? "Sending…"
-                        : "Ask about day attendance"}
-                    </button>
-                    <RecaptchaNotice />
-                    <p className="mt-4 text-center text-sm text-[#666766] sm:text-left">
-                      Questions? You can also reach out through{" "}
-                      <Link
-                        href="/contact"
-                        className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
-                      >
-                        Contact
-                      </Link>
-                      .
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </div>
+        <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_min(28rem,100%)] lg:items-start lg:gap-16">
+            <motion.div {...fadeUp}>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab]">
+                Spring 2027
+              </p>
+              <h2
+                id="spring-2027-form-heading"
+                className="mt-3 text-3xl font-semibold text-[#141413] sm:text-4xl"
+              >
+                Join the interest list
+              </h2>
+              <p className={`mt-5 ${body}`}>
+                Share your name and email — we&apos;ll reach out first when
+                details and registration open. No pressure, no obligation.
+              </p>
+              <p className={`mt-5 ${body}`}>
+                We can&apos;t wait to welcome you.
+              </p>
+              <Link
+                href="/retreats/past"
+                className="mt-8 inline-flex text-sm font-semibold text-[#b8457e] underline decoration-[#e76fab]/40 underline-offset-4 transition-colors hover:text-[#e76fab]"
+              >
+                Browse past retreats →
+              </Link>
+            </motion.div>
+            <motion.div
+              {...fadeUp}
+              className="rounded-[1.75rem] border border-black/[0.08] bg-white p-6 shadow-lg shadow-black/[0.06] sm:p-8 lg:sticky lg:top-28"
+            >
+              <Spring2027RetreatInterestForm />
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Closing */}
+      <section className="bg-[#c94d8a] px-4 py-16 text-center text-white sm:py-20">
+        <div className="mx-auto max-w-2xl">
+          <p className="text-2xl font-semibold leading-snug sm:text-3xl">
+            We can&apos;t wait to welcome you.
+          </p>
+          <p className="mt-4 text-lg text-white/90">
+            A weekend of connection, rest, laughter, and hope — for widows who
+            understand.
+          </p>
+          <button
+            type="button"
+            onClick={scrollToInterestForm}
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#c94d8a] transition-colors hover:bg-neutral-100"
+          >
+            Join the interest list
+          </button>
         </div>
       </section>
     </div>

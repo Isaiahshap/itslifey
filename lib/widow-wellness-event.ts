@@ -6,8 +6,7 @@ export const EVENT_LOCATION = "Presence & Co. · Reading, Massachusetts";
 export const EVENT_PATH = "/events/widow-wellness-connection-experience";
 export const SPONSORSHIP_PATH =
   "/events/widow-wellness-connection-experience/sponsorship";
-export const SPONSORSHIP_PDF =
-  "/Sponsorship_Opportunities_Widow_Wellness_2026.pdf";
+export const SPONSORSHIP_PDF = "/images/sponsorship_packet.pdf";
 
 export const HOTEL_NAME = "Lakeside Inn";
 export const HOTEL_BLOCK_URL =
@@ -48,7 +47,7 @@ export const TICKET_TIERS = {
     price: 169,
     stripeUrl: "https://buy.stripe.com/7sYdRa18B29W3gggn65Rm0f",
     description:
-      "Cocktail hour with Kelley Lynn on November 13, plus the full main event on November 14.",
+      "Mocktail hour with Kelley Lynn on November 13, plus the full main event on November 14.",
   },
   regular: {
     key: "regular",
@@ -76,25 +75,25 @@ export const SPONSOR_TIERS = [
     label: "Healing Sponsor",
     price: 3500,
     stripeUrl: "https://buy.stripe.com/3cI00kcRj7ugeYYdaU5Rm07",
-    availability: "Only 4 available",
+    availability: "4 slots left",
   },
   {
     key: "connection",
     label: "Connection Sponsor",
     price: 2500,
     stripeUrl: "https://buy.stripe.com/cNiaEY5oRbKwg32daU5Rm08",
-    availability: "Only 5 available",
+    availability: "4 slots left",
   },
   {
     key: "community",
     label: "Community Supporter",
     price: 1000,
     stripeUrl: "https://buy.stripe.com/14AeVe6sV15S5oogn65Rm09",
-    availability: "Only 5 available",
+    availability: "4 slots left",
   },
   {
     key: "vip_mocktail",
-    label: "VIP Mocktail & Comedy Hour Sponsor",
+    label: "VIP Cocktail Hour Sponsor",
     price: 1500,
     stripeUrl: "https://buy.stripe.com/fZu8wQ04xeWIbMM5Is5Rm0a",
     availability: "Only 1 available",

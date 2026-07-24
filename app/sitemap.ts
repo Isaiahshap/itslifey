@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   };
 
-  const excludeFromSitemap = new Set(["/first-40-mockup"]);
+  const excludeFromSitemap = new Set(["/first-40-mockup", "/retreats"]);
 
   for (const p of staticPaths) {
     if (excludeFromSitemap.has(p)) continue;
