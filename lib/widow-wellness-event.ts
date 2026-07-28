@@ -6,7 +6,7 @@ export const EVENT_LOCATION = "Presence & Co. · Reading, Massachusetts";
 export const EVENT_PATH = "/events/widow-wellness-connection-experience";
 export const SPONSORSHIP_PATH =
   "/events/widow-wellness-connection-experience/sponsorship";
-export const SPONSORSHIP_PDF = "/images/sponsorship_packet.pdf";
+export const SPONSORSHIP_PDF = "/images/mocktail_sponsorhip_packet.pdf";
 
 export const HOTEL_NAME = "Lakeside Inn";
 export const HOTEL_BLOCK_URL =
@@ -93,7 +93,7 @@ export const SPONSOR_TIERS = [
   },
   {
     key: "vip_mocktail",
-    label: "VIP Cocktail Hour Sponsor",
+    label: "VIP Mocktail Hour Sponsor",
     price: 1500,
     stripeUrl: "https://buy.stripe.com/fZu8wQ04xeWIbMM5Is5Rm0a",
     availability: "Only 1 available",

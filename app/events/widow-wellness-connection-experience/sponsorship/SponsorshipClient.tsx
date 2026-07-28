@@ -104,12 +104,12 @@ const mainTiers = [
 
 const specialtyTiers = [
   {
-    name: "VIP Cocktail Hour Sponsor",
+    name: "VIP Mocktail Hour Sponsor",
     price: "$1,500",
     availability: "Only 1 available",
     subtitle: "Featuring Kelley Lynn · Evening before the main event",
     includes: [
-      "Exclusive recognition as VIP Cocktail Hour Sponsor",
+      "Exclusive recognition as VIP Mocktail Hour Sponsor",
       "Signage at the VIP evening event",
       "Logo on all event materials & event webpage",
       "5-minute welcome remarks",
