@@ -4,6 +4,7 @@ import { FormHoneypot } from "@/components/FormHoneypot";
 import { RecaptchaNotice } from "@/components/RecaptchaNotice";
 import { HONEYPOT_FIELD } from "@/lib/form-spam";
 import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { redirectAfterMetaPixel } from "@/lib/meta-pixel-client";
 import {
   EVENT_NAME,
   SPONSOR_TIERS,
@@ -84,7 +85,7 @@ export function WidowWellnessSponsorshipForm() {
       }
 
       if (data.url) {
-        window.location.href = data.url;
+        redirectAfterMetaPixel(data.url);
       }
     } catch {
       setStatus("error");
