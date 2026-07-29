@@ -6,7 +6,7 @@ export const EVENT_LOCATION = "Presence & Co. · Reading, Massachusetts";
 export const EVENT_PATH = "/events/widow-wellness-connection-experience";
 export const SPONSORSHIP_PATH =
   "/events/widow-wellness-connection-experience/sponsorship";
-export const SPONSORSHIP_PDF = "/images/mocktail_sponsorhip_packet.pdf";
+export const SPONSORSHIP_PDF = "/sponsorship_new.pdf";
 
 export const HOTEL_NAME = "Lakeside Inn";
 export const HOTEL_BLOCK_URL =
