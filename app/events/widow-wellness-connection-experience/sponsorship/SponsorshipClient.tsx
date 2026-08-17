@@ -57,21 +57,6 @@ const mainTiers = [
     ],
   },
   {
-    name: "Healing Sponsor",
-    price: "$3,500",
-    availability: "4 slots left",
-    blurb:
-      "For sponsors who want a stronger presence and deeper alignment with the event experience.",
-    includes: [
-      "All Community and Connection Sponsor benefits, plus:",
-      "Premium sponsor table placement",
-      "Premium logo placement",
-      "Recognition from stage",
-      "Featured email spotlight (700 recipients)",
-      "2 complimentary event tickets",
-    ],
-  },
-  {
     name: "Connection Sponsor",
     price: "$2,500",
     availability: "4 slots left",
@@ -84,40 +69,6 @@ const mainTiers = [
       "Logo on event webpage & all event materials",
       "Branded gift or insert in attendee bags",
       "1 complimentary event ticket",
-    ],
-  },
-  {
-    name: "Community Supporter",
-    price: "$1,000",
-    availability: "4 slots left",
-    blurb:
-      "For businesses that want to support widows and be part of the It's Lifey mission.",
-    includes: [
-      "Logo on event webpage",
-      "Logo included in all event materials",
-      "Branded gift or insert in attendee bags",
-      "Social shout-out",
-      "1 complimentary event ticket",
-    ],
-  },
-] as const;
-
-const specialtyTiers = [
-  {
-    name: "VIP Mocktail Hour Sponsor",
-    price: "$1,500",
-    availability: "Only 1 available",
-    subtitle: "Featuring Kelley Lynn · Evening before the main event",
-    includes: [
-      "Exclusive recognition as VIP Mocktail Hour Sponsor",
-      "Signage at the VIP evening event",
-      "Logo on all event materials & event webpage",
-      "5-minute welcome remarks",
-      "Sponsor table at VIP event",
-      "4 VIP tickets",
-      "Social media spotlight",
-      "Recognition during the main event the following day",
-      "Branded gift or insert in attendee bags",
     ],
   },
   {
@@ -135,9 +86,55 @@ const specialtyTiers = [
       "Branded gift or insert in attendee bags",
     ],
   },
+  {
+    name: "VIP Mocktail Hour Sponsor",
+    price: "$1,500",
+    availability: "Only 1 available",
+    subtitle: "Featuring Kelley Lynn · Evening before the main event",
+    includes: [
+      "Exclusive recognition as VIP Mocktail Hour Sponsor",
+      "Signage at the VIP evening event",
+      "Logo on all event materials & event webpage",
+      "5-minute welcome remarks",
+      "Sponsor table at VIP event",
+      "4 VIP tickets",
+      "Social media spotlight",
+      "Recognition during the main event the following day",
+      "Branded gift or insert in attendee bags",
+    ],
+  },
 ] as const;
 
-const hospitalityTiers = [
+const additionalTiers = [
+  {
+    name: "Community Supporter",
+    price: "$1,000",
+    availability: "4 slots left",
+    blurb:
+      "For businesses that want to support widows and be part of the It's Lifey mission.",
+    includes: [
+      "Logo on event webpage",
+      "Logo included in all event materials",
+      "Branded gift or insert in attendee bags",
+      "Social shout-out",
+      "1 complimentary event ticket",
+    ],
+  },
+  {
+    name: "Healing Sponsor",
+    price: "$3,500",
+    availability: "4 slots left",
+    blurb:
+      "For sponsors who want a stronger presence and deeper alignment with the event experience.",
+    includes: [
+      "All Community and Connection Sponsor benefits, plus:",
+      "Premium sponsor table placement",
+      "Premium logo placement",
+      "Recognition from stage",
+      "Featured email spotlight (700 recipients)",
+      "2 complimentary event tickets",
+    ],
+  },
   {
     name: "Lunch Sponsor",
     price: "$1,000",
@@ -526,6 +523,11 @@ export function SponsorshipClient() {
                 <h3 className="mt-1 text-2xl font-semibold text-[#141413]">
                   {tier.name}
                 </h3>
+                {"subtitle" in tier && tier.subtitle ? (
+                  <p className="mt-1 text-sm font-medium text-[#9a3d6c]">
+                    {tier.subtitle}
+                  </p>
+                ) : null}
                 {"blurb" in tier && tier.blurb ? (
                   <p className="mt-2 text-[15px] leading-relaxed text-[#666766]">
                     {tier.blurb}
@@ -559,17 +561,17 @@ export function SponsorshipClient() {
         <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
           <motion.div {...fadeUp}>
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab]">
-              Specialty &amp; hospitality
+              Additional levels
             </p>
             <h2
               id="sponsor-specialty-heading"
               className="mt-3 text-3xl font-semibold text-[#141413] sm:text-4xl"
             >
-              Sponsor a specific moment of the day
+              Healing, community, hospitality, and scholarships
             </h2>
           </motion.div>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {[...specialtyTiers, ...hospitalityTiers].map((tier) => (
+            {additionalTiers.map((tier) => (
               <motion.article
                 key={tier.name}
                 {...fadeUp}
@@ -578,9 +580,9 @@ export function SponsorshipClient() {
                 <h3 className="text-xl font-semibold text-[#141413]">
                   {tier.name}
                 </h3>
-                {"subtitle" in tier && tier.subtitle ? (
-                  <p className="mt-1 text-sm font-medium text-[#9a3d6c]">
-                    {tier.subtitle}
+                {"blurb" in tier && tier.blurb ? (
+                  <p className="mt-2 text-[15px] leading-relaxed text-[#666766]">
+                    {tier.blurb}
                   </p>
                 ) : null}
                 <p className="mt-1 text-2xl font-semibold text-[#b8457e]">

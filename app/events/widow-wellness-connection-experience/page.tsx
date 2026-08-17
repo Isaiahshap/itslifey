@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { BREAKOUT_LEADERS } from "@/lib/widow-wellness-event";
 import { WidowWellnessClient } from "./WidowWellnessClient";
 
 export const metadata: Metadata = {
@@ -12,6 +15,16 @@ export const metadata: Metadata = {
   },
 };
 
+function publicAssetExists(src: string) {
+  return existsSync(path.join(process.cwd(), "public", src.replace(/^\//, "")));
+}
+
 export default function WidowWellnessConnectionExperiencePage() {
-  return <WidowWellnessClient />;
+  const availableLeaderPhotos = Object.fromEntries(
+    BREAKOUT_LEADERS.flatMap((leader) =>
+      publicAssetExists(leader.photo) ? [[leader.name, leader.photo] as const] : [],
+    ),
+  );
+
+  return <WidowWellnessClient availableLeaderPhotos={availableLeaderPhotos} />;
 }
