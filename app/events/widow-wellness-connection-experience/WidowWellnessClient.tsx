@@ -18,6 +18,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const HERO_IMAGE = "/images/hero3.webp";
+const KELLEY_LYNN_BANNER = "/images/widowwellnessimages/kelleylinn.png";
 
 const presentingSponsors = EVENT_SPONSORS.filter((s) => s.featured);
 const supportingSponsors = EVENT_SPONSORS.filter((s) => !s.featured);
@@ -154,12 +155,12 @@ function BreakoutLeaderRow({
       }`}
     >
       {photo ? (
-        <figure className="relative mx-auto aspect-[4/5] w-full max-w-[13.5rem] overflow-hidden rounded-2xl bg-[#ebe6df] shadow-sm ring-1 ring-black/[0.06] lg:col-span-4 lg:mx-0 lg:max-w-none xl:col-span-3">
+        <figure className="relative mx-auto aspect-square w-full max-w-[13.5rem] overflow-hidden rounded-2xl bg-[#ebe6df] shadow-sm ring-1 ring-black/[0.06] lg:col-span-4 lg:mx-0 lg:max-w-none xl:col-span-3">
           <Image
             src={photo}
             alt={leader.name}
             fill
-            className="object-cover"
+            className="object-cover object-top"
             sizes="(max-width: 1024px) 13.5rem, 16rem"
           />
         </figure>
@@ -441,7 +442,21 @@ export function WidowWellnessClient({
                 advocate Kelley Lynn. Expect laughter, honesty, connection, and
                 hope — a powerful night before the main event.
               </p>
-              <p className={`mt-5 ${body}`}>
+          </motion.div>
+
+          <motion.figure {...fadeUp} className="mt-10 max-w-4xl sm:mt-12">
+            <Image
+              src={KELLEY_LYNN_BANNER}
+              alt="Featured guest Kelley Lynn — Friday Night VIP Event. Kelley Lynn is a stand-up comedian, actor, author, TEDx presenter, certified grief counselor, and widow whose work blends humor, honesty, and grief."
+              width={1221}
+              height={538}
+              className="h-auto w-full"
+              sizes="(max-width: 1280px) 100vw, 80rem"
+            />
+          </motion.figure>
+
+          <motion.div {...fadeUp} className="mt-8 max-w-3xl sm:mt-10">
+              <p className={`${body}`}>
                 Kelley became a leading voice in grief support. Her TEDx talk,
                 &ldquo;When Someone You Love Dies, There is No Such Thing as
                 Moving On,&rdquo; has reached millions. Her book,{" "}

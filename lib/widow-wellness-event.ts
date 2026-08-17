@@ -51,7 +51,7 @@ export const BREAKOUT_LEADERS = [
       "We close at the heart center, weaving together gentle movement, seated practice, and space for reflection and sharing, so that grief and warmth can be held together in community.",
     ],
     website: "https://leelayogawellness.com/about-marlene",
-    photo: "/images/events/widow-wellness/leaders/marlene-boyette.webp",
+    photo: "/images/widowwellnessimages/marlene.jpg",
   },
   {
     name: "LRVS Financial",
@@ -61,7 +61,7 @@ export const BREAKOUT_LEADERS = [
       "Life after loss often comes with financial decisions you never expected to make. This session will offer practical guidance to help you feel more informed and confident about your financial future.",
     ],
     website: "https://www.lrvsadvisory.com/",
-    photo: "/images/events/widow-wellness/leaders/lrvs-financial.webp",
+    photo: "/images/widowwellnessimages/lrvs.jpg",
   },
   {
     name: "Alyssa Zonghetti",
@@ -71,7 +71,7 @@ export const BREAKOUT_LEADERS = [
       "Widowhood can leave you wondering who you are now. This session is about reconnecting with yourself, reclaiming your identity, and finding your way into a new chapter.",
     ],
     website: "https://www.atozhypnotherapy.com/about",
-    photo: "/images/events/widow-wellness/leaders/alyssa-zonghetti.webp",
+    photo: "/images/widowwellnessimages/alyssa.png",
   },
   {
     name: "Carrie Rowan",
@@ -81,7 +81,7 @@ export const BREAKOUT_LEADERS = [
       "Your story didn't end with your loss. Carrie will help you think about what comes next and the possibilities that still exist for your life.",
     ],
     website: "https://carrierowan.com/",
-    photo: "/images/events/widow-wellness/leaders/carrie-rowan.webp",
+    photo: "/images/widowwellnessimages/carrie.jpg",
   },
   {
     name: "Colleen Marie",
@@ -91,7 +91,7 @@ export const BREAKOUT_LEADERS = [
       "A beautiful opportunity to explore what it means to release what no longer serves you and make space for what comes next. Colleen will guide you through reflection and spiritual practices designed to support your journey forward.",
     ],
     website: "https://colleenmariehealing.com/",
-    photo: "/images/events/widow-wellness/leaders/colleen-marie.webp",
+    photo: "/images/widowwellnessimages/colleeen.png",
   },
   {
     name: "Susan Trotter",
@@ -101,7 +101,7 @@ export const BREAKOUT_LEADERS = [
       "Exploring the possibility of opening your heart again after loss. Susan will share guidance and compassionate insight around dating, relationships, and navigating this part of widowhood.",
     ],
     website: "https://www.susantrotterphd.com/",
-    photo: "/images/events/widow-wellness/leaders/susan-trotter.webp",
+    photo: "/images/widowwellnessimages/susan.jpg",
   },
 ] as const;
 
