@@ -360,12 +360,15 @@
   max-width: 9.5rem;
   text-decoration: none;
   color: inherit;
-  opacity: 0.88;
-  transition: opacity 0.25s ease;
 }
 
-.ww-sponsors__item:hover {
-  opacity: 1;
+.ww-sponsors__item:hover .ww-sponsors__logo {
+  filter: none;
+}
+
+.ww-sponsors__item:focus-visible {
+  outline: 2px solid var(--ww-pink);
+  outline-offset: 4px;
 }
 
 .ww-sponsors__tier {
@@ -383,12 +386,14 @@
   position: relative;
   width: clamp(5.5rem, 12vw, 7.5rem);
   height: 2.4rem;
-  filter: grayscale(1) contrast(1.05);
-  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.08);
+  transition: filter 0.28s ease;
+  background: transparent;
 }
 
 .ww-sponsors__logo img {
   object-fit: contain;
+  background: transparent;
 }
 
 .ww-sponsors__logo--feature {
@@ -1288,7 +1293,7 @@
   .ww-sticky,
   .ww-btn,
   .ww-btn::after,
-  .ww-sponsors__item {
+  .ww-sponsors__logo {
     transition: none !important;
   }
 

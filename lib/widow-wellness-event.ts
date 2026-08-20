@@ -49,7 +49,7 @@ export const EVENT_SPONSORS = [
     name: "Parents Estate Planning",
     tier: "VIP Mocktail Hour Sponsor",
     href: "https://www.parentsestateplanning.com/",
-    logo: "/images/sponsors/theparentsestateplanning.jpg",
+    logo: "/images/sponsors/theparentsestateplanning.png",
     featured: false,
     surface: "light" as const,
   },
