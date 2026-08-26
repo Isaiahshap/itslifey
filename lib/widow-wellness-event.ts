@@ -39,7 +39,7 @@ export const EVENT_SPONSORS = [
   },
   {
     name: "A New Path Coaching",
-    tier: "The Hope Mic Story Slam Sponsor",
+    tier: "The Hope Mic Story Share Sponsor",
     href: "https://www.anewpathcoaching.com/",
     logo: "/images/sponsors/newpath.png",
     featured: false,
@@ -70,6 +70,34 @@ export const EVENT_SPONSORS = [
     surface: "light" as const,
   },
 ] as const;
+
+export type KeynoteSpeaker = {
+  name: string;
+  role: string;
+  org: string;
+  bio: string[];
+  photo: string | null;
+  website: string | null;
+  social: string | null;
+  comingSoon: boolean;
+};
+
+export const KEYNOTE_SPEAKERS: KeynoteSpeaker[] = [
+  {
+    name: "Anita Coyle",
+    role: "Main Stage Keynote · November 14",
+    org: "Widow We Do Now? Podcast",
+    bio: [
+      "Anita's world collapsed when her husband died unexpectedly in 2019 while swimming laps, leaving her to raise four kids (ages 12, 8, 5 & 2) alone.",
+      "Soon after, she met another young widow named Mel. Having someone who truly understood the widowhood experience was life-saving. They supported each other with dark humor and cheese — which led to the creation of the Widow We Do Now? Podcast. The podcast and its grief community have grown into something beautiful: real friendships, real experiences, real hope.",
+      "Anita uses physical activity to help process the challenges of widowed life. She races mountain bikes and triathlons, and is a physical therapist in her professional life.",
+    ],
+    photo: "/images/widowwellnessimages/anita.jpeg",
+    website: "https://widowwedonow.com",
+    social: "@Widowwedonow",
+    comingSoon: false,
+  },
+];
 
 export const BREAKOUT_LEADERS = [
   {
@@ -154,7 +182,7 @@ export const TICKET_TIERS = {
     price: 129,
     stripeUrl: "https://buy.stripe.com/dRmfZicRjdSEcQQ2wg5Rm0e",
     description:
-      "The full main event — welcome, keynotes, breakouts, lunch, and The Hope Mic Story Slam.",
+      "The full main event — welcome, keynotes, breakouts, lunch, and The Hope Mic Story Share.",
   },
 } as const;
 
@@ -177,7 +205,7 @@ export const SPONSOR_TIERS = [
   },
   {
     key: "hope_mic",
-    label: "The Hope Mic Story Slam Sponsor",
+    label: "The Hope Mic Story Share Sponsor",
     price: 1500,
     stripeUrl: "https://buy.stripe.com/dRm28saJb9Co5oo3Ak5Rm0b",
     availability: "Only 1 available",

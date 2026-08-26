@@ -11,6 +11,7 @@ import {
   EVENT_SPONSORS,
   HOTEL_BLOCK_URL,
   HOTEL_NAME,
+  KEYNOTE_SPEAKERS,
   SPONSORSHIP_PATH,
 } from "@/lib/widow-wellness-event";
 import Image from "next/image";
@@ -18,13 +19,13 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import "./widow-wellness.css";
 
-const HERO_IMAGE =
-  "/images/Retreats/Summer2025/Jen Kitchen Table Horizontal.webp";
-const EXP_A = "/images/Retreats/Summer2025/IMG_1832.webp";
-const EXP_B = "/images/Retreats/fall 2025/IMG_0978.webp";
-const EXP_C = "/images/Retreats/Summer2025/IMG_1698.webp";
-const EXP_D = "/images/Retreats/fall 2025/IMG_0966.webp";
-const BREAK_IMAGE = "/images/Retreats/Summer2025/IMG_1908.webp";
+/* ─── Image constants — all indoor ─── */
+const HERO_IMAGE = "/images/widowwellnessimages/IMG_8510.jpeg";
+const EXP_A = "/images/widowwellnessimages/IMG_3180.jpeg";
+const EXP_B = "/images/widowwellnessimages/IMG_0604.jpeg";
+const EXP_C = "/images/widowwellnessimages/IMG_4575.jpeg";
+const EXP_D = "/images/widowwellnessimages/IMG_2517.jpeg";
+const BREAK_IMAGE = "/images/widowwellnessimages/IMG_4386.jpeg";
 const KELLEY_BANNER = "/images/widowwellnessimages/kelleylinn.png";
 
 const morningBreakouts = BREAKOUT_LEADERS.filter((l) => l.slot === "morning");
@@ -46,6 +47,7 @@ function scrollToDetails() {
   });
 }
 
+/* ─── Scroll-triggered fade-up ─── */
 function Reveal({
   children,
   className = "",
@@ -82,6 +84,151 @@ function Reveal({
   );
 }
 
+/* ─── Collapsible section (Event Flow, Breakouts, gallery) ─── */
+const LARGE_SPONSOR_LOGOS = new Set([
+  "Parents Estate Planning",
+  "Lightwork",
+  "Howe2Organize",
+]);
+
+function AccordionSection({
+  title,
+  subtitle,
+  eyebrow,
+  preview,
+  children,
+  defaultOpen = false,
+  onDark = false,
+  overlay = false,
+}: {
+  title: ReactNode;
+  subtitle?: string;
+  eyebrow?: string;
+  preview?: ReactNode;
+  children: ReactNode;
+  defaultOpen?: boolean;
+  onDark?: boolean;
+  overlay?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div
+      className={`ww-accordion${open ? " is-open" : ""}${onDark ? " ww-accordion--dark" : ""}${overlay ? " ww-accordion--overlay" : ""}`}
+    >
+      <button
+        type="button"
+        className="ww-accordion__trigger"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <span className="ww-accordion__trigger-text">
+          {eyebrow && (
+            <span className="ww-accordion__eyebrow">{eyebrow}</span>
+          )}
+          <span className="ww-accordion__title">{title}</span>
+          {subtitle && (
+            <span className="ww-accordion__subtitle">{subtitle}</span>
+          )}
+        </span>
+        <span className="ww-accordion__arrow" aria-hidden>
+          ↓
+        </span>
+      </button>
+      {preview ? (
+        <div className="ww-accordion__stack">
+          <div className="ww-accordion__preview">{preview}</div>
+          <div className="ww-accordion__body" aria-hidden={!open}>
+            <div className="ww-accordion__inner">
+              <div className="ww-accordion__panel">{children}</div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="ww-accordion__body" aria-hidden={!open}>
+          <div className="ww-accordion__inner">{children}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── Keynote speaker card with expandable bio ─── */
+function SpeakerCard({
+  speaker,
+}: {
+  speaker: (typeof KEYNOTE_SPEAKERS)[number];
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className={`ww-speaker-card${open ? " is-open" : ""}`}>
+      <button
+        type="button"
+        className="ww-speaker-card__header"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        {speaker.photo && (
+          <figure className="ww-speaker-card__photo">
+            <Image src={speaker.photo} alt={speaker.name} fill sizes="88px" />
+          </figure>
+        )}
+        <div className="ww-speaker-card__meta">
+          <p className="ww-speaker-card__label">{speaker.role}</p>
+          <h3 className="ww-speaker-card__name">{speaker.name}</h3>
+          {speaker.org && (
+            <p className="ww-speaker-card__org">{speaker.org}</p>
+          )}
+          <p className="ww-speaker-card__preview">{speaker.bio[0]}</p>
+        </div>
+        <span className="ww-speaker-card__expand-arrow" aria-hidden>
+          ↓
+        </span>
+      </button>
+
+      <div className="ww-speaker-card__body" aria-hidden={!open}>
+        <div className="ww-speaker-card__inner">
+          <div className="ww-speaker-card__full">
+            {speaker.photo && (
+              <figure className="ww-speaker-card__full-photo">
+                <Image
+                  src={speaker.photo}
+                  alt={speaker.name}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 260px"
+                />
+              </figure>
+            )}
+            <div className="ww-speaker-card__full-bio">
+              {speaker.bio.map((para) => (
+                <p key={para.slice(0, 48)}>{para}</p>
+              ))}
+              <div className="ww-speaker-card__links">
+                {speaker.website && (
+                  <a
+                    href={speaker.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ww-link"
+                  >
+                    Visit website →
+                  </a>
+                )}
+                {speaker.social && (
+                  <span className="ww-speaker-card__social">
+                    {speaker.social}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main client component ─── */
 export function WidowWellnessClient({
   availableLeaderPhotos = {},
 }: {
@@ -133,7 +280,7 @@ export function WidowWellnessClient({
     <div className="ww">
       <WidowWellnessPixelEvents contentName={EVENT_NAME} value={129} />
 
-      {/* 1. Hero — event poster */}
+      {/* 1. Hero */}
       <section
         ref={heroRef}
         className="ww-hero"
@@ -142,7 +289,7 @@ export function WidowWellnessClient({
         <div className="ww-hero__media">
           <Image
             src={HERO_IMAGE}
-            alt="Women gathered around a dinner table in warm conversation"
+            alt="Widows gathered in a warm circle of connection and support"
             fill
             priority
             sizes="(max-width: 960px) 100vw, 58vw"
@@ -151,8 +298,7 @@ export function WidowWellnessClient({
         <div className="ww-hero__panel">
           <p className="ww-hero__brand">Presented by It&apos;s Lifey</p>
           <h1 id="ww-hero-heading" className="ww-hero__title">
-            Widow Wellness &amp;{" "}
-            <em>Connection</em> Experience
+            Widow Wellness &amp; <em>Connection</em> Experience
           </h1>
           <p className="ww-hero__lede">
             A gathering for widows across New England — inspiration, education,
@@ -177,12 +323,36 @@ export function WidowWellnessClient({
         </div>
       </section>
 
-      {/* 2. Compact sponsor strip */}
+      {/* 2. Sponsor strip */}
       <section className="ww-sponsors" aria-label="Event sponsors">
         <div className="ww-shell">
           <p className="ww-sponsors__label">Presented with support from</p>
+
+          {EVENT_SPONSORS.filter((s) => s.featured).map((sponsor) => (
+            <a
+              key={sponsor.name}
+              href={sponsor.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ww-sponsors__featured"
+              aria-label={`${sponsor.name} — ${sponsor.tier}`}
+            >
+              <p className="ww-sponsors__tier">{sponsor.tier}</p>
+              <span className="ww-sponsors__logo ww-sponsors__logo--feature">
+                <Image
+                  src={sponsor.logo}
+                  alt=""
+                  fill
+                  className="object-contain"
+                  sizes="280px"
+                />
+              </span>
+              <p className="ww-sponsors__name">{sponsor.name}</p>
+            </a>
+          ))}
+
           <div className="ww-sponsors__track">
-            {EVENT_SPONSORS.map((sponsor) => (
+            {EVENT_SPONSORS.filter((s) => !s.featured).map((sponsor) => (
               <a
                 key={sponsor.name}
                 href={sponsor.href}
@@ -194,7 +364,13 @@ export function WidowWellnessClient({
                 <p className="ww-sponsors__tier">{sponsor.tier}</p>
                 <span
                   className={`ww-sponsors__logo${
-                    sponsor.featured ? " ww-sponsors__logo--feature" : ""
+                    LARGE_SPONSOR_LOGOS.has(sponsor.name)
+                      ? " ww-sponsors__logo--prominent"
+                      : ""
+                  }${
+                    sponsor.name === "Lightwork"
+                      ? " ww-sponsors__logo--lightwork"
+                      : ""
                   }`}
                 >
                   <Image
@@ -202,22 +378,22 @@ export function WidowWellnessClient({
                     alt=""
                     fill
                     className="object-contain"
-                    sizes={sponsor.featured ? "160px" : "120px"}
+                    sizes={
+                      LARGE_SPONSOR_LOGOS.has(sponsor.name) ? "240px" : "140px"
+                    }
                   />
                 </span>
                 <p className="ww-sponsors__name">{sponsor.name}</p>
               </a>
             ))}
-          </div>
-          <p className="ww-sponsors__cta">
-            <Link href={SPONSORSHIP_PATH} className="ww-link">
+            <Link href={SPONSORSHIP_PATH} className="ww-sponsors__cta-inline">
               Interested in sponsoring?
             </Link>
-          </p>
+          </div>
         </div>
       </section>
 
-      {/* 3. Intro / emotional premise */}
+      {/* 3. Intro */}
       <section
         id="ww-intro"
         className="ww-intro"
@@ -251,7 +427,10 @@ export function WidowWellnessClient({
                   resources, and the support of women who truly understand your
                   journey.
                 </p>
-                <p className="ww-body" style={{ fontWeight: 600, color: "var(--ww-ink)" }}>
+                <p
+                  className="ww-body"
+                  style={{ fontWeight: 600, color: "var(--ww-ink)" }}
+                >
                   By a widow, for widows. {EVENT_SHORT_TAGLINE}
                 </p>
               </div>
@@ -260,99 +439,103 @@ export function WidowWellnessClient({
         </div>
       </section>
 
-      {/* 4. Experience collage */}
+      {/* 4. Experience collage — collapsible */}
       <section
         className="ww-experience"
         aria-labelledby="ww-experience-heading"
       >
         <div className="ww-shell">
-          <Reveal>
-            <div className="ww-experience__header">
-              <h2 id="ww-experience-heading" className="ww-experience__title">
+          <AccordionSection
+            eyebrow="Glimpse the gathering"
+            title={
+              <span id="ww-experience-heading">
                 More than a conference — a day to exhale
-              </h2>
-              <p className="ww-experience__lede">
+              </span>
+            }
+            subtitle="See photos from past It's Lifey gatherings"
+          >
+            <div style={{ paddingBottom: "2.5rem" }}>
+              <p className="ww-experience__lede" style={{ marginBottom: "1.75rem" }}>
                 The experience begins the evening before with an optional VIP
-                Mocktail Hour featuring Kelley Lynn. The following day includes
-                breakfast, keynotes, wellness and educational breakouts,
-                networking, lunch, and conversations designed to help widows
-                navigate life after loss with greater confidence and support.
+                Mocktail Hour. The following day includes breakfast, keynotes,
+                wellness and educational breakouts, networking, lunch, and
+                conversations designed to help widows navigate life after loss.
               </p>
-            </div>
-          </Reveal>
-
-          <div className="ww-experience__grid">
-            <figure className="ww-tile ww-tile--photo ww-tile--a">
-              <Image
-                src={EXP_A}
-                alt="Widows talking and laughing together at an It's Lifey gathering"
-                fill
-                sizes="(max-width: 900px) 100vw, 58vw"
-              />
-            </figure>
-            <div className="ww-tile ww-tile--word ww-tile--b">
-              <div>
-                <span>CONNECTION</span>
-                <small>Women who get it</small>
+              <div className="ww-experience__grid">
+                <figure className="ww-tile ww-tile--photo ww-tile--a">
+                  <Image
+                    src={EXP_A}
+                    alt="Widows in a warm circle of connection at an It's Lifey gathering"
+                    fill
+                    sizes="(max-width: 900px) 100vw, 58vw"
+                  />
+                </figure>
+                <div className="ww-tile ww-tile--word ww-tile--b">
+                  <div>
+                    <span>CONNECTION</span>
+                    <small>Women who get it</small>
+                  </div>
+                </div>
+                <div className="ww-tile ww-tile--copy ww-tile--c">
+                  <strong>Come as you are</strong>
+                  <p>
+                    Whether you&apos;re newly widowed or years into your
+                    journey, this is a welcoming space to connect, learn, heal,
+                    and be reminded that you do not have to navigate widowhood
+                    alone.
+                  </p>
+                </div>
+                <figure className="ww-tile ww-tile--photo ww-tile--d">
+                  <Image
+                    src={EXP_C}
+                    alt="Women sharing a warm meal and conversation"
+                    fill
+                    sizes="(max-width: 900px) 100vw, 30vw"
+                  />
+                </figure>
+                <div className="ww-tile ww-tile--word ww-tile--e">
+                  <div>
+                    <span>COMMUNITY</span>
+                    <small>Shared meals &amp; hope</small>
+                  </div>
+                </div>
+                <div className="ww-tile ww-tile--word ww-tile--f">
+                  <div>
+                    <span>WELLNESS</span>
+                    <small>Mind · body · heart</small>
+                  </div>
+                </div>
+                <figure className="ww-tile ww-tile--photo ww-tile--g">
+                  <Image
+                    src={EXP_D}
+                    alt="Widows gathered around a table in warm conversation"
+                    fill
+                    sizes="(max-width: 900px) 100vw, 48vw"
+                  />
+                </figure>
+                <div className="ww-tile ww-tile--copy ww-tile--h">
+                  <strong>What the day includes</strong>
+                  <p>
+                    Keynotes · Interactive wellness breakouts · Breakfast &amp;
+                    shared lunch · Networking · Practical tools &amp; trusted
+                    resources · The Hope Mic Story Share
+                  </p>
+                </div>
+                <figure className="ww-tile ww-tile--photo ww-tile--wide">
+                  <Image
+                    src={EXP_B}
+                    alt="Women laughing together at a shared meal"
+                    fill
+                    sizes="100vw"
+                  />
+                </figure>
               </div>
             </div>
-            <div className="ww-tile ww-tile--copy ww-tile--c">
-              <strong>Come as you are</strong>
-              <p>
-                Whether you&apos;re newly widowed or years into your journey,
-                this is a welcoming space to connect, learn, heal, and be
-                reminded that you do not have to navigate widowhood alone.
-              </p>
-            </div>
-            <figure className="ww-tile ww-tile--photo ww-tile--d">
-              <Image
-                src={EXP_C}
-                alt="A quiet moment of connection outdoors"
-                fill
-                sizes="(max-width: 900px) 100vw, 30vw"
-              />
-            </figure>
-            <div className="ww-tile ww-tile--word ww-tile--e">
-              <div>
-                <span>COMMUNITY</span>
-                <small>Shared meals &amp; hope</small>
-              </div>
-            </div>
-            <div className="ww-tile ww-tile--word ww-tile--f">
-              <div>
-                <span>WELLNESS</span>
-                <small>Mind · body · heart</small>
-              </div>
-            </div>
-            <figure className="ww-tile ww-tile--photo ww-tile--g">
-              <Image
-                src={EXP_D}
-                alt="Shared meal and conversation in soft evening light"
-                fill
-                sizes="(max-width: 900px) 100vw, 48vw"
-              />
-            </figure>
-            <div className="ww-tile ww-tile--copy ww-tile--h">
-              <strong>What the day includes</strong>
-              <p>
-                Keynotes · Interactive wellness breakouts · Breakfast &amp;
-                shared lunch · Networking · Practical tools &amp; trusted
-                resources · The Hope Mic Story Slam
-              </p>
-            </div>
-            <figure className="ww-tile ww-tile--photo ww-tile--wide">
-              <Image
-                src={EXP_B}
-                alt="Women gathered outdoors in soft natural light"
-                fill
-                sizes="100vw"
-              />
-            </figure>
-          </div>
+          </AccordionSection>
         </div>
       </section>
 
-      {/* 5. Full-bleed photographic break */}
+      {/* 5. Full-bleed photo break */}
       <section className="ww-break" aria-label="Emotional invitation">
         <Image
           src={BREAK_IMAGE}
@@ -363,11 +546,31 @@ export function WidowWellnessClient({
         />
         <div className="ww-break__veil" aria-hidden />
         <p className="ww-break__quote">
-          Come alone. You won&apos;t be alone for long.
+          Come alone. Leave with your people.
         </p>
       </section>
 
-      {/* 6. Kelley Lynn */}
+      {/* 6. Keynote speakers — Anita + TBD, above Kelley */}
+      <section className="ww-keynotes" aria-labelledby="ww-keynotes-heading">
+        <div className="ww-shell">
+          <Reveal>
+            <div className="ww-keynotes__header">
+              <p className="ww-eyebrow">Main stage · November 14</p>
+              <h2 id="ww-keynotes-heading" className="ww-keynotes__title">
+                Keynote Speakers
+              </h2>
+            </div>
+          </Reveal>
+
+          <div className="ww-keynotes__list">
+            {KEYNOTE_SPEAKERS.map((speaker) => (
+              <SpeakerCard key={speaker.name} speaker={speaker} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Kelley Lynn — VIP Evening */}
       <section className="ww-host" aria-labelledby="ww-host-heading">
         <div className="ww-shell">
           <Reveal>
@@ -389,9 +592,7 @@ export function WidowWellnessClient({
                 <h2 id="ww-host-heading" className="ww-host__name">
                   Kelley Lynn
                 </h2>
-                <p className="ww-host__role">
-                  Mocktail Hour · November 13
-                </p>
+                <p className="ww-host__role">Mocktail Hour · November 13</p>
                 <p className="ww-body" style={{ marginTop: "1.25rem" }}>
                   VIP guests gather the evening before for an intimate mocktail
                   hour featuring widow, comedian, TEDx speaker, author, and
@@ -400,9 +601,9 @@ export function WidowWellnessClient({
                   event.
                 </p>
                 <p className="ww-body">
-                  Kelley became a leading voice in grief support. Her TEDx talk,
-                  &ldquo;When Someone You Love Dies, There is No Such Thing as
-                  Moving On,&rdquo; has reached millions. Her book,{" "}
+                  Kelley became a leading voice in grief support. Her TEDx
+                  talk, &ldquo;When Someone You Love Dies, There is No Such
+                  Thing as Moving On,&rdquo; has reached millions. Her book,{" "}
                   <em>My Husband Is Not a Rainbow</em>, shares an honest and
                   often humorous perspective on grief, love, and rebuilding
                   life after loss.
@@ -416,157 +617,7 @@ export function WidowWellnessClient({
         </div>
       </section>
 
-      {/* 7. Event Flow */}
-      <section className="ww-flow" aria-labelledby="ww-flow-heading">
-        <div className="ww-shell">
-          <Reveal>
-            <div className="ww-flow__intro">
-              <p className="ww-eyebrow">Your day, step by step</p>
-              <h2 id="ww-flow-heading" className="ww-flow__title">
-                Event Flow
-              </h2>
-              <p className="ww-flow__lede">
-                November 13–14 at Presence &amp; Co. — an optional VIP evening,
-                a full day of connection and wellness, and a closing that
-                belongs to the women in the room.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="ww-flow__day">
-            <div className="ww-flow__day-side">
-              <p className="ww-flow__day-label">Friday</p>
-              <p className="ww-flow__day-sub">November 13 · Evening</p>
-            </div>
-            <div className="ww-flow__rows">
-              <article className="ww-flow__row">
-                <p className="ww-flow__when">Evening</p>
-                <h3 className="ww-flow__row-title ww-flow__row-title--flag">
-                  VIP Evening · Mocktail Hour with Kelley Lynn
-                </h3>
-                <ul className="ww-flow__list">
-                  <li>Welcome and connection</li>
-                  <li>Mocktails and light bites</li>
-                  <li>Conversation with Kelley Lynn</li>
-                  <li>Laughter, honesty, and hope</li>
-                  <li>
-                    Time for widows, sponsors, and VIP guests to connect
-                  </li>
-                </ul>
-              </article>
-            </div>
-          </div>
-
-          <div className="ww-flow__day">
-            <div className="ww-flow__day-side">
-              <p className="ww-flow__day-label">Saturday</p>
-              <p className="ww-flow__day-sub">November 14 · Main event</p>
-            </div>
-            <div className="ww-flow__rows">
-              <article className="ww-flow__row">
-                <p className="ww-flow__when">Morning</p>
-                <h3 className="ww-flow__row-title">
-                  Main Widow Wellness Experience · Morning Welcome
-                </h3>
-                <ul className="ww-flow__list">
-                  <li>Arrival, coffee, and connection</li>
-                  <li>Welcome from It&apos;s Lifey</li>
-                  <li>Grounding moment / candle lighting</li>
-                  <li>Opening keynote</li>
-                </ul>
-              </article>
-
-              <article className="ww-flow__row">
-                <p className="ww-flow__when">~10 a.m.</p>
-                <h3 className="ww-flow__row-title">
-                  Mid-Morning Breakout Sessions
-                </h3>
-                <p
-                  className="ww-flow__lede"
-                  style={{ marginTop: "0.55rem", maxWidth: "none" }}
-                >
-                  Widows will choose from healing and wellness-centered
-                  sessions:
-                </p>
-                <ul className="ww-flow__list">
-                  {morningBreakouts.map((leader) => (
-                    <li key={leader.name}>
-                      <strong>{leader.session}</strong>
-                      <span>{leader.name}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-
-              <article className="ww-flow__row">
-                <p className="ww-flow__when">Midday</p>
-                <h3 className="ww-flow__row-title">Lunch &amp; Connection</h3>
-                <ul className="ww-flow__list">
-                  <li>Shared lunch</li>
-                  <li>Sponsor and resource table visits</li>
-                  <li>
-                    Time for widows to connect in a relaxed, supportive setting
-                  </li>
-                </ul>
-              </article>
-
-              <article className="ww-flow__row">
-                <p className="ww-flow__when">Afternoon · ~2 p.m.</p>
-                <h3 className="ww-flow__row-title">Afternoon Program</h3>
-                <ul className="ww-flow__list">
-                  <li>Afternoon keynote</li>
-                  <li>Wellness breakout sessions · approximately 2 p.m.</li>
-                  {afternoonBreakouts.map((leader) => (
-                    <li key={leader.name}>
-                      <strong>{leader.session}</strong>
-                      <span>{leader.name}</span>
-                    </li>
-                  ))}
-                  <li>Guided reflection or community conversation</li>
-                </ul>
-              </article>
-
-              <article className="ww-flow__row">
-                <p className="ww-flow__when">Closing</p>
-                <h3 className="ww-flow__row-title ww-flow__row-title--flag">
-                  The Hope Mic Story Slam · Stories of Experience, Strength
-                  &amp; Hope
-                </h3>
-                <div className="ww-flow__prose">
-                  <p>
-                    The day will close with The Hope Mic Story Slam — an open
-                    invitation for widows to share their stories in a
-                    supportive, judgment-free space.
-                  </p>
-                  <p>
-                    Each speaker will have 3 minutes to share a piece of their
-                    experience, strength, and hope — whether it&apos;s a moment
-                    of grief, love, humor, survival, rebuilding, or what life
-                    after loss has taught them.
-                  </p>
-                  <p>
-                    This closing event honors the truth that every widow has a
-                    story, and that sharing those stories can be healing for the
-                    person speaking and for every woman listening.
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div className="ww-flow__cta">
-            <button
-              type="button"
-              className="ww-btn ww-btn--on-dark"
-              onClick={scrollToRegister}
-            >
-              Reserve Your Spot
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. Registration */}
+      {/* 8. Registration — moved before Event Flow */}
       <section
         id="ww-register"
         ref={registerRef}
@@ -583,10 +634,10 @@ export function WidowWellnessClient({
                 </h2>
                 <p className="ww-body" style={{ marginTop: "1.15rem" }}>
                   We&apos;d love to have you in the room. Choose your ticket,
-                  share a few details, and you&apos;ll be taken to secure Stripe
-                  checkout to complete payment. We&apos;ll also email you the
-                  link — your spot isn&apos;t confirmed until payment is
-                  received.
+                  share a few details, and you&apos;ll be taken to secure
+                  Stripe checkout to complete payment. We&apos;ll also email
+                  you the link — your spot isn&apos;t confirmed until payment
+                  is received.
                 </p>
 
                 <dl className="ww-register__facts">
@@ -598,8 +649,8 @@ export function WidowWellnessClient({
                     <dt>Where</dt>
                     <dd>{EVENT_LOCATION}</dd>
                     <p>
-                      Whether you&apos;re joining for the full day or adding the
-                      VIP evening with Kelley Lynn, you&apos;ll step into a
+                      Whether you&apos;re joining for the full day or adding
+                      the VIP evening with Kelley Lynn, you&apos;ll step into a
                       space built for widows — real talk, real connection, and
                       real hope.
                     </p>
@@ -624,29 +675,33 @@ export function WidowWellnessClient({
 
                 <div className="ww-register__tiers">
                   <div className="ww-register__tier">
-                    <strong>VIP — $169</strong>
+                    <span className="ww-register__tier-label">VIP</span>
+                    <span className="ww-register__tier-price">$169</span>
                     <p>
                       Mocktail hour with Kelley Lynn on November 13, plus the
                       full main event on November 14.
                     </p>
                   </div>
                   <div className="ww-register__tier">
-                    <strong>General Admission — $129</strong>
+                    <span className="ww-register__tier-label">
+                      General Admission
+                    </span>
+                    <span className="ww-register__tier-price">$129</span>
                     <p>
-                      The full main event — welcome, keynotes, breakouts, lunch,
-                      and The Hope Mic Story Slam.
+                      The full main event — welcome, keynotes, breakouts,
+                      lunch, and The Hope Mic Story Share.
                     </p>
                   </div>
                 </div>
 
-                <p className="ww-body" style={{ marginTop: "1.35rem" }}>
+                <p className="ww-body" style={{ marginTop: "1.75rem" }}>
                   Newly widowed or years into your journey — you belong here.
-                  Come as you are. Leave with practical tools, trusted
-                  resources, and the quiet relief of women who understand
-                  without you having to explain.
+                  Come alone. Leave with practical tools, trusted resources,
+                  and the quiet relief of women who understand without you
+                  having to explain.
                 </p>
                 <p className="ww-body" style={{ marginTop: "0.85rem" }}>
-                  Questions before you register? Reach out at{" "}
+                  Questions?{" "}
                   <a href="mailto:jennifer@itslifey.com" className="ww-link">
                     jennifer@itslifey.com
                   </a>
@@ -662,66 +717,245 @@ export function WidowWellnessClient({
         </div>
       </section>
 
-      {/* 9. Breakout leaders */}
-      <section
-        className="ww-leaders"
-        aria-labelledby="ww-leaders-heading"
-      >
+      {/* 9. Event Flow — collapsible */}
+      <section className="ww-flow" aria-labelledby="ww-flow-heading">
         <div className="ww-shell">
-          <Reveal>
-            <p className="ww-eyebrow">Session leaders</p>
-            <h2 id="ww-leaders-heading" className="ww-leaders__title">
-              Introducing the Breakout Session Leaders
-            </h2>
-          </Reveal>
+          <AccordionSection
+            eyebrow="Your day, step by step"
+            title={
+              <span id="ww-flow-heading">Event Flow</span>
+            }
+            subtitle={`November 13–14 · ${EVENT_LOCATION}`}
+            onDark
+          >
+            <div className="ww-flow__content">
+              <div className="ww-flow__day">
+                <div className="ww-flow__day-side">
+                  <p className="ww-flow__day-label">Friday</p>
+                  <p className="ww-flow__day-sub">November 13 · Evening</p>
+                </div>
+                <div className="ww-flow__rows">
+                  <article className="ww-flow__row">
+                    <p className="ww-flow__when">Evening</p>
+                    <h3 className="ww-flow__row-title ww-flow__row-title--flag">
+                      VIP Evening · Mocktail Hour with Kelley Lynn
+                    </h3>
+                    <ul className="ww-flow__list">
+                      <li>Welcome and connection</li>
+                      <li>Mocktails and light bites</li>
+                      <li>Conversation with Kelley Lynn</li>
+                      <li>Laughter, honesty, and hope</li>
+                      <li>
+                        Time for widows, sponsors, and VIP guests to connect
+                      </li>
+                    </ul>
+                  </article>
+                </div>
+              </div>
 
-          <ul className="ww-leaders__list">
-            {BREAKOUT_LEADERS.map((leader) => {
-              const photo = availableLeaderPhotos[leader.name];
-              return (
-                <li key={leader.name} className="ww-leader">
-                  {photo ? (
-                    <figure className="ww-leader__photo">
-                      <Image
-                        src={photo}
-                        alt={leader.name}
-                        fill
-                        sizes="92px"
-                      />
-                    </figure>
-                  ) : (
-                    <div className="ww-leader__photo" aria-hidden />
-                  )}
-                  <div>
-                    <p className="ww-leader__slot">
-                      {leader.slot === "morning"
-                        ? "Morning · approximately 10 a.m."
-                        : "Afternoon · approximately 2 p.m."}
-                    </p>
-                    <h3 className="ww-leader__name">{leader.name}</h3>
-                    <p className="ww-leader__session">{leader.session}</p>
-                    <div className="ww-leader__bio">
-                      {leader.description.map((paragraph) => (
-                        <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-                      ))}
-                    </div>
-                    <a
-                      href={leader.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="ww-link ww-leader__link"
+              <div className="ww-flow__day">
+                <div className="ww-flow__day-side">
+                  <p className="ww-flow__day-label">Saturday</p>
+                  <p className="ww-flow__day-sub">November 14 · Main event</p>
+                </div>
+                <div className="ww-flow__rows">
+                  <article className="ww-flow__row">
+                    <p className="ww-flow__when">Morning</p>
+                    <h3 className="ww-flow__row-title">
+                      Main Widow Wellness Experience · Morning Welcome
+                    </h3>
+                    <ul className="ww-flow__list">
+                      <li>Arrival, coffee, and connection</li>
+                      <li>Welcome from It&apos;s Lifey</li>
+                      <li>Grounding moment / candle lighting</li>
+                      <li>Opening keynote</li>
+                    </ul>
+                  </article>
+
+                  <article className="ww-flow__row">
+                    <p className="ww-flow__when">~10 a.m.</p>
+                    <h3 className="ww-flow__row-title">
+                      Mid-Morning Breakout Sessions
+                    </h3>
+                    <p
+                      className="ww-flow__lede"
+                      style={{ marginTop: "0.55rem", maxWidth: "none" }}
                     >
-                      Website →
-                    </a>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+                      Widows will choose from healing and wellness-centered
+                      sessions:
+                    </p>
+                    <ul className="ww-flow__list">
+                      {morningBreakouts.map((leader) => (
+                        <li key={leader.name}>
+                          <strong>{leader.session}</strong>
+                          <span>{leader.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+
+                  <article className="ww-flow__row">
+                    <p className="ww-flow__when">Midday</p>
+                    <h3 className="ww-flow__row-title">
+                      Lunch &amp; Connection
+                    </h3>
+                    <ul className="ww-flow__list">
+                      <li>Shared lunch</li>
+                      <li>Sponsor and resource table visits</li>
+                      <li>
+                        Time for widows to connect in a relaxed, supportive
+                        setting
+                      </li>
+                    </ul>
+                  </article>
+
+                  <article className="ww-flow__row">
+                    <p className="ww-flow__when">Afternoon · ~2 p.m.</p>
+                    <h3 className="ww-flow__row-title">Afternoon Program</h3>
+                    <ul className="ww-flow__list">
+                      <li>Afternoon keynote</li>
+                      <li>
+                        Wellness breakout sessions · approximately 2 p.m.
+                      </li>
+                      {afternoonBreakouts.map((leader) => (
+                        <li key={leader.name}>
+                          <strong>{leader.session}</strong>
+                          <span>{leader.name}</span>
+                        </li>
+                      ))}
+                      <li>Guided reflection or community conversation</li>
+                    </ul>
+                  </article>
+
+                  <article className="ww-flow__row">
+                    <p className="ww-flow__when">Closing</p>
+                    <h3 className="ww-flow__row-title ww-flow__row-title--flag">
+                      The Hope Mic Story Share · Stories of Experience,
+                      Strength &amp; Hope
+                    </h3>
+                    <div className="ww-flow__prose">
+                      <p>
+                        The day will close with The Hope Mic Story Share — an
+                        open invitation for widows to share their stories in a
+                        supportive, judgment-free space.
+                      </p>
+                      <p>
+                        Each speaker will have 3 minutes to share a piece of
+                        their experience, strength, and hope — whether
+                        it&apos;s a moment of grief, love, humor, survival,
+                        rebuilding, or what life after loss has taught them.
+                      </p>
+                      <p>
+                        This closing event honors the truth that every widow
+                        has a story, and that sharing those stories can be
+                        healing for the person speaking and for every woman
+                        listening.
+                      </p>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <div className="ww-flow__cta">
+                <button
+                  type="button"
+                  className="ww-btn ww-btn--on-dark"
+                  onClick={scrollToRegister}
+                >
+                  Reserve Your Spot
+                </button>
+              </div>
+            </div>
+          </AccordionSection>
         </div>
       </section>
 
-      {/* 10. Sponsorship CTA */}
+      {/* 10. Breakout leaders — collapsible */}
+      <section className="ww-leaders" aria-labelledby="ww-leaders-heading">
+        <div className="ww-shell">
+          <AccordionSection
+            eyebrow="Session leaders"
+            title={
+              <span id="ww-leaders-heading">
+                Breakout Sessions
+              </span>
+            }
+            subtitle="6 sessions · Morning & Afternoon · choose your path"
+            overlay
+            preview={
+              <div className="ww-leaders__preview">
+                {BREAKOUT_LEADERS.map((leader) => {
+                  const photo = availableLeaderPhotos[leader.name];
+                  return (
+                    <div key={leader.name} className="ww-leaders__preview-tile">
+                      <div className="ww-leaders__preview-photo">
+                        {photo && (
+                          <Image src={photo} alt="" fill sizes="64px" />
+                        )}
+                      </div>
+                      <p className="ww-leaders__preview-slot">
+                        {leader.slot === "morning" ? "AM" : "PM"}
+                      </p>
+                      <p className="ww-leaders__preview-name">
+                        {leader.name.split(" ·")[0]}
+                      </p>
+                      <p className="ww-leaders__preview-session">
+                        {leader.session}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            }
+          >
+            <ul className="ww-leaders__list">
+              {BREAKOUT_LEADERS.map((leader) => {
+                const photo = availableLeaderPhotos[leader.name];
+                return (
+                  <li key={leader.name} className="ww-leader">
+                    {photo ? (
+                      <figure className="ww-leader__photo">
+                        <Image
+                          src={photo}
+                          alt={leader.name}
+                          fill
+                          sizes="92px"
+                        />
+                      </figure>
+                    ) : (
+                      <div className="ww-leader__photo" aria-hidden />
+                    )}
+                    <div>
+                      <p className="ww-leader__slot">
+                        {leader.slot === "morning"
+                          ? "Morning · approximately 10 a.m."
+                          : "Afternoon · approximately 2 p.m."}
+                      </p>
+                      <h3 className="ww-leader__name">{leader.name}</h3>
+                      <p className="ww-leader__session">{leader.session}</p>
+                      <div className="ww-leader__bio">
+                        {leader.description.map((paragraph) => (
+                          <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                        ))}
+                      </div>
+                      <a
+                        href={leader.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ww-link ww-leader__link"
+                      >
+                        Website →
+                      </a>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </AccordionSection>
+        </div>
+      </section>
+
+      {/* 11. Sponsorship CTA */}
       <section
         className="ww-sponsor-cta"
         aria-labelledby="ww-sponsor-cta-heading"

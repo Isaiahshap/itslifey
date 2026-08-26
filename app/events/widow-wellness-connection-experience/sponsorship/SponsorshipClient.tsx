@@ -72,15 +72,15 @@ const mainTiers = [
     ],
   },
   {
-    name: "The Hope Mic Story Slam Sponsor",
+    name: "The Hope Mic Story Share Sponsor",
     price: "$1,500",
     availability: "Only 1 available",
     subtitle: "Closing event · Stories of experience, strength & hope",
     includes: [
-      "Exclusive recognition as The Hope Mic Story Slam Sponsor",
+      "Exclusive recognition as The Hope Mic Story Share Sponsor",
       "Special signage at the closing event",
       "Logo on event materials & event webpage",
-      "5-minute welcome remarks before the Story Slam",
+      "5-minute welcome remarks before the Story Share",
       "2 complimentary event tickets",
       "Social media spotlight",
       "Branded gift or insert in attendee bags",
@@ -395,7 +395,7 @@ export function SponsorshipClient() {
                 real conversations, and restorative wellness breakout sessions
                 including yoga, Reiki, mediumship, financial wellness, dating
                 and relationship advice, and guided healing. The day closes with
-                The Hope Mic Story Slam, where widows share 3-minute stories of
+                The Hope Mic Story Share, where widows share 3-minute stories of
                 experience, strength, and hope.
               </p>
               <p>
@@ -431,7 +431,7 @@ export function SponsorshipClient() {
               },
               {
                 label: "Closing",
-                title: "The Hope Mic Story Slam",
+                title: "The Hope Mic Story Share",
                 when: "End of main event",
               },
             ].map((item) => (
@@ -658,7 +658,7 @@ export function SponsorshipClient() {
                   "Afternoon keynote, additional wellness breakout sessions, and guided reflection or community conversation.",
               },
               {
-                title: "Closing · The Hope Mic Story Slam",
+                title: "Closing · The Hope Mic Story Share",
                 detail:
                   "Stories of experience, strength & hope — widows share three minutes in a supportive, judgment-free space.",
               },
