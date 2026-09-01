@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
 import { PAST_RETREATS } from "@/lib/past-retreats";
@@ -22,7 +23,7 @@ export default function PastRetreatsPage() {
         aria-labelledby="past-retreats-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
             alt="Women from an It's Lifey retreat gathered on a dock"
             fill

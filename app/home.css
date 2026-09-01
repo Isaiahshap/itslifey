@@ -29,11 +29,13 @@
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
+  background: #ebe6df;
 }
 
 .home-hero__media {
   position: absolute;
   inset: 0;
+  background: #ebe6df;
 }
 
 .home-hero__slide {

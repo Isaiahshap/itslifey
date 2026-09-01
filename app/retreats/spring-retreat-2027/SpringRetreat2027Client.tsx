@@ -3,6 +3,7 @@
 import { ClipReveal } from "@/components/ClipReveal";
 import { Spring2027RetreatInterestForm } from "@/components/Spring2027RetreatInterestForm";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState, type CSSProperties } from "react";
@@ -71,7 +72,7 @@ export function SpringRetreat2027Client() {
               animate={{ opacity: heroIndex === i ? 1 : 0 }}
               transition={{ duration: 2.2, ease: [0.45, 0, 0.55, 1] as const }}
             >
-              <Image
+              <HeroImage
                 src={src}
                 alt=""
                 fill

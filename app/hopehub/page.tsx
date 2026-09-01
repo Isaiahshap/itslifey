@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
 import {
@@ -52,7 +53,7 @@ export default function HopeHubPage() {
         aria-labelledby="hopehub-hero-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
             alt="Women gathered in a bright living room during an It's Lifey retreat"
             fill

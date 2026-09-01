@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
 import { EVENT_PATH } from "@/lib/widow-wellness-event";
@@ -21,7 +22,7 @@ export default function AboutPage() {
         aria-labelledby="about-hero-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
             alt="Jennifer, founder of It's Lifey, in a bright kitchen"
             fill

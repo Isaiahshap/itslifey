@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
 import {
@@ -27,7 +28,7 @@ export default function ResourcesPage() {
         aria-labelledby="resources-hero-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
             alt="Women together during an It's Lifey summer retreat"
             fill

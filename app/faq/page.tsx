@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
 import { FAQ_GROUPS } from "@/lib/faqs";
@@ -23,7 +24,7 @@ export default function FaqPage() {
         aria-labelledby="faq-hero-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
             alt="Women sharing conversation at an It's Lifey gathering"
             fill

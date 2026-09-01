@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import { ClipReveal } from "@/components/ClipReveal";
 import { ContactForm } from "@/components/ContactForm";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     "Reach It's Lifey with questions about retreats, HopeHub, and support for widows. We read every message.",
 };
 
-const HERO = "/images/widowwellnessimages/IMG_4575.jpeg";
+const HERO = `/images/${encodeURIComponent("Summer retreat")}/IMG_4349.webp`;
 const SIDE = "/images/widowwellnessimages/IMG_0604.jpeg";
 
 export default function ContactPage() {
@@ -21,9 +22,9 @@ export default function ContactPage() {
         aria-labelledby="contact-hero-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
-            alt="Women sharing a warm meal and conversation together"
+            alt="Women gathered around a candlelit table at an It's Lifey retreat"
             fill
             priority
             sizes="100vw"

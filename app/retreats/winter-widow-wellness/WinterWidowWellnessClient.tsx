@@ -3,6 +3,7 @@
 import { ClipReveal } from "@/components/ClipReveal";
 import { WinterWidowWellnessEarlyBirdForm } from "@/components/WinterWidowWellnessEarlyBirdForm";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { useEffect, type CSSProperties } from "react";
 import "./winter-widow-wellness.css";
@@ -101,7 +102,7 @@ export function WinterWidowWellnessClient() {
         aria-labelledby="wwr-hero-heading"
       >
         <div className="wwr-hero__media reveal-media" style={delayStyle(160)}>
-          <Image
+          <HeroImage
             src={HERO}
             alt="Aerial view of the private Hudson Valley lodge and grounds"
             fill

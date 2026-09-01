@@ -73,17 +73,37 @@
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
-  background: #161412;
+  background: #ebe6df;
 }
 
 .ed-hero__media {
   position: absolute;
   inset: 0;
+  background: #ebe6df;
 }
 
 .ed-hero__media img {
   object-fit: cover;
   object-position: center 35%;
+}
+
+.hero-image__blur {
+  position: absolute;
+  inset: -8%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px);
+  transform: scale(1.12);
+  pointer-events: none;
+}
+
+.hero-image--native {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.hero-image--native.is-loaded {
+  opacity: 1;
 }
 
 .ed-hero--plain {

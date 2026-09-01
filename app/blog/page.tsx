@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
 import { getPosts } from "@/lib/wordpress";
@@ -38,7 +39,7 @@ export default async function BlogArchivePage() {
         aria-labelledby="blog-index-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
             alt="Women practicing yoga together in a bright summer retreat house"
             fill

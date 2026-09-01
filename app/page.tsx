@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
@@ -141,7 +142,7 @@ export default function Home() {
               animate={{ opacity: heroIndex === i ? 1 : 0 }}
               transition={{ duration: 3.2, ease: [0.45, 0, 0.55, 1] as const }}
             >
-              <Image
+              <HeroImage
                 src={src}
                 alt=""
                 fill

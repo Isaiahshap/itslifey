@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
 import { VirtualHealingPixelEvents } from "@/components/VirtualHealingPixelEvents";
@@ -99,7 +100,7 @@ export default function VirtualHealingExperiencesPage() {
         aria-labelledby="vhe-hero-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
             alt="Women gathered outdoors during an It's Lifey retreat"
             fill

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
 import { WP_EVENTS_EMBED_URL } from "@/lib/wp-config";
@@ -21,7 +22,7 @@ export default function SupportGroupsPage() {
         aria-labelledby="sg-index-heading"
       >
         <div className="ed-hero__media reveal-media">
-          <Image
+          <HeroImage
             src={HERO}
             alt="Women gathered in warm conversation during an It's Lifey retreat"
             fill
