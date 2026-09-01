@@ -6,6 +6,7 @@ import { EntranceMotion } from "@/components/EntranceMotion";
 import { Footer } from "@/components/Footer";
 import { MetaPixel } from "@/components/MetaPixel";
 import { Navbar } from "@/components/Navbar";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { SiteFinalCta } from "@/components/SiteFinalCta";
 import { VirtualHealingAnnouncementBar } from "@/components/VirtualHealingAnnouncementBar";
 
@@ -95,7 +96,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunitoSans.variable} ${heroScript.variable} h-full scroll-smooth`}
+      className={`${nunitoSans.variable} ${heroScript.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased text-black">
         <Script
@@ -111,6 +112,7 @@ export default function RootLayout({
           `}
         </Script>
         <MetaPixel />
+        <ScrollToTop />
         <EntranceMotion />
         <VirtualHealingAnnouncementBar />
         <Navbar />
