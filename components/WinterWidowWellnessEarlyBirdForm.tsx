@@ -7,9 +7,16 @@ import { getRecaptchaToken } from "@/lib/recaptcha-client";
 import { useState, type FormEvent } from "react";
 
 const inputClass =
-  "mt-2 w-full rounded-none border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15 disabled:opacity-60";
+  "mt-2 w-full rounded-none border border-[#5a3d8a]/15 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#7a5aaf]/45 focus:ring-4 focus:ring-[#7a5aaf]/15 disabled:opacity-60";
 
-export function Spring2027RetreatInterestForm() {
+const ROOM_OPTIONS = [
+  { value: "", label: "Not sure yet" },
+  { value: "private", label: "Private Room — $4,200" },
+  { value: "double", label: "Double Room — $3,700" },
+  { value: "triple", label: "Triple Room — $3,200" },
+] as const;
+
+export function WinterWidowWellnessEarlyBirdForm() {
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
@@ -24,7 +31,9 @@ export function Spring2027RetreatInterestForm() {
     const fd = new FormData(form);
     let recaptchaToken: string | undefined;
     try {
-      recaptchaToken = await getRecaptchaToken("spring_2027_retreat_interest");
+      recaptchaToken = await getRecaptchaToken(
+        "winter_widow_wellness_interest",
+      );
     } catch {
       setStatus("error");
       setFeedback(
@@ -37,13 +46,14 @@ export function Spring2027RetreatInterestForm() {
       fullName: String(fd.get("fullName") ?? "").trim(),
       email: String(fd.get("email") ?? "").trim(),
       phone: String(fd.get("phone") ?? "").trim(),
+      roomPreference: String(fd.get("roomPreference") ?? "").trim(),
       note: String(fd.get("note") ?? "").trim(),
       [HONEYPOT_FIELD]: String(fd.get(HONEYPOT_FIELD) ?? "").trim(),
       ...(recaptchaToken ? { recaptchaToken } : {}),
     };
 
     try {
-      const res = await fetch("/api/spring-2027-retreat-interest", {
+      const res = await fetch("/api/winter-widow-wellness-interest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -61,7 +71,7 @@ export function Spring2027RetreatInterestForm() {
 
       if (typeof window.fbq === "function") {
         window.fbq("track", "Lead", {
-          content_name: "Spring 2027 Widow Wellness Retreat Interest",
+          content_name: "Winter Widow Wellness Retreat Interest",
           content_category: "Retreat",
         });
       }
@@ -80,23 +90,24 @@ export function Spring2027RetreatInterestForm() {
     return (
       <div
         role="status"
-        className="rounded-none border border-[#e76fab]/25 bg-[#fdf8fb] px-6 py-8 text-center"
+        className="rounded-none border border-[#7a5aaf]/25 bg-[#f4f0fa] px-6 py-8 text-center"
       >
-        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-          You&apos;re on the list
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5a3d8a]">
+          Interest received
         </p>
         <p className="mt-3 text-xl font-semibold leading-snug text-[#141413]">
-          Thank you — we&apos;ll be in touch as Spring 2027 details unfold.
+          Thank you — we&apos;ll be in touch soon about the Winter Widow
+          Wellness Retreat.
         </p>
         <p className="mt-3 text-sm leading-relaxed text-[#666766]">
-          Check your inbox for a quick confirmation. If you have questions,{" "}
+          Check your inbox for a quick confirmation. Questions?{" "}
           <a
             href="/contact"
-            className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2"
+            className="font-semibold text-[#7a5aaf] underline decoration-[#7a5aaf]/40 underline-offset-2"
           >
-            contact us
+            Contact us
           </a>
-          anytime.
+          .
         </p>
       </div>
     );
@@ -106,7 +117,7 @@ export function Spring2027RetreatInterestForm() {
 
   return (
     <form className="relative space-y-5" onSubmit={onSubmit} noValidate>
-      <FormHoneypot idPrefix="spring-2027" />
+      <FormHoneypot idPrefix="winter-ww" />
 
       {status === "error" && feedback ? (
         <p
@@ -120,13 +131,13 @@ export function Spring2027RetreatInterestForm() {
 
       <div>
         <label
-          htmlFor="spring-2027-name"
+          htmlFor="winter-ww-name"
           className="block text-sm font-semibold text-black"
         >
           Name
         </label>
         <input
-          id="spring-2027-name"
+          id="winter-ww-name"
           name="fullName"
           type="text"
           autoComplete="name"
@@ -138,13 +149,13 @@ export function Spring2027RetreatInterestForm() {
 
       <div>
         <label
-          htmlFor="spring-2027-email"
+          htmlFor="winter-ww-email"
           className="block text-sm font-semibold text-black"
         >
           Email
         </label>
         <input
-          id="spring-2027-email"
+          id="winter-ww-email"
           name="email"
           type="email"
           autoComplete="email"
@@ -156,13 +167,13 @@ export function Spring2027RetreatInterestForm() {
 
       <div>
         <label
-          htmlFor="spring-2027-phone"
+          htmlFor="winter-ww-phone"
           className="block text-sm font-semibold text-black"
         >
           Phone <span className="font-normal text-[#666766]">(optional)</span>
         </label>
         <input
-          id="spring-2027-phone"
+          id="winter-ww-phone"
           name="phone"
           type="tel"
           autoComplete="tel"
@@ -173,19 +184,42 @@ export function Spring2027RetreatInterestForm() {
 
       <div>
         <label
-          htmlFor="spring-2027-note"
+          htmlFor="winter-ww-room"
+          className="block text-sm font-semibold text-black"
+        >
+          Room preference{" "}
+          <span className="font-normal text-[#666766]">(optional)</span>
+        </label>
+        <select
+          id="winter-ww-room"
+          name="roomPreference"
+          disabled={isSending}
+          className={inputClass}
+          defaultValue=""
+        >
+          {ROOM_OPTIONS.map((opt) => (
+            <option key={opt.value || "unsure"} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label
+          htmlFor="winter-ww-note"
           className="block text-sm font-semibold text-black"
         >
           Anything you&apos;d like us to know{" "}
           <span className="font-normal text-[#666766]">(optional)</span>
         </label>
         <textarea
-          id="spring-2027-note"
+          id="winter-ww-note"
           name="note"
           rows={3}
           disabled={isSending}
           className={`${inputClass} resize-y leading-relaxed`}
-          placeholder="Questions, timing preferences, or what you're hoping for."
+          placeholder="Questions, timing, or what you're hoping for."
         />
       </div>
 
@@ -193,12 +227,13 @@ export function Spring2027RetreatInterestForm() {
         <button
           type="submit"
           disabled={isSending}
-          className="il-btn il-btn--solid"
+          className="wwr-btn disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
-          {isSending ? "Joining…" : "Join the interest list"}
+          {isSending ? "Sending…" : "Share your interest"}
         </button>
         <p className="mt-3 text-xs leading-relaxed text-[#888]">
-          No obligation — just early access when details and registration open.
+          No payment today — this is interest only. We&apos;ll follow up by
+          email to confirm your spot.
         </p>
         <RecaptchaNotice />
       </div>

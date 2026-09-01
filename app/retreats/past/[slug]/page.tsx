@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ClipReveal } from "@/components/ClipReveal";
 import { PastRetreatPhotoGallery } from "@/components/PastRetreatPhotoGallery";
 import {
   getPastRetreat,
   getPastRetreatSlugs,
 } from "@/lib/past-retreats";
 import { EVENT_PATH } from "@/lib/widow-wellness-event";
-
-const shell =
-  "mx-auto w-full max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,calc(100vw-4rem))]";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -34,106 +32,74 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
   const r = getPastRetreat(slug);
   if (!r) notFound();
 
-  return (
-    <div className="bg-[#f6f3ee]">
-      <section className="border-b border-[#e3ddd4] bg-[#faf8f5]">
-        <div className={`${shell} py-8 sm:py-10`}>
-          <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-[#666766]">
-              <li>
-                <Link
-                  href="/retreats/past"
-                  className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/35 underline-offset-2 hover:decoration-[#e76fab]"
-                >
-                  Past retreats
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li className="text-black">{r.pageTitle}</li>
-            </ol>
-          </nav>
-        </div>
-      </section>
+  const fallbackHero = `/images/${encodeURIComponent("Summer retreat")}/IMG_4397.webp`;
+  const heroSrc = r.coverImage ?? fallbackHero;
 
-      {r.coverImage ? (
-        <div className="relative h-[min(56vh,520px)] min-h-[220px] w-full overflow-hidden bg-[#1a1918]">
+  return (
+    <div className="ed">
+      <section
+        data-entrance="hero"
+        className="ed-hero"
+        aria-labelledby="past-retreat-heading"
+      >
+        <div className="ed-hero__media reveal-media">
           {/* Native img keeps EXIF/pixel orientation consistent with the gallery lightbox. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={r.coverImage}
+            src={heroSrc}
             alt={r.coverAlt ?? ""}
             className={`absolute inset-0 h-full w-full object-cover ${r.coverHeroObjectPosition ?? "object-center"}`}
           />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/25"
-            aria-hidden
-          />
         </div>
-      ) : (
-        <div className="border-b border-[#d85e9a] bg-[#e76fab]">
-          <div className={`${shell} py-16 sm:py-20`}>
-            <div className="max-w-3xl">
-              {r.cardBadge ? (
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/85">
-                  {r.cardBadge}
-                </p>
-              ) : null}
-              <h1 className="mt-4 text-pretty text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl">
-                {r.pageTitle}
-              </h1>
-              <p className="mt-4 text-lg leading-relaxed text-white/90">
-                {r.cardEyebrow}
-              </p>
-            </div>
+        <div className="ed-hero__veil" aria-hidden />
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker reveal-label">{r.cardEyebrow}</p>
+            <h1 id="past-retreat-heading" className="ed-title ed-title--wide">
+              <ClipReveal delay={0}>{r.pageTitle}</ClipReveal>
+            </h1>
+            {r.cardBadge ? (
+              <p className="ed-lede reveal-up">{r.cardBadge}</p>
+            ) : null}
           </div>
         </div>
-      )}
+      </section>
 
-      <article>
-        <div className={`${shell} py-12 sm:py-16 lg:py-20`}>
-          {r.coverImage ? (
-            <header className="max-w-3xl">
-              <div className="flex flex-wrap items-center gap-2">
-                {r.cardBadge ? (
-                  <span className="rounded-full bg-[#e76fab] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
-                    {r.cardBadge}
-                  </span>
-                ) : null}
-                <span
-                  className={`rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] ${
-                    r.kind === "upcoming"
-                      ? "border-[#e76fab]/40 text-[#c2528c]"
-                      : "border-black/10 text-[#666766]"
-                  }`}
-                >
-                  {r.kind === "upcoming" ? "Upcoming" : "Past"}
-                </span>
-              </div>
-              <h1 className="mt-5 text-pretty text-4xl font-semibold leading-[1.08] tracking-tight text-black sm:text-5xl">
-                {r.pageTitle}
-              </h1>
-              <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#666766]">
-                {r.cardEyebrow}
-              </p>
-            </header>
-          ) : null}
+      <nav className="ed-section ed-section--cream" style={{ paddingBlock: "1.25rem" }} aria-label="Breadcrumb">
+        <div className="ed-shell">
+          <ol className="m-0 flex list-none flex-wrap items-center gap-2 p-0 text-sm text-[var(--ed-muted)]">
+            <li>
+              <Link
+                href="/retreats/past"
+                className="font-semibold text-[var(--ed-pink-deep)] underline decoration-[rgba(231,111,171,0.35)] underline-offset-2"
+              >
+                Past retreats
+              </Link>
+            </li>
+            <li aria-hidden>/</li>
+            <li className="text-[var(--ed-ink)]">{r.pageTitle}</li>
+          </ol>
+        </div>
+      </nav>
 
-          <div
-            className={`max-w-3xl space-y-6 text-pretty text-lg leading-[1.78] text-[#2a2928] sm:text-xl sm:leading-[1.72] ${r.coverImage ? "mx-auto mt-10 sm:mt-12" : "pt-2"}`}
-          >
+      <article className="ed-section ed-section--cream" style={{ paddingTop: 0 }}>
+        <div className="ed-shell">
+          <div className="mx-auto max-w-3xl space-y-6">
             {r.body.map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i} className="ed-body ed-body--ink">
+                {p}
+              </p>
             ))}
           </div>
 
           {r.venueUrl ? (
-            <p className="mx-auto mt-10 max-w-3xl text-lg leading-relaxed text-[#666766] sm:mt-12">
-              <span className="font-semibold text-black">Venue reference: </span>
+            <p className="ed-body mx-auto mt-10 max-w-3xl">
+              <span className="font-semibold text-[var(--ed-ink)]">Venue reference: </span>
               <a
                 href={r.venueUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
+                className="font-semibold text-[var(--ed-pink-deep)] underline decoration-[rgba(231,111,171,0.4)] underline-offset-2"
               >
                 {r.venueLabel ?? "Retreat venue"}
               </a>
@@ -142,11 +108,11 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
           ) : null}
 
           {r.kind === "upcoming" && r.gallery.length === 0 ? (
-            <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-[#e76fab]/25 bg-[#fdf8fb] px-6 py-8 sm:px-8">
-              <p className="text-base font-semibold text-black">
+            <div className="ed-form-panel mx-auto mt-12 max-w-3xl">
+              <p className="m-0 text-base font-semibold text-[var(--ed-ink)]">
                 Photos aren&apos;t on the site yet
               </p>
-              <p className="mt-3 text-lg leading-relaxed text-[#666766]">
+              <p className="ed-body" style={{ marginTop: "0.75rem" }}>
                 This spring weekend hasn&apos;t happened yet. After early May
                 2026, we&apos;ll add images from the retreat here.
               </p>
@@ -160,21 +126,28 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
         </div>
       </article>
 
-      <section className="border-t border-[#e3ddd4] bg-[#faf8f5] py-12 sm:py-14">
+      <section className="ed-section ed-section--blush" style={{ paddingBlock: "2.5rem" }}>
         <div
-          className={`${shell} flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between`}
+          className="ed-shell"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "1rem",
+          }}
         >
           <Link
             href="/retreats/past"
-            className="text-sm font-semibold text-[#e76fab] underline decoration-[#e76fab]/35 underline-offset-2 hover:decoration-[#e76fab]"
+            className="text-sm font-semibold text-[var(--ed-pink-deep)] underline decoration-[rgba(231,111,171,0.35)] underline-offset-2"
           >
             ← All past retreats
           </Link>
-          <Link
-            href={EVENT_PATH}
-            className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:text-base"
-          >
-            Join Widow Wellness &amp; Connection Experience
+          <Link href={EVENT_PATH} className="il-btn il-btn--solid">
+            Join an upcoming gathering
+            <span aria-hidden className="il-btn__arrow">
+              →
+            </span>
           </Link>
         </div>
       </section>

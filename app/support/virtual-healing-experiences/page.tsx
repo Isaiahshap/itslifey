@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ClipReveal } from "@/components/ClipReveal";
 import { VirtualHealingPixelEvents } from "@/components/VirtualHealingPixelEvents";
 import { VirtualHealingSignupForm } from "@/components/VirtualHealingSignupForm";
 
@@ -15,6 +16,8 @@ const shell =
 
 const body =
   "text-[0.98rem] leading-[1.78] text-[#2a2928] sm:text-[1.0625rem] sm:leading-[1.76]";
+
+const HERO = `/images/${encodeURIComponent("Summer retreat")}/IMG_4615.webp`;
 
 const weekThemes = [
   {
@@ -73,7 +76,7 @@ const outcomes = [
 
 export default function VirtualHealingExperiencesPage() {
   return (
-    <div className="bg-[#f6f3ee]">
+    <div className="ed bg-[#f6f3ee]">
       <VirtualHealingPixelEvents />
 
       <div
@@ -90,135 +93,95 @@ export default function VirtualHealingExperiencesPage() {
         </p>
       </div>
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
-        className="relative overflow-hidden border-b border-[#e8d4df]/80"
+        data-entrance="hero"
+        className="ed-hero"
         aria-labelledby="vhe-hero-heading"
       >
-        <div
-          className="pointer-events-none absolute inset-0 min-h-full w-full bg-[radial-gradient(ellipse_160%_90%_at_50%_-18%,rgba(231,111,171,0.2),transparent_58%)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 min-h-full w-full bg-gradient-to-b from-[#fdf8fb] via-[#f8eef3] to-[#f0dfe8]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute left-0 top-1/4 h-80 w-[min(100vw,56rem)] max-w-none rounded-full bg-[#e76fab]/10 blur-3xl sm:w-[80vw]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute right-0 top-0 h-72 w-[min(100vw,52rem)] max-w-none rounded-full bg-white/45 blur-3xl sm:w-[75vw]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-44 w-full bg-gradient-to-t from-[#f6f3ee] to-transparent"
-          aria-hidden
-        />
-
-        <div className={`relative py-14 sm:py-16 lg:py-20 ${shell}`}>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_min(26rem,100%)] lg:items-start lg:gap-14 xl:gap-20">
-
-            {/* Left column */}
-            <div className="max-w-2xl lg:pt-1">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#7a6a72] sm:text-[11px]">
-                A 6-week virtual experience for widows · with Tina Walsh
-              </p>
-              <h1
-                id="vhe-hero-heading"
-                className="mt-5 text-pretty text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-[#141413] sm:text-4xl sm:leading-[1.08] lg:text-[2.5rem] lg:leading-[1.05] xl:text-[2.65rem]"
-              >
-                The Body Keeps the Story
-              </h1>
-              <p className="mt-2 text-lg font-normal leading-snug text-[#666766] sm:text-xl">
-                Grief, trauma &amp; the nervous system — healing from the inside out
-              </p>
-
-              <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                <p className="inline-flex items-center rounded-full border border-[#5c5258]/20 bg-white/90 px-4 py-2 text-sm font-semibold text-[#3a3938] backdrop-blur-sm">
-                  Event postponed
-                </p>
-                <p className="inline-flex items-center rounded-full border border-[#e76fab]/35 bg-white/90 px-4 py-2 text-sm font-semibold text-[#b8457e] shadow-[0_6px_24px_-6px_rgba(199,77,138,0.22)] backdrop-blur-sm">
-                  August 2026 cohort — interest list open
-                </p>
-              </div>
-
-              <p className={`mt-8 max-w-xl ${body}`}>
-                Grief doesn&apos;t only live in your thoughts—it lives in your
-                body. After loss, your nervous system can feel completely out of
-                sync: anxiety, exhaustion, numbness, a tightness you
-                can&apos;t quite explain. This six-week experience helps you
-                understand what&apos;s happening inside you—and how to begin
-                working <em className="font-medium not-italic text-[#141413]">
-                  with
-                </em>{" "}
-                your body, not against it.
-              </p>
-
-              <p className={`mt-4 max-w-xl text-[0.94rem] font-medium leading-relaxed text-[#666766]`}>
-                No prior experience needed. You can participate, observe, or simply be present. There is no wrong way to show up.
-              </p>
-
-              {/* Primary CTA — anchors to form */}
-              <div className="mt-8">
-                <a
-                  href="#signup"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#e76fab] px-7 py-3.5 text-[0.95rem] font-semibold text-white shadow-md shadow-[#e76fab]/25 transition-[background-color,transform] duration-200 hover:bg-[#d85e9a] active:scale-[0.98]"
-                >
-                  Join the August interest list
-                  <svg aria-hidden viewBox="0 0 16 16" fill="currentColor" className="h-3.5 w-3.5 opacity-80">
-                    <path d="M8 1l7 7-7 7M1 8h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                  </svg>
-                </a>
-              </div>
-
-              {/* Pricing card */}
-              <div className="mt-8 rounded-2xl border border-[#e76fab]/18 bg-white/60 p-5 backdrop-blur-[2px] sm:p-6">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                  August cohort
-                </p>
-                <p className={`mt-3 max-w-md ${body} text-[#444]`}>
-                  Registration for the May cohort is closed while we reschedule.
-                  Share your interest below—we&apos;ll email you when the{" "}
-                  <strong className="font-semibold text-[#141413]">
-                    August 2026
-                  </strong>{" "}
-                  cohort opens, with updated dates and pricing.
-                </p>
-              </div>
-
-              <p className="mt-6">
-                <Link
-                  href="/contact"
-                  className="text-sm font-semibold text-[#141413] underline decoration-[#e76fab]/50 underline-offset-[3px] transition-colors hover:text-[#e76fab] hover:decoration-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
-                >
-                  Questions first? Contact us
-                </Link>
-              </p>
+        <div className="ed-hero__media reveal-media">
+          <Image
+            src={HERO}
+            alt="Women gathered outdoors during an It's Lifey retreat"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectPosition: "center 40%" }}
+          />
+        </div>
+        <div className="ed-hero__veil" aria-hidden />
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker reveal-label">
+              6-week virtual experience · Tina Walsh
+            </p>
+            <h1 id="vhe-hero-heading" className="ed-title ed-title--wide">
+              <ClipReveal delay={0}>The Body Keeps</ClipReveal>
+              <span className="il-em">
+                <ClipReveal delay={80}>the Story</ClipReveal>
+              </span>
+            </h1>
+            <p className="ed-lede reveal-up">
+              Grief, trauma &amp; the nervous system — healing from the inside
+              out. August 2026 interest list is open.
+            </p>
+            <div className="ed-actions reveal-up">
+              <a href="#signup" className="il-btn il-btn--solid">
+                Join the interest list
+                <span aria-hidden className="il-btn__arrow">
+                  →
+                </span>
+              </a>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Right column — sticky form */}
-            <div
-              id="signup"
-              className="scroll-mt-28 lg:sticky lg:top-28"
-            >
-              <div className="relative rounded-[1.35rem] border border-white/90 bg-white/90 p-6 shadow-[0_28px_70px_-24px_rgba(180,60,120,0.35)] ring-1 ring-[#e76fab]/10 backdrop-blur-md sm:p-8">
-                <div
-                  className="pointer-events-none absolute inset-x-6 -top-px h-px bg-gradient-to-r from-transparent via-[#e76fab]/40 to-transparent opacity-80 sm:inset-x-8"
-                  aria-hidden
-                />
-                <div className="mb-5">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                    August interest list
-                  </p>
-                  <p className="mt-2 text-[1.35rem] font-semibold leading-snug tracking-tight text-[#141413]">
-                    Future event — August 2026
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#666766]">
-                    No payment today. We&apos;ll reach out when registration
-                    opens for the rescheduled cohort.
-                  </p>
-                </div>
+      <section className="ed-section ed-section--cream">
+        <div className="ed-shell ed-split">
+          <div>
+            <p className="ed-kicker">About this experience</p>
+            <h2 className="ed-section-title">Grief lives in the body</h2>
+            <p className="ed-body ed-body--ink" style={{ marginTop: "1.25rem" }}>
+              Grief doesn&apos;t only live in your thoughts—it lives in your
+              body. After loss, your nervous system can feel completely out of
+              sync: anxiety, exhaustion, numbness, a tightness you can&apos;t
+              quite explain. This six-week experience helps you understand
+              what&apos;s happening inside you—and how to begin working{" "}
+              <em className="font-medium not-italic text-[var(--ed-ink)]">
+                with
+              </em>{" "}
+              your body, not against it.
+            </p>
+            <p className="ed-body" style={{ marginTop: "1.1rem" }}>
+              No prior experience needed. You can participate, observe, or
+              simply be present. There is no wrong way to show up.
+            </p>
+            <p className="ed-body" style={{ marginTop: "1.1rem" }}>
+              Registration for the May cohort is closed while we reschedule.
+              Share your interest below—we&apos;ll email you when the August
+              2026 cohort opens, with updated dates and pricing.
+            </p>
+            <p style={{ marginTop: "1.5rem" }}>
+              <Link
+                href="/contact"
+                className="text-sm font-semibold text-[var(--ed-ink)] underline decoration-[rgba(231,111,171,0.5)] underline-offset-[3px] hover:text-[var(--ed-pink)]"
+              >
+                Questions first? Contact us
+              </Link>
+            </p>
+          </div>
+
+          <div id="signup" className="scroll-mt-28">
+            <div className="ed-form-panel">
+              <p className="ed-kicker">August interest list</p>
+              <p className="mt-2 text-[1.35rem] font-semibold leading-snug tracking-tight text-[var(--ed-ink)]">
+                Future event — August 2026
+              </p>
+              <p className="ed-body" style={{ marginTop: "0.5rem" }}>
+                No payment today. We&apos;ll reach out when registration opens
+                for the rescheduled cohort.
+              </p>
+              <div style={{ marginTop: "1.25rem" }}>
                 <VirtualHealingSignupForm mode="interest" />
               </div>
             </div>

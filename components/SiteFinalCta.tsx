@@ -8,7 +8,8 @@ import { EVENT_PATH } from "@/lib/widow-wellness-event";
 export function SiteFinalCta() {
   const pathname = usePathname();
   if (
-    pathname === "/retreats/upcoming" ||
+    pathname.startsWith("/retreats/spring-retreat-2027") ||
+    pathname.startsWith("/retreats/winter-widow-wellness") ||
     pathname.startsWith("/events/widow-wellness-connection-experience")
   ) {
     return null;
@@ -16,7 +17,7 @@ export function SiteFinalCta() {
 
   return (
     <section
-      className="relative overflow-hidden border-t border-[#d85e9a]/30 bg-[#c94d8a] px-3 py-24 sm:px-4 lg:px-5 lg:py-32"
+      className="site-final-cta relative overflow-hidden border-t border-[#d85e9a]/30 bg-[#c94d8a] px-3 py-16 sm:px-4 sm:py-24 lg:px-5 lg:py-32"
       aria-labelledby="final-cta-heading"
     >
       <div className="relative mx-auto max-w-3xl text-center">
@@ -31,18 +32,18 @@ export function SiteFinalCta() {
           a listening ear, or a gentler place to land, you&apos;ll find people
           here who understand—because they&apos;ve been there too.
         </p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href={EVENT_PATH}
-            className="inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#c94d8a] shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
-          >
+        <div className="mt-10 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
+          <Link href={EVENT_PATH} className="il-btn il-btn--on-dark">
             Join Widow Wellness &amp; Connection Experience
+            <span aria-hidden className="il-btn__arrow">
+              →
+            </span>
           </Link>
-          <Link
-            href="/about"
-            className="inline-flex w-full items-center justify-center rounded-full border-2 border-white bg-white px-8 py-3.5 text-base font-semibold text-black transition-[background-color] duration-200 hover:bg-transparent hover:text-white sm:w-auto"
-          >
+          <Link href="/about" className="il-btn il-btn--ghost-dark">
             Learn More About It&apos;s Lifey
+            <span aria-hidden className="il-btn__arrow">
+              →
+            </span>
           </Link>
         </div>
       </div>

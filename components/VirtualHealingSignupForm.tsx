@@ -11,7 +11,7 @@ import {
 } from "react";
 
 const inputClass =
-  "mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15";
+  "mt-2 w-full rounded-none border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15";
 
 type VirtualHealingSignupFormProps = {
   /** Prefix for input ids when multiple forms exist on one page (e.g. homepage modal). */
@@ -126,7 +126,7 @@ export function VirtualHealingSignupForm({
     return (
       <div
         role="status"
-        className="rounded-xl border border-[#e76fab]/25 bg-[#fdf8fb] px-5 py-6 text-center"
+        className="rounded-none border border-[#e76fab]/25 bg-[#fdf8fb] px-5 py-6 text-center"
       >
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
           You&apos;re on the list
@@ -161,7 +161,7 @@ export function VirtualHealingSignupForm({
         <p
           role="alert"
           aria-live="assertive"
-          className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm leading-relaxed text-red-900"
+          className="rounded-none border border-red-200 bg-red-50 px-4 py-3 text-sm leading-relaxed text-red-900"
         >
           {errorMessage}
         </p>
@@ -239,7 +239,7 @@ export function VirtualHealingSignupForm({
         <button
           type="submit"
           disabled={isSending}
-          className="w-full rounded-full bg-[#e76fab] px-8 py-4 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] enabled:active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="il-btn il-btn--solid"
         >
           {isSending
             ? "Sending…"

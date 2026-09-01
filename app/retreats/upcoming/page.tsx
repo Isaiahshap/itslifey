@@ -1,5 +1,6 @@
-import { UpcomingRetreatClient } from "./UpcomingRetreatClient";
+import { redirect } from "next/navigation";
 
-export default function UpcomingRetreatsPage() {
-  return <UpcomingRetreatClient />;
+/** Legacy URL — Spring 2027 now lives at /retreats/spring-retreat-2027 */
+export default function UpcomingRetreatsRedirect() {
+  redirect("/retreats/spring-retreat-2027");
 }

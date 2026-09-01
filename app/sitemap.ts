@@ -18,7 +18,8 @@ function siteOrigin(): string {
 function priorityForPath(path: string): number {
   if (path === "/") return 1;
   if (
-    path === "/retreats/upcoming" ||
+    path === "/retreats/spring-retreat-2027" ||
+    path === "/retreats/winter-widow-wellness" ||
     path === "/events/widow-wellness-connection-experience" ||
     path === "/events/widow-wellness-connection-experience/sponsorship" ||
     path === "/hopehub"

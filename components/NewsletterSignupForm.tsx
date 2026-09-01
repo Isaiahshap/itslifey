@@ -6,7 +6,12 @@ import { HONEYPOT_FIELD } from "@/lib/form-spam";
 import { getRecaptchaToken } from "@/lib/recaptcha-client";
 import { useState, type FormEvent } from "react";
 
-export function NewsletterSignupForm() {
+type Props = {
+  /** Editorial homepage layout */
+  variant?: "default" | "editorial";
+};
+
+export function NewsletterSignupForm({ variant = "default" }: Props) {
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
@@ -50,7 +55,7 @@ export function NewsletterSignupForm() {
         return;
       }
       setStatus("success");
-      setFeedback("You’re on the list—check your inbox for a quick confirmation.");
+      setFeedback("You’re on the list—watch for a short confirmation email.");
       form.reset();
     } catch {
       setStatus("error");
@@ -58,6 +63,61 @@ export function NewsletterSignupForm() {
         "We couldn’t reach the server. Check your connection and try again.",
       );
     }
+  }
+
+  if (variant === "editorial") {
+    return (
+      <div className="home-email__form">
+        <form className="home-email__row" onSubmit={onSubmit} noValidate>
+          <FormHoneypot idPrefix="newsletter" />
+          <div className="home-email__field">
+            <label htmlFor="email-signup" className="home-email__label">
+              Email
+            </label>
+            <input
+              id="email-signup"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              disabled={status === "sending"}
+              placeholder="you@email.com"
+              className="home-email__input"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="il-btn il-btn--solid home-email__submit"
+          >
+            {status === "sending" ? (
+              "Joining…"
+            ) : (
+              <>
+                Join
+                <span aria-hidden className="il-btn__arrow">
+                  →
+                </span>
+              </>
+            )}
+          </button>
+        </form>
+        {feedback ? (
+          <p
+            role="status"
+            aria-live="polite"
+            className={`home-email__feedback${
+              status === "error" ? " is-error" : ""
+            }`}
+          >
+            {feedback}
+          </p>
+        ) : null}
+        <div className="home-email__legal">
+          <RecaptchaNotice />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -79,14 +139,23 @@ export function NewsletterSignupForm() {
           required
           disabled={status === "sending"}
           placeholder="Your email"
-          className="min-h-12 flex-1 rounded-full border border-[#ebe6df] bg-white px-5 text-base text-black placeholder:text-black/45 outline-none ring-[#e76fab]/30 transition-shadow focus:border-[#e76fab] focus:ring-2 focus:ring-[#e76fab]/35 disabled:opacity-60"
+          className="min-h-12 flex-1 border border-[#1a1918]/18 bg-white px-5 text-base text-black placeholder:text-black/45 outline-none transition-[border-color,box-shadow] focus:border-[#e76fab] focus:ring-2 focus:ring-[#e76fab]/25 disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={status === "sending"}
-          className="min-h-12 w-full rounded-full bg-[#e76fab] px-8 text-base font-semibold text-white transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="il-btn il-btn--solid il-btn--compact"
         >
-          {status === "sending" ? "Joining…" : "Join the list"}
+          {status === "sending" ? (
+            "Joining…"
+          ) : (
+            <>
+              Join the list
+              <span aria-hidden className="il-btn__arrow">
+                →
+              </span>
+            </>
+          )}
         </button>
       </form>
       {feedback ? (

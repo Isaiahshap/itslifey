@@ -17,14 +17,21 @@ import { SocialMediaLinks } from "@/components/SocialMediaLinks";
 
 const aboutSubLinks = [
   { href: "/about", label: "About Me" },
-  { href: "/blog", label: "Blog/Insights" },
-  { href: "/press", label: "Press" },
-  { href: "/contact", label: "Contact" },
   { href: "/resources", label: "Resources" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/blog", label: "Blog/Insights" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 const retreatSubLinks = [
-  { href: "/retreats/upcoming", label: "Upcoming Retreats" },
+  {
+    href: "/retreats/winter-widow-wellness",
+    label: "Winter Retreat 2026",
+  },
+  {
+    href: "/retreats/spring-retreat-2027",
+    label: "Spring Retreat 2027",
+  },
   { href: "/retreats/past", label: "Past Retreats" },
 ] as const;
 
@@ -76,57 +83,58 @@ function useHydrated(): boolean {
 
 function linkClass(active: boolean) {
   return [
-    "text-[15px] font-medium transition-colors duration-200",
-    active ? "text-[#e76fab]" : "text-black hover:text-[#e76fab]",
+    "text-[13px] font-semibold uppercase tracking-[0.14em] transition-colors duration-150",
+    active ? "text-[#e76fab]" : "text-[#1a1918] hover:text-[#e76fab]",
   ].join(" ");
 }
 
-/** Desktop flyout — same base as navbar bar, no tinted glow */
+/** Desktop flyout — sharp, no bottom radius */
 const desktopMenuFlyout =
-  "min-w-[13.75rem] overflow-hidden rounded-none rounded-b-2xl border border-[#ebe6df] border-t-0 bg-[#f6f3ee] py-2 shadow-none";
+  "min-w-[14rem] overflow-hidden rounded-none border border-[#e3ddd4] border-t-0 bg-[#fffcfa] py-0 shadow-[0_18px_40px_-20px_rgba(26,25,24,0.35)]";
 
-const desktopFlyOpenEase = [0.16, 1, 0.32, 1] as const;
+const desktopMenuItemClass =
+  "block rounded-none border-b border-[#ebe6df] px-4 py-3.5 text-[14px] font-medium tracking-tight transition-colors duration-150 last:border-b-0";
 
-const desktopMenuListVariants = {
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      y: { duration: 0.3, ease: desktopFlyOpenEase },
-      opacity: { duration: 0.2, ease: [0.2, 0.8, 0.2, 1] as const },
-      staggerChildren: 0.018,
-      delayChildren: 0,
-    },
-  },
+const dropdownEase = [0.22, 1, 0.36, 1] as const;
+const dropdownExitEase = [0.4, 0, 0.2, 1] as const;
+
+const desktopMenuPanelVariants = {
   closed: {
-    opacity: 0,
-    /* Retract upward into the bar (mirror of entrance) */
-    y: -14,
-    transition: {
-      when: "afterChildren" as const,
-      staggerChildren: 0.022,
-      staggerDirection: -1,
-      y: { duration: 0.28, ease: [0.42, 0, 0.22, 1] as const },
-      opacity: { duration: 0.22, ease: [0.45, 0, 0.9, 1] as const },
-    },
+    y: "-100%",
+    transition: { duration: 0.22, ease: dropdownExitEase },
+  },
+  open: {
+    y: "0%",
+    transition: { duration: 0.32, ease: dropdownEase },
   },
 };
 
 const desktopMenuItemVariants = {
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.16, ease: [0.22, 1, 0.36, 1] as const },
-  },
   closed: {
-    opacity: 0,
-    y: -8,
-    transition: { duration: 0.14, ease: [0.42, 0, 0.85, 1] as const },
+    y: -10,
+    transition: { duration: 0.12, ease: dropdownExitEase },
+  },
+  open: {
+    y: 0,
+    transition: { duration: 0.22, ease: dropdownEase },
   },
 };
 
-const desktopMenuItemClass =
-  "block rounded-lg px-3 py-2.5 text-[15px] transition-[background-color,color] duration-200";
+const desktopMenuListVariants = {
+  closed: {
+    transition: {
+      staggerChildren: 0.02,
+      staggerDirection: -1,
+      when: "afterChildren" as const,
+    },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.035,
+      delayChildren: 0.04,
+    },
+  },
+};
 
 const mobileOverlayEase = [0.22, 1, 0.36, 1] as const;
 
@@ -134,33 +142,33 @@ const mobileOverlayPanel = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { duration: 0.42, ease: mobileOverlayEase },
+    transition: { duration: 0.28, ease: mobileOverlayEase },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.32, ease: mobileOverlayEase },
+    transition: { duration: 0.2, ease: mobileOverlayEase },
   },
 };
 
 const mobileOverlayContent = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.04, delayChildren: 0.04 },
   },
 };
 
 const mobileOverlayRow = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 12 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: mobileOverlayEase },
+    transition: { duration: 0.32, ease: mobileOverlayEase },
   },
 };
 
 function mobileNavLinkClass(active: boolean) {
   return [
-    "rounded-2xl px-4 py-3.5 text-[1.0625rem] font-medium tracking-tight transition-[background-color,color,transform] duration-200 active:scale-[0.99]",
+    "rounded-none px-4 py-3.5 text-[1.0625rem] font-medium tracking-tight transition-colors duration-150",
     active
       ? "bg-white text-[#b84a82]"
       : "text-white hover:bg-[#c2528c] hover:text-white",
@@ -169,7 +177,7 @@ function mobileNavLinkClass(active: boolean) {
 
 function mobileNavSubLinkClass(active: boolean) {
   return [
-    "block rounded-xl px-4 py-3 text-[15px] font-medium transition-colors duration-200",
+    "block rounded-none px-4 py-3 text-[15px] font-medium transition-colors duration-150",
     active
       ? "bg-white text-[#b84a82]"
       : "text-white hover:bg-[#c2528c] hover:text-white",
@@ -211,63 +219,74 @@ function DesktopHoverMenu({
     >
       <button
         type="button"
-        className={`relative z-20 inline-flex h-full items-center gap-1 bg-[#f6f3ee] px-2 outline-offset-4 ${linkClass(sectionActive)}`}
+        className={`relative z-20 inline-flex h-full items-center gap-1.5 bg-[#fffcfa] px-1 outline-offset-4 ${linkClass(sectionActive)}`}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
       >
         {label}
         <ChevronDown
-          className={`h-4 w-4 shrink-0 opacity-65 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${open ? "rotate-180" : ""}`}
+          className={`h-3.5 w-3.5 shrink-0 opacity-55 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          aria-hidden
+          strokeWidth={2.25}
+        />
+        <span
+          className={`pointer-events-none absolute inset-x-0 bottom-0 h-[2px] bg-[#e76fab] transition-opacity duration-150 ${
+            open || sectionActive ? "opacity-100" : "opacity-0"
+          }`}
           aria-hidden
         />
       </button>
       <div
-        className="pointer-events-none absolute left-1/2 top-full z-10 w-max max-w-[min(20rem,calc(100vw-1.5rem))] -translate-x-1/2"
+        className="pointer-events-none absolute left-1/2 top-full z-10 w-max max-w-[min(22rem,calc(100vw-1.5rem))] -translate-x-1/2 overflow-hidden"
         aria-hidden={!open}
       >
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {open ? (
-            <motion.ul
-              key={menuId}
-              id={menuId}
-              role="menu"
-              aria-label={ariaLabel}
-              variants={desktopMenuListVariants}
+            <motion.div
+              key={`${menuId}-panel`}
+              variants={desktopMenuPanelVariants}
               initial="closed"
               animate="open"
               exit="closed"
-              className={`pointer-events-auto ${desktopMenuFlyout} ${menuShellExtra}`}
-              style={{
-                willChange: "transform, opacity",
-                transformOrigin: "top center",
-              }}
+              className="pointer-events-auto will-change-transform"
+              style={{ transformOrigin: "top center" }}
             >
-              {links.map(({ href, label: itemLabel }) => {
-                const active = pathMatchesHref(pathname, href);
-                return (
-                  <motion.li
-                    key={href}
-                    role="none"
-                    variants={desktopMenuItemVariants}
-                    className="px-1.5"
-                  >
-                    <Link
-                      role="menuitem"
-                      href={href}
-                      onClick={() => setOpen(false)}
-                      className={`${desktopMenuItemClass} ${
-                        active
-                          ? "bg-white font-semibold text-[#e76fab]"
-                          : "text-[#2a2928] hover:bg-[#ebe6df] hover:text-[#e76fab] active:bg-[#e3ddd4]"
-                      }`}
+              <motion.ul
+                id={menuId}
+                role="menu"
+                aria-label={ariaLabel}
+                variants={desktopMenuListVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                className={`${desktopMenuFlyout} ${menuShellExtra}`}
+              >
+                {links.map(({ href, label: itemLabel }) => {
+                  const active = pathMatchesHref(pathname, href);
+                  return (
+                    <motion.li
+                      key={href}
+                      role="none"
+                      variants={desktopMenuItemVariants}
                     >
-                      {itemLabel}
-                    </Link>
-                  </motion.li>
-                );
-              })}
-            </motion.ul>
+                      <Link
+                        role="menuitem"
+                        href={href}
+                        onClick={() => setOpen(false)}
+                        className={`${desktopMenuItemClass} ${
+                          active
+                            ? "bg-[#f6f3ee] font-semibold text-[#e76fab]"
+                            : "text-[#1a1918] hover:bg-[#f6f3ee] hover:text-[#e76fab]"
+                        }`}
+                      >
+                        {itemLabel}
+                      </Link>
+                    </motion.li>
+                  );
+                })}
+              </motion.ul>
+            </motion.div>
           ) : null}
         </AnimatePresence>
       </div>
@@ -310,8 +329,8 @@ export function Navbar() {
 
   return (
     <Fragment>
-    <header className="sticky top-0 z-50 border-b border-[#ebe6df] bg-[#f6f3ee]">
-      <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between gap-3 px-3 sm:px-4 lg:px-5">
+    <header className="sticky top-0 z-50 border-b border-[#e3ddd4] bg-[#fffcfa]">
+      <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-3 sm:px-4 lg:px-6">
         <Link
           href="/"
           className="relative flex shrink-0 items-center gap-2 outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#e76fab]"
@@ -322,20 +341,26 @@ export function Navbar() {
             alt="It's Lifey"
             width={200}
             height={60}
-            className="h-11 w-auto sm:h-[3.25rem]"
+            className="h-11 w-auto sm:h-[3.15rem]"
             priority
           />
         </Link>
 
         <nav
-          className="hidden items-stretch gap-8 self-stretch lg:flex"
+          className="hidden items-stretch gap-7 self-stretch lg:flex xl:gap-9"
           aria-label="Primary"
         >
           <Link
             href="/"
-            className={`flex items-center ${linkClass(pathname === "/")}`}
+            className={`relative flex items-center ${linkClass(pathname === "/")}`}
           >
             Home
+            {pathname === "/" ? (
+              <span
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] bg-[#e76fab]"
+                aria-hidden
+              />
+            ) : null}
           </Link>
 
           <DesktopHoverMenu
@@ -350,9 +375,15 @@ export function Navbar() {
 
           <Link
             href={navHopeHub.href}
-            className={`flex items-center ${linkClass(pathname === navHopeHub.href)}`}
+            className={`relative flex items-center ${linkClass(pathname === navHopeHub.href)}`}
           >
             {navHopeHub.label}
+            {pathname === navHopeHub.href ? (
+              <span
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] bg-[#e76fab]"
+                aria-hidden
+              />
+            ) : null}
           </Link>
 
           <DesktopHoverMenu
@@ -363,7 +394,7 @@ export function Navbar() {
             ariaLabel="Retreats"
             links={retreatSubLinks}
             sectionActive={retreatSectionActive(pathname)}
-            menuShellExtra="min-w-[14.5rem]"
+            menuShellExtra="min-w-[15rem]"
           />
 
           <DesktopHoverMenu
@@ -374,25 +405,25 @@ export function Navbar() {
             ariaLabel="Events"
             links={eventsSubLinks}
             sectionActive={eventsSectionActive(pathname)}
-            menuShellExtra="min-w-[18rem]"
+            menuShellExtra="min-w-[19rem]"
           />
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <SocialMediaLinks
             className="hidden items-center gap-0.5 sm:flex"
-            linkClassName="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#666766] transition-[color,background-color] duration-200 hover:bg-[#e76fab]/10 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:h-10 sm:w-10"
-            iconSizeClassName="h-[1.15rem] w-[1.15rem] sm:h-[1.3rem] sm:w-[1.3rem]"
+            linkClassName="inline-flex h-9 w-9 items-center justify-center rounded-none text-[#666766] transition-colors duration-150 hover:bg-[#f6f3ee] hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:h-10 sm:w-10"
+            iconSizeClassName="h-[1.1rem] w-[1.1rem] sm:h-[1.2rem] sm:w-[1.2rem]"
           />
           <Link
             href={navPrimaryCta.href}
-            className="hidden max-w-[14.5rem] rounded-full bg-[#e76fab] px-4 py-2.5 text-center text-[12px] font-semibold leading-snug text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md sm:inline-flex sm:max-w-[17rem] sm:px-4 sm:text-[13px] lg:max-w-none lg:px-5 lg:text-[14px]"
+            className="il-btn il-btn--solid il-btn--nav hidden sm:inline-flex"
           >
             {navPrimaryCta.label}
           </Link>
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebe6df] bg-white text-black transition-colors hover:bg-neutral-50 lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-none border border-[#e3ddd4] bg-white text-[#1a1918] transition-colors hover:bg-[#f6f3ee] lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => (open ? closeMobileNav() : setOpen(true))}
@@ -442,7 +473,7 @@ export function Navbar() {
                 </Link>
                 <button
                   type="button"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-white text-[#b84a82] transition-[background-color,color,transform] duration-200 hover:bg-neutral-100 active:scale-95"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-none border-2 border-white bg-white text-[#b84a82] transition-colors duration-150 hover:bg-neutral-100"
                   aria-label="Close menu"
                   onClick={closeMobileNav}
                 >
@@ -488,12 +519,12 @@ export function Navbar() {
                       {mobileAboutOpen ? (
                         <motion.ul
                           role="list"
-                          className="mt-1 flex flex-col gap-1 overflow-hidden pl-1"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
+                          className="mt-1 flex flex-col gap-0 overflow-hidden border-l-2 border-white/40 pl-2"
+                          initial={{ height: 0 }}
+                          animate={{ height: "auto" }}
+                          exit={{ height: 0 }}
                           transition={{
-                            duration: 0.32,
+                            duration: 0.22,
                             ease: mobileOverlayEase,
                           }}
                         >
@@ -543,12 +574,12 @@ export function Navbar() {
                       {mobileRetreatsOpen ? (
                         <motion.ul
                           role="list"
-                          className="mt-1 flex flex-col gap-1 overflow-hidden pl-1"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
+                          className="mt-1 flex flex-col gap-0 overflow-hidden border-l-2 border-white/40 pl-2"
+                          initial={{ height: 0 }}
+                          animate={{ height: "auto" }}
+                          exit={{ height: 0 }}
                           transition={{
-                            duration: 0.32,
+                            duration: 0.22,
                             ease: mobileOverlayEase,
                           }}
                         >
@@ -588,12 +619,12 @@ export function Navbar() {
                       {mobileEventsOpen ? (
                         <motion.ul
                           role="list"
-                          className="mt-1 flex flex-col gap-1 overflow-hidden pl-1"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
+                          className="mt-1 flex flex-col gap-0 overflow-hidden border-l-2 border-white/40 pl-2"
+                          initial={{ height: 0 }}
+                          animate={{ height: "auto" }}
+                          exit={{ height: 0 }}
                           transition={{
-                            duration: 0.32,
+                            duration: 0.22,
                             ease: mobileOverlayEase,
                           }}
                         >
@@ -618,10 +649,13 @@ export function Navbar() {
                   <motion.div variants={mobileOverlayRow} className="pt-4">
                     <Link
                       href={navPrimaryCta.href}
-                      className="block rounded-full bg-white px-6 py-4 text-center text-[1rem] font-semibold leading-snug text-[#c43d7a] shadow-[0_16px_40px_rgba(0,0,0,0.12)] transition-[transform,box-shadow,background-color] duration-200 hover:bg-[#fff8fb] hover:shadow-[0_20px_48px_rgba(0,0,0,0.14)] active:scale-[0.99]"
+                      className="il-btn il-btn--on-dark"
                       onClick={closeMobileNav}
                     >
                       {navPrimaryCta.label}
+                      <span aria-hidden className="il-btn__arrow">
+                        →
+                      </span>
                     </Link>
                   </motion.div>
                 </motion.div>

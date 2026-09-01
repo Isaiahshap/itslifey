@@ -1,63 +1,194 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { ClipReveal } from "@/components/ClipReveal";
+import {
+  RESOURCE_SECTIONS,
+  RESOURCES_CLOSING,
+  RESOURCES_INTRO,
+} from "@/lib/resources";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
+import { HOPEHUB_SIGNUP_URL } from "@/lib/hopehub";
 
 export const metadata: Metadata = {
-  title: "Resources — It's Lifey",
+  title: "Resources for Widows",
   description:
-    "Articles, tools, and vetted resources for widows—free inside HopeHub, the It's Lifey online community.",
+    "Trusted resources for widows—crisis support, grief help, mental health, parenting, finances, legal aid, and connection through It's Lifey.",
 };
 
-const shell =
-  "mx-auto w-full max-w-6xl px-4 sm:px-5 lg:px-6 xl:px-8";
-
-const RESOURCE_GUIDE_EMBED_SRC =
-  "https://simplebooklet.com/itslifeyresourceguide#page=1";
+const HERO = `/images/${encodeURIComponent("Summer retreat")}/IMG_4297.webp`;
 
 export default function ResourcesPage() {
   return (
-    <div className="bg-[#f6f3ee]">
+    <div className="ed">
       <section
-        className="py-8 sm:py-10 lg:py-12"
-        aria-labelledby="resources-heading"
+        data-entrance="hero"
+        className="ed-hero"
+        aria-labelledby="resources-hero-heading"
       >
-        <div className={shell}>
-          <div className="flex flex-col gap-4 border-b border-black/[0.08] pb-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8 sm:pb-8">
-            <div>
-              <h1
-                id="resources-heading"
-                className="text-pretty text-2xl font-semibold tracking-[-0.02em] text-[#141413] sm:text-[1.75rem]"
-              >
-                Resource library
-              </h1>
-              <p className="mt-2 max-w-xl text-base leading-relaxed text-[#666766]">
-                Most resources are available free in{" "}
-                <Link
-                  href="/hopehub"
-                  className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/35 underline-offset-[0.2em] transition-colors hover:text-[#d85e9a] hover:decoration-[#d85e9a]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
-                >
-                  HopeHub
-                </Link>
-                .
-              </p>
-            </div>
-            <Link
-              href="/hopehub"
-              className="shrink-0 text-sm font-semibold text-[#e76fab] underline decoration-[#e76fab]/35 underline-offset-[0.2em] transition-colors hover:text-[#d85e9a] hover:decoration-[#d85e9a]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:text-base"
-            >
-              Open HopeHub →
-            </Link>
+        <div className="ed-hero__media reveal-media">
+          <Image
+            src={HERO}
+            alt="Women together during an It's Lifey summer retreat"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectPosition: "center 40%" }}
+          />
+        </div>
+        <div className="ed-hero__veil" aria-hidden />
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker reveal-label">Support</p>
+            <h1 id="resources-hero-heading" className="ed-title ed-title--wide">
+              <ClipReveal delay={0}>Resources</ClipReveal>
+              <ClipReveal delay={80}>for widows</ClipReveal>
+            </h1>
+            <p className="ed-lede reveal-up">
+              Trusted places to turn—when you need help now, gentle guidance,
+              or simply a place to begin.
+            </p>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-6 overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-28px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.08] sm:mt-8">
-            <div className="relative min-h-[min(78vh,760px)] w-full sm:min-h-[min(82vh,880px)]">
-              <iframe
-                className="absolute inset-0 h-full w-full border-0"
-                src={RESOURCE_GUIDE_EMBED_SRC}
-                title="It's Lifey resource guide"
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
+      <section className="ed-section ed-section--cream">
+        <div className="ed-shell ed-resources-intro">
+          <div>
+            {RESOURCES_INTRO.map((p) => (
+              <p key={p} className="ed-body ed-body--ink ed-resources-intro__p">
+                {p}
+              </p>
+            ))}
+          </div>
+          <nav className="ed-jump" aria-label="Resource topics">
+            <p className="ed-kicker">Browse</p>
+            <ul className="ed-jump__list">
+              {RESOURCE_SECTIONS.map((s) => (
+                <li key={s.id}>
+                  <a href={`#${s.id}`}>{s.title}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </section>
+
+      {RESOURCE_SECTIONS.map((section, index) => {
+        const flip = index % 2 === 1;
+        return (
+          <section
+            key={section.id}
+            id={section.id}
+            className={`ed-section ${
+              section.tone === "crisis"
+                ? "ed-section--crisis"
+                : index % 2 === 0
+                  ? "ed-section--cream"
+                  : "ed-section--blush"
+            }`}
+          >
+            <div
+              className={`ed-shell ed-split ${flip ? "ed-split--flip" : ""}`}
+            >
+              <div>
+                <p className="ed-kicker">{section.kicker}</p>
+                <h2 className="ed-section-title">{section.title}</h2>
+                {section.intro.map((p) => (
+                  <p
+                    key={p}
+                    className="ed-body"
+                    style={{ marginTop: "1.1rem", maxWidth: "42ch" }}
+                  >
+                    {p}
+                  </p>
+                ))}
+
+                <div className="ed-resource-list">
+                  {section.items.map((item) => (
+                    <article key={item.name} className="ed-resource">
+                      <h3 className="ed-resource__name">{item.name}</h3>
+                      {item.body.map((p) => (
+                        <p key={p} className="ed-resource__body">
+                          {p}
+                        </p>
+                      ))}
+                      {item.links.length > 0 ? (
+                        <div className="ed-resource__links">
+                          {item.links.map((link) =>
+                            link.external ? (
+                              <a
+                                key={link.href + link.label}
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ed-resource__link"
+                              >
+                                {link.label}
+                                <span aria-hidden> →</span>
+                              </a>
+                            ) : (
+                              <Link
+                                key={link.href + link.label}
+                                href={link.href}
+                                className="ed-resource__link"
+                              >
+                                {link.label}
+                                <span aria-hidden> →</span>
+                              </Link>
+                            ),
+                          )}
+                        </div>
+                      ) : null}
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              {section.image ? (
+                <figure className="ed-split__media ed-split__media--tall m-0">
+                  <Image
+                    src={section.image.src}
+                    alt={section.image.alt}
+                    fill
+                    sizes="(max-width: 960px) 100vw, 48vw"
+                    style={{
+                      objectPosition: section.image.position ?? "center center",
+                    }}
+                  />
+                </figure>
+              ) : null}
             </div>
+          </section>
+        );
+      })}
+
+      <section className="ed-section ed-section--blush">
+        <div className="ed-shell ed-resources-close">
+          <p className="ed-kicker">A soft place to land</p>
+          <h2 className="ed-section-title">{RESOURCES_CLOSING.title}</h2>
+          {RESOURCES_CLOSING.body.map((p) => (
+            <p
+              key={p}
+              className="ed-body"
+              style={{ marginTop: "1.1rem", maxWidth: "48ch" }}
+            >
+              {p}
+            </p>
+          ))}
+          <div className="ed-actions" style={{ marginTop: "2rem" }}>
+            <a href={HOPEHUB_SIGNUP_URL} className="il-btn il-btn--solid">
+              Join HopeHub free
+              <span aria-hidden className="il-btn__arrow">
+                →
+              </span>
+            </a>
+            <Link href={EVENT_PATH} className="il-btn il-btn--ghost-light">
+              Upcoming gathering
+            </Link>
+            <Link href="/contact" className="il-btn il-btn--ghost-light">
+              Contact us
+            </Link>
           </div>
         </div>
       </section>

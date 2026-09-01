@@ -1,13 +1,13 @@
 "use client";
 
+import { ClipReveal } from "@/components/ClipReveal";
 import { Spring2027RetreatInterestForm } from "@/components/Spring2027RetreatInterestForm";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 const HERO_IMAGES = [
-  "/images/Retreats/Summer2025/IMG_1832.webp",
   "/images/Retreats/fall 2025/IMG_0978.webp",
   "/images/Retreats/Summer2025/IMG_1698.webp",
   "/images/Retreats/fall 2025/IMG_0966.webp",
@@ -26,12 +26,9 @@ const shell =
 const body =
   "text-[0.98rem] leading-[1.78] text-[#2a2928] sm:text-[1.0625rem] sm:leading-[1.76]";
 
-const fadeUp = {
-  initial: { opacity: 0, y: 22 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-64px" },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const },
-};
+function delayStyle(ms: number): CSSProperties {
+  return { ["--reveal-delay" as string]: `${ms}ms` };
+}
 
 function scrollToInterestForm() {
   document.getElementById("spring-2027-interest")?.scrollIntoView({
@@ -40,7 +37,7 @@ function scrollToInterestForm() {
   });
 }
 
-export function UpcomingRetreatClient() {
+export function SpringRetreat2027Client() {
   const [heroIndex, setHeroIndex] = useState(0);
 
   useEffect(() => {
@@ -59,13 +56,13 @@ export function UpcomingRetreatClient() {
   }, []);
 
   return (
-    <div className="min-w-0 overflow-x-clip bg-[#f6f3ee]">
-      {/* Hero */}
+    <div className="ed min-w-0 overflow-x-clip">
       <section
-        className="relative w-full min-w-0 overflow-hidden min-h-[min(88vh,720px)] lg:h-[min(88vh,900px)] lg:min-h-[620px]"
+        data-entrance="hero"
+        className="ed-hero"
         aria-labelledby="spring-2027-hero-heading"
       >
-        <div className="absolute inset-0">
+        <div className="ed-hero__media reveal-media" style={delayStyle(160)}>
           {HERO_IMAGES.map((src, i) => (
             <motion.div
               key={src}
@@ -84,64 +81,49 @@ export function UpcomingRetreatClient() {
               />
             </motion.div>
           ))}
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/72"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_45%,rgba(0,0,0,0.5)_100%)]"
-            aria-hidden
-          />
         </div>
-
-        <div
-          className={`relative mx-auto flex h-full flex-col justify-end gap-8 pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-16 lg:pt-24 ${shell}`}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] as const }}
-            className="max-w-3xl"
-          >
-            <p className="m-0 flex flex-wrap items-center gap-2.5">
-              <span className="inline-block rounded-full bg-[#e76fab] px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.2em] text-white ring-2 ring-white/30 sm:text-sm">
-                It&apos;s Lifey
-              </span>
-              <span className="inline-block rounded-full bg-white/95 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#9a3d6c] ring-2 ring-white/40 sm:text-[13px]">
-                Coming soon
-              </span>
+        <div className="ed-hero__veil" aria-hidden />
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker reveal-label" style={delayStyle(180)}>
+              Coming soon
             </p>
             <h1
               id="spring-2027-hero-heading"
-              className="mt-5 max-w-[18ch] text-balance text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl lg:max-w-none lg:text-6xl xl:text-7xl [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_12px_rgba(0,0,0,0.75),0_4px_28px_rgba(0,0,0,0.6)]"
+              className="ed-title ed-title--wide"
             >
-              Spring 2027 Widow Wellness Retreat
+              <ClipReveal delay={0}>Spring 2027 Widow</ClipReveal>
+              <span className="il-em">
+                <ClipReveal delay={80}>Wellness Retreat</ClipReveal>
+              </span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/92 sm:max-w-2xl sm:text-xl [text-shadow:0_1px_2px_rgba(0,0,0,0.88),0_2px_10px_rgba(0,0,0,0.68)]">
+            <p className="ed-lede reveal-up" style={delayStyle(260)}>
               Imagine a weekend where you don&apos;t have to explain your grief
               — where healing happens through connection, rest, laughter, and
               hope.
             </p>
-            <div className="mt-9">
+            <div className="ed-actions reveal-up" style={delayStyle(340)}>
               <button
                 type="button"
                 onClick={scrollToInterestForm}
-                className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-9 py-4 text-base font-semibold text-white shadow-lg shadow-black/20 ring-2 ring-white/30 transition-[background-color,transform] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.99]"
+                className="il-btn il-btn--solid"
               >
                 Join the interest list
+                <span aria-hidden className="il-btn__arrow">
+                  →
+                </span>
               </button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Invitation */}
       <section
         className="border-b border-black/10 bg-white"
         aria-labelledby="spring-2027-invite-heading"
       >
         <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
-          <motion.div {...fadeUp} className="max-w-2xl">
+          <div data-reveal="" className="reveal-up max-w-2xl">
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab] sm:text-[11px]">
               Coming soon
             </p>
@@ -149,7 +131,8 @@ export function UpcomingRetreatClient() {
               id="spring-2027-invite-heading"
               className="mt-3 text-balance text-3xl font-semibold leading-[1.08] tracking-tight text-black sm:text-4xl lg:text-[2.75rem]"
             >
-              A weekend surrounded by women who truly understand
+              <ClipReveal delay={0}>A weekend surrounded by</ClipReveal>
+              <ClipReveal delay={80}>women who truly understand</ClipReveal>
             </h2>
             <p className={`mt-6 ${body}`}>
               Imagine a weekend where you don&apos;t have to explain your grief,
@@ -161,18 +144,17 @@ export function UpcomingRetreatClient() {
               Our Spring 2027 Widow Wellness Retreat is currently in the works,
               and we can&apos;t wait to share it with you.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* What you'll receive + early bird */}
       <section
         className="border-b border-[#d85e9a] bg-[#e76fab]"
         aria-labelledby="spring-2027-perks-heading"
       >
         <div className={`${shell} py-12 sm:py-16 lg:py-20`}>
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-14">
-            <motion.div {...fadeUp} className="text-white">
+            <div data-reveal="" className="reveal-up text-white">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/85">
                 Interest list
               </p>
@@ -189,7 +171,7 @@ export function UpcomingRetreatClient() {
                 {INTEREST_PERKS.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 backdrop-blur-sm"
+                    className="flex gap-3 border border-white/20 bg-white/10 px-5 py-4"
                   >
                     <span
                       className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white"
@@ -201,11 +183,12 @@ export function UpcomingRetreatClient() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
-            <motion.aside
-              {...fadeUp}
-              className="rounded-[1.75rem] border border-white/25 bg-white p-7 shadow-xl shadow-black/10 sm:p-8"
+            <aside
+              data-reveal=""
+              className="reveal-up border border-white/25 bg-white p-7 shadow-xl shadow-black/10 sm:p-8"
+              style={delayStyle(80)}
             >
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
                 Early bird bonus
@@ -225,16 +208,18 @@ export function UpcomingRetreatClient() {
               <button
                 type="button"
                 onClick={scrollToInterestForm}
-                className="mt-7 inline-flex w-full items-center justify-center rounded-full bg-[#e76fab] px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#d85e9a] sm:w-auto"
+                className="il-btn il-btn--solid mt-7"
               >
                 Sign up for early access
+                <span aria-hidden className="il-btn__arrow">
+                  →
+                </span>
               </button>
-            </motion.aside>
+            </aside>
           </div>
         </div>
       </section>
 
-      {/* Form */}
       <section
         id="spring-2027-interest"
         className="border-b border-black/10 bg-[#faf8f5]"
@@ -242,7 +227,7 @@ export function UpcomingRetreatClient() {
       >
         <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_min(28rem,100%)] lg:items-start lg:gap-16">
-            <motion.div {...fadeUp}>
+            <div data-reveal="" className="reveal-up">
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab]">
                 Spring 2027
               </p>
@@ -265,20 +250,23 @@ export function UpcomingRetreatClient() {
               >
                 Browse past retreats →
               </Link>
-            </motion.div>
-            <motion.div
-              {...fadeUp}
-              className="rounded-[1.75rem] border border-black/[0.08] bg-white p-6 shadow-lg shadow-black/[0.06] sm:p-8 lg:sticky lg:top-28"
+            </div>
+            <div
+              data-reveal=""
+              className="reveal-up border border-black/[0.08] bg-white p-6 shadow-lg shadow-black/[0.06] sm:p-8 lg:sticky lg:top-28"
+              style={delayStyle(80)}
             >
               <Spring2027RetreatInterestForm />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Closing */}
-      <section className="bg-[#c94d8a] px-4 py-16 text-center text-white sm:py-20">
-        <div className="mx-auto max-w-2xl">
+      <section
+        className="bg-[#c94d8a] px-4 py-16 text-center text-white sm:py-20"
+        data-reveal=""
+      >
+        <div className="reveal-up mx-auto max-w-2xl">
           <p className="text-2xl font-semibold leading-snug sm:text-3xl">
             We can&apos;t wait to welcome you.
           </p>
@@ -289,9 +277,12 @@ export function UpcomingRetreatClient() {
           <button
             type="button"
             onClick={scrollToInterestForm}
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#c94d8a] transition-colors hover:bg-neutral-100"
+            className="il-btn il-btn--on-dark mt-8"
           >
             Join the interest list
+            <span aria-hidden className="il-btn__arrow">
+              →
+            </span>
           </button>
         </div>
       </section>

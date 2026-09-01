@@ -13,20 +13,25 @@ const h2 = "mt-10 text-xl font-semibold tracking-tight text-[#141413] sm:text-2x
 
 export default function TermsOfServicePage() {
   return (
-    <div className="bg-[#f6f3ee]">
-      <section className="border-b border-[#e3ddd4] bg-[#faf8f5]">
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:py-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-            Legal
-          </p>
-          <h1 className="mt-3 text-balance text-4xl font-semibold leading-tight tracking-tight text-[#141413] sm:text-5xl">
-            Terms of Service
-          </h1>
-          <p className="mt-4 text-sm text-[#666766]">Last updated: April 9, 2026</p>
+    <div className="ed">
+      <section
+        data-entrance="hero"
+        className="ed-hero ed-hero--plain"
+        aria-labelledby="terms-heading"
+      >
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker">Legal</p>
+            <h1 id="terms-heading" className="ed-title">
+              Terms of Service
+            </h1>
+            <p className="ed-lede">Last updated: April 9, 2026</p>
+          </div>
         </div>
       </section>
 
-      <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
+      <article className="ed-section ed-section--cream">
+        <div className="ed-shell" style={{ maxWidth: "48rem" }}>
         <p className={p}>
           These Terms of Service (&quot;Terms&quot;) govern your access to and use of the
           It&apos;s Lifey website and related online services (collectively, the
@@ -108,6 +113,7 @@ export default function TermsOfServicePage() {
           </Link>
           .
         </p>
+        </div>
       </article>
     </div>
   );

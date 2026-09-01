@@ -2,17 +2,12 @@ import { HONEYPOT_FIELD } from "@/lib/form-spam";
 
 type Props = { idPrefix: string };
 
-/** Hidden field — leave empty. Bots often fill “website” fields. */
+/** Visually hidden — leave empty. Bots often fill “website” fields. */
 export function FormHoneypot({ idPrefix }: Props) {
   const id = `${idPrefix}-hp`;
   return (
-    <div
-      className="pointer-events-none absolute -left-[10000px] top-0 h-px w-px overflow-hidden opacity-0"
-      aria-hidden="true"
-    >
-      <label htmlFor={id} className="sr-only">
-        Leave this field blank
-      </label>
+    <div className="il-honeypot" aria-hidden="true">
+      <label htmlFor={id}>Company website</label>
       <input
         id={id}
         name={HONEYPOT_FIELD}

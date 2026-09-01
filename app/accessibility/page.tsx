@@ -14,26 +14,31 @@ const ul = "mt-4 list-disc space-y-2 pl-6";
 
 export default function AccessibilityPage() {
   return (
-    <div className="bg-[#f6f3ee]">
-      <section className="border-b border-[#e3ddd4] bg-[#faf8f5]">
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:py-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e76fab]">
-            Accessibility
-          </p>
-          <h1 className="mt-3 text-balance text-4xl font-semibold leading-tight tracking-tight text-[#141413] sm:text-5xl">
-            Accessibility at It&apos;s Lifey
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-[#666766] sm:text-xl">
-            We want this site to feel usable, readable, and respectful for as many people as
-            possible—including visitors who use keyboards, screen readers, or other assistive
-            tools. This page describes what we prioritize today, where we are still learning,
-            and how you can reach us with feedback.
-          </p>
-          <p className="mt-4 text-sm text-[#666766]">Last updated: April 9, 2026</p>
+    <div className="ed">
+      <section
+        data-entrance="hero"
+        className="ed-hero ed-hero--plain"
+        aria-labelledby="accessibility-heading"
+      >
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker">Accessibility</p>
+            <h1 id="accessibility-heading" className="ed-title ed-title--wide">
+              Accessibility at It&apos;s Lifey
+            </h1>
+            <p className="ed-lede">
+              We want this site to feel usable, readable, and respectful for as
+              many people as possible.
+            </p>
+          </div>
         </div>
       </section>
 
-      <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
+      <article className="ed-section ed-section--cream">
+        <div className="ed-shell" style={{ maxWidth: "48rem" }}>
+        <p className="ed-body" style={{ marginBottom: "1rem" }}>
+          Last updated: April 9, 2026
+        </p>
         <h2 className={`${h2} mt-0`}>What we are doing intentionally</h2>
         <ul className={`${ul} ${p}`}>
           <li>
@@ -127,6 +132,7 @@ export default function AccessibilityPage() {
             Terms of Service
           </Link>
         </p>
+        </div>
       </article>
     </div>
   );

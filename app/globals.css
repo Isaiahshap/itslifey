@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./content-pages.css";
 
 :root {
   --background: #f6f3ee;
@@ -7,6 +8,16 @@
   --brand-grey: #666766;
   --surface-card: #fffcfa;
   --surface-muted: #ebe6df;
+  --il-pink: #e76fab;
+  --il-pink-deep: #d85e9a;
+  --il-ink: #1a1918;
+  --il-cream: #fffcfa;
+  --il-ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+  --il-editorial-ease: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --il-reveal-duration: 650ms;
+  --il-media-duration: 900ms;
+  --il-swoop-duration: 0.48s;
+  --il-color-in-delay: 0.1s;
 }
 
 @theme inline {
@@ -22,6 +33,390 @@ body {
   color: var(--foreground);
   font-family: var(--font-nunito-sans), system-ui, sans-serif;
   overflow-x: clip;
+}
+
+/* Soft italic for emotional hero / headline accents */
+.il-em {
+  display: block;
+  font-family: var(--font-hero-script), "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: inherit;
+  padding-bottom: 0.06em;
+}
+
+.il-em--inline {
+  display: inline;
+  padding-bottom: 0;
+  line-height: inherit;
+}
+
+.ed-title .il-em,
+.home-title .il-em {
+  font-weight: 500;
+}
+
+/* Descenders need space inside the masked reveal window — keep tight */
+.il-em .clip-reveal {
+  padding-bottom: 0.14em;
+  margin-bottom: -0.1em;
+}
+
+.home-hero__title .il-em {
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  padding-bottom: 0.04em;
+  font-size: 1.18em;
+}
+
+.home-hero__title .il-em--inline {
+  display: inline;
+  font-size: 1.18em;
+  padding-bottom: 0;
+  line-height: inherit;
+}
+
+.home-hero__title .il-em .clip-reveal {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.home-title .il-em .clip-reveal,
+.ed-title .il-em .clip-reveal {
+  padding-bottom: 0.16em;
+  margin-bottom: -0.08em;
+}
+
+/* Sitewide: sharp corners */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+/* Spam honeypot — never visible */
+.il-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ——— Brand buttons: rectangular upward swoop (full button fill, never oval) ——— */
+
+.il-btn,
+.ww-btn,
+.wwr-btn {
+  --btn-fill: currentColor;
+  --btn-base: transparent;
+  --btn-fg: inherit;
+  --btn-fg-hover: inherit;
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  text-decoration: none;
+  text-shadow: none;
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  background-color: var(--btn-base);
+  background-image: none !important;
+  color: var(--btn-fg);
+  transition: color 0.2s ease 0.08s, border-color 0.2s ease;
+}
+
+/* Full-bleed rectangular mask rising from the bottom — not a circle / blob */
+.il-btn::before,
+.ww-btn::before,
+.wwr-btn::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--btn-fill) !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  transform: translate3d(0, 101%, 0) !important;
+  transform-origin: center bottom !important;
+  scale: none !important;
+  animation: none !important;
+  transition: transform var(--il-swoop-duration) var(--il-editorial-ease) !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  will-change: transform;
+}
+
+.il-btn:hover,
+.il-btn:focus-visible,
+.ww-btn:hover,
+.ww-btn:focus-visible,
+.wwr-btn:hover,
+.wwr-btn:focus-visible {
+  color: var(--btn-fg-hover);
+}
+
+.il-btn:hover::before,
+.il-btn:focus-visible::before,
+.ww-btn:hover::before,
+.ww-btn:focus-visible::before,
+.wwr-btn:hover::before,
+.wwr-btn:focus-visible::before {
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.il-btn {
+  --btn-base: transparent;
+  --btn-fill: var(--il-pink);
+  --btn-fg: var(--il-pink);
+  --btn-fg-hover: #fff;
+  --il-btn-border: var(--il-pink);
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.9rem 1.7rem;
+  border-color: var(--il-btn-border);
+  font-size: 0.95rem;
+}
+
+.il-btn:focus-visible {
+  outline: 2px solid var(--il-pink);
+  outline-offset: 3px;
+}
+
+.il-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.il-btn__arrow {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  translate: 0 1px;
+  transition: transform 0.36s var(--il-editorial-ease);
+}
+
+.il-btn:hover .il-btn__arrow,
+.il-btn:focus-visible .il-btn__arrow {
+  transform: translateX(4px);
+}
+
+.il-btn--solid {
+  --btn-base: var(--il-pink);
+  --btn-fill: var(--il-pink-deep);
+  --btn-fg: #fff;
+  --btn-fg-hover: #fff;
+  --il-btn-border: var(--il-pink);
+}
+
+.il-btn--on-dark {
+  --btn-base: #fff;
+  --btn-fill: var(--il-cream);
+  --btn-fg: var(--il-ink);
+  --btn-fg-hover: var(--il-ink);
+  --il-btn-border: #fff;
+}
+
+.il-btn--ghost-dark {
+  --btn-base: transparent;
+  --btn-fill: #fff;
+  --btn-fg: #fff;
+  --btn-fg-hover: var(--il-ink);
+  --il-btn-border: rgba(255, 255, 255, 0.72);
+}
+
+.il-btn--ghost-light {
+  --btn-base: transparent;
+  --btn-fill: var(--il-pink);
+  --btn-fg: var(--il-ink);
+  --btn-fg-hover: #fff;
+  --il-btn-border: rgba(26, 25, 24, 0.28);
+}
+
+.il-btn--ghost-pink {
+  --btn-base: transparent;
+  --btn-fill: #fff;
+  --btn-fg: #fff;
+  --btn-fg-hover: var(--il-pink);
+  --il-btn-border: rgba(255, 255, 255, 0.55);
+}
+
+.il-btn--nav {
+  width: auto;
+  min-height: 2.65rem;
+  max-width: 17rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.il-btn--compact {
+  min-height: 3rem;
+  padding: 0.75rem 1.4rem;
+}
+
+@media (min-width: 640px) {
+  .il-btn:not(.il-btn--block) {
+    width: auto;
+  }
+
+  .il-btn--wide {
+    min-width: 13.5rem;
+  }
+
+  .il-btn--nav {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .il-btn--nav {
+    max-width: none;
+    padding-inline: 1.15rem;
+  }
+}
+
+.il-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 2.5rem;
+  color: var(--il-pink);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(231, 111, 171, 0.45);
+  padding-bottom: 0.12em;
+  transition:
+    color 0.35s var(--il-ease-lux),
+    border-color 0.35s var(--il-ease-lux);
+}
+
+.il-link:hover,
+.il-link:focus-visible {
+  color: var(--il-pink-deep);
+  border-bottom-color: var(--il-pink-deep);
+}
+
+.il-link .il-btn__arrow {
+  text-decoration: none;
+}
+
+/* ——— Editorial entrance: transform + clip-path only (no opacity fades) ——— */
+
+.clip-reveal {
+  display: block;
+  overflow: hidden;
+  /* Soft pad so non-italic glyphs aren't clipped either */
+  padding-bottom: 0.06em;
+}
+
+.clip-reveal__inner {
+  display: block;
+  transform: translate3d(0, 115%, 0);
+  transition: transform var(--il-reveal-duration) var(--il-editorial-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform;
+}
+
+.is-ready .clip-reveal__inner,
+.is-visible .clip-reveal__inner,
+[data-reveal].is-visible .clip-reveal__inner {
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-up,
+.reveal-label {
+  transform: translate3d(0, 2rem, 0);
+  transition: transform var(--il-reveal-duration) var(--il-editorial-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform;
+}
+
+.is-ready .reveal-up,
+.is-ready .reveal-label,
+.reveal-up.is-visible,
+.reveal-label.is-visible,
+.is-visible .reveal-up,
+.is-visible .reveal-label {
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-media {
+  transform: translate3d(0, 2rem, 0);
+  clip-path: inset(6%);
+  transition:
+    transform var(--il-reveal-duration) var(--il-editorial-ease),
+    clip-path var(--il-media-duration) var(--il-editorial-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform, clip-path;
+}
+
+.is-ready .reveal-media,
+.reveal-media.is-visible,
+.is-visible .reveal-media {
+  transform: translate3d(0, 0, 0);
+  clip-path: inset(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .il-btn,
+  .ww-btn,
+  .wwr-btn,
+  .il-btn__arrow,
+  .il-btn::before,
+  .ww-btn::before,
+  .wwr-btn::before {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .il-btn:hover::before,
+  .il-btn:focus-visible::before,
+  .ww-btn:hover::before,
+  .ww-btn:focus-visible::before,
+  .wwr-btn:hover::before,
+  .wwr-btn:focus-visible::before {
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  .clip-reveal__inner,
+  .reveal-up,
+  .reveal-label,
+  .reveal-media {
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
 }
 
 @keyframes retreat-marquee-scroll {
@@ -49,3 +444,4 @@ body {
     transform: none;
   }
 }
+

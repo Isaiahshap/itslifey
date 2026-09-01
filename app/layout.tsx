@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
+import { Cormorant_Garamond, Nunito_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { EntranceMotion } from "@/components/EntranceMotion";
 import { Footer } from "@/components/Footer";
 import { MetaPixel } from "@/components/MetaPixel";
 import { Navbar } from "@/components/Navbar";
@@ -12,6 +13,14 @@ const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const heroScript = Cormorant_Garamond({
+  variable: "--font-hero-script",
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  style: ["italic"],
   display: "swap",
 });
 
@@ -84,7 +93,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${nunitoSans.variable} h-full scroll-smooth`}>
+    <html
+      lang="en"
+      className={`${nunitoSans.variable} ${heroScript.variable} h-full scroll-smooth`}
+    >
       <body className="min-h-full flex flex-col antialiased text-black">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-962038QD51"
@@ -99,6 +111,7 @@ export default function RootLayout({
           `}
         </Script>
         <MetaPixel />
+        <EntranceMotion />
         <VirtualHealingAnnouncementBar />
         <Navbar />
         <main className="flex-1">{children}</main>

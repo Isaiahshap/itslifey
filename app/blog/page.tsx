@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { ClipReveal } from "@/components/ClipReveal";
 import { getPosts } from "@/lib/wordpress";
 
 export const metadata: Metadata = {
@@ -10,8 +12,8 @@ export const metadata: Metadata = {
 
 export const revalidate = 120;
 
-const shell =
-  "mx-auto w-full max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,calc(100vw-4rem))]";
+const HERO = `/images/${encodeURIComponent("Summer retreat")}/IMG_4366.webp`;
+const FALLBACK_THUMB = "/images/widowwellnessimages/IMG_3180.jpeg";
 
 function formatDate(iso: string) {
   try {
@@ -29,103 +31,113 @@ export default async function BlogArchivePage() {
   const posts = await getPosts();
 
   return (
-    <div className="bg-[#f6f3ee]">
+    <div className="ed">
       <section
-        className="border-b border-black/[0.06] bg-[#faf8f5]"
+        data-entrance="hero"
+        className="ed-hero"
         aria-labelledby="blog-index-heading"
       >
-        <div className={`${shell} py-12 sm:py-16 lg:py-20`}>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#666766] sm:text-[11px]">
-            It&apos;s Lifey
-          </p>
-          <h1
-            id="blog-index-heading"
-            className="mt-4 max-w-2xl text-pretty text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-[#141413] sm:text-4xl"
-          >
-            Blog
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#2a2928]">
-            Thoughtful pieces you can return to on hard days and quiet ones
-            alike—clear, warm, and grounded in real life.
-          </p>
+        <div className="ed-hero__media reveal-media">
+          <Image
+            src={HERO}
+            alt="Women practicing yoga together in a bright summer retreat house"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectPosition: "center 40%" }}
+          />
+        </div>
+        <div className="ed-hero__veil" aria-hidden />
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker reveal-label">It&apos;s Lifey</p>
+            <h1 id="blog-index-heading" className="ed-title">
+              <ClipReveal delay={0}>Stories &amp; support</ClipReveal>
+            </h1>
+          </div>
         </div>
       </section>
 
-      <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
-        {posts.length === 0 ? (
-          <div className="mx-auto max-w-xl rounded-2xl border border-black/[0.08] bg-white px-8 py-14 text-center shadow-sm shadow-black/[0.04] sm:px-12 sm:py-16">
-            <div
-              className="mx-auto mb-6 h-px w-12 bg-[#e76fab]/70"
-              aria-hidden
-            />
-            <h2 className="text-xl font-semibold text-[#141413] sm:text-2xl">
-              New stories are on the way
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#666766]">
-              There aren&apos;t any posts published yet. When articles go live,
-              they&apos;ll appear here—honest, compassionate reading for widows,
-              written with care.
-            </p>
-            <p className="mt-8">
-              <Link
-                href="/hopehub"
-                className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md shadow-black/10 transition-colors hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+      <section className="ed-section ed-section--cream">
+        <div className="ed-shell">
+          {posts.length === 0 ? (
+            <div className="ed-empty">
+              <p className="ed-kicker">Coming soon</p>
+              <h2 className="ed-empty__title">New stories are on the way</h2>
+              <p
+                className="ed-body"
+                style={{ margin: "1.15rem auto 0", maxWidth: "36ch" }}
               >
-                Explore HopeHub
-              </Link>
-            </p>
-          </div>
-        ) : (
-          <ul className="mx-auto grid max-w-4xl gap-10 sm:gap-12">
-            {posts.map((post) => (
-              <li key={post.id}>
-                <article className="flex flex-col gap-6 border-b border-black/[0.06] pb-10 sm:flex-row sm:gap-10 sm:pb-12 last:border-b-0 last:pb-0">
-                  {post.featuredImageUrl ? (
+                There aren&apos;t any posts published yet. When articles go
+                live, they&apos;ll appear here — honest, compassionate reading
+                for widows, written with care.
+              </p>
+              <p style={{ marginTop: "1.75rem" }}>
+                <Link href="/hopehub" className="il-btn il-btn--solid">
+                  Explore HopeHub
+                  <span aria-hidden className="il-btn__arrow">
+                    →
+                  </span>
+                </Link>
+              </p>
+            </div>
+          ) : (
+            <>
+              <p className="ed-kicker">From the journal</p>
+              <h2 className="ed-section-title">Latest articles</h2>
+              <div className="ed-blog-list" style={{ marginTop: "2rem" }}>
+                {posts.map((post) => {
+                  const image = post.featuredImageUrl || FALLBACK_THUMB;
+                  const isRemote = Boolean(post.featuredImageUrl);
+
+                  return (
                     <Link
+                      key={post.id}
                       href={`/blog/${post.slug}`}
-                      className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-2xl bg-[#ebe6df] sm:aspect-square sm:max-w-[280px]"
+                      className="ed-blog-item"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element -- Featured image URLs come from WP/CDN; next/image 500s in prod when host is not allowlisted. */}
-                      <img
-                        src={post.featuredImageUrl}
-                        alt=""
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
-                      />
+                      <div className="ed-blog-item__media">
+                        {isRemote ? (
+                          // eslint-disable-next-line @next/next/no-img-element -- Featured image URLs come from WP/CDN; next/image needs host allowlisting.
+                          <img
+                            src={image}
+                            alt=""
+                            className="absolute inset-0 h-full w-full object-cover"
+                          />
+                        ) : (
+                          <Image
+                            src={FALLBACK_THUMB}
+                            alt=""
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 800px) 100vw, 40vw"
+                          />
+                        )}
+                      </div>
+                      <div>
+                        <time
+                          dateTime={post.dateISO}
+                          className="ed-blog-item__meta"
+                        >
+                          {formatDate(post.dateISO)}
+                        </time>
+                        <h3 className="ed-blog-item__title">{post.title}</h3>
+                        <p className="ed-blog-item__excerpt">
+                          {post.excerptText}
+                        </p>
+                        <span className="ed-blog-item__more">
+                          Read article
+                          <span aria-hidden>→</span>
+                        </span>
+                      </div>
                     </Link>
-                  ) : null}
-                  <div className="min-w-0 flex-1">
-                    <time
-                      dateTime={post.dateISO}
-                      className="text-sm font-medium text-[#666766]"
-                    >
-                      {formatDate(post.dateISO)}
-                    </time>
-                    <h2 className="mt-2 text-2xl font-semibold leading-snug tracking-tight text-[#141413]">
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="text-[#141413] transition-colors hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
-                      >
-                        {post.title}
-                      </Link>
-                    </h2>
-                    <p className="mt-3 text-base leading-relaxed text-[#2a2928]">
-                      {post.excerptText}
-                    </p>
-                    <p className="mt-5">
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="text-sm font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 transition-colors hover:decoration-[#e76fab]"
-                      >
-                        Read article
-                      </Link>
-                    </p>
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

@@ -12,7 +12,7 @@ import {
 } from "react";
 
 const inputClass =
-  "mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15";
+  "mt-2 w-full rounded-none border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
@@ -80,7 +80,7 @@ export function ContactForm() {
         <p
           role="status"
           aria-live="polite"
-          className={`rounded-xl border px-4 py-3 text-sm leading-relaxed ${
+          className={`rounded-none border px-4 py-3 text-sm leading-relaxed ${
             status === "success"
               ? "border-[#e76fab]/25 bg-[#fdf8fb] text-[#555]"
               : "border-red-200 bg-red-50 text-red-900"
@@ -144,9 +144,18 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="w-full rounded-full bg-[#e76fab] px-8 py-4 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] enabled:active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="il-btn il-btn--solid"
         >
-          {status === "sending" ? "Sending…" : "Send message"}
+          {status === "sending" ? (
+            "Sending…"
+          ) : (
+            <>
+              Send message
+              <span aria-hidden className="il-btn__arrow">
+                →
+              </span>
+            </>
+          )}
         </button>
         <RecaptchaNotice />
         <p className="mt-6 text-sm leading-relaxed text-[#666766]">

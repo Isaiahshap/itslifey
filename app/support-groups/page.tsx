@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { ClipReveal } from "@/components/ClipReveal";
 import { WP_EVENTS_EMBED_URL } from "@/lib/wp-config";
 
 export const metadata: Metadata = {
@@ -8,72 +10,82 @@ export const metadata: Metadata = {
     "Upcoming It's Lifey gatherings—virtual and in-person sessions, expert events, and connection with women who understand.",
 };
 
-const shell =
-  "mx-auto w-full max-w-7xl px-4 sm:px-5 lg:px-6 xl:px-8 2xl:max-w-[min(88rem,calc(100vw-4rem))]";
+const HERO = `/images/${encodeURIComponent("Summer retreat")}/IMG_4560.webp`;
 
 export default function SupportGroupsPage() {
   return (
-    <div className="bg-[#f6f3ee]">
+    <div className="ed">
       <section
-        className="border-b border-black/[0.06] bg-[#faf8f5]"
+        data-entrance="hero"
+        className="ed-hero"
         aria-labelledby="sg-index-heading"
       >
-        <div className={`${shell} py-12 sm:py-16 lg:py-20`}>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#666766] sm:text-[11px]">
-            Support
-          </p>
-          <h1
-            id="sg-index-heading"
-            className="mt-4 max-w-4xl text-pretty text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-[#141413] sm:text-4xl"
-          >
-            Support groups &amp; events
-          </h1>
-          <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[#2a2928]">
-            Upcoming gatherings and sessions hosted by It&apos;s Lifey—browse the
-            calendar below, register, and complete checkout on our secure event
-            pages.
-          </p>
+        <div className="ed-hero__media reveal-media">
+          <Image
+            src={HERO}
+            alt="Women gathered in warm conversation during an It's Lifey retreat"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectPosition: "center 40%" }}
+          />
+        </div>
+        <div className="ed-hero__veil" aria-hidden />
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker reveal-label">Support</p>
+            <h1 id="sg-index-heading" className="ed-title ed-title--wide">
+              <ClipReveal delay={0}>Support groups</ClipReveal>
+              <ClipReveal delay={80}>&amp; events</ClipReveal>
+            </h1>
+            <p className="ed-lede reveal-up">
+              Upcoming gatherings and sessions — browse the calendar, register,
+              and complete checkout on our secure event pages.
+            </p>
+          </div>
         </div>
       </section>
 
-      <div className={`${shell} pb-16 pt-8 sm:pb-20 sm:pt-10 lg:pb-24`}>
-        <div className="overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-md shadow-black/[0.06]">
-          <iframe
-            title="It's Lifey — upcoming events calendar"
-            src={WP_EVENTS_EMBED_URL}
-            className="block min-h-[min(85vh,900px)] w-full border-0 sm:min-h-[min(88vh,1000px)]"
-            loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allow="payment *; fullscreen; clipboard-write"
-          />
+      <section className="ed-section ed-section--cream">
+        <div className="ed-shell">
+          <div className="overflow-hidden border border-[var(--ed-rule)] bg-white">
+            <iframe
+              title="It's Lifey — upcoming events calendar"
+              src={WP_EVENTS_EMBED_URL}
+              className="block min-h-[min(85vh,900px)] w-full border-0 sm:min-h-[min(88vh,1000px)]"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="payment *; fullscreen; clipboard-write"
+            />
+          </div>
+          <p className="ed-body" style={{ marginTop: "1.5rem", textAlign: "center" }}>
+            Prefer the full site?{" "}
+            <a
+              href={WP_EVENTS_EMBED_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[var(--ed-pink-deep)] underline decoration-[rgba(231,111,171,0.4)] underline-offset-2"
+            >
+              Open the calendar in a new tab
+            </a>
+            . Questions?{" "}
+            <Link
+              href="/contact"
+              className="font-semibold text-[var(--ed-pink-deep)] underline decoration-[rgba(231,111,171,0.4)] underline-offset-2"
+            >
+              Contact us
+            </Link>{" "}
+            or visit{" "}
+            <Link
+              href="/hopehub"
+              className="font-semibold text-[var(--ed-pink-deep)] underline decoration-[rgba(231,111,171,0.4)] underline-offset-2"
+            >
+              HopeHub
+            </Link>
+            .
+          </p>
         </div>
-        <p className="mt-6 text-center text-sm leading-relaxed text-[#666766]">
-          Prefer the full site?{" "}
-          <a
-            href={WP_EVENTS_EMBED_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
-          >
-            Open the calendar in a new tab
-          </a>
-          . Questions?{" "}
-          <Link
-            href="/contact"
-            className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
-          >
-            Contact us
-          </Link>
-          {" "}or visit{" "}
-          <Link
-            href="/hopehub"
-            className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
-          >
-            HopeHub
-          </Link>
-          .
-        </p>
-      </div>
+      </section>
     </div>
   );
 }

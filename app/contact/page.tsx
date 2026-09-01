@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { ClipReveal } from "@/components/ClipReveal";
 import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
@@ -7,36 +9,79 @@ export const metadata: Metadata = {
     "Reach It's Lifey with questions about retreats, HopeHub, and support for widows. We read every message.",
 };
 
+const HERO = "/images/widowwellnessimages/IMG_4575.jpeg";
+const SIDE = "/images/widowwellnessimages/IMG_0604.jpeg";
+
 export default function ContactPage() {
   return (
-    <div className="bg-[#f6f3ee]">
-      <section className="border-b border-[#e3ddd4] bg-[#faf8f5]">
-        <div className="mx-auto max-w-3xl px-4 py-14 sm:px-5 sm:py-16 lg:px-6 lg:py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e76fab] sm:text-sm">
-            Contact
-          </p>
-          <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-black sm:text-5xl">
-            We&apos;re glad you reached out
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-[#666766] sm:text-xl">
-            Share a note below—we read every message and respond as soon as we
-            can. You&apos;ll get a short confirmation email when your form is
-            received.
-          </p>
+    <div className="ed">
+      <section
+        data-entrance="hero"
+        className="ed-hero"
+        aria-labelledby="contact-hero-heading"
+      >
+        <div className="ed-hero__media reveal-media">
+          <Image
+            src={HERO}
+            alt="Women sharing a warm meal and conversation together"
+            fill
+            priority
+            sizes="100vw"
+          />
+        </div>
+        <div className="ed-hero__veil" aria-hidden />
+        <div className="ed-hero__inner">
+          <div className="ed-hero__panel">
+            <p className="ed-kicker reveal-label">Contact</p>
+            <h1 id="contact-hero-heading" className="ed-title">
+              <ClipReveal delay={0}>We&apos;re glad you</ClipReveal>
+              <ClipReveal delay={80}>reached out</ClipReveal>
+            </h1>
+            <p className="ed-lede reveal-up">
+              Share a note below. We read every message and respond as soon as
+              we can.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="py-14 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-5 lg:px-6">
-          <div className="rounded-[1.35rem] border border-[#e8e2da] bg-[#fffcfa] p-6 shadow-[0_20px_50px_-40px_rgba(0,0,0,0.12)] sm:p-10 lg:p-12">
-            <h2 className="text-xl font-semibold tracking-tight text-black sm:text-2xl">
-              Send a message
+      <section className="ed-section ed-section--cream">
+        <div className="ed-shell ed-split">
+          <div>
+            <p className="ed-kicker">Send a message</p>
+            <h2 className="ed-section-title">
+              Tell us what you need
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-[#666766]">
-              Name, email, and your message are all we need. Phone is optional if
-              you&apos;d rather we call you back.
+            <p className="ed-body" style={{ marginTop: "1.15rem" }}>
+              Questions about retreats, HopeHub, support groups, or simply
+              wanting to say hello — we&apos;re here. You&apos;ll get a short
+              confirmation email when your form is received.
             </p>
-            <ContactForm />
+
+            <div className="ed-form-panel" style={{ marginTop: "2rem" }}>
+              <ContactForm />
+            </div>
+          </div>
+
+          <div className="ed-contact-aside">
+            <figure className="ed-split__media ed-split__media--tall m-0">
+              <Image
+                src={SIDE}
+                alt="Widows gathered in warm connection at an It's Lifey event"
+                fill
+                sizes="(max-width: 960px) 100vw, 48vw"
+              />
+            </figure>
+            <div>
+              <p className="ed-kicker">Prefer email?</p>
+              <p className="ed-body" style={{ marginTop: "0.75rem" }}>
+                You can also reach Jennifer directly at{" "}
+                <a href="mailto:jennifer@itslifey.com">
+                  jennifer@itslifey.com
+                </a>
+                .
+              </p>
+            </div>
           </div>
         </div>
       </section>

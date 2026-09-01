@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { ClipReveal } from "@/components/ClipReveal";
 import { NewsletterSignupForm } from "@/components/NewsletterSignupForm";
 import {
   computeHeroHeadlineFontSizePx,
@@ -16,14 +17,17 @@ import {
   EVENT_SHORT_TAGLINE,
   SPONSORSHIP_PATH,
 } from "@/lib/widow-wellness-event";
+import "./home.css";
+
 const HERO_IMAGES = [
-  "/images/hero.jpg",
-  "/images/hero2.jpg",
-  "/images/hero3.jpg",
-  "/images/hero4.jpg",
+  "/images/widowwellnessimages/IMG_0604.jpeg",
+  "/images/widowwellnessimages/IMG_2517.jpeg",
+  "/images/widowwellnessimages/IMG_3180.jpeg",
+  "/images/widowwellnessimages/IMG_4386.jpeg",
+  "/images/widowwellnessimages/IMG_4575.jpeg",
+  "/images/widowwellnessimages/IMG_8510.jpeg",
 ] as const;
 
-/** Summer 2025 retreat — home showcase crossfade (paths must match `public/images`). */
 const RETREAT_SHOWCASE_IMAGES = [
   "/images/Retreats/Summer2025/Jen Kitchen Table Horizontal.webp",
   "/images/Retreats/Summer2025/IMG_0683.webp",
@@ -62,12 +66,17 @@ const YOUTUBE_CONVERSATIONS = [
   },
 ] as const;
 
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-72px" },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const },
-};
+function delayStyle(ms: number): CSSProperties {
+  return { ["--reveal-delay" as string]: `${ms}ms` };
+}
+
+function CtaArrow() {
+  return (
+    <span aria-hidden className="il-btn__arrow">
+      →
+    </span>
+  );
+}
 
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
@@ -111,35 +120,26 @@ export default function Home() {
   }, []);
 
   const activeVideo = YOUTUBE_CONVERSATIONS[videoIndex];
-  const videoCount = YOUTUBE_CONVERSATIONS.length;
-
-  const goToPrevVideo = () => {
-    setVideoIndex((i) => (i - 1 + videoCount) % videoCount);
-  };
-
-  const goToNextVideo = () => {
-    setVideoIndex((i) => (i + 1) % videoCount);
-  };
-
-  const prevVideo =
-    YOUTUBE_CONVERSATIONS[(videoIndex - 1 + videoCount) % videoCount];
-  const nextVideo = YOUTUBE_CONVERSATIONS[(videoIndex + 1) % videoCount];
 
   return (
-    <div className="bg-[#f6f3ee]">
+    <div className="home">
       {/* ——— HERO ——— */}
       <section
-        className="relative h-[min(72vh,720px)] min-h-[400px] overflow-hidden lg:h-[min(80vh,820px)]"
+        className="home-hero"
+        data-entrance="hero"
         aria-labelledby="hero-heading"
       >
-        <div className="absolute inset-0">
+        <div
+          className="home-hero__media reveal-media"
+          style={delayStyle(160)}
+        >
           {HERO_IMAGES.map((src, i) => (
             <motion.div
               key={src}
-              className="absolute inset-0"
+              className="home-hero__slide"
               initial={false}
               animate={{ opacity: heroIndex === i ? 1 : 0 }}
-              transition={{ duration: 2.4, ease: [0.45, 0, 0.55, 1] as const }}
+              transition={{ duration: 3.2, ease: [0.45, 0, 0.55, 1] as const }}
             >
               <Image
                 src={src}
@@ -151,558 +151,501 @@ export default function Home() {
               />
             </motion.div>
           ))}
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-black/76 via-black/64 to-black/78"
-            aria-hidden
-          />
+          <div className="home-hero__veil" aria-hidden />
         </div>
 
-        <div className="relative mx-auto grid h-full max-w-7xl grid-rows-[minmax(0,1fr)_auto] px-3 pb-6 pt-20 sm:px-4 sm:pb-8 sm:pt-24 lg:px-5 lg:pb-10 lg:pt-12">
-          <div className="flex min-h-0 flex-col justify-end lg:justify-center">
-          <motion.div
-            ref={heroCopyRef}
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] as const }}
-            className="w-full max-w-2xl lg:max-w-4xl [text-shadow:0_1px_2px_rgba(0,0,0,0.55),0_4px_24px_rgba(0,0,0,0.35)]"
-          >
-            <p className="m-0 max-w-2xl lg:max-w-none">
-              <span className="relative inline-block max-w-[min(100%,22rem)] rounded-full bg-[#e76fab] px-3 py-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.28)] ring-1 ring-white/25 [text-shadow:none] sm:px-4 sm:py-2">
-                <span className="block text-[12.5px] font-medium leading-snug text-white/95 sm:text-[15px]">
-                  By a widow, for widows.
-                </span>
-              </span>
+        <div className="home-hero__inner">
+          <div ref={heroCopyRef} className="home-hero__panel">
+            <p className="home-hero__brand reveal-label" style={delayStyle(180)}>
+              It&apos;s Lifey
+            </p>
+            <p
+              className="home-hero__eyebrow reveal-label"
+              style={delayStyle(180)}
+            >
+              By a widow, for widows
             </p>
             <h1
               id="hero-heading"
-              className={
-                heroHeadlinePx !== undefined
-                  ? "mt-4 text-pretty font-semibold tracking-tight text-white sm:mt-5 sm:text-balance"
-                  : "mt-4 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-white sm:mt-5 sm:text-5xl sm:leading-[1.08] md:text-6xl lg:text-[3rem] lg:leading-[1.08] xl:text-[3.15rem]"
-              }
+              className="home-hero__title"
               style={
                 heroHeadlinePx !== undefined
                   ? {
-                      fontSize: heroHeadlinePx,
+                      fontSize: Math.min(heroHeadlinePx, 46),
                       lineHeight: HERO_HEADLINE_LINE_HEIGHT_RATIO,
                     }
-                  : undefined
+                  : {
+                      fontSize: "clamp(1.85rem, 4.5vw, 2.85rem)",
+                      lineHeight: HERO_HEADLINE_LINE_HEIGHT_RATIO,
+                    }
               }
             >
-              A place for widows to feel supported, understood, and{" "}
-              <span className="relative inline-block">
-                <svg
-                  className="pointer-events-none absolute -left-[0.12em] -right-[0.1em] bottom-[0.06em] z-0 h-[0.44em] min-h-[12px] w-[calc(100%+0.24em)] overflow-visible"
-                  viewBox="0 0 200 16"
-                  preserveAspectRatio="none"
-                  aria-hidden
-                >
-                  <motion.path
-                    d="M4,10 C64,8 136,12 196,10"
-                    fill="none"
-                    stroke="#e76fab"
-                    strokeWidth="4.5"
-                    strokeLinecap="butt"
-                    strokeLinejoin="miter"
-                    vectorEffect="nonScalingStroke"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{
-                      delay: 0.55,
-                      duration: 0.8,
-                      ease: [0.22, 1, 0.36, 1] as const,
-                    }}
-                    style={{ opacity: 0.92 }}
-                  />
-                </svg>
-                <span className="relative z-10">less alone.</span>
+              <ClipReveal delay={0}>
+                A place for widows to feel{" "}
+                <span className="il-em il-em--inline">supported, understood,</span>
+              </ClipReveal>
+              <span className="il-em">
+                <ClipReveal delay={100}>and less alone.</ClipReveal>
               </span>
             </h1>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link
-                href={EVENT_PATH}
-                className="inline-flex w-full items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#2a2928]/20 transition-[transform,background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
-              >
-                Join Widow Wellness &amp; Connection Experience
+            <p className="home-hero__lede reveal-up" style={delayStyle(260)}>
+              Support, retreats, and community for widows navigating life after
+              loss.
+            </p>
+            <div
+              className="home-hero__actions reveal-up"
+              style={delayStyle(340)}
+            >
+              <Link href={EVENT_PATH} className="il-btn il-btn--solid">
+                Join the event
+                <CtaArrow />
               </Link>
-              <Link
-                href="/hopehub"
-                className="inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-md [text-shadow:none] transition-[background-color,box-shadow] duration-200 hover:bg-neutral-100 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
-              >
+              <Link href="/hopehub" className="il-btn il-btn--ghost-light">
                 Explore HopeHub
+                <CtaArrow />
               </Link>
             </div>
-          </motion.div>
           </div>
-          <p className="mx-auto mt-6 max-w-3xl text-balance text-center text-2xl font-medium italic leading-snug text-[#e76fab] [text-shadow:0_1px_12px_rgba(0,0,0,0.45)] sm:mt-8 sm:text-3xl sm:leading-relaxed lg:mt-10 lg:text-4xl lg:leading-relaxed">
-            You do not have to carry this alone.
-          </p>
         </div>
+
+        <a
+          href="#home-highlights"
+          className="home-hero__scroll reveal-up"
+          style={delayStyle(420)}
+          aria-label="Scroll to next section"
+        >
+          <span aria-hidden>↓</span>
+        </a>
       </section>
 
-      {/* ——— COMMUNITY STRIP (below hero) ——— */}
+      {/* ——— HIGHLIGHTS ——— */}
       <section
-        className="border-y border-[#c2528c]/50 bg-gradient-to-br from-[#df68a3] via-[#e76fab] to-[#d85e9a] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
-        aria-labelledby="community-strip-heading"
+        id="home-highlights"
+        className="home-highlights"
+        aria-label="Ways to begin"
       >
-        <h2 id="community-strip-heading" className="sr-only">
-          Join our free widow community on HopeHub
-        </h2>
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-5 sm:py-14 lg:px-5 lg:py-16">
-          <div className="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-14">
-            <div className="min-w-0 flex-1 text-center lg:max-w-[46rem] lg:text-left">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/90 sm:text-xs">
-                HopeHub · Free to join
-              </p>
-              <p className="mt-4 text-pretty text-[1.625rem] font-medium leading-[1.25] tracking-tight text-white sm:text-3xl lg:text-[2rem] lg:leading-[1.2]">
-                Join our free community of{" "}
-                <span className="font-semibold">120+ widows</span>.
-              </p>
-              <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/95 lg:mx-0">
-                Connection, encouragement, and a place to be understood—without
-                a fee or a big commitment.
-              </p>
+        <div className="home-highlights__grid" data-reveal="">
+          <Link
+            href="/hopehub"
+            className="home-highlight reveal-up"
+            style={delayStyle(0)}
+          >
+            <p className="home-highlight__kicker">HopeHub</p>
+            <h2 className="home-highlight__title">
+              A free community of 120+ widows
+            </h2>
+            <div className="home-highlight__meta">
+              <span className="home-highlight__arrow" aria-hidden>
+                →
+              </span>
+              <span className="home-highlight__thumb">
+                <Image
+                  src="/images/widowwellnessimages/IMG_3180.jpeg"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="72px"
+                />
+              </span>
             </div>
-            <div className="flex w-full justify-center lg:w-auto lg:justify-end lg:shrink-0 lg:border-l lg:border-white/25 lg:pl-14">
-              <Link
-                href="/hopehub"
-                className="inline-flex w-full items-center justify-center rounded-full bg-white px-10 py-4 text-[15px] font-semibold tracking-wide text-black shadow-[0_4px_24px_rgba(0,0,0,0.12)] transition-[background-color,box-shadow] duration-200 hover:bg-neutral-50 hover:shadow-[0_8px_28px_rgba(0,0,0,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto lg:min-w-[13.5rem]"
-              >
-                Explore HopeHub
-              </Link>
+          </Link>
+
+          <Link
+            href={EVENT_PATH}
+            className="home-highlight reveal-up"
+            style={delayStyle(80)}
+          >
+            <p className="home-highlight__kicker">One-day gathering</p>
+            <h2 className="home-highlight__title">
+              Widow Wellness &amp; Connection Experience
+            </h2>
+            <div className="home-highlight__meta">
+              <span className="home-highlight__arrow" aria-hidden>
+                →
+              </span>
+              <span className="home-highlight__thumb">
+                <Image
+                  src="/images/widowwellnessimages/IMG_0604.jpeg"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="72px"
+                />
+              </span>
             </div>
-          </div>
+          </Link>
+
+          <Link
+            href="/retreats/winter-widow-wellness"
+            className="home-highlight reveal-up"
+            style={delayStyle(140)}
+          >
+            <p className="home-highlight__kicker">Winter Retreat 2026</p>
+            <h2 className="home-highlight__title">
+              A restorative escape in the Hudson Valley
+            </h2>
+            <div className="home-highlight__meta">
+              <span className="home-highlight__arrow" aria-hidden>
+                →
+              </span>
+              <span className="home-highlight__thumb">
+                <Image
+                  src="/images/widowwellnessimages/IMG_8510.jpeg"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="72px"
+                />
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
 
-      {/* ——— WELCOME / ABOUT ——— */}
-      <motion.section
-        className="mx-auto max-w-7xl px-3 py-20 sm:px-4 lg:px-5 lg:py-28"
-        aria-labelledby="welcome-heading"
-        {...fadeUp}
-      >
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-[#ebe6df] shadow-sm ring-1 ring-[#ebe6df] lg:aspect-[3/4]">
+      {/* ——— ABOUT ——— */}
+      <section className="home-section" aria-labelledby="welcome-heading">
+        <div className="home-shell home-split" data-reveal="">
+          <div className="home-split__media reveal-media" style={delayStyle(40)}>
             <Image
               src="/images/jen3.jpg"
               alt="Jennifer, founder of It's Lifey, smiling warmly in soft natural light"
               fill
               className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 960px) 100vw, 50vw"
             />
           </div>
-          <div>
-            <h2
-              id="welcome-heading"
-              className="text-balance text-3xl font-semibold leading-tight tracking-tight text-black sm:text-4xl"
-            >
-              Welcome to the It&apos;s Lifey Family
+          <div className="reveal-up" style={delayStyle(120)}>
+            <p className="home-kicker">Our story</p>
+            <h2 id="welcome-heading" className="home-title">
+              <ClipReveal delay={0}>Welcome to the</ClipReveal>
+              <span className="il-em">
+                <ClipReveal delay={80}>It&apos;s Lifey Family</ClipReveal>
+              </span>
             </h2>
-            <div className="mt-8 space-y-5 text-lg leading-relaxed text-black">
+            <div className="home-copy">
               <p>
-                If you&apos;ve ever wondered where the playbook for life is –
+                If you&apos;ve ever wondered where the playbook for life is —
                 it&apos;s in the wisdom of those who have lived it. And for
-                widows, that wisdom is hard-earned. Here, experience becomes our
-                greatest teacher, and connection becomes our greatest strength.
+                widows, that wisdom is hard-earned.
               </p>
               <p>
-                Join our community and discover the power of shared widowhood
-                journeys. You&apos;re not alone – truly. We&apos;ve been where you
-                are, and we&apos;ll walk with you as you navigate what comes next.
-              </p>
-              <p>
-                Whether you need a listening ear from someone who gets it,
-                practical guidance for the everyday realities of widowhood, or
-                simply the comfort of knowing you&apos;re not the only one trying
-                to rebuild – our community is here for you.
-              </p>
-              <p>
-                You don&apos;t have to take this step alone. We&apos;re here to walk
-                alongside you, one honest conversation and one moment of connection
-                at a time.
+                Join a community built by a widow who understands. You&apos;re
+                not alone — and you don&apos;t have to take the next step by
+                yourself.
               </p>
             </div>
-            <Link
-              href="/about"
-              className="mt-10 inline-flex items-center text-base font-semibold text-[#e76fab] underline-offset-4 transition-colors hover:text-[#d85e9a] hover:underline"
-            >
+            <Link href="/about" className="il-link">
               Learn more
+              <CtaArrow />
             </Link>
           </div>
         </div>
-      </motion.section>
-
-      {/* ——— WIDOW WELLNESS EVENT + YOUTUBE (shared pink → light gradient) ——— */}
-      <div className="bg-[linear-gradient(to_bottom,#df68a3_0%,#e76fab_32%,#d85e9a_40%,#e76fab_46%,#f0dfe8_70%,#f6f3ee_100%)]">
-      <section
-        id="support-paths"
-        aria-labelledby="event-heading"
-      >
-        <motion.div
-          className="relative overflow-hidden px-3 py-16 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] sm:px-4 sm:py-20 lg:px-5 lg:py-24"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-64px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-        >
-          <div
-            className="pointer-events-none absolute -right-24 top-0 h-[28rem] w-[28rem] rounded-full bg-white/[0.07] blur-3xl"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -left-32 bottom-0 h-[22rem] w-[22rem] rounded-full bg-[#2a2928]/[0.06] blur-3xl"
-            aria-hidden
-          />
-
-          <div className="relative mx-auto max-w-7xl">
-            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
-              <div className="min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/90 sm:text-sm">
-                  Widow Wellness &amp; Connection Experience
-                </p>
-                <h2
-                  id="event-heading"
-                  className="mt-3 max-w-xl text-pretty text-3xl font-semibold leading-[1.15] tracking-tight text-white sm:text-4xl lg:max-w-[26rem] lg:text-[2.35rem] lg:leading-[1.12]"
-                >
-                  Join the event
-                </h2>
-                <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-white/95 sm:text-lg">
-                  A one-day gathering for widows across New England—inspiration,
-                  education, healing, and women who truly understand.{" "}
-                  {EVENT_SHORT_TAGLINE}
-                </p>
-                <p className="mt-5 text-sm font-semibold tracking-wide text-white sm:text-[15px]">
-                  {EVENT_DATES} · {EVENT_LOCATION}
-                </p>
-
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <Link
-                    href={EVENT_PATH}
-                    className="inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-[0_12px_40px_rgba(0,0,0,0.18)] transition-[background-color,box-shadow,transform] duration-200 hover:bg-neutral-100 hover:shadow-[0_16px_48px_rgba(0,0,0,0.22)] active:scale-[0.99] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
-                  >
-                    Join the event
-                  </Link>
-                  <Link
-                    href={SPONSORSHIP_PATH}
-                    className="inline-flex w-full items-center justify-center rounded-full border-2 border-white/80 bg-white/10 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
-                  >
-                    Sponsor the event
-                  </Link>
-                </div>
-              </div>
-
-              <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
-                <figure
-                  className="relative mx-auto aspect-[4/5] w-full max-w-[22rem] overflow-hidden rounded-[1.35rem] shadow-[0_28px_70px_rgba(0,0,0,0.28)] ring-1 ring-white/30 sm:max-w-lg lg:max-w-none lg:rounded-[1.5rem]"
-                  aria-label="Moments from past It's Lifey gatherings"
-                >
-                  {RETREAT_SHOWCASE_IMAGES.map((src, i) => (
-                    <motion.div
-                      key={src}
-                      className="absolute inset-0"
-                      initial={false}
-                      animate={{
-                        opacity: retreatShowcaseIndex === i ? 1 : 0,
-                      }}
-                      transition={{
-                        duration: 2.2,
-                        ease: [0.45, 0, 0.55, 1] as const,
-                      }}
-                    >
-                      <Image
-                        src={src}
-                        alt=""
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 90vw, 42vw"
-                      />
-                    </motion.div>
-                  ))}
-                </figure>
-                <p
-                  className="sr-only"
-                  aria-live="polite"
-                  aria-atomic="true"
-                >{`Event photo ${retreatShowcaseIndex + 1} of ${RETREAT_SHOWCASE_IMAGES.length}`}</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </section>
 
-      {/* ——— YOUTUBE CONVERSATIONS ——— */}
-      <motion.section
-        className="relative overflow-hidden px-3 pb-20 pt-4 sm:px-4 sm:pb-28 lg:px-5"
-        aria-labelledby="videos-heading"
-        {...fadeUp}
+      {/* ——— EVENT FEATURE ——— */}
+      <section
+        id="support-paths"
+        className="home-section home-section--pink"
+        aria-labelledby="event-heading"
       >
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
-              Watch &amp; listen
+        <div className="home-shell home-split home-split--flip" data-reveal="">
+          <div className="home-split__media reveal-media" style={delayStyle(40)}>
+            {RETREAT_SHOWCASE_IMAGES.map((src, i) => (
+              <motion.div
+                key={src}
+                className="absolute inset-0"
+                initial={false}
+                animate={{
+                  opacity: retreatShowcaseIndex === i ? 1 : 0,
+                }}
+                transition={{
+                  duration: 2.4,
+                  ease: [0.45, 0, 0.55, 1] as const,
+                }}
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 960px) 100vw, 50vw"
+                />
+              </motion.div>
+            ))}
+          </div>
+          <div className="reveal-up" style={delayStyle(120)}>
+            <p className="home-kicker">
+              Widow Wellness &amp; Connection Experience
             </p>
-            <h2
-              id="videos-heading"
-              className="mt-3 text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl"
-            >
-              Conversations, resources, and support
+            <h2 id="event-heading" className="home-title">
+              <ClipReveal delay={0}>Join the event</ClipReveal>
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-white/95">
-              Honest talks with experts and widows who understand—on grief,
-              planning, finances, therapy, and the everyday realities of life
-              after losing a spouse.
+            <p className="home-copy">
+              A one-day gathering for widows across New England — inspiration,
+              education, healing, and women who truly understand.{" "}
+              {EVENT_SHORT_TAGLINE}
+            </p>
+            <p className="home-meta">
+              {EVENT_DATES} · {EVENT_LOCATION}
+            </p>
+            <div className="home-actions">
+              <Link href={EVENT_PATH} className="il-btn il-btn--on-dark">
+                Join the event
+                <CtaArrow />
+              </Link>
+              <Link
+                href={SPONSORSHIP_PATH}
+                className="il-btn il-btn--ghost-dark"
+              >
+                Sponsor the event
+                <CtaArrow />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ——— PATHWAYS ——— */}
+      <section
+        className="home-section home-section--blush"
+        aria-labelledby="pathways-heading"
+      >
+        <div className="home-shell home-split" data-reveal="">
+          <div className="reveal-up" style={delayStyle(0)}>
+            <p className="home-kicker">Ways to begin</p>
+            <h2 id="pathways-heading" className="home-title">
+              <ClipReveal delay={0}>Support that meets you</ClipReveal>
+              <span className="il-em">
+                <ClipReveal delay={80}>where you are</ClipReveal>
+              </span>
+            </h2>
+            <p className="home-copy">
+              Whether you want community from home, a one-day gathering, or a
+              longer retreat — there is a gentle next step here.
+            </p>
+          </div>
+          <div className="home-pathways" role="list">
+            <div
+              className="reveal-up"
+              style={delayStyle(60)}
+              role="listitem"
+            >
+              <Link href="/hopehub" className="home-pathway">
+                <span className="home-pathway__thumb">
+                  <Image
+                    src="/images/widowwellnessimages/IMG_3180.jpeg"
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="56px"
+                  />
+                </span>
+                <p className="home-pathway__title">HopeHub free community</p>
+                <span className="home-pathway__arrow" aria-hidden>
+                  →
+                </span>
+              </Link>
+            </div>
+            <div
+              className="reveal-up"
+              style={delayStyle(120)}
+              role="listitem"
+            >
+              <Link href={EVENT_PATH} className="home-pathway">
+                <span className="home-pathway__thumb">
+                  <Image
+                    src={RETREAT_SHOWCASE_IMAGES[1]}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="56px"
+                  />
+                </span>
+                <p className="home-pathway__title">
+                  Widow Wellness &amp; Connection Experience
+                </p>
+                <span className="home-pathway__arrow" aria-hidden>
+                  →
+                </span>
+              </Link>
+            </div>
+            <div
+              className="reveal-up"
+              style={delayStyle(180)}
+              role="listitem"
+            >
+              <Link
+                href="/retreats/winter-widow-wellness"
+                className="home-pathway"
+              >
+                <span className="home-pathway__thumb">
+                  <Image
+                    src="/images/widowwellnessimages/IMG_0604.jpeg"
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="56px"
+                  />
+                </span>
+                <p className="home-pathway__title">Winter Retreat 2026</p>
+                <span className="home-pathway__arrow" aria-hidden>
+                  →
+                </span>
+              </Link>
+            </div>
+            <div
+              className="reveal-up"
+              style={delayStyle(240)}
+              role="listitem"
+            >
+              <Link
+                href="/retreats/spring-retreat-2027"
+                className="home-pathway"
+              >
+                <span className="home-pathway__thumb">
+                  <Image
+                    src={RETREAT_SHOWCASE_IMAGES[2]}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="56px"
+                  />
+                </span>
+                <p className="home-pathway__title">Spring Retreat 2027</p>
+                <span className="home-pathway__arrow" aria-hidden>
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ——— VIDEOS ——— */}
+      <section className="home-videos" aria-labelledby="videos-heading">
+        <div className="home-shell" data-reveal="">
+          <div className="home-videos__intro reveal-up" style={delayStyle(0)}>
+            <p className="home-kicker">Watch &amp; listen</p>
+            <h2 id="videos-heading" className="home-title">
+              <ClipReveal delay={0}>Conversations that</ClipReveal>
+              <span className="il-em">
+                <ClipReveal delay={80}>understand</ClipReveal>
+              </span>
+            </h2>
+            <p className="home-copy">
+              Honest talks with experts and widows — on grief, planning,
+              finances, therapy, and everyday life after losing a spouse.
             </p>
           </div>
 
-          <div className="mx-auto mt-12 max-w-6xl">
-            <div className="relative">
-              <div className="hidden items-end justify-center gap-4 md:flex lg:gap-5">
-                <button
-                  type="button"
-                  onClick={goToPrevVideo}
-                  className="group w-[24%] max-w-[14rem] shrink-0 cursor-pointer text-left transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] lg:max-w-[15rem]"
-                  aria-label={`Previous: ${prevVideo.title}`}
-                >
-                  <div className="overflow-hidden rounded-xl bg-black shadow-sm ring-1 ring-black/10 transition-[box-shadow,opacity] duration-200 group-hover:shadow-md group-hover:opacity-100 opacity-80">
-                    <div className="relative aspect-video w-full">
-                      <Image
-                        src={`https://img.youtube.com/vi/${prevVideo.id}/hqdefault.jpg`}
-                        alt=""
-                        fill
-                        className="object-cover"
-                        sizes="15rem"
-                      />
-                      <div
-                        className="absolute inset-0 bg-black/15 transition-colors duration-200 group-hover:bg-black/5"
-                        aria-hidden
-                      />
-                    </div>
-                  </div>
-                  <p className="mt-2.5 line-clamp-2 text-[0.8rem] font-semibold leading-snug text-[#555] transition-colors duration-200 group-hover:text-[#141413]">
-                    {prevVideo.title}
-                  </p>
-                  <p className="mt-0.5 text-[0.72rem] font-medium text-[#888]">
-                    × {prevVideo.guest}
-                  </p>
-                </button>
-
-                <div className="w-[52%] max-w-[32rem] shrink-0">
-                  <div className="overflow-hidden rounded-[1.15rem] bg-black shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/10">
-                    <div className="relative aspect-video w-full">
-                      <iframe
-                        key={activeVideo.id}
-                        src={`https://www.youtube-nocookie.com/embed/${activeVideo.id}?rel=0`}
-                        title={`${activeVideo.title} | It's Lifey x ${activeVideo.guest}`}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allowFullScreen
-                        className="absolute inset-0 h-full w-full border-0"
-                      />
-                    </div>
-                  </div>
-                  <div className="mt-4 text-center">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                      Now playing
-                    </p>
-                    <p className="mt-2 text-pretty text-lg font-semibold leading-snug text-[#141413] sm:text-xl">
-                      {activeVideo.title}
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-[#666766]">
-                      It&apos;s Lifey × {activeVideo.guest}
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={goToNextVideo}
-                  className="group w-[24%] max-w-[14rem] shrink-0 cursor-pointer text-left transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] lg:max-w-[15rem]"
-                  aria-label={`Next: ${nextVideo.title}`}
-                >
-                  <div className="overflow-hidden rounded-xl bg-black shadow-sm ring-1 ring-black/10 transition-[box-shadow,opacity] duration-200 group-hover:shadow-md group-hover:opacity-100 opacity-80">
-                    <div className="relative aspect-video w-full">
-                      <Image
-                        src={`https://img.youtube.com/vi/${nextVideo.id}/hqdefault.jpg`}
-                        alt=""
-                        fill
-                        className="object-cover"
-                        sizes="15rem"
-                      />
-                      <div
-                        className="absolute inset-0 bg-black/15 transition-colors duration-200 group-hover:bg-black/5"
-                        aria-hidden
-                      />
-                    </div>
-                  </div>
-                  <p className="mt-2.5 line-clamp-2 text-[0.8rem] font-semibold leading-snug text-[#555] transition-colors duration-200 group-hover:text-[#141413]">
-                    {nextVideo.title}
-                  </p>
-                  <p className="mt-0.5 text-[0.72rem] font-medium text-[#888]">
-                    × {nextVideo.guest}
-                  </p>
-                </button>
-              </div>
-
-              <div className="md:hidden">
-                <div className="overflow-hidden rounded-[1.15rem] bg-black shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/10">
-                  <div className="relative aspect-video w-full">
-                    <iframe
-                      key={activeVideo.id}
-                      src={`https://www.youtube-nocookie.com/embed/${activeVideo.id}?rel=0`}
-                      title={`${activeVideo.title} | It's Lifey x ${activeVideo.guest}`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="absolute inset-0 h-full w-full border-0"
-                    />
-                  </div>
-                </div>
-                <div className="mt-4 text-center">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                    Video {videoIndex + 1} of {videoCount}
-                  </p>
-                  <p className="mt-2 text-pretty text-lg font-semibold leading-snug text-[#141413]">
-                    {activeVideo.title}
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-[#666766]">
-                    It&apos;s Lifey × {activeVideo.guest}
-                  </p>
+          <div
+            className="home-videos__stage reveal-media"
+            style={delayStyle(100)}
+          >
+            <div className="home-videos__main">
+              <div className="home-videos__frame">
+                <div className="home-videos__frame-inner">
+                  <iframe
+                    key={activeVideo.id}
+                    src={`https://www.youtube-nocookie.com/embed/${activeVideo.id}?rel=0`}
+                    title={`${activeVideo.title} | It's Lifey x ${activeVideo.guest}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
                 </div>
               </div>
 
-              <div className="mt-6 flex items-center justify-center gap-4">
-                <button
-                  type="button"
-                  onClick={goToPrevVideo}
-                  className="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-[#141413] shadow-sm transition-[background-color,border-color,transform] duration-200 hover:border-[#e76fab]/35 hover:bg-[#fdf8fb] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
-                  aria-label="Previous video"
-                >
-                  <svg
-                    aria-hidden
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    className="h-4 w-4"
+              <div className="home-videos__now">
+                <p className="home-videos__now-label">Now playing</p>
+                <p className="home-videos__now-title">{activeVideo.title}</p>
+                <p className="home-videos__now-guest">
+                  It&apos;s Lifey × {activeVideo.guest}
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="home-videos__rail"
+              role="tablist"
+              aria-label="More conversations"
+            >
+              {YOUTUBE_CONVERSATIONS.map((video, i) => {
+                const isActive = videoIndex === i;
+                return (
+                  <button
+                    key={video.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setVideoIndex(i)}
+                    className={`home-videos__side${isActive ? " is-active" : ""}`}
                   >
-                    <path
-                      d="M10 3L5 8l5 5"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-
-                <div
-                  className="flex flex-wrap justify-center gap-2"
-                  role="tablist"
-                  aria-label="Select a video"
-                >
-                  {YOUTUBE_CONVERSATIONS.map((video, i) => {
-                    const isActive = videoIndex === i;
-                    return (
-                      <button
-                        key={video.id}
-                        type="button"
-                        role="tab"
-                        aria-selected={isActive}
-                        onClick={() => setVideoIndex(i)}
-                        className={`cursor-pointer rounded-full px-3 py-1.5 text-xs font-medium transition-[background-color,border-color,color] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:px-4 sm:py-2 sm:text-sm ${
-                          isActive
-                            ? "border border-[#e76fab]/45 bg-white text-[#b8457e] shadow-sm"
-                            : "border border-black/10 bg-white/70 text-[#555] hover:border-[#e76fab]/30 hover:bg-white hover:text-[#141413]"
-                        }`}
-                      >
+                    <span className="home-videos__side-thumb">
+                      <Image
+                        src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="120px"
+                      />
+                    </span>
+                    <span className="home-videos__side-copy">
+                      <span className="home-videos__side-title">
                         {video.title}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <button
-                  type="button"
-                  onClick={goToNextVideo}
-                  className="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-[#141413] shadow-sm transition-[background-color,border-color,transform] duration-200 hover:border-[#e76fab]/35 hover:bg-[#fdf8fb] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
-                  aria-label="Next video"
-                >
-                  <svg
-                    aria-hidden
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    className="h-4 w-4"
-                  >
-                    <path
-                      d="M6 3l5 5-5 5"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
+                      </span>
+                      <span className="home-videos__side-guest">
+                        {video.guest}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <div className="mx-auto mt-14 max-w-2xl text-center">
-            <p className="text-lg leading-relaxed text-[#2a2928]">
+          <div className="home-videos__cta reveal-up" style={delayStyle(180)}>
+            <p>
               Our YouTube channel has{" "}
-              <strong className="font-semibold text-[#141413]">
-                30+ videos
-              </strong>{" "}
-              of conversations, resources, and support for those navigating the
-              loss of a spouse—whenever you need something steady to listen to.
+              <strong>30+ videos</strong> of conversations and support — whenever
+              you need something steady to listen to.
             </p>
             <a
               href={YOUTUBE_CHANNEL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md transition-[background-color,box-shadow,transform] duration-200 hover:bg-[#d85e9a] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] active:scale-[0.99]"
+              className="il-btn il-btn--solid"
+              style={{ marginTop: "1.25rem" }}
             >
               Watch more on YouTube
-              <svg
-                aria-hidden
-                viewBox="0 0 16 16"
-                fill="none"
-                className="h-3.5 w-3.5 opacity-90"
-              >
-                <path
-                  d="M8 1l7 7-7 7M1 8h14"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <CtaArrow />
             </a>
           </div>
         </div>
-      </motion.section>
-      </div>
+      </section>
 
       {/* ——— EMAIL ——— */}
-      <motion.section
-        className="bg-[#f6f3ee] px-3 py-20 sm:px-4 lg:px-5 lg:py-24"
-        aria-labelledby="email-heading"
-        {...fadeUp}
-      >
-        <div className="mx-auto max-w-2xl text-center">
-          <h2
-            id="email-heading"
-            className="text-balance text-3xl font-semibold leading-tight text-black sm:text-4xl"
-          >
-            Stay connected for Widow Wellness event updates, support, and
-            community news
-          </h2>
-          <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-black">
-            Short notes—no spam. Unsubscribe anytime. If you want a softer way
-            to stay close to what&apos;s happening, this is it.
-          </p>
-          <div className="mx-auto mt-10 max-w-xl">
-            <NewsletterSignupForm />
+      <section className="home-email" aria-labelledby="email-heading">
+        <div className="home-shell home-email__grid" data-reveal="">
+          <div className="reveal-up" style={delayStyle(0)}>
+            <p className="home-kicker">Newsletter</p>
+            <h2 id="email-heading" className="home-title">
+              <ClipReveal delay={0}>Soft updates,</ClipReveal>
+              <span className="il-em">
+                <ClipReveal delay={80}>when you want them</ClipReveal>
+              </span>
+            </h2>
+            <p className="home-copy">
+              Occasional notes on gatherings, HopeHub, and support—never noisy,
+              never salesy. Unsubscribe anytime.
+            </p>
+          </div>
+          <div className="reveal-up" style={delayStyle(120)}>
+            <NewsletterSignupForm variant="editorial" />
           </div>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }

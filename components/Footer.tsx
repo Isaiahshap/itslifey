@@ -5,15 +5,22 @@ import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 const exploreLinks = [
   { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-  { href: "/press", label: "Press" },
-  { href: "/contact", label: "Contact" },
   { href: "/resources", label: "Resources" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 const programsLinks = [
   { href: "/hopehub", label: "HopeHub" },
-  { href: "/retreats/upcoming", label: "Upcoming Retreats" },
+  {
+    href: "/retreats/winter-widow-wellness",
+    label: "Winter Retreat 2026",
+  },
+  {
+    href: "/retreats/spring-retreat-2027",
+    label: "Spring Retreat 2027",
+  },
   { href: "/retreats/past", label: "Past Retreats" },
   {
     href: "/events/widow-wellness-connection-experience",
@@ -32,23 +39,19 @@ const legalLinks = [
 ] as const;
 
 function footerLinkClass() {
-  return "text-[15px] font-medium text-black transition-colors duration-200 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] focus-visible:rounded-sm";
+  return "text-[13px] font-medium tracking-tight text-[#1a1918] transition-colors duration-150 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]";
 }
 
 function legalLinkClass() {
-  return "text-sm font-medium text-[#666766] underline-offset-2 transition-colors hover:text-[#e76fab] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] focus-visible:rounded-sm";
+  return "text-[11px] font-semibold uppercase tracking-[0.12em] text-[#666766] transition-colors duration-150 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]";
 }
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-[#e3ddd4] bg-[#f6f3ee]">
-      <div
-        className="h-1 w-full bg-gradient-to-r from-[#e76fab]/90 via-[#c94d8a] to-[#e76fab]/90"
-        aria-hidden
-      />
-      <div className="mx-auto max-w-7xl px-5 pt-14 pb-5 sm:px-6 sm:pt-16 sm:pb-6 lg:px-8 lg:pt-20 lg:pb-7">
+    <footer className="border-t border-[#e3ddd4] bg-[#fffcfa]">
+      <div className="mx-auto max-w-7xl px-5 pt-14 pb-10 sm:px-6 sm:pt-16 sm:pb-12 lg:px-8 lg:pt-16 lg:pb-14">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-14">
           <div className="lg:col-span-5 xl:col-span-4">
             <Link
@@ -61,20 +64,16 @@ export function Footer() {
                 alt="It's Lifey"
                 width={180}
                 height={54}
-                className="h-11 w-auto opacity-[0.96] sm:h-[3.15rem]"
+                className="h-10 w-auto sm:h-11"
               />
             </Link>
-            <p className="mt-6 max-w-sm text-[1.0625rem] leading-relaxed text-[#2a2928]">
+            <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-[#2a2928]">
               Support, retreats, and community for widows—created by Jennifer,
               from lived experience.
             </p>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#666766]">
-              You deserve clarity, warmth, and a path forward that feels human—not
-              rushed, not clinical.
-            </p>
             <SocialMediaLinks
-              className="mt-8 flex flex-wrap items-center gap-2"
-              linkClassName="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#666766] transition-[color,background-color,box-shadow] duration-200 hover:bg-[#e76fab]/12 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+              className="mt-7 flex flex-wrap items-center gap-0.5"
+              linkClassName="inline-flex h-10 w-10 items-center justify-center rounded-none text-[#666766] transition-colors duration-150 hover:bg-[#f6f3ee] hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
             />
           </div>
 
@@ -120,19 +119,22 @@ export function Footer() {
                 Next step
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-[#2a2928]">
-                When you&apos;re ready, start with what feels kindest—the Widow
-                Wellness &amp; Connection Experience, HopeHub, or a workshop.
+                When you&apos;re ready, start with the Widow Wellness &amp;
+                Connection Experience or HopeHub.
               </p>
               <Link
                 href={EVENT_PATH}
-                className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#e76fab] px-6 py-2.5 text-center text-[15px] font-semibold text-white shadow-sm transition-[background-color,box-shadow] duration-200 hover:bg-[#d85e9a] hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] sm:w-auto"
+                className="il-btn il-btn--solid il-btn--compact mt-5"
               >
-                Join Widow Wellness &amp; Connection Experience
+                Join the event
+                <span aria-hidden className="il-btn__arrow">
+                  →
+                </span>
               </Link>
               <p className="mt-4">
                 <Link
                   href="/hopehub"
-                  className={`${footerLinkClass()} text-[14px]`}
+                  className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#e76fab] transition-colors duration-150 hover:text-[#d85e9a]"
                 >
                   Explore HopeHub →
                 </Link>
@@ -141,69 +143,38 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-6 border-t border-[#e3ddd4] pt-10 sm:mt-16 sm:gap-8 sm:pt-12">
+        <div className="mt-12 flex flex-col gap-5 border-t border-[#e3ddd4] pt-8 sm:mt-14 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <nav
             aria-label="Legal"
-            className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-8"
+            className="flex flex-wrap items-center gap-x-5 gap-y-2"
           >
-            {legalLinks.map(({ href, label }, i) => (
-              <span key={href} className="flex items-center gap-x-5 sm:gap-x-8">
-                {i > 0 ? (
-                  <span className="text-[#d4cfc7]" aria-hidden>
-                    |
-                  </span>
-                ) : null}
-                <Link href={href} className={legalLinkClass()}>
-                  {label}
-                </Link>
-              </span>
+            {legalLinks.map(({ href, label }) => (
+              <Link key={href} href={href} className={legalLinkClass()}>
+                {label}
+              </Link>
             ))}
           </nav>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-[#666766]">
-              {`© ${year} It's Lifey. All rights reserved.`}
+          <div className="flex flex-col gap-1 sm:items-end">
+            <p className="text-[12px] font-medium tracking-wide text-[#666766]">
+              {`© ${year} It's Lifey`}
             </p>
-            <p className="text-sm text-[#666766]">By a widow, for widows.</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#888988]">
+              By a widow, for widows
+            </p>
           </div>
-          <p className="mt-6 border-t border-[#ebe6df] pt-5 text-center text-xs text-[#888988] sm:mt-8 sm:pt-6">
-            Made with ❤️ by{" "}
-            <a
-              href="https://www.causehouse.co"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-[#666766] underline decoration-[#e76fab]/40 underline-offset-2 transition-colors hover:text-[#e76fab] hover:decoration-[#e76fab]"
-            >
-              CauseHouse
-            </a>
-          </p>
         </div>
-      </div>
 
-      <div className="relative mt-0 w-full overflow-hidden leading-[0]" aria-hidden>
-        <svg
-          className="block h-10 w-full min-w-full text-[#e76fab] sm:h-12 md:h-14"
-          viewBox="0 0 1440 56"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient
-              id="footerPinkWave"
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="1"
-            >
-              <stop offset="0%" stopColor="#f0a8cf" />
-              <stop offset="55%" stopColor="#e76fab" />
-              <stop offset="100%" stopColor="#d85e9a" />
-            </linearGradient>
-          </defs>
-          <path
-            fill="url(#footerPinkWave)"
-            d="M0,28 C120,8 280,48 420,26 C560,4 680,44 840,24 C1000,4 1140,38 1280,22 C1340,14 1390,18 1440,16 L1440,56 L0,56 Z"
-          />
-        </svg>
+        <p className="mt-8 text-[11px] tracking-wide text-[#888988]">
+          Made with care by{" "}
+          <a
+            href="https://www.causehouse.co"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-[#666766] underline decoration-[#e76fab]/35 underline-offset-2 transition-colors hover:text-[#e76fab] hover:decoration-[#e76fab]"
+          >
+            CauseHouse
+          </a>
+        </p>
       </div>
     </footer>
   );

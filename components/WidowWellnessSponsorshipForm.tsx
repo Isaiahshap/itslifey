@@ -13,7 +13,7 @@ import {
 import { useState, type FormEvent } from "react";
 
 const inputClass =
-  "mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15";
+  "mt-2 w-full rounded-none border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15";
 
 export function WidowWellnessSponsorshipForm() {
   const [sponsorTier, setSponsorTier] = useState<SponsorTierKey>("community");
@@ -107,7 +107,7 @@ export function WidowWellnessSponsorshipForm() {
         <p
           role="alert"
           aria-live="assertive"
-          className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm leading-relaxed text-red-900"
+          className="rounded-none border border-red-200 bg-red-50 px-4 py-3 text-sm leading-relaxed text-red-900"
         >
           {errorMessage}
         </p>
@@ -208,7 +208,7 @@ export function WidowWellnessSponsorshipForm() {
         <button
           type="submit"
           disabled={isSending}
-          className="w-full rounded-full bg-[#e76fab] px-8 py-4 text-base font-semibold text-white shadow-md shadow-black/10 transition-[background-color,opacity] duration-200 hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab] enabled:active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="il-btn il-btn--solid"
         >
           {isSending
             ? "Sending…"
