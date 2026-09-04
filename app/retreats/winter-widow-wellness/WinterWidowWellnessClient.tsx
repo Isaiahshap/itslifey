@@ -12,14 +12,14 @@ function delayStyle(ms: number): CSSProperties {
   return { ["--reveal-delay" as string]: `${ms}ms` };
 }
 
-const HERO = "/images/winter/winter-retreat-10.jpg";
+const HERO = "/images/winter/winter-retreat-01.jpg";
 const BREAK = "/images/winter/winter-retreat-05.jpg";
-const STORY = "/images/winter/winter-retreat-08.jpg";
-const GAL_A = "/images/winter/winter-retreat-02.jpg";
+const STORY = "/images/winter/winter-retreat-02.jpg";
+const GAL_A = "/images/winter/winter-retreat-08.jpg";
 const GAL_B = "/images/winter/winter-retreat-04.jpg";
 const GAL_C = "/images/winter/winter-retreat-07.jpg";
 const GAL_D = "/images/winter/winter-retreat-03.jpg";
-const GAL_E = "/images/winter/winter-retreat-01.jpg";
+const GAL_E = "/images/winter/winter-retreat-10.jpg";
 const GAL_F = "/images/winter/winter-retreat-06.jpg";
 
 const INCLUDES = [
@@ -57,17 +57,23 @@ const ROOMS = [
   {
     room: "Private Room",
     price: "$4,200",
-    availability: "10 available · Per person",
+    availabilityWas: "10 available",
+    availability: "7 available · Per person",
+    soldOut: false,
   },
   {
     room: "Double Room",
     price: "$3,700",
+    availabilityWas: null,
     availability: "1 available · Per person",
+    soldOut: false,
   },
   {
     room: "Triple Room",
     price: "$3,200",
-    availability: "1 available · Per person",
+    availabilityWas: "1 available",
+    availability: "Sold out",
+    soldOut: true,
   },
 ] as const;
 
@@ -104,7 +110,7 @@ export function WinterWidowWellnessClient() {
         <div className="wwr-hero__media reveal-media" style={delayStyle(160)}>
           <HeroImage
             src={HERO}
-            alt="Aerial view of the private Hudson Valley lodge and grounds"
+            alt="Bright great room with dining table, sofas, and floor-to-ceiling forest views"
             fill
             priority
             sizes="100vw"
@@ -113,7 +119,7 @@ export function WinterWidowWellnessClient() {
         <div className="wwr-hero__veil" aria-hidden />
         <div className="wwr-hero__content">
           <p className="wwr-hero__brand reveal-label" style={delayStyle(180)}>
-            It&apos;s Lifey · Winter Retreat 2026
+            It&apos;s Lifey · Winter Retreat 2027
           </p>
           <h1 id="wwr-hero-heading" className="wwr-hero__title">
             <ClipReveal delay={0}>Winter Widow</ClipReveal>
@@ -125,7 +131,8 @@ export function WinterWidowWellnessClient() {
             Come as strangers. Leave as lifelong friends.
           </p>
           <div className="wwr-hero__meta reveal-up" style={delayStyle(300)}>
-            <span>Hudson Valley · Winter</span>
+            <span>January 15–18, 2027</span>
+            <span>Hudson Valley</span>
             <span>100-acre private property</span>
             <span>Three luxurious nights</span>
           </div>
@@ -174,9 +181,17 @@ export function WinterWidowWellnessClient() {
                 </p>
                 <p className="wwr-body">
                   This winter, we&apos;re bringing that magic to the Hudson
-                  Valley — with a little more luxury, pampering, adventure, and
-                  fun.
+                  Valley — January 15–18, 2027 — with a little more luxury,
+                  pampering, adventure, and fun.
                 </p>
+                <button
+                  type="button"
+                  className="wwr-btn"
+                  style={{ marginTop: "1.5rem" }}
+                  onClick={scrollToInterest}
+                >
+                  Share your interest
+                </button>
               </div>
             </div>
           </div>
@@ -190,7 +205,7 @@ export function WinterWidowWellnessClient() {
               <figure className="wwr-escape__media reveal-media" data-reveal="">
                 <Image
                   src={STORY}
-                  alt="The private log lodge nestled among trees on the Hudson Valley property"
+                  alt="Open great room with long dining table, sofas, and floor-to-ceiling windows"
                   fill
                   sizes="(max-width: 900px) 100vw, 52vw"
                 />
@@ -229,6 +244,14 @@ export function WinterWidowWellnessClient() {
                   much room for friendship, adventure, laughter, rest, beauty
                   and joy.
                 </p>
+                <button
+                  type="button"
+                  className="wwr-btn"
+                  style={{ marginTop: "1.5rem" }}
+                  onClick={scrollToInterest}
+                >
+                  Share your interest
+                </button>
               </div>
             </div>
           </div>
@@ -260,6 +283,11 @@ export function WinterWidowWellnessClient() {
               </article>
             ))}
           </div>
+          <div style={{ marginTop: "2.25rem", textAlign: "center" }}>
+            <button type="button" className="wwr-btn" onClick={scrollToInterest}>
+              Share your interest
+            </button>
+          </div>
         </div>
       </section>
 
@@ -281,7 +309,7 @@ export function WinterWidowWellnessClient() {
           <figure className="wwr-gallery__item wwr-gallery__item--a">
             <Image
               src={GAL_A}
-              alt="Open great room with long dining table, sofas, and floor-to-ceiling windows"
+              alt="Private log lodge nestled among trees on the Hudson Valley property"
               fill
               sizes="(max-width: 900px) 100vw, 58vw"
             />
@@ -313,7 +341,7 @@ export function WinterWidowWellnessClient() {
           <figure className="wwr-gallery__item wwr-gallery__item--e">
             <Image
               src={GAL_E}
-              alt="Living and dining space with vaulted beams and natural light"
+              alt="Aerial view of the private Hudson Valley lodge and grounds"
               fill
               sizes="(max-width: 900px) 100vw, 50vw"
             />
@@ -346,15 +374,36 @@ export function WinterWidowWellnessClient() {
 
           <div className="wwr-pricing__list">
             {ROOMS.map((tier) => (
-              <article key={tier.room} className="wwr-pricing__row">
+              <article
+                key={tier.room}
+                className={`wwr-pricing__row${tier.soldOut ? " is-sold-out" : ""}`}
+              >
                 <p className="wwr-pricing__room">{tier.room}</p>
                 <div className="wwr-pricing__amount">
                   <p className="wwr-pricing__price">{tier.price}</p>
                   <p className="wwr-pricing__save">Per person</p>
                 </div>
-                <p className="wwr-pricing__meta">{tier.availability}</p>
+                <p className="wwr-pricing__meta">
+                  {tier.availabilityWas ? (
+                    <>
+                      <s className="wwr-pricing__was">{tier.availabilityWas}</s>{" "}
+                    </>
+                  ) : null}
+                  <span
+                    className={
+                      tier.soldOut ? "wwr-pricing__sold-out" : undefined
+                    }
+                  >
+                    {tier.availability}
+                  </span>
+                </p>
               </article>
             ))}
+          </div>
+          <div style={{ marginTop: "2rem", textAlign: "center" }}>
+            <button type="button" className="wwr-btn" onClick={scrollToInterest}>
+              Share your interest
+            </button>
           </div>
         </div>
       </section>
@@ -384,6 +433,14 @@ export function WinterWidowWellnessClient() {
                 Because long after the retreat ends, that&apos;s the part you
                 may treasure most.
               </p>
+              <button
+                type="button"
+                className="wwr-btn"
+                style={{ marginTop: "1.75rem" }}
+                onClick={scrollToInterest}
+              >
+                Share your interest
+              </button>
             </div>
           </div>
         </div>

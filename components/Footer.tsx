@@ -15,7 +15,7 @@ const programsLinks = [
   { href: "/hopehub", label: "HopeHub" },
   {
     href: "/retreats/winter-widow-wellness",
-    label: "Winter Retreat 2026",
+    label: "Winter Retreat 2027",
   },
   {
     href: "/retreats/spring-retreat-2027",

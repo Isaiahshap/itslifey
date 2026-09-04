@@ -3,6 +3,7 @@ import Image from "next/image";
 import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
+import { FaqAnswer } from "@/components/FaqAnswer";
 import {
   HOPEHUB_MEMBER_LOGIN_URL,
   HOPEHUB_SIGNUP_URL,
@@ -38,7 +39,7 @@ const included = [
 ] as const;
 
 const stats = [
-  { value: "Hundreds", label: "of members" },
+  { value: "220+", label: "members & growing" },
   { value: "Daily", label: "new connections" },
   { value: "Monthly", label: "widow meetups" },
   { value: "24/7", label: "community access" },
@@ -193,8 +194,9 @@ export default function HopeHubPage() {
               truly understand are waiting to meet you.
             </p>
             <p className="ed-body" style={{ marginTop: "1.1rem" }}>
-              Hundreds of women across the country are already finding their
-              people here. Explore quietly or dive in; there&apos;s room for you.
+              220+ widows across the country are already finding their people
+              here—and that circle keeps growing. Explore quietly or dive in;
+              there&apos;s room for you.
             </p>
             <p className="ed-body" style={{ marginTop: "1.1rem" }}>
               Your privacy and trust matter. HopeHub is a confidential space
@@ -244,7 +246,7 @@ export default function HopeHubPage() {
                   </summary>
                   <div className="ed-faq__panel">
                     <div className="ed-faq__panel-inner">
-                      <p className="ed-faq__a">{a}</p>
+                      <FaqAnswer text={a} />
                     </div>
                   </div>
                 </details>

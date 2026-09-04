@@ -89,6 +89,7 @@ const LARGE_SPONSOR_LOGOS = new Set([
   "Parents Estate Planning",
   "Lightwork",
   "Howe2Organize",
+  "Lamacchia Realty",
 ]);
 
 function AccordionSection({
@@ -379,7 +380,11 @@ export function WidowWellnessClient({
                     fill
                     className="object-contain"
                     sizes={
-                      LARGE_SPONSOR_LOGOS.has(sponsor.name) ? "240px" : "140px"
+                      sponsor.name === "Lightwork"
+                        ? "280px"
+                        : LARGE_SPONSOR_LOGOS.has(sponsor.name)
+                          ? "240px"
+                          : "140px"
                     }
                   />
                 </span>

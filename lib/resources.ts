@@ -154,12 +154,61 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
       {
         name: "Dougy Center",
         body: [
-          "The Dougy Center provides free grief resources for adults, children, teenagers, young adults, parents, and families—covering many kinds of loss, including the death of a spouse.",
+          "The Dougy Center provides free grief resources near you (just enter your zip code) for adults, children, teenagers, young adults, parents, and families—covering many kinds of loss, including the death of a spouse.",
         ],
         links: [
           {
+            label: "Find grief support near you",
+            href: "https://www.dougy.org/program-finder",
+            external: true,
+          },
+          {
             label: "Explore Dougy Center resources",
             href: "https://www.dougy.org/grief-support-resources",
+            external: true,
+          },
+        ],
+      },
+      {
+        name: "A New Path Life & Grief Coaching",
+        body: [
+          "Compassionate grief and life-transition coaching with Julie Foster—supporting adults as they process loss, find steadier ground, and take a next step forward.",
+        ],
+        links: [
+          {
+            label: "Visit A New Path Coaching",
+            href: "https://www.anewpathcoaching.com/",
+            external: true,
+          },
+        ],
+      },
+      {
+        name: "The Parmenter Foundation",
+        body: [
+          "End-of-life care and bereavement support in MetroWest, Massachusetts—including Widows’ Walk, a movement-based community for people navigating the death of a partner.",
+        ],
+        links: [
+          {
+            label: "Visit The Parmenter Foundation",
+            href: "https://parmenterfoundation.org/",
+            external: true,
+          },
+          {
+            label: "Learn about Widows’ Walk",
+            href: "https://parmenterfoundation.org/widows-walk/",
+            external: true,
+          },
+        ],
+      },
+      {
+        name: "Kelci Jager — RISE with Grief",
+        body: [
+          "Widow, grief coach, author, and influencer Kelci Jager shares honest guidance for life after loss—tools, community, and hope for navigating grief while honoring the love that remains.",
+        ],
+        links: [
+          {
+            label: "Visit RISE with Grief",
+            href: "https://risewithgrief.com/",
             external: true,
           },
         ],
@@ -241,61 +290,6 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
     ],
   },
   {
-    id: "suicide-loss",
-    kicker: "Specialized support",
-    title: "After losing a spouse to suicide",
-    intro: [
-      "Losing a spouse to suicide can bring additional layers of grief, trauma, confusion, anger, and unanswered questions. Specialized support is available.",
-    ],
-    image: {
-      src: summer("IMG_4615.webp"),
-      alt: "Women gathered outdoors in quiet connection",
-      position: "center 40%",
-    },
-    items: [
-      {
-        name: "988 Suicide & Crisis Lifeline",
-        body: [
-          "You can contact 988 not only if you are having suicidal thoughts, but also if you are overwhelmed by grief, emotional distress, or concern for someone else.",
-          "Call or text 988.",
-        ],
-        links: [
-          {
-            label: "Visit the 988 Suicide & Crisis Lifeline",
-            href: "https://988lifeline.org/",
-            external: true,
-          },
-        ],
-      },
-      {
-        name: "Crisis Text Line suicide resources",
-        body: [
-          "Information about suicide, coping after a suicide loss, and helping someone who may be experiencing suicidal thoughts.",
-        ],
-        links: [
-          {
-            label: "Explore suicide support resources",
-            href: "https://www.crisistextline.org/topics/suicide/",
-            external: true,
-          },
-        ],
-      },
-      {
-        name: "Dougy Center",
-        body: [
-          "Resources for adults, parents, children, and families grieving a death by suicide.",
-        ],
-        links: [
-          {
-            label: "Explore grief support resources",
-            href: "https://www.dougy.org/grief-support-resources",
-            external: true,
-          },
-        ],
-      },
-    ],
-  },
-  {
     id: "parenting",
     kicker: "Family",
     title: "Parenting after the loss of a spouse",
@@ -309,9 +303,22 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
     },
     items: [
       {
-        name: "Dougy Center: resources for children",
+        name: "The Widowed Parent",
         body: [
-          "Age-appropriate activities, information, and support resources for grieving children.",
+          "Free information and resources for widowed parents and their children—post-death checklists, grief camps, scholarships, Social Security guidance, and practical support for parenting after loss.",
+        ],
+        links: [
+          {
+            label: "Visit The Widowed Parent",
+            href: "https://widowedparent.com/",
+            external: true,
+          },
+        ],
+      },
+      {
+        name: "Dougy Center",
+        body: [
+          "Age-appropriate activities, information, and support resources for grieving children, parents, and caregivers.",
         ],
         links: [
           {
@@ -319,14 +326,6 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
             href: "https://www.dougy.org/grief-support-resources/kids",
             external: true,
           },
-        ],
-      },
-      {
-        name: "Dougy Center: parents & caregivers",
-        body: [
-          "Resources designed for parents and caregivers supporting children through the death of someone important in their lives.",
-        ],
-        links: [
           {
             label: "Explore resources for parents and caregivers",
             href: "https://www.dougy.org/grief-support-resources/parents-caregivers",
@@ -339,9 +338,9 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
   {
     id: "financial",
     kicker: "Practical help",
-    title: "Financial help & survivor benefits",
+    title: "Financial help & advisors",
     intro: [
-      "The financial side of losing a spouse can feel overwhelming, especially while you are also grieving. There may be benefits and community resources available to help.",
+      "The financial side of losing a spouse can feel overwhelming, especially while you are also grieving. There may be trusted advisors, benefits, and community resources available to help.",
     ],
     image: {
       src: summer("IMG_4456.webp"),
@@ -349,6 +348,32 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
       position: "center 35%",
     },
     items: [
+      {
+        name: "LRVS Advisory Group",
+        body: [
+          "Financial guidance for widows navigating life after loss—trusted partners of It’s Lifey and presenting sponsor of the Widow Wellness & Connection Experience.",
+        ],
+        links: [
+          {
+            label: "Visit LRVS Advisory Group",
+            href: "https://www.lrvsadvisory.com/",
+            external: true,
+          },
+        ],
+      },
+      {
+        name: "Ascent Financial",
+        body: [
+          "Financial planning support for people rebuilding after major life change—also joining It’s Lifey as a sponsor of the November Widow Wellness & Connection Experience.",
+        ],
+        links: [
+          {
+            label: "Visit Ascent Financial",
+            href: "https://www.planwithascend.com/",
+            external: true,
+          },
+        ],
+      },
       {
         name: "Social Security survivor benefits",
         body: [
@@ -381,9 +406,9 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
   {
     id: "legal",
     kicker: "Guidance",
-    title: "Legal help",
+    title: "Estate & legal help",
     intro: [
-      "After the death of a spouse, you may encounter legal questions involving estates, probate, housing, benefits, debt, custody, or other issues. Free or low-cost legal assistance may be available.",
+      "After the death of a spouse, you may encounter legal questions involving estates, probate, housing, benefits, debt, custody, or other issues. Trusted estate attorneys and free or low-cost legal assistance may be available.",
     ],
     image: {
       src: summer("IMG_4397.webp"),
@@ -391,6 +416,32 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
       position: "center 42%",
     },
     items: [
+      {
+        name: "Law Mom",
+        body: [
+          "Estate planning and probate attorneys in Massachusetts—helping families protect what matters and navigate wills, trusts, and the practical legal steps after a loss.",
+        ],
+        links: [
+          {
+            label: "Visit Law Mom",
+            href: "https://lawmom.com/",
+            external: true,
+          },
+        ],
+      },
+      {
+        name: "The Parents Estate Planning Law Firm, PC",
+        body: [
+          "Estate planning guidance for parents and families—helping you protect loved ones and bring clarity to wills, trusts, and legacy planning after loss.",
+        ],
+        links: [
+          {
+            label: "Visit Parents Estate Planning",
+            href: "https://www.parentsestateplanning.com/",
+            external: true,
+          },
+        ],
+      },
       {
         name: "Legal Services Corporation",
         body: [
@@ -427,9 +478,9 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
       "If your spouse served in the military, you may qualify for additional benefits and support.",
     ],
     image: {
-      src: summer("IMG_4332.webp"),
-      alt: "A joyful moment shared during an It's Lifey retreat",
-      position: "center 30%",
+      src: summer("IMG_4615.webp"),
+      alt: "Women gathered outdoors in quiet connection at a retreat",
+      position: "center 40%",
     },
     items: [
       {

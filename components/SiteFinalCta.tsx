@@ -10,7 +10,8 @@ export function SiteFinalCta() {
   if (
     pathname.startsWith("/retreats/spring-retreat-2027") ||
     pathname.startsWith("/retreats/winter-widow-wellness") ||
-    pathname.startsWith("/events/widow-wellness-connection-experience")
+    pathname.startsWith("/events/widow-wellness-connection-experience") ||
+    pathname.startsWith("/resources")
   ) {
     return null;
   }
@@ -39,8 +40,8 @@ export function SiteFinalCta() {
               →
             </span>
           </Link>
-          <Link href="/about" className="il-btn il-btn--ghost-dark">
-            Learn More About It&apos;s Lifey
+          <Link href="/resources" className="il-btn il-btn--ghost-dark">
+            Explore Resources
             <span aria-hidden className="il-btn__arrow">
               →
             </span>

@@ -1,4 +1,6 @@
-/** Shared FAQ content for /faq and HopeHub. */
+/** Shared FAQ content for /faq and HopeHub.
+ *  Answers may include markdown-style links: [label](/path)
+ */
 
 export type FaqItem = {
   q: string;
@@ -38,7 +40,7 @@ export const HOPEHUB_FAQS: FaqItem[] = [
   },
   {
     q: "Are there in-person events?",
-    a: "Yes. There are in-person gatherings like the Widow Wellness & Connection Experience and other meetups through the year. Details and registration are shared inside HopeHub and on the It’s Lifey events pages.",
+    a: "Yes. There are in-person gatherings like the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) and multi-day [retreats](/retreats/winter-widow-wellness). Details and registration are shared inside HopeHub and on the It’s Lifey site.",
   },
   {
     q: "How do I get started?",
@@ -58,7 +60,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "What is It’s Lifey?",
-        a: "It’s Lifey is a support, retreat, and community organization for widows—created by Jennifer, a widow herself. We offer HopeHub (a free online community), in-person gatherings, retreats, and ongoing support so widows don’t have to navigate life after loss alone.",
+        a: "It’s Lifey is a support, retreat, and community organization for widows—created by Jennifer, a widow herself. We offer [HopeHub](/hopehub) (a free online community), in-person gatherings, [retreats](/retreats/winter-widow-wellness), and ongoing support so widows don’t have to navigate life after loss alone.",
       },
       {
         q: "Who is It’s Lifey for?",
@@ -66,7 +68,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       },
       {
         q: "Where should I start if I’m new?",
-        a: "If you want connection from home, join HopeHub for free. If you’re ready for an in-person day, explore the Widow Wellness & Connection Experience. If you want a longer weekend, look at our upcoming retreats. You can also browse trusted outside resources on our Resources page.",
+        a: "If you want connection from home, join [HopeHub](/hopehub) for free. If you’re ready for an in-person day, explore the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience). If you want a longer weekend, look at our upcoming [Winter Retreat](/retreats/winter-widow-wellness) or [Spring Retreat](/retreats/spring-retreat-2027). You can also browse trusted outside resources on our [Resources](/resources) page.",
       },
       {
         q: "Is It’s Lifey a crisis service?",
@@ -80,7 +82,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "What kinds of gatherings do you host?",
-        a: "One-day experiences like Widow Wellness & Connection, multi-day retreats such as Winter Widow Wellness and Spring retreats, plus virtual offerings when available. Each gathering is designed for connection, rest, and being with women who understand.",
+        a: "One-day experiences like the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience), multi-day retreats such as [Winter Widow Wellness](/retreats/winter-widow-wellness) and [Spring retreats](/retreats/spring-retreat-2027), plus virtual offerings when available. Each gathering is designed for connection, rest, and being with women who understand. You can also browse [past retreats](/retreats/past).",
       },
       {
         q: "Do I have to come with a friend?",
@@ -88,7 +90,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       },
       {
         q: "How do I hear about new retreats first?",
-        a: "Join the interest list on the Spring 2027 retreat page, follow updates in HopeHub, or sign up for soft email updates from the homepage.",
+        a: "Join the interest list on the [Winter Retreat](/retreats/winter-widow-wellness) or [Spring 2027 retreat](/retreats/spring-retreat-2027) page, follow updates in [HopeHub](/hopehub), or sign up for soft email updates from the homepage.",
       },
     ],
   },
@@ -98,11 +100,11 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "Where can I find crisis or mental health help?",
-        a: "Call or text 988 for the Suicide & Crisis Lifeline. Text HOME to 741741 for Crisis Text Line. For local services including counseling and practical help, call 211. Our Resources page lists trusted organizations for grief, mental health, finances, legal aid, parenting, and more.",
+        a: "Call or text 988 for the Suicide & Crisis Lifeline. Text HOME to 741741 for Crisis Text Line. For local services including counseling and practical help, call 211. Our [Resources](/resources) page lists trusted organizations for grief, mental health, finances, legal aid, parenting, and more.",
       },
       {
         q: "Do you provide medical, legal, or financial advice?",
-        a: "No. We share community and curated links to reputable organizations. For medical, legal, or financial decisions, please consult qualified professionals or the specialist resources linked on our Resources page.",
+        a: "No. We share community and curated links to reputable organizations. For medical, legal, or financial decisions, please consult qualified professionals or the specialist resources linked on our [Resources](/resources) page.",
       },
     ],
   },
@@ -112,11 +114,11 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "How do I contact Jennifer or the team?",
-        a: "Use the Contact page form, or email jennifer@itslifey.com. We read every message and respond as soon as we can.",
+        a: "Use the [Contact](/contact) page form, or email jennifer@itslifey.com. We read every message and respond as soon as we can.",
       },
       {
         q: "How do I stay updated without overwhelm?",
-        a: "Join HopeHub for community on your own pace, or subscribe to occasional email notes—never noisy, never salesy. You can unsubscribe anytime.",
+        a: "Join [HopeHub](/hopehub) for community on your own pace, or subscribe to occasional email notes—never noisy, never salesy. You can unsubscribe anytime.",
       },
     ],
   },

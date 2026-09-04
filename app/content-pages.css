@@ -708,6 +708,20 @@
   line-height: 1.8;
 }
 
+.ed-faq__link {
+  color: var(--il-pink, #e76fab);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(231, 111, 171, 0.35);
+  text-underline-offset: 0.18em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.ed-faq__link:hover {
+  color: #d85e9a;
+  text-decoration-color: #d85e9a;
+}
+
 .ed-faq--lux .ed-faq__mark {
   width: 0.72rem;
   height: 0.72rem;
@@ -893,7 +907,6 @@
 #connect,
 #grief,
 #mental-health,
-#suicide-loss,
 #parenting,
 #financial,
 #legal,

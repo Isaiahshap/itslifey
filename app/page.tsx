@@ -29,21 +29,27 @@ const HERO_IMAGES = [
   "/images/widowwellnessimages/IMG_8510.jpeg",
 ] as const;
 
-const RETREAT_SHOWCASE_IMAGES = [
-  "/images/Retreats/Summer2025/Jen Kitchen Table Horizontal.webp",
-  "/images/Retreats/Summer2025/IMG_0683.webp",
-  "/images/Retreats/Summer2025/IMG_1698.webp",
-  "/images/Retreats/Summer2025/IMG_1845.webp",
-  "/images/Retreats/Summer2025/IMG_1908.webp",
+/** One-day gathering energy — communal tables, real connection. */
+const EVENT_SHOWCASE_IMAGES = [
+  "/images/widowwellnessimages/IMG_2517.jpeg",
+  "/images/widowwellnessimages/IMG_4386.jpeg",
+  "/images/widowwellnessimages/IMG_0604.jpeg",
 ] as const;
+
+const PATHWAY_THUMBS = {
+  hopehub: "/images/widowwellnessimages/IMG_3180.jpeg",
+  event: "/images/widowwellnessimages/IMG_2517.jpeg",
+  winter: "/images/winter/winter-retreat-10.jpg",
+  spring: "/images/Retreats/Summer2025/IMG_1698.webp",
+} as const;
 
 const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@ItsLifey-co";
 
 const YOUTUBE_CONVERSATIONS = [
   {
-    id: "51RdueWbby8",
-    title: "Your Story Matters",
-    guest: "Mark Carpenter",
+    id: "i-ifgGkIskI",
+    title: "Finding community after loss",
+    guest: "SJ Hodges",
   },
   {
     id: "Ed-S6C8pIOY",
@@ -65,6 +71,11 @@ const YOUTUBE_CONVERSATIONS = [
     title: "Compassion-Focused Therapy",
     guest: "Lenore Mewton",
   },
+  {
+    id: "51RdueWbby8",
+    title: "Your Story Matters",
+    guest: "Mark Carpenter",
+  },
 ] as const;
 
 function delayStyle(ms: number): CSSProperties {
@@ -81,7 +92,7 @@ function CtaArrow() {
 
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
-  const [retreatShowcaseIndex, setRetreatShowcaseIndex] = useState(0);
+  const [eventShowcaseIndex, setEventShowcaseIndex] = useState(0);
   const [videoIndex, setVideoIndex] = useState(0);
   const heroCopyRef = useRef<HTMLDivElement>(null);
   const [heroHeadlinePx, setHeroHeadlinePx] = useState<number | undefined>(
@@ -113,9 +124,7 @@ export default function Home() {
 
   useEffect(() => {
     const id = window.setInterval(() => {
-      setRetreatShowcaseIndex(
-        (i) => (i + 1) % RETREAT_SHOWCASE_IMAGES.length,
-      );
+      setEventShowcaseIndex((i) => (i + 1) % EVENT_SHOWCASE_IMAGES.length);
     }, 6500);
     return () => window.clearInterval(id);
   }, []);
@@ -201,8 +210,11 @@ export default function Home() {
                 Join the event
                 <CtaArrow />
               </Link>
-              <Link href="/hopehub" className="il-btn il-btn--ghost-light">
-                Explore HopeHub
+              <Link
+                href="/retreats/winter-widow-wellness"
+                className="il-btn il-btn--ghost-light"
+              >
+                Winter Retreat 2027
                 <CtaArrow />
               </Link>
             </div>
@@ -225,40 +237,15 @@ export default function Home() {
         className="home-highlights"
         aria-label="Ways to begin"
       >
-        <div className="home-highlights__grid" data-reveal="">
-          <Link
-            href="/hopehub"
-            className="home-highlight reveal-up"
-            style={delayStyle(0)}
-          >
-            <p className="home-highlight__kicker">HopeHub</p>
-            <h2 className="home-highlight__title">
-              A free community of 120+ widows
-            </h2>
-            <div className="home-highlight__meta">
-              <span className="home-highlight__arrow" aria-hidden>
-                →
-              </span>
-              <span className="home-highlight__thumb">
-                <Image
-                  src="/images/widowwellnessimages/IMG_3180.jpeg"
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="72px"
-                />
-              </span>
-            </div>
-          </Link>
-
+        <div className="home-highlights__grid home-highlights__grid--duo" data-reveal="">
           <Link
             href={EVENT_PATH}
             className="home-highlight reveal-up"
-            style={delayStyle(80)}
+            style={delayStyle(0)}
           >
             <p className="home-highlight__kicker">One-day gathering</p>
             <h2 className="home-highlight__title">
-              Widow Wellness &amp; Connection Experience
+              Join the Widow Connection Event
             </h2>
             <div className="home-highlight__meta">
               <span className="home-highlight__arrow" aria-hidden>
@@ -266,7 +253,7 @@ export default function Home() {
               </span>
               <span className="home-highlight__thumb">
                 <Image
-                  src="/images/widowwellnessimages/IMG_0604.jpeg"
+                  src={EVENT_SHOWCASE_IMAGES[0]}
                   alt=""
                   fill
                   className="object-cover"
@@ -279,11 +266,11 @@ export default function Home() {
           <Link
             href="/retreats/winter-widow-wellness"
             className="home-highlight reveal-up"
-            style={delayStyle(140)}
+            style={delayStyle(80)}
           >
-            <p className="home-highlight__kicker">Winter Retreat 2026</p>
+            <p className="home-highlight__kicker">Winter Retreat 2027</p>
             <h2 className="home-highlight__title">
-              A restorative escape in the Hudson Valley
+              Join the Winter Widow Wellness Retreat
             </h2>
             <div className="home-highlight__meta">
               <span className="home-highlight__arrow" aria-hidden>
@@ -291,7 +278,7 @@ export default function Home() {
               </span>
               <span className="home-highlight__thumb">
                 <Image
-                  src="/images/widowwellnessimages/IMG_8510.jpeg"
+                  src={PATHWAY_THUMBS.winter}
                   alt=""
                   fill
                   className="object-cover"
@@ -351,13 +338,13 @@ export default function Home() {
       >
         <div className="home-shell home-split home-split--flip" data-reveal="">
           <div className="home-split__media reveal-media" style={delayStyle(40)}>
-            {RETREAT_SHOWCASE_IMAGES.map((src, i) => (
+            {EVENT_SHOWCASE_IMAGES.map((src, i) => (
               <motion.div
                 key={src}
                 className="absolute inset-0"
                 initial={false}
                 animate={{
-                  opacity: retreatShowcaseIndex === i ? 1 : 0,
+                  opacity: eventShowcaseIndex === i ? 1 : 0,
                 }}
                 transition={{
                   duration: 2.4,
@@ -434,7 +421,7 @@ export default function Home() {
               <Link href="/hopehub" className="home-pathway">
                 <span className="home-pathway__thumb">
                   <Image
-                    src="/images/widowwellnessimages/IMG_3180.jpeg"
+                    src={PATHWAY_THUMBS.hopehub}
                     alt=""
                     fill
                     className="object-cover"
@@ -455,7 +442,7 @@ export default function Home() {
               <Link href={EVENT_PATH} className="home-pathway">
                 <span className="home-pathway__thumb">
                   <Image
-                    src={RETREAT_SHOWCASE_IMAGES[1]}
+                    src={PATHWAY_THUMBS.event}
                     alt=""
                     fill
                     className="object-cover"
@@ -481,14 +468,14 @@ export default function Home() {
               >
                 <span className="home-pathway__thumb">
                   <Image
-                    src="/images/widowwellnessimages/IMG_0604.jpeg"
+                    src={PATHWAY_THUMBS.winter}
                     alt=""
                     fill
                     className="object-cover"
                     sizes="56px"
                   />
                 </span>
-                <p className="home-pathway__title">Winter Retreat 2026</p>
+                <p className="home-pathway__title">Winter Retreat 2027</p>
                 <span className="home-pathway__arrow" aria-hidden>
                   →
                 </span>
@@ -505,7 +492,7 @@ export default function Home() {
               >
                 <span className="home-pathway__thumb">
                   <Image
-                    src={RETREAT_SHOWCASE_IMAGES[2]}
+                    src={PATHWAY_THUMBS.spring}
                     alt=""
                     fill
                     className="object-cover"

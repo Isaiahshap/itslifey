@@ -3,6 +3,7 @@ import Image from "next/image";
 import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
+import { FaqAnswer } from "@/components/FaqAnswer";
 import { FAQ_GROUPS } from "@/lib/faqs";
 import { HOPEHUB_SIGNUP_URL } from "@/lib/hopehub";
 import { EVENT_PATH } from "@/lib/widow-wellness-event";
@@ -70,7 +71,7 @@ export default function FaqPage() {
                     </summary>
                     <div className="ed-faq__panel">
                       <div className="ed-faq__panel-inner">
-                        <p className="ed-faq__a">{a}</p>
+                        <FaqAnswer text={a} />
                       </div>
                     </div>
                   </details>
@@ -97,6 +98,12 @@ export default function FaqPage() {
               </a>
               <Link href={EVENT_PATH} className="il-btn il-btn--ghost-light">
                 Upcoming gathering
+              </Link>
+              <Link
+                href="/retreats/winter-widow-wellness"
+                className="il-btn il-btn--ghost-light"
+              >
+                Upcoming retreats
               </Link>
               <Link href="/resources" className="il-btn il-btn--ghost-light">
                 Browse resources

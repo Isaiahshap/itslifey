@@ -91,7 +91,9 @@ export function EntranceMotion() {
         el;
 
       if (
-        target.closest("nav, header, footer, button, a.home-highlight, .home-highlight")
+        target.closest(
+          "nav, header, footer, button, a.home-highlight, .home-highlight, .ww-sponsors, [class*='sponsors__logo'], [class*='sponsor-logo']",
+        )
       ) {
         return;
       }
@@ -160,6 +162,17 @@ export function EntranceMotion() {
       main.querySelectorAll<HTMLElement>("section.reveal-up, article.reveal-up").forEach((el) => {
         el.classList.remove("reveal-up");
       });
+
+      // Sponsor logos must never get reveal-media (filter + clip-path glitches)
+      main
+        .querySelectorAll<HTMLElement>(
+          ".ww-sponsors .reveal-media, .ww-sponsors [data-reveal]",
+        )
+        .forEach((el) => {
+          el.classList.remove("reveal-media", "is-visible", "reveal-up", "reveal-label");
+          el.removeAttribute("data-reveal");
+          delete el.dataset.mediaReady;
+        });
 
       const sections = Array.from(
         main.querySelectorAll<HTMLElement>("section, article"),

@@ -3,7 +3,6 @@ import Image from "next/image";
 import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { ClipReveal } from "@/components/ClipReveal";
-import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 export const metadata: Metadata = {
   title: "About Jennifer & It's Lifey",
@@ -49,7 +48,9 @@ export default function AboutPage() {
             <ClipReveal delay={0}>Hi, I&apos;m Jen.</ClipReveal>
             <ClipReveal delay={80}>In May 2024, I became a widow.</ClipReveal>
           </h2>
-          <p className="ed-pull">Connection is lifesaving.</p>
+          <p className="ed-pull">
+            And I have learned, connection is lifesaving.
+          </p>
         </div>
       </section>
 
@@ -151,8 +152,8 @@ export default function AboutPage() {
                 experience, we can find our way through.
               </p>
               <div style={{ marginTop: "1.75rem" }}>
-                <Link href={EVENT_PATH} className="il-btn il-btn--solid">
-                  Join an upcoming gathering
+                <Link href="/resources" className="il-btn il-btn--solid">
+                  Explore Resources
                   <span aria-hidden className="il-btn__arrow">
                     →
                   </span>
