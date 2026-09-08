@@ -47,14 +47,14 @@ const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@ItsLifey-co";
 
 const YOUTUBE_CONVERSATIONS = [
   {
-    id: "i-ifgGkIskI",
-    title: "Finding community after loss",
-    guest: "SJ Hodges",
-  },
-  {
     id: "Ed-S6C8pIOY",
     title: "Grief, Gratitude & Healing",
     guest: "Dr. Peggy DeLong",
+  },
+  {
+    id: "i-ifgGkIskI",
+    title: "Finding community after loss",
+    guest: "SJ Hodges",
   },
   {
     id: "xRS5QOZPxl0",
