@@ -523,7 +523,7 @@ export function WidowWellnessClient({
                   <p>
                     Keynotes · Interactive wellness breakouts · Breakfast &amp;
                     shared lunch · Networking · Practical tools &amp; trusted
-                    resources · The Hope Mic Story Share
+                    resources · The Hope Mic Story Slam
                   </p>
                 </div>
                 <figure className="ww-tile ww-tile--photo ww-tile--wide">
@@ -694,7 +694,7 @@ export function WidowWellnessClient({
                     <span className="ww-register__tier-price">$129</span>
                     <p>
                       The full main event — welcome, keynotes, breakouts,
-                      lunch, and The Hope Mic Story Share.
+                      lunch, and The Hope Mic Story Slam.
                     </p>
                   </div>
                 </div>
@@ -835,12 +835,12 @@ export function WidowWellnessClient({
                   <article className="ww-flow__row">
                     <p className="ww-flow__when">Closing</p>
                     <h3 className="ww-flow__row-title ww-flow__row-title--flag">
-                      The Hope Mic Story Share · Stories of Experience,
+                      The Hope Mic Story Slam · Stories of Experience,
                       Strength &amp; Hope
                     </h3>
                     <div className="ww-flow__prose">
                       <p>
-                        The day will close with The Hope Mic Story Share — an
+                        The day will close with The Hope Mic Story Slam — an
                         open invitation for widows to share their stories in a
                         supportive, judgment-free space.
                       </p>

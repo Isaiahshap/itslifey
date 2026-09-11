@@ -6,7 +6,7 @@ export const EVENT_LOCATION = "Presence & Co. · Reading, Massachusetts";
 export const EVENT_PATH = "/events/widow-wellness-connection-experience";
 export const SPONSORSHIP_PATH =
   "/events/widow-wellness-connection-experience/sponsorship";
-export const SPONSORSHIP_PDF = "/sponsorship_new.pdf";
+export const SPONSORSHIP_PDF = "/sponsor.pdf";
 
 export const HOTEL_NAME = "Lakeside Inn";
 export const HOTEL_BLOCK_URL =
@@ -39,7 +39,7 @@ export const EVENT_SPONSORS = [
   },
   {
     name: "A New Path Coaching",
-    tier: "The Hope Mic Story Share Sponsor",
+    tier: "The Hope Mic Story Slam Sponsor",
     href: "https://www.anewpathcoaching.com/",
     logo: "/images/sponsors/newpath.png",
     featured: false,
@@ -182,7 +182,7 @@ export const TICKET_TIERS = {
     price: 129,
     stripeUrl: "https://buy.stripe.com/dRmfZicRjdSEcQQ2wg5Rm0e",
     description:
-      "The full main event — welcome, keynotes, breakouts, lunch, and The Hope Mic Story Share.",
+      "The full main event — welcome, keynotes, breakouts, lunch, and The Hope Mic Story Slam.",
   },
 } as const;
 
@@ -194,28 +194,28 @@ export const SPONSOR_TIERS = [
     label: "Presenting Sponsor",
     price: 7500,
     stripeUrl: "https://buy.stripe.com/eVq7sM8B37ugeYY8UE5Rm06",
-    availability: "Only 1 available",
+    availability: "Sold out",
   },
   {
     key: "connection",
     label: "Connection Sponsor",
     price: 2500,
     stripeUrl: "https://buy.stripe.com/cNiaEY5oRbKwg32daU5Rm08",
-    availability: "4 slots left",
+    availability: "3 slots left",
   },
   {
     key: "hope_mic",
-    label: "The Hope Mic Story Share Sponsor",
+    label: "The Hope Mic Story Slam Sponsor",
     price: 1500,
     stripeUrl: "https://buy.stripe.com/dRm28saJb9Co5oo3Ak5Rm0b",
-    availability: "Only 1 available",
+    availability: "Sold out",
   },
   {
     key: "vip_mocktail",
     label: "VIP Mocktail Hour Sponsor",
     price: 1500,
     stripeUrl: "https://buy.stripe.com/fZu8wQ04xeWIbMM5Is5Rm0a",
-    availability: "Only 1 available",
+    availability: "Sold out",
   },
   {
     key: "community",
@@ -229,7 +229,7 @@ export const SPONSOR_TIERS = [
     label: "Healing Sponsor",
     price: 3500,
     stripeUrl: "https://buy.stripe.com/3cI00kcRj7ugeYYdaU5Rm07",
-    availability: "4 slots left",
+    availability: "2 slots left",
   },
   {
     key: "lunch",
@@ -243,7 +243,7 @@ export const SPONSOR_TIERS = [
     label: "Coffee & Connection Sponsor",
     price: 550,
     stripeUrl: "https://buy.stripe.com/5kQ9AUaJb4i4aIIb2M5Rm0d",
-    availability: "Only 1 available",
+    availability: "Sold out",
   },
 ] as const;
 

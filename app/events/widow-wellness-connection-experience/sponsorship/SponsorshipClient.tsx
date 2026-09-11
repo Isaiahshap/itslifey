@@ -39,7 +39,7 @@ const mainTiers = [
   {
     name: "Presenting Sponsor",
     price: "$7,500",
-    availability: "Only 1 available",
+    availability: "Sold out",
     highlight: true,
     blurb:
       "For a leading brand that wants to stand at the heart of the Widow Wellness Experience.",
@@ -59,7 +59,7 @@ const mainTiers = [
   {
     name: "Connection Sponsor",
     price: "$2,500",
-    availability: "4 slots left",
+    availability: "3 slots left",
     blurb:
       "For brands that want meaningful visibility and direct connection with attendees.",
     includes: [
@@ -72,15 +72,15 @@ const mainTiers = [
     ],
   },
   {
-    name: "The Hope Mic Story Share Sponsor",
+    name: "The Hope Mic Story Slam Sponsor",
     price: "$1,500",
-    availability: "Only 1 available",
+    availability: "Sold out",
     subtitle: "Closing event · Stories of experience, strength & hope",
     includes: [
-      "Exclusive recognition as The Hope Mic Story Share Sponsor",
+      "Exclusive recognition as The Hope Mic Story Slam Sponsor",
       "Special signage at the closing event",
       "Logo on event materials & event webpage",
-      "5-minute welcome remarks before the Story Share",
+      "5-minute welcome remarks before the Story Slam",
       "2 complimentary event tickets",
       "Social media spotlight",
       "Branded gift or insert in attendee bags",
@@ -89,7 +89,7 @@ const mainTiers = [
   {
     name: "VIP Mocktail Hour Sponsor",
     price: "$1,500",
-    availability: "Only 1 available",
+    availability: "Sold out",
     subtitle: "Featuring Kelley Lynn · Evening before the main event",
     includes: [
       "Exclusive recognition as VIP Mocktail Hour Sponsor",
@@ -123,7 +123,7 @@ const additionalTiers = [
   {
     name: "Healing Sponsor",
     price: "$3,500",
-    availability: "4 slots left",
+    availability: "2 slots left",
     blurb:
       "For sponsors who want a stronger presence and deeper alignment with the event experience.",
     includes: [
@@ -152,7 +152,7 @@ const additionalTiers = [
   {
     name: "Coffee & Connection Sponsor",
     price: "$550",
-    availability: "Only 1 available",
+    availability: "Sold out",
     includes: [
       "Recognition as Coffee & Connection Sponsor",
       "Signage at coffee station",
@@ -395,7 +395,7 @@ export function SponsorshipClient() {
                 real conversations, and restorative wellness breakout sessions
                 including yoga, Reiki, mediumship, financial wellness, dating
                 and relationship advice, and guided healing. The day closes with
-                The Hope Mic Story Share, where widows share 3-minute stories of
+                The Hope Mic Story Slam, where widows share 3-minute stories of
                 experience, strength, and hope.
               </p>
               <p>
@@ -431,7 +431,7 @@ export function SponsorshipClient() {
               },
               {
                 label: "Closing",
-                title: "The Hope Mic Story Share",
+                title: "The Hope Mic Story Slam",
                 when: "End of main event",
               },
             ].map((item) => (
@@ -658,7 +658,7 @@ export function SponsorshipClient() {
                   "Afternoon keynote, additional wellness breakout sessions, and guided reflection or community conversation.",
               },
               {
-                title: "Closing · The Hope Mic Story Share",
+                title: "Closing · The Hope Mic Story Slam",
                 detail:
                   "Stories of experience, strength & hope — widows share three minutes in a supportive, judgment-free space.",
               },
