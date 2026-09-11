@@ -56,21 +56,21 @@ const TIMES = [
 const ROOMS = [
   {
     room: "Private Room",
-    price: "$4,200",
+    price: "$4,499",
     availabilityWas: "10 available",
     availability: "7 available · Per person",
     soldOut: false,
   },
   {
     room: "Double Room",
-    price: "$3,700",
+    price: "$3,999",
     availabilityWas: null,
     availability: "1 available · Per person",
     soldOut: false,
   },
   {
     room: "Triple Room",
-    price: "$3,200",
+    price: "$3,499",
     availabilityWas: "1 available",
     availability: "Sold out",
     soldOut: true,
