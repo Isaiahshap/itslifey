@@ -362,14 +362,19 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
         ],
       },
       {
-        name: "Ascent Financial",
+        name: "Ascent Capital Group",
         body: [
-          "Financial planning support for people rebuilding after major life change—also joining It’s Lifey as a sponsor of the November Widow Wellness & Connection Experience.",
+          "Financial guidance for people rebuilding after major life change—joining It’s Lifey as a sponsor of the November Widow Wellness & Connection Experience.",
         ],
         links: [
           {
-            label: "Visit Ascent Financial",
-            href: "https://www.planwithascend.com/",
+            label: "Visit Ascent Capital Group",
+            href: "https://www.ascentcapitalgrp.com/",
+            external: true,
+          },
+          {
+            label: "Schedule time with Ariel Detlefsen",
+            href: "https://calendly.com/arieldetlefsen",
             external: true,
           },
         ],
