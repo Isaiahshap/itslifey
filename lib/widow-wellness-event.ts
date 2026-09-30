@@ -22,18 +22,34 @@ export const EVENT_SPONSORS = [
     surface: "light" as const,
   },
   {
-    name: "Lamacchia Realty",
-    tier: "Connection Sponsor",
-    href: "https://www.lamacchiarealty.com/",
-    logo: "/images/sponsors/lamacchia.png",
+    name: "Kaplan Family Financial",
+    tier: "Healing Sponsor",
+    href: "https://kaplanfamilyfinancial.com/",
+    logo: "/images/sponsors/kaplan-family-financial.png",
     featured: false,
     surface: "light" as const,
   },
   {
-    name: "Aussemista Style",
-    tier: "Connection Sponsor",
-    href: "https://www.aussemistastyle.com/",
-    logo: "/images/sponsors/aussemista-style.png",
+    name: "Law Mom",
+    tier: "Healing Sponsor",
+    href: "https://lawmom.com/",
+    logo: "/images/sponsors/law-mom.png",
+    featured: false,
+    surface: "dark" as const,
+  },
+  {
+    name: "Cove Wellness",
+    tier: "Healing Sponsor",
+    href: "https://thecovewellnesscenter.com/",
+    logo: "/images/sponsors/cove-wellness.png",
+    featured: false,
+    surface: "light" as const,
+  },
+  {
+    name: "Ascent Capital",
+    tier: "Healing Sponsor",
+    href: "https://calendly.com/arieldetlefsen",
+    logo: "/images/sponsors/ascent-capital.webp",
     featured: false,
     surface: "light" as const,
   },
@@ -54,18 +70,50 @@ export const EVENT_SPONSORS = [
     surface: "light" as const,
   },
   {
-    name: "Lightwork",
-    tier: "Coffee & Connection Sponsor",
-    href: "https://lightworktr.com/",
-    logo: "/images/sponsors/lightwork.png",
+    name: "Lamacchia Realty",
+    tier: "Connection Sponsor",
+    href: "https://lamacchiarealty.com/team_members/tina-davis-chiruna/",
+    logo: "/images/sponsors/lamacchia.png",
+    featured: false,
+    surface: "light" as const,
+  },
+  {
+    name: "Aussemista Style",
+    tier: "Connection Sponsor",
+    href: "https://www.aussemistastyle.com/",
+    logo: "/images/sponsors/aussemista-style.webp",
+    featured: false,
+    surface: "light" as const,
+  },
+  {
+    name: "Ashley Liddle",
+    tier: "Community Supporter",
+    href: "https://www.elliman.com/",
+    logo: "/images/sponsors/douglas-elliman.webp",
+    featured: false,
+    surface: "light" as const,
+  },
+  {
+    name: "Bea.",
+    tier: "Community Supporter",
+    href: "https://findbea.com/",
+    logo: "/images/sponsors/bea.png",
     featured: false,
     surface: "light" as const,
   },
   {
     name: "Howe2Organize",
-    tier: "Scholarship Sponsor",
+    tier: "Widow Scholarship Sponsor",
     href: "https://www.howe2organize.com/",
     logo: "/images/sponsors/howe2organize.png",
+    featured: false,
+    surface: "light" as const,
+  },
+  {
+    name: "Lightwork",
+    tier: "Coffee & Connection Sponsor",
+    href: "https://lightworktr.com/",
+    logo: "/images/sponsors/lightwork.png",
     featured: false,
     surface: "light" as const,
   },
@@ -77,7 +125,9 @@ export type KeynoteSpeaker = {
   org: string;
   bio: string[];
   photo: string | null;
+  photoPosition?: string;
   website: string | null;
+  websiteLabel?: string;
   social: string | null;
   comingSoon: boolean;
 };
@@ -97,11 +147,64 @@ export const KEYNOTE_SPEAKERS: KeynoteSpeaker[] = [
     social: "@Widowwedonow",
     comingSoon: false,
   },
+  {
+    name: "Linda Limperis",
+    role: "Main Stage Keynote · November 14",
+    org: "Teacher, Mentor, Counselor & Widow Advocate",
+    bio: [
+      "Linda became a widow at 54 and suddenly found herself navigating a life she never imagined. Because many of her friends and family had not experienced the loss of a spouse, she felt very alone in her grief. She began doing the work of healing through grief counseling, support groups, journaling, grief classes, yoga, and meditation.",
+      "Eventually, Linda moved to New York City to begin a new chapter of her life, where she met and connected with other widows who became an important source of inspiration and support. Her own journey taught her that while grief changes us, there can still be hope, laughter, love, and new possibilities.",
+      "Today, Linda is passionate about helping other widows feel less alone. She started a social group in her community to bring widows together and create a space for connection and support. As a teacher, counselor, mentor, and widow advocate, Linda brings warmth, empathy, humor, and honesty to her conversations about grief and rebuilding life after loss.",
+      "Linda’s message is that there is no timeline for grief, and grief is never a straight line. It is possible to honor the memories and love we carry while still making new memories, stepping outside our comfort zones, and opening our hearts to what comes next.",
+    ],
+    photo: "/images/widowwellnessimages/linda-limperis.jpg",
+    website: "https://www.instagram.com/lindakarol42/",
+    websiteLabel: "Instagram",
+    social: "@lindakarol42",
+    comingSoon: false,
+  },
+  {
+    name: "Lisa Woolery",
+    role: "Main Stage Keynote · November 14",
+    org: "CWO (Chief Widow Officer), The Widow’s Comeback",
+    bio: [
+      "Lisa Woolery is an award-winning author, widow advocate, and founder of The Widow’s Comeback, a community dedicated to helping widows navigate grief, rediscover themselves, and build a life they never expected to have.",
+      "Lisa became a widow in 2019 when her husband, Eric, died, leaving her to raise their two tweens and navigate a future she could not yet imagine. As she searched for stories of women who had survived widowhood, she realized how deeply she wanted to share her own story and help other women find hope.",
+      "She is the author of the award-winning memoir The Widow’s Comeback, along with a grief journal and other resources created specifically for widows. Through her writing, workshops, teaching, and online community, Lisa combines honest storytelling, humor, faith, and practical guidance.",
+      "Her message is simple: Your life is not over. Lisa understands how devastating widowhood can feel, but she also knows that hope can return, joy can find its way back in, and it is possible to rebuild a meaningful life while still honoring the love and memories you carry.",
+      "Lisa is passionate about helping widows feel less alone and showing them that a comeback is possible. She brings warmth, honesty, humor, and hope to her conversations, offering new widows encouragement for the road ahead and longer-term widows a reminder of how far they have already come.",
+    ],
+    photo: "/images/widowwellnessimages/lisa-woolery.jpg",
+    photoPosition: "50% 18%",
+    website: "https://www.thewidowscomeback.com/",
+    social: null,
+    comingSoon: false,
+  },
 ];
 
 export const BREAKOUT_LEADERS = [
   {
-    name: "Marlene Boyette",
+    name: "Karen Sullivan & Jeff Van Siclen · LRVS Advisory Group",
+    slot: "morning" as const,
+    session: "Your Next Financial Chapter: Financial Planning after Loss",
+    description: [
+      "Life after loss often comes with financial decisions you never expected to make. This session will offer practical guidance to help you feel more informed and confident about your financial future.",
+    ],
+    website: "https://www.lrvsadvisory.com/",
+    photo: "/images/widowwellnessimages/karen-sullivan.jpg",
+  },
+  {
+    name: "Alyssa Zonghetti · A to Z Hypnotherapy",
+    slot: "morning" as const,
+    session: "Reclaiming Yourself in a Life You Didn't Choose",
+    description: [
+      "Widowhood can leave you wondering who you are now. This session is about reconnecting with yourself, reclaiming your identity, and finding your way into a new chapter.",
+    ],
+    website: "https://www.atozhypnotherapy.com/about",
+    photo: "/images/widowwellnessimages/alyssa-zonghetti.webp",
+  },
+  {
+    name: "Marlene Boyette · Leela Yoga + Wellness",
     slot: "morning" as const,
     session:
       "Healing Through Mind, Body, and Heart Connection: A Three Part Yoga, Mindfulness & Reflection Practice",
@@ -111,57 +214,37 @@ export const BREAKOUT_LEADERS = [
       "We close at the heart center, weaving together gentle movement, seated practice, and space for reflection and sharing, so that grief and warmth can be held together in community.",
     ],
     website: "https://leelayogawellness.com/about-marlene",
-    photo: "/images/widowwellnessimages/marlene.jpg",
+    photo: "/images/widowwellnessimages/marlene-boyette.jpg",
   },
   {
-    name: "Karen Sullivan · LRVS Financial",
-    slot: "morning" as const,
-    session: "Navigating Your Financial Next Chapter",
-    description: [
-      "Life after loss often comes with financial decisions you never expected to make. This session will offer practical guidance to help you feel more informed and confident about your financial future.",
-    ],
-    website: "https://www.lrvsadvisory.com/",
-    photo: "/images/widowwellnessimages/KS-LRVSphoto.webp",
-  },
-  {
-    name: "Alyssa Zonghetti",
-    slot: "morning" as const,
-    session: "Reclaiming Yourself in a Life You Didn't Choose",
-    description: [
-      "Widowhood can leave you wondering who you are now. This session is about reconnecting with yourself, reclaiming your identity, and finding your way into a new chapter.",
-    ],
-    website: "https://www.atozhypnotherapy.com/about",
-    photo: "/images/widowwellnessimages/alyssa.png",
-  },
-  {
-    name: "Carrie Rowan",
-    slot: "afternoon" as const,
-    session: "The Hidden Story Stealing Your Power",
-    description: [
-      "Your story didn't end with your loss. Carrie will help you think about what comes next and the possibilities that still exist for your life.",
-    ],
-    website: "https://carrierowan.com/",
-    photo: "/images/widowwellnessimages/carrie.jpg",
-  },
-  {
-    name: "Colleen Marie",
-    slot: "afternoon" as const,
-    session: "The Art of Letting Go",
-    description: [
-      "A beautiful opportunity to explore what it means to release what no longer serves you and make space for what comes next. Colleen will guide you through reflection and spiritual practices designed to support your journey forward.",
-    ],
-    website: "https://colleenmariehealing.com/",
-    photo: "/images/widowwellnessimages/colleeen.png",
-  },
-  {
-    name: "Susan Trotter",
+    name: "Susan Trotter · Relationship Coaching",
     slot: "afternoon" as const,
     session: "Opening Your Heart Again: Dating & Relationships",
     description: [
       "Exploring the possibility of opening your heart again after loss. Susan will share guidance and compassionate insight around dating, relationships, and navigating this part of widowhood.",
     ],
     website: "https://www.susantrotterphd.com/",
-    photo: "/images/widowwellnessimages/susan.jpg",
+    photo: "/images/widowwellnessimages/susan-trotter.jpg",
+  },
+  {
+    name: "Colleen Marie · Colleen Marie Healing",
+    slot: "afternoon" as const,
+    session: "The Art of Letting Go",
+    description: [
+      "A beautiful opportunity to explore what it means to release what no longer serves you and make space for what comes next. Colleen will guide you through reflection and spiritual practices designed to support your journey forward.",
+    ],
+    website: "https://colleenmariehealing.com/",
+    photo: "/images/widowwellnessimages/colleen-marie.webp",
+  },
+  {
+    name: "Carrie Rowan · Look for the Good",
+    slot: "afternoon" as const,
+    session: "The Hidden Story Stealing Your Power",
+    description: [
+      "Your story didn't end with your loss. Carrie will help you think about what comes next and the possibilities that still exist for your life.",
+    ],
+    website: "https://carrierowan.com/",
+    photo: "/images/widowwellnessimages/carrie-rowan.jpg",
   },
 ] as const;
 
@@ -222,14 +305,14 @@ export const SPONSOR_TIERS = [
     label: "Community Supporter",
     price: 1000,
     stripeUrl: "https://buy.stripe.com/14AeVe6sV15S5oogn65Rm09",
-    availability: "4 slots left",
+    availability: "2 slots left",
   },
   {
     key: "healing",
     label: "Healing Sponsor",
     price: 3500,
     stripeUrl: "https://buy.stripe.com/3cI00kcRj7ugeYYdaU5Rm07",
-    availability: "2 slots left",
+    availability: "Sold out",
   },
   {
     key: "lunch",

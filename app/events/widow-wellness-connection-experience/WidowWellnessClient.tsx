@@ -90,7 +90,16 @@ const LARGE_SPONSOR_LOGOS = new Set([
   "Lightwork",
   "Howe2Organize",
   "Lamacchia Realty",
+  "Kaplan Family Financial",
+  "Law Mom",
+  "Cove Wellness",
+  "Ashley Liddle",
+  "A New Path Coaching",
+  "Aussemista Style",
+  "Ascent Capital",
 ]);
+
+const INVERT_SPONSOR_LOGOS = new Set(["Law Mom"]);
 
 function AccordionSection({
   title,
@@ -165,13 +174,21 @@ function SpeakerCard({
     <div className={`ww-speaker-card${open ? " is-open" : ""}`}>
       <button
         type="button"
-        className="ww-speaker-card__header"
+        className={`ww-speaker-card__header${speaker.photo ? "" : " ww-speaker-card__header--no-photo"}`}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
         {speaker.photo && (
           <figure className="ww-speaker-card__photo">
-            <Image src={speaker.photo} alt={speaker.name} fill sizes="88px" />
+            <Image
+              src={speaker.photo}
+              alt={speaker.name}
+              fill
+              sizes="88px"
+              style={{
+                objectPosition: speaker.photoPosition ?? "top center",
+              }}
+            />
           </figure>
         )}
         <div className="ww-speaker-card__meta">
@@ -197,6 +214,9 @@ function SpeakerCard({
                   alt={speaker.name}
                   fill
                   sizes="(max-width: 900px) 100vw, 260px"
+                  style={{
+                    objectPosition: speaker.photoPosition ?? "top center",
+                  }}
                 />
               </figure>
             )}
@@ -212,7 +232,7 @@ function SpeakerCard({
                     rel="noopener noreferrer"
                     className="ww-link"
                   >
-                    Visit website →
+                    Visit {speaker.websiteLabel ?? "website"} →
                   </a>
                 )}
                 {speaker.social && (
@@ -371,6 +391,10 @@ export function WidowWellnessClient({
                   }${
                     sponsor.name === "Lightwork"
                       ? " ww-sponsors__logo--lightwork"
+                      : ""
+                  }${
+                    INVERT_SPONSOR_LOGOS.has(sponsor.name)
+                      ? " ww-sponsors__logo--invert"
                       : ""
                   }`}
                 >
@@ -555,7 +579,7 @@ export function WidowWellnessClient({
         </p>
       </section>
 
-      {/* 6. Keynote speakers — Anita + TBD, above Kelley */}
+      {/* 6. Keynote speakers — Anita, Linda, Lisa */}
       <section className="ww-keynotes" aria-labelledby="ww-keynotes-heading">
         <div className="ww-shell">
           <Reveal>
@@ -892,10 +916,17 @@ export function WidowWellnessClient({
                 {BREAKOUT_LEADERS.map((leader) => {
                   const photo = availableLeaderPhotos[leader.name];
                   return (
-                    <div key={leader.name} className="ww-leaders__preview-tile">
+                    <a
+                      key={leader.name}
+                      href={leader.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ww-leaders__preview-tile"
+                      aria-label={`${leader.name.split(" ·")[0]} — visit website`}
+                    >
                       <div className="ww-leaders__preview-photo">
                         {photo && (
-                          <Image src={photo} alt="" fill sizes="64px" />
+                          <Image src={photo} alt="" fill sizes="80px" />
                         )}
                       </div>
                       <p className="ww-leaders__preview-slot">
@@ -907,7 +938,7 @@ export function WidowWellnessClient({
                       <p className="ww-leaders__preview-session">
                         {leader.session}
                       </p>
-                    </div>
+                    </a>
                   );
                 })}
               </div>
@@ -919,14 +950,22 @@ export function WidowWellnessClient({
                 return (
                   <li key={leader.name} className="ww-leader">
                     {photo ? (
-                      <figure className="ww-leader__photo">
-                        <Image
-                          src={photo}
-                          alt={leader.name}
-                          fill
-                          sizes="92px"
-                        />
-                      </figure>
+                      <a
+                        href={leader.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ww-leader__photo-link"
+                        aria-label={`${leader.name.split(" ·")[0]} website`}
+                      >
+                        <figure className="ww-leader__photo">
+                          <Image
+                            src={photo}
+                            alt={leader.name}
+                            fill
+                            sizes="92px"
+                          />
+                        </figure>
+                      </a>
                     ) : (
                       <div className="ww-leader__photo" aria-hidden />
                     )}
