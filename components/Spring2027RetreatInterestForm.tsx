@@ -9,6 +9,12 @@ import { useState, type FormEvent } from "react";
 const inputClass =
   "mt-2 w-full rounded-none border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition-shadow focus:border-[#e76fab]/40 focus:ring-4 focus:ring-[#e76fab]/15 disabled:opacity-60";
 
+const COSTA_RICA_OPTIONS = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
+  { value: "unsure", label: "Not sure" },
+] as const;
+
 export function Spring2027RetreatInterestForm() {
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error"
@@ -37,6 +43,7 @@ export function Spring2027RetreatInterestForm() {
       fullName: String(fd.get("fullName") ?? "").trim(),
       email: String(fd.get("email") ?? "").trim(),
       phone: String(fd.get("phone") ?? "").trim(),
+      considerCostaRica: String(fd.get("considerCostaRica") ?? "").trim(),
       note: String(fd.get("note") ?? "").trim(),
       [HONEYPOT_FIELD]: String(fd.get(HONEYPOT_FIELD) ?? "").trim(),
       ...(recaptchaToken ? { recaptchaToken } : {}),
@@ -170,6 +177,30 @@ export function Spring2027RetreatInterestForm() {
           className={inputClass}
         />
       </div>
+
+      <fieldset>
+        <legend className="text-sm font-semibold text-black">
+          Would you consider Costa Rica?
+        </legend>
+        <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
+          {COSTA_RICA_OPTIONS.map((option) => (
+            <label
+              key={option.value}
+              className="inline-flex cursor-pointer items-center gap-2.5 text-base text-[#141413]"
+            >
+              <input
+                type="radio"
+                name="considerCostaRica"
+                value={option.value}
+                required
+                disabled={isSending}
+                className="h-4 w-4 shrink-0 accent-[#e76fab]"
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       <div>
         <label

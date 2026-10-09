@@ -89,6 +89,7 @@ const LARGE_SPONSOR_LOGOS = new Set([
   "Parents Estate Planning",
   "Lightwork",
   "Howe2Organize",
+  "Laurie Foley",
   "Lamacchia Realty",
   "Kaplan Family Financial",
   "Law Mom",
@@ -97,9 +98,37 @@ const LARGE_SPONSOR_LOGOS = new Set([
   "A New Path Coaching",
   "Aussemista Style",
   "Ascent Capital",
+  "Dovetail Mortgage",
+  "The MRP Project",
 ]);
 
 const INVERT_SPONSOR_LOGOS = new Set(["Law Mom"]);
+
+function SponsorCard({
+  sponsor,
+  className,
+  children,
+}: {
+  sponsor: (typeof EVENT_SPONSORS)[number];
+  className: string;
+  children: ReactNode;
+}) {
+  if (!sponsor.href) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <a
+      href={sponsor.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+      aria-label={`${sponsor.name} — ${sponsor.tier}`}
+    >
+      {children}
+    </a>
+  );
+}
 
 function AccordionSection({
   title,
@@ -350,13 +379,10 @@ export function WidowWellnessClient({
           <p className="ww-sponsors__label">Presented with support from</p>
 
           {EVENT_SPONSORS.filter((s) => s.featured).map((sponsor) => (
-            <a
+            <SponsorCard
               key={sponsor.name}
-              href={sponsor.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              sponsor={sponsor}
               className="ww-sponsors__featured"
-              aria-label={`${sponsor.name} — ${sponsor.tier}`}
             >
               <p className="ww-sponsors__tier">{sponsor.tier}</p>
               <span className="ww-sponsors__logo ww-sponsors__logo--feature">
@@ -369,18 +395,15 @@ export function WidowWellnessClient({
                 />
               </span>
               <p className="ww-sponsors__name">{sponsor.name}</p>
-            </a>
+            </SponsorCard>
           ))}
 
           <div className="ww-sponsors__track">
             {EVENT_SPONSORS.filter((s) => !s.featured).map((sponsor) => (
-              <a
+              <SponsorCard
                 key={sponsor.name}
-                href={sponsor.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                sponsor={sponsor}
                 className="ww-sponsors__item"
-                aria-label={`${sponsor.name} — ${sponsor.tier}`}
               >
                 <p className="ww-sponsors__tier">{sponsor.tier}</p>
                 <span
@@ -413,7 +436,7 @@ export function WidowWellnessClient({
                   />
                 </span>
                 <p className="ww-sponsors__name">{sponsor.name}</p>
-              </a>
+              </SponsorCard>
             ))}
             <Link href={SPONSORSHIP_PATH} className="ww-sponsors__cta-inline">
               Interested in sponsoring?

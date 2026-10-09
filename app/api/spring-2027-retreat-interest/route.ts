@@ -14,6 +14,12 @@ const INTERNAL_TO = "jennifer@itslifey.com";
 
 const RETREAT_NAME = "Spring 2027 Widow Wellness Retreat";
 
+const COSTA_RICA_ANSWERS: Record<string, string> = {
+  yes: "Yes",
+  no: "No",
+  unsure: "Not sure",
+};
+
 function trimField(v: unknown, max: number): string {
   if (typeof v !== "string") return "";
   return v.trim().slice(0, max);
@@ -81,7 +87,9 @@ export async function POST(request: Request) {
   const fullName = trimField(o.fullName, 200);
   const email = trimField(o.email, 320);
   const phone = trimField(o.phone, 80);
+  const considerCostaRica = trimField(o.considerCostaRica, 20);
   const note = trimField(o.note, 4000);
+  const costaRicaAnswer = COSTA_RICA_ANSWERS[considerCostaRica];
 
   if (!fullName || !email) {
     return NextResponse.json(
@@ -93,6 +101,13 @@ export async function POST(request: Request) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json(
       { error: "Please enter a valid email address." },
+      { status: 400 },
+    );
+  }
+
+  if (!costaRicaAnswer) {
+    return NextResponse.json(
+      { error: "Please let us know if you would consider Costa Rica." },
       { status: 400 },
     );
   }
@@ -109,7 +124,8 @@ export async function POST(request: Request) {
 <p style="margin:0 0 16px;">Hi ${escapeHtml(greet)},</p>
 <p style="margin:0 0 16px;">Thank you for joining the interest list for the <strong style="color:#1a1918;">${escapeHtml(RETREAT_NAME)}</strong>.</p>
 <p style="margin:0 0 16px;">You&rsquo;ll be among the first to hear retreat details, early registration, pricing, and updates as plans unfold. There&rsquo;s no obligation&mdash;just early access when enrollment opens.</p>
-<p style="margin:0 0 16px;">Remember: the first 5 women who register when enrollment opens will receive <strong style="color:#1a1918;">20% off</strong> their retreat registration.</p>
+<p style="margin:0 0 16px;">Women who sign up before <strong style="color:#1a1918;">February 28, 2027</strong> will get <strong style="color:#1a1918;">$250 off</strong>.</p>
+<p style="margin:0 0 16px;">Would you consider Costa Rica? <strong style="color:#1a1918;">${escapeHtml(costaRicaAnswer)}</strong>. Nothing about a destination is confirmed yet — we&rsquo;re only exploring who&rsquo;s interested.</p>
 <p style="margin:0;font-size:15px;color:#666766;">If anything changes, reply to this email anytime.</p>`;
 
   const applicantHtml = wrapBrandedEmail({
@@ -123,6 +139,7 @@ export async function POST(request: Request) {
     { label: "Email", value: email },
   ];
   if (phone) rows.push({ label: "Phone", value: phone });
+  rows.push({ label: "Would you consider Costa Rica?", value: costaRicaAnswer });
   rows.push({ label: "Note", value: note || "—" });
 
   const internalHtml = wrapInternalLogEmail({
@@ -140,6 +157,7 @@ export async function POST(request: Request) {
     `Name: ${fullName}`,
     `Email: ${email}`,
     ...(phone ? [`Phone: ${phone}`] : []),
+    `Would you consider Costa Rica?: ${costaRicaAnswer}`,
     "",
     "Note:",
     note || "—",
@@ -168,7 +186,9 @@ export async function POST(request: Request) {
         "",
         "You'll be among the first to hear retreat details, early registration, pricing, and updates as plans unfold. There's no obligation—just early access when enrollment opens.",
         "",
-        "Remember: the first 5 women who register when enrollment opens will receive 20% off their retreat registration.",
+        "Women who sign up before February 28, 2027 will get $250 off.",
+        "",
+        `Would you consider Costa Rica? ${costaRicaAnswer}. Nothing about a destination is confirmed yet — we're only exploring who's interested.`,
         "",
         "— Jennifer & the It's Lifey team",
         "",

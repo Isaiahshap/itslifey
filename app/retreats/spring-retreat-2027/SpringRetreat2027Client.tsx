@@ -195,11 +195,10 @@ export function SpringRetreat2027Client() {
                 Early bird bonus
               </p>
               <h3 className="mt-3 text-2xl font-semibold leading-snug text-[#141413]">
-                First 5 women get 20% off
+                $250 off before February 28
               </h3>
               <p className={`mt-4 ${body}`}>
-                The first 5 women who register when enrollment opens will
-                receive 20% off their retreat registration.
+                Women who sign up before February 28, 2027 will get $250 off.
               </p>
               <p className={`mt-4 ${body}`}>
                 If you&apos;re even thinking about joining us, sign up today.
@@ -217,6 +216,73 @@ export function SpringRetreat2027Client() {
                 </span>
               </button>
             </aside>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="border-b border-black/10 bg-white"
+        aria-labelledby="spring-2027-costa-rica-heading"
+      >
+        <div className={`${shell} py-16 sm:py-20 lg:py-24`}>
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-16">
+            <div data-reveal="" className="reveal-up">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab] sm:text-[11px]">
+                Spring 2027
+              </p>
+              <h2
+                id="spring-2027-costa-rica-heading"
+                className="mt-3 text-balance text-3xl font-semibold leading-[1.12] tracking-tight text-black sm:text-4xl lg:text-[2.65rem]"
+              >
+                <ClipReveal delay={0}>Widow Wellness Retreat.</ClipReveal>
+                <span className="mt-1 block text-[#b8457e]">
+                  <ClipReveal delay={80}>Costa Rica, maybe?</ClipReveal>
+                </span>
+              </h2>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-[#2a2928] sm:text-xl sm:leading-relaxed">
+                Sunshine. Ocean breezes. A little adventure. And a whole lot of
+                connection.
+              </p>
+            </div>
+
+            <div
+              data-reveal=""
+              className="reveal-up max-w-xl"
+              style={delayStyle(80)}
+            >
+              <p className={body}>
+                We&apos;re dreaming big for Spring 2027, and Costa Rica is one
+                destination we&apos;re seriously considering. It isn&apos;t
+                confirmed, so if that feels outside your comfort zone, we hope
+                you will still consider the retreat.
+              </p>
+              <p className={`mt-5 ${body}`}>
+                Imagine a few days in paradise, surrounded by women who
+                understand your journey, where you can relax, laugh, recharge,
+                and just be.
+              </p>
+              <p className={`mt-5 ${body}`}>
+                To be clear, nothing is confirmed. We haven&apos;t booked a
+                location, finalized dates, or made any commitments. Right now,
+                we&apos;re simply exploring the idea and seeing who&apos;s
+                interested before making any decisions.
+              </p>
+              <p className={`mt-5 ${body}`}>
+                Does Costa Rica sound like your kind of retreat? Let us know.
+                If not, that&apos;s okay too. Your interest will help us decide
+                whether to turn this dream into a reality.
+              </p>
+              <button
+                type="button"
+                onClick={scrollToInterestForm}
+                className="il-btn il-btn--solid mt-8"
+              >
+                Tell us what you think
+                <span aria-hidden className="il-btn__arrow">
+                  →
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -241,6 +307,10 @@ export function SpringRetreat2027Client() {
               <p className={`mt-5 ${body}`}>
                 Share your name and email — we&apos;ll reach out first when
                 details and registration open. No pressure, no obligation.
+              </p>
+              <p className={`mt-5 ${body}`}>
+                Please also tell us whether you would consider Costa Rica. If
+                you wouldn&apos;t, we still want you on the list.
               </p>
               <p className={`mt-5 ${body}`}>
                 We can&apos;t wait to welcome you.
