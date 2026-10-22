@@ -70,19 +70,26 @@ export function WidowWellnessRegistrationForm() {
         return;
       }
 
+      if (!data.url) {
+        setStatus("error");
+        setErrorMessage("Something went wrong. Please try again.");
+        return;
+      }
+
       const selected = TICKET_TIERS[ticketTier];
-      if (typeof window.fbq === "function") {
+      const leavingForStripe = data.url.includes("buy.stripe.com");
+
+      if (typeof window.fbq === "function" && leavingForStripe) {
         window.fbq("track", "InitiateCheckout", {
-          content_name: `${EVENT_NAME} — ${selected.shortLabel}`,
-          content_category: "Events",
-          value: selected.price,
+          content_name: EVENT_NAME,
+          content_category:
+            ticketTier === "vip" ? "VIP Ticket" : "General Admission Ticket",
           currency: "USD",
+          value: selected.price,
         });
       }
 
-      if (data.url) {
-        redirectAfterMetaPixel(data.url);
-      }
+      redirectAfterMetaPixel(data.url);
     } catch {
       setStatus("error");
       setErrorMessage(
