@@ -144,7 +144,7 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
             ← All past retreats
           </Link>
           <Link href={EVENT_PATH} className="il-btn il-btn--solid">
-            Join an upcoming gathering
+            November event — sold out
             <span aria-hidden className="il-btn__arrow">
               →
             </span>

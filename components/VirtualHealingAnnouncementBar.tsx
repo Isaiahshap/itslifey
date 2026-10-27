@@ -25,7 +25,7 @@ export function VirtualHealingAnnouncementBar() {
               href="/events/widow-wellness-connection-experience"
               className="underline decoration-white/50 underline-offset-2 transition-colors hover:text-white hover:decoration-white"
             >
-              Join Widow Wellness &amp; Connection Experience
+              Widow Wellness &amp; Connection Experience — sold out
             </Link>
           </p>
         </div>

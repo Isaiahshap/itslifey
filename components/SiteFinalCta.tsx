@@ -35,7 +35,7 @@ export function SiteFinalCta() {
         </p>
         <div className="mt-10 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
           <Link href={EVENT_PATH} className="il-btn il-btn--on-dark">
-            Join Widow Wellness &amp; Connection Experience
+            November event — sold out
             <span aria-hidden className="il-btn__arrow">
               →
             </span>

@@ -185,7 +185,7 @@ export default function ResourcesPage() {
               </span>
             </a>
             <Link href={EVENT_PATH} className="il-btn il-btn--ghost-light">
-              Upcoming gathering
+              November event — sold out
             </Link>
             <Link href="/contact" className="il-btn il-btn--ghost-light">
               Contact us

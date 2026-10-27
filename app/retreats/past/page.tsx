@@ -102,7 +102,7 @@ export default function PastRetreatsPage() {
 
           <div className="ed-actions" style={{ marginTop: "3rem", justifyContent: "center" }}>
             <Link href={EVENT_PATH} className="il-btn il-btn--solid">
-              Join an upcoming gathering
+              November event — sold out
               <span aria-hidden className="il-btn__arrow">
                 →
               </span>

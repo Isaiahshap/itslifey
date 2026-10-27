@@ -97,7 +97,7 @@ export default function FaqPage() {
                 Join HopeHub
               </a>
               <Link href={EVENT_PATH} className="il-btn il-btn--ghost-light">
-                Upcoming gathering
+                November event — sold out
               </Link>
               <Link
                 href="/retreats/winter-widow-wellness"

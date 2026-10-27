@@ -166,14 +166,14 @@ export function ContactForm() {
           >
             HopeHub
           </Link>{" "}
-          and{" "}
+          is open, and the{" "}
           <Link
             href={EVENT_PATH}
             className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2 hover:decoration-[#e76fab]"
           >
-            the Widow Wellness &amp; Connection Experience
+            November gathering
           </Link>{" "}
-          are a gentle next step.
+          is sold out.
         </p>
       </div>
     </form>

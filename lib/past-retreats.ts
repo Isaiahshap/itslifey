@@ -123,7 +123,7 @@ export const PAST_RETREATS: PastRetreat[] = [
       "What a beautiful weekend we shared at our Summer Widow Wellness Retreat.",
       "Over a few days, an incredible group of widows came together to rest, connect, laugh, cry, reflect, and simply be with women who truly understand this journey. Watching these friendships form and continue beyond the retreat is such a beautiful reminder that healing happens in community.",
       "A heartfelt thank you to our co-host, Colleen Marie, for sharing her wisdom and creating such a meaningful experience for everyone.",
-      "If you're longing for this kind of support and connection, we'd love to have you join us at our Widow Wellness & Connection Experience this November — or on the interest list for our Spring 2027 retreat.",
+      "The November Widow Wellness & Connection Experience is sold out. If you're longing for this kind of support, the Spring 2027 retreat interest list is open.",
     ],
     seoTitle: "Summer 2026 Widow Wellness Retreat — Cape Cod — It's Lifey",
     seoDescription:

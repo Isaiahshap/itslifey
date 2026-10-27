@@ -17,7 +17,7 @@ export function ShellPage({
   title,
   description,
   ctaHref = EVENT_PATH,
-  ctaLabel = "Join Widow Wellness & Connection Experience",
+  ctaLabel = "November event — sold out",
 }: ShellPageProps) {
   return (
     <div className="bg-[#f6f3ee]">

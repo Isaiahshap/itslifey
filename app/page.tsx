@@ -207,7 +207,7 @@ export default function Home() {
               style={delayStyle(340)}
             >
               <Link href={EVENT_PATH} className="il-btn il-btn--solid">
-                Join the event
+                November event — sold out
                 <CtaArrow />
               </Link>
               <Link
@@ -245,7 +245,7 @@ export default function Home() {
           >
             <p className="home-highlight__kicker">One-day gathering</p>
             <h2 className="home-highlight__title">
-              Join the Widow Connection Event
+              November event — sold out
             </h2>
             <div className="home-highlight__meta">
               <span className="home-highlight__arrow" aria-hidden>
@@ -366,19 +366,19 @@ export default function Home() {
               Widow Wellness &amp; Connection Experience
             </p>
             <h2 id="event-heading" className="home-title">
-              <ClipReveal delay={0}>Join the event</ClipReveal>
+              <ClipReveal delay={0}>Sold out</ClipReveal>
             </h2>
             <p className="home-copy">
               A one-day gathering for widows across New England — inspiration,
-              education, healing, and women who truly understand.{" "}
-              {EVENT_SHORT_TAGLINE}
+              education, healing, and women who truly understand. Tickets for{" "}
+              {EVENT_DATES} are sold out. {EVENT_SHORT_TAGLINE}
             </p>
             <p className="home-meta">
               {EVENT_DATES} · {EVENT_LOCATION}
             </p>
             <div className="home-actions">
               <Link href={EVENT_PATH} className="il-btn il-btn--on-dark">
-                Join the event
+                View the event
                 <CtaArrow />
               </Link>
               <Link

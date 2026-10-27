@@ -200,6 +200,28 @@
   font-size: 0.88rem;
 }
 
+.ww-soldout {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  min-height: 3.15rem;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid rgba(201, 77, 138, 0.28);
+  background: rgba(231, 111, 171, 0.1);
+  font-family: var(--ww-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ww-pink-deep);
+}
+
+.ww-soldout--bar {
+  flex-shrink: 0;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+}
+
 /* ─── Hero ─── */
 .ww-hero {
   position: relative;
@@ -1589,6 +1611,15 @@
   text-align: center;
 }
 
+.ww-flow__status {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #f5b8dc;
+}
+
 @media (min-width: 960px) {
   .ww-flow__day {
     grid-template-columns: minmax(12.5rem, 0.28fr) minmax(0, 1fr);
@@ -1715,10 +1746,28 @@
 }
 
 .ww-register__form {
-  padding: 1.35rem;
+  padding: 1.35rem 1.5rem;
   background: #fffcfa;
   border: 1px solid var(--ww-rule);
   box-shadow: 0 24px 60px -42px rgba(36, 24, 32, 0.45);
+}
+
+.ww-register__form .ww-register__facts {
+  margin-top: 0;
+  border-top: 0;
+}
+
+.ww-register__form .ww-register__fact:first-child {
+  padding-top: 0.15rem;
+}
+
+.ww-register__form .ww-register__fact:last-child {
+  padding-bottom: 0.15rem;
+  border-bottom: 0;
+}
+
+.ww-register__form .ww-register__fact dd {
+  font-size: clamp(1.15rem, 0.95rem + 0.7vw, 1.55rem);
 }
 
 @media (min-width: 980px) {

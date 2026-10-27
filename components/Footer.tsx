@@ -119,14 +119,14 @@ export function Footer() {
                 Next step
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-[#2a2928]">
-                When you&apos;re ready, start with the Widow Wellness &amp;
-                Connection Experience or HopeHub.
+                The November gathering is sold out. HopeHub is open when
+                you want company.
               </p>
               <Link
                 href={EVENT_PATH}
                 className="il-btn il-btn--solid il-btn--compact mt-5"
               >
-                Join the event
+                November event — sold out
                 <span aria-hidden className="il-btn__arrow">
                   →
                 </span>

@@ -1,7 +1,6 @@
 "use client";
 
 import { WidowWellnessPixelEvents } from "@/components/WidowWellnessPixelEvents";
-import { WidowWellnessRegistrationForm } from "@/components/WidowWellnessRegistrationForm";
 import {
   BREAKOUT_LEADERS,
   EVENT_DATES,
@@ -32,13 +31,6 @@ const morningBreakouts = BREAKOUT_LEADERS.filter((l) => l.slot === "morning");
 const afternoonBreakouts = BREAKOUT_LEADERS.filter(
   (l) => l.slot === "afternoon",
 );
-
-function scrollToRegister() {
-  document.getElementById("ww-register")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-}
 
 function scrollToDetails() {
   document.getElementById("ww-intro")?.scrollIntoView({
@@ -359,9 +351,7 @@ export function WidowWellnessClient({
             <span>{EVENT_LOCATION}</span>
           </div>
           <div className="ww-hero__actions">
-            <button type="button" className="ww-btn" onClick={scrollToRegister}>
-              Reserve Your Spot
-            </button>
+            <p className="ww-soldout">Sold out</p>
             <button
               type="button"
               className="ww-btn ww-btn--ghost"
@@ -669,7 +659,7 @@ export function WidowWellnessClient({
         </div>
       </section>
 
-      {/* 8. Registration — moved before Event Flow */}
+      {/* 8. Sold out */}
       <section
         id="ww-register"
         ref={registerRef}
@@ -680,90 +670,53 @@ export function WidowWellnessClient({
           <div className="ww-register__grid">
             <Reveal>
               <div>
-                <p className="ww-eyebrow">Join us</p>
+                <p className="ww-eyebrow">Tickets</p>
                 <h2 id="ww-register-heading" className="ww-register__title">
-                  Reserve Your Spot
+                  Sold out
                 </h2>
                 <p className="ww-body" style={{ marginTop: "1.15rem" }}>
-                  We&apos;d love to have you in the room. Choose your ticket,
-                  share a few details, and you&apos;ll be taken to secure
-                  Stripe checkout to complete payment. We&apos;ll also email
-                  you the link — your spot isn&apos;t confirmed until payment
-                  is received.
-                </p>
-
-                <dl className="ww-register__facts">
-                  <div className="ww-register__fact">
-                    <dt>When</dt>
-                    <dd>{EVENT_DATES}</dd>
-                  </div>
-                  <div className="ww-register__fact">
-                    <dt>Where</dt>
-                    <dd>{EVENT_LOCATION}</dd>
-                    <p>
-                      Whether you&apos;re joining for the full day or adding
-                      the VIP evening with Kelley Lynn, you&apos;ll step into a
-                      space built for widows — real talk, real connection, and
-                      real hope.
-                    </p>
-                  </div>
-                  <div className="ww-register__fact">
-                    <dt>Where to stay</dt>
-                    <dd>Hotel block at {HOTEL_NAME}</dd>
-                    <p>
-                      We&apos;ve reserved a nearby hotel block at {HOTEL_NAME}{" "}
-                      for guests traveling in for the weekend.{" "}
-                      <a
-                        href={HOTEL_BLOCK_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ww-link"
-                      >
-                        Book {HOTEL_NAME}
-                      </a>
-                    </p>
-                  </div>
-                </dl>
-
-                <div className="ww-register__tiers">
-                  <div className="ww-register__tier">
-                    <span className="ww-register__tier-label">VIP</span>
-                    <span className="ww-register__tier-price">$169</span>
-                    <p>
-                      Mocktail hour with Kelley Lynn on November 13, plus the
-                      full main event on November 14.
-                    </p>
-                  </div>
-                  <div className="ww-register__tier">
-                    <span className="ww-register__tier-label">
-                      General Admission
-                    </span>
-                    <span className="ww-register__tier-price">$129</span>
-                    <p>
-                      The full main event — welcome, keynotes, breakouts,
-                      lunch, and The Hope Mic Story Slam.
-                    </p>
-                  </div>
-                </div>
-
-                <p className="ww-body" style={{ marginTop: "1.75rem" }}>
-                  Newly widowed or years into your journey — you belong here.
-                  Come alone. Leave with practical tools, trusted resources,
-                  and the quiet relief of women who understand without you
-                  having to explain.
+                  Tickets for the Widow Wellness &amp; Connection Experience
+                  are sold out. Thank you — the room is full.
                 </p>
                 <p className="ww-body" style={{ marginTop: "0.85rem" }}>
-                  Questions?{" "}
+                  If you already have a spot and need anything before the
+                  weekend, write to us. We read every message with care.
+                </p>
+                <p className="ww-body" style={{ marginTop: "0.85rem" }}>
                   <a href="mailto:jennifer@itslifey.com" className="ww-link">
                     jennifer@itslifey.com
                   </a>
-                  . We read every message with care.
                 </p>
               </div>
             </Reveal>
 
             <div className="ww-register__form">
-              <WidowWellnessRegistrationForm />
+              <dl className="ww-register__facts">
+                <div className="ww-register__fact">
+                  <dt>When</dt>
+                  <dd>{EVENT_DATES}</dd>
+                </div>
+                <div className="ww-register__fact">
+                  <dt>Where</dt>
+                  <dd>{EVENT_LOCATION}</dd>
+                </div>
+                <div className="ww-register__fact">
+                  <dt>Where to stay</dt>
+                  <dd>Hotel block at {HOTEL_NAME}</dd>
+                  <p>
+                    A nearby hotel block at {HOTEL_NAME} is reserved for guests
+                    traveling in for the weekend.{" "}
+                    <a
+                      href={HOTEL_BLOCK_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ww-link"
+                    >
+                      Book {HOTEL_NAME}
+                    </a>
+                  </p>
+                </div>
+              </dl>
             </div>
           </div>
         </div>
@@ -909,13 +862,7 @@ export function WidowWellnessClient({
               </div>
 
               <div className="ww-flow__cta">
-                <button
-                  type="button"
-                  className="ww-btn ww-btn--on-dark"
-                  onClick={scrollToRegister}
-                >
-                  Reserve Your Spot
-                </button>
+                <p className="ww-flow__status">Sold out</p>
               </div>
             </div>
           </AccordionSection>
@@ -1056,16 +1003,14 @@ export function WidowWellnessClient({
       {/* Sticky CTA */}
       <div
         className={`ww-sticky${stickyVisible ? " is-visible" : ""}`}
-        role="region"
-        aria-label="Quick registration"
+        role="status"
+        aria-label="Tickets are sold out"
       >
         <div className="ww-sticky__meta">
           <p>{EVENT_DATES}</p>
           <span>{EVENT_LOCATION}</span>
         </div>
-        <button type="button" className="ww-btn" onClick={scrollToRegister}>
-          Reserve Your Spot
-        </button>
+        <p className="ww-soldout ww-soldout--bar">Sold out</p>
       </div>
     </div>
   );

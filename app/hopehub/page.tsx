@@ -211,7 +211,7 @@ export default function HopeHubPage() {
                 </span>
               </a>
               <Link href={EVENT_PATH} className="il-btn il-btn--ghost-light">
-                One-day gathering
+                November event — sold out
               </Link>
             </div>
           </div>

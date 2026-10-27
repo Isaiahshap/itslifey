@@ -44,10 +44,10 @@ const eventsSubLinks = [
 
 const navHopeHub = { href: "/hopehub", label: "Hope Hub" } as const;
 
-/** Primary header CTA — Widow Wellness & Connection Experience. */
+/** Header link to the November event. Tickets are sold out. */
 const navPrimaryCta = {
   href: "/events/widow-wellness-connection-experience",
-  label: "Join Widow Wellness & Connection Experience",
+  label: "November event — sold out",
 } as const;
 
 function pathMatchesHref(pathname: string, href: string) {
