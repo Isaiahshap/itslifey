@@ -59,7 +59,7 @@ const mainTiers = [
   {
     name: "Connection Sponsor",
     price: "$2,500",
-    availability: "3 slots left",
+    availability: "Sold out",
     blurb:
       "For brands that want meaningful visibility and direct connection with attendees.",
     includes: [
@@ -109,7 +109,7 @@ const additionalTiers = [
   {
     name: "Community Supporter",
     price: "$1,000",
-    availability: "4 slots left",
+    availability: "1 slot left",
     blurb:
       "For businesses that want to support widows and be part of the It's Lifey mission.",
     includes: [

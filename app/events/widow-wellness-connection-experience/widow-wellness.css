@@ -341,7 +341,7 @@
 .ww-sponsors {
   border-block: 1px solid var(--ww-rule);
   background: #fffcfa;
-  padding: 1.5rem 0 1.65rem;
+  padding: 1.85rem 0 2.15rem;
 }
 
 .ww-sponsors__label {
@@ -399,10 +399,10 @@
 .ww-sponsors__track {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  column-gap: clamp(0.85rem, 2vw, 1.5rem);
-  row-gap: 1.15rem;
+  column-gap: clamp(1.75rem, 3.4vw, 3rem);
+  row-gap: 2.35rem;
 }
 
 .ww-sponsors__item {

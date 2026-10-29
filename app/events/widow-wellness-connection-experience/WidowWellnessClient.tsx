@@ -92,6 +92,10 @@ const LARGE_SPONSOR_LOGOS = new Set([
   "Ascent Capital",
   "Dovetail Mortgage",
   "The MRP Project",
+  "Eastern Bank",
+  "Tasteful Skin",
+  "The Modern Events Company",
+  "Touchstone Closing & Escrow",
 ]);
 
 const INVERT_SPONSOR_LOGOS = new Set(["Law Mom"]);
