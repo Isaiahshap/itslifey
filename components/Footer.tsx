@@ -21,6 +21,10 @@ const programsLinks = [
     href: "/retreats/spring-retreat-2027",
     label: "Spring Retreat 2027",
   },
+  {
+    href: "/retreats/summer-by-the-sea",
+    label: "Summer by the Sea",
+  },
   { href: "/retreats/past", label: "Past Retreats" },
   {
     href: "/events/widow-wellness-connection-experience",

@@ -32,6 +32,10 @@ const retreatSubLinks = [
     href: "/retreats/spring-retreat-2027",
     label: "Spring Retreat 2027",
   },
+  {
+    href: "/retreats/summer-by-the-sea",
+    label: "Summer by the Sea",
+  },
   { href: "/retreats/past", label: "Past Retreats" },
 ] as const;
 
@@ -300,7 +304,16 @@ export function Navbar() {
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileRetreatsOpen, setMobileRetreatsOpen] = useState(false);
   const [mobileEventsOpen, setMobileEventsOpen] = useState(false);
+  const [menuPath, setMenuPath] = useState(pathname);
   const hydrated = useHydrated();
+
+  if (menuPath !== pathname) {
+    setMenuPath(pathname);
+    setOpen(false);
+    setMobileAboutOpen(false);
+    setMobileRetreatsOpen(false);
+    setMobileEventsOpen(false);
+  }
 
   const closeMobileNav = useCallback(() => {
     setOpen(false);
@@ -308,10 +321,6 @@ export function Navbar() {
     setMobileRetreatsOpen(false);
     setMobileEventsOpen(false);
   }, []);
-
-  useEffect(() => {
-    closeMobileNav();
-  }, [pathname, closeMobileNav]);
 
   useEffect(() => {
     if (!open) return;

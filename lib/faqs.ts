@@ -40,7 +40,7 @@ export const HOPEHUB_FAQS: FaqItem[] = [
   },
   {
     q: "Are there in-person events?",
-    a: "Yes. There are in-person gatherings like the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) — sold out for November 2026 — and multi-day [retreats](/retreats/winter-widow-wellness). Details are shared inside HopeHub and on the It’s Lifey site.",
+    a: "Yes. There are in-person gatherings like the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) — sold out for November 2026 — and multi-day retreats, including [Summer by the Sea](/retreats/summer-by-the-sea) and the [Winter Retreat](/retreats/winter-widow-wellness). Details are shared inside HopeHub and on the It’s Lifey site.",
   },
   {
     q: "How do I get started?",
@@ -68,7 +68,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       },
       {
         q: "Where should I start if I’m new?",
-        a: "If you want connection from home, join [HopeHub](/hopehub) for free. The November [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) is sold out. If you want a longer weekend, look at our upcoming [Winter Retreat](/retreats/winter-widow-wellness) or [Spring Retreat](/retreats/spring-retreat-2027). You can also browse trusted outside resources on our [Resources](/resources) page.",
+        a: "If you want connection from home, join [HopeHub](/hopehub) for free. The November [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) is sold out. If you want a longer weekend, look at [Summer by the Sea](/retreats/summer-by-the-sea), the [Winter Retreat](/retreats/winter-widow-wellness), or the [Spring Retreat](/retreats/spring-retreat-2027). You can also browse trusted outside resources on our [Resources](/resources) page.",
       },
       {
         q: "Is It’s Lifey a crisis service?",
@@ -82,7 +82,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "What kinds of gatherings do you host?",
-        a: "One-day experiences like the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) — sold out for November 2026 — multi-day retreats such as [Winter Widow Wellness](/retreats/winter-widow-wellness) and [Spring retreats](/retreats/spring-retreat-2027), plus virtual offerings when available. Each gathering is designed for connection, rest, and being with women who understand. You can also browse [past retreats](/retreats/past).",
+        a: "One-day experiences like the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) — sold out for November 2026 — multi-day retreats such as [Summer by the Sea](/retreats/summer-by-the-sea), [Winter Widow Wellness](/retreats/winter-widow-wellness), and [Spring retreats](/retreats/spring-retreat-2027), plus virtual offerings when available. Each gathering is designed for connection, rest, and being with women who understand. You can also browse [past retreats](/retreats/past).",
       },
       {
         q: "Do I have to come with a friend?",
@@ -90,7 +90,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       },
       {
         q: "How do I hear about new retreats first?",
-        a: "Join the interest list on the [Winter Retreat](/retreats/winter-widow-wellness) or [Spring 2027 retreat](/retreats/spring-retreat-2027) page, follow updates in [HopeHub](/hopehub), or sign up for soft email updates from the homepage.",
+        a: "Join the interest list on [Summer by the Sea](/retreats/summer-by-the-sea), the [Winter Retreat](/retreats/winter-widow-wellness), or the [Spring 2027 retreat](/retreats/spring-retreat-2027). You can also follow updates in [HopeHub](/hopehub), or sign up for soft email updates from the homepage.",
       },
     ],
   },

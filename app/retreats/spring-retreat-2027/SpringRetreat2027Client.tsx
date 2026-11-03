@@ -2,7 +2,6 @@
 
 import { ClipReveal } from "@/components/ClipReveal";
 import { Spring2027RetreatInterestForm } from "@/components/Spring2027RetreatInterestForm";
-import Image from "next/image";
 import { HeroImage } from "@/components/HeroImage";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -315,12 +314,20 @@ export function SpringRetreat2027Client() {
               <p className={`mt-5 ${body}`}>
                 We can&apos;t wait to welcome you.
               </p>
-              <Link
-                href="/retreats/past"
-                className="mt-8 inline-flex text-sm font-semibold text-[#b8457e] underline decoration-[#e76fab]/40 underline-offset-4 transition-colors hover:text-[#e76fab]"
-              >
-                Browse past retreats →
-              </Link>
+              <p className="mt-8 flex flex-col items-start gap-3">
+                <Link
+                  href="/retreats/summer-by-the-sea"
+                  className="inline-flex text-sm font-semibold text-[#b8457e] underline decoration-[#e76fab]/40 underline-offset-4 transition-colors hover:text-[#e76fab]"
+                >
+                  Summer by the Sea →
+                </Link>
+                <Link
+                  href="/retreats/past"
+                  className="inline-flex text-sm font-semibold text-[#b8457e] underline decoration-[#e76fab]/40 underline-offset-4 transition-colors hover:text-[#e76fab]"
+                >
+                  Browse past retreats →
+                </Link>
+              </p>
             </div>
             <div
               data-reveal=""

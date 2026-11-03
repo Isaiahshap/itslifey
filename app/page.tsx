@@ -41,6 +41,7 @@ const PATHWAY_THUMBS = {
   event: "/images/widowwellnessimages/IMG_2517.jpeg",
   winter: "/images/winter/winter-retreat-10.jpg",
   spring: "/images/Retreats/Summer2025/IMG_1698.webp",
+  summer: "/images/Retreats/Summer2025/IMG_0683.webp",
 } as const;
 
 const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@ItsLifey-co";
@@ -237,11 +238,34 @@ export default function Home() {
         className="home-highlights"
         aria-label="Ways to begin"
       >
-        <div className="home-highlights__grid home-highlights__grid--duo" data-reveal="">
+        <div className="home-highlights__grid" data-reveal="">
+          <Link
+            href="/retreats/summer-by-the-sea"
+            className="home-highlight reveal-up"
+            style={delayStyle(0)}
+          >
+            <p className="home-highlight__kicker">Summer Retreat 2027</p>
+            <h2 className="home-highlight__title">Summer by the Sea</h2>
+            <div className="home-highlight__meta">
+              <span className="home-highlight__arrow" aria-hidden>
+                →
+              </span>
+              <span className="home-highlight__thumb">
+                <Image
+                  src={PATHWAY_THUMBS.summer}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="72px"
+                />
+              </span>
+            </div>
+          </Link>
+
           <Link
             href={EVENT_PATH}
             className="home-highlight reveal-up"
-            style={delayStyle(0)}
+            style={delayStyle(80)}
           >
             <p className="home-highlight__kicker">One-day gathering</p>
             <h2 className="home-highlight__title">
@@ -266,7 +290,7 @@ export default function Home() {
           <Link
             href="/retreats/winter-widow-wellness"
             className="home-highlight reveal-up"
-            style={delayStyle(80)}
+            style={delayStyle(160)}
           >
             <p className="home-highlight__kicker">Winter Retreat 2027</p>
             <h2 className="home-highlight__title">
@@ -500,6 +524,30 @@ export default function Home() {
                   />
                 </span>
                 <p className="home-pathway__title">Spring Retreat 2027</p>
+                <span className="home-pathway__arrow" aria-hidden>
+                  →
+                </span>
+              </Link>
+            </div>
+            <div
+              className="reveal-up"
+              style={delayStyle(300)}
+              role="listitem"
+            >
+              <Link
+                href="/retreats/summer-by-the-sea"
+                className="home-pathway"
+              >
+                <span className="home-pathway__thumb">
+                  <Image
+                    src={PATHWAY_THUMBS.summer}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="56px"
+                  />
+                </span>
+                <p className="home-pathway__title">Summer by the Sea</p>
                 <span className="home-pathway__arrow" aria-hidden>
                   →
                 </span>

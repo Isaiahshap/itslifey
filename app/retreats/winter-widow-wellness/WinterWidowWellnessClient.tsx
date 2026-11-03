@@ -475,6 +475,10 @@ export function WinterWidowWellnessClient() {
                   .
                 </p>
                 <p style={{ marginTop: "1.5rem" }}>
+                  <Link href="/retreats/summer-by-the-sea" className="wwr-link">
+                    Summer by the Sea →
+                  </Link>
+                  {" · "}
                   <Link href="/retreats/spring-retreat-2027" className="wwr-link">
                     Spring Retreat 2027 →
                   </Link>

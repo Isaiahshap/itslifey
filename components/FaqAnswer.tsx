@@ -7,13 +7,12 @@ const LINK_RE = /\[([^\]]+)\]\(([^)]+)\)/g;
 export function FaqAnswer({ text }: { text: string }) {
   const nodes: ReactNode[] = [];
   let last = 0;
-  let match: RegExpExecArray | null;
   let key = 0;
 
-  LINK_RE.lastIndex = 0;
-  while ((match = LINK_RE.exec(text)) !== null) {
-    if (match.index > last) {
-      nodes.push(text.slice(last, match.index));
+  for (const match of text.matchAll(LINK_RE)) {
+    const index = match.index;
+    if (index > last) {
+      nodes.push(text.slice(last, index));
     }
     const label = match[1];
     const href = match[2];
@@ -37,7 +36,7 @@ export function FaqAnswer({ text }: { text: string }) {
         </Link>,
       );
     }
-    last = match.index + match[0].length;
+    last = index + match[0].length;
   }
 
   if (last < text.length) {
