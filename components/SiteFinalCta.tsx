@@ -8,6 +8,7 @@ import { EVENT_PATH } from "@/lib/widow-wellness-event";
 export function SiteFinalCta() {
   const pathname = usePathname();
   if (
+    pathname === "/retreats" ||
     pathname.startsWith("/retreats/spring-retreat-2027") ||
     pathname.startsWith("/retreats/summer-by-the-sea") ||
     pathname.startsWith("/retreats/winter-widow-wellness") ||

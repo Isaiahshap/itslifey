@@ -82,7 +82,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "What kinds of gatherings do you host?",
-        a: "One-day experiences like the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) — sold out for November 2026 — multi-day retreats such as [Summer by the Sea](/retreats/summer-by-the-sea), [Winter Widow Wellness](/retreats/winter-widow-wellness), and [Spring retreats](/retreats/spring-retreat-2027), plus virtual offerings when available. Each gathering is designed for connection, rest, and being with women who understand. You can also browse [past retreats](/retreats/past).",
+        a: "One-day experiences like the [Widow Wellness & Connection Experience](/events/widow-wellness-connection-experience) — sold out for November 2026 — and multi-day retreats: [Winter](/retreats/winter-widow-wellness), [Spring](/retreats/spring-retreat-2027), and [Summer](/retreats/summer-by-the-sea). Each gathering is designed for connection, rest, and being with women who understand. [All retreats](/retreats), including past weekends, are listed together.",
       },
       {
         q: "Do I have to come with a friend?",

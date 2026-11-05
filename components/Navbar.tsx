@@ -24,19 +24,19 @@ const aboutSubLinks = [
 ] as const;
 
 const retreatSubLinks = [
+  { href: "/retreats", label: "All Retreats" },
   {
     href: "/retreats/winter-widow-wellness",
-    label: "Winter Retreat 2027",
+    label: "Winter Retreat",
   },
   {
     href: "/retreats/spring-retreat-2027",
-    label: "Spring Retreat 2027",
+    label: "Spring Retreat",
   },
   {
     href: "/retreats/summer-by-the-sea",
-    label: "Summer by the Sea",
+    label: "Summer Retreat",
   },
-  { href: "/retreats/past", label: "Past Retreats" },
 ] as const;
 
 const eventsSubLinks = [
@@ -48,15 +48,20 @@ const eventsSubLinks = [
 
 const navHopeHub = { href: "/hopehub", label: "Hope Hub" } as const;
 
-/** Header link to the November event. Tickets are sold out. */
+/** Header link to the retreat index — upcoming first, then past gatherings. */
 const navPrimaryCta = {
-  href: "/events/widow-wellness-connection-experience",
-  label: "November event — sold out",
+  href: "/retreats",
+  label: "Book It's Lifey Retreat",
 } as const;
 
 function pathMatchesHref(pathname: string, href: string) {
   const base = href.split("#")[0] ?? href;
   return pathname === base || pathname.startsWith(`${base}/`);
+}
+
+function navItemActive(pathname: string, href: string) {
+  if (href === "/retreats") return pathname === "/retreats";
+  return pathMatchesHref(pathname, href);
 }
 
 function aboutSectionActive(pathname: string) {
@@ -267,7 +272,7 @@ function DesktopHoverMenu({
                 className={`${desktopMenuFlyout} ${menuShellExtra}`}
               >
                 {links.map(({ href, label: itemLabel }) => {
-                  const active = pathMatchesHref(pathname, href);
+                  const active = navItemActive(pathname, href);
                   return (
                     <motion.li
                       key={href}
@@ -546,7 +551,7 @@ export function Navbar() {
                               <Link
                                 href={href}
                                 className={mobileNavSubLinkClass(
-                                  pathMatchesHref(pathname, href)
+                                  navItemActive(pathname, href)
                                 )}
                                 onClick={closeMobileNav}
                               >
@@ -601,7 +606,7 @@ export function Navbar() {
                               <Link
                                 href={href}
                                 className={mobileNavSubLinkClass(
-                                  pathMatchesHref(pathname, href)
+                                  navItemActive(pathname, href)
                                 )}
                                 onClick={closeMobileNav}
                               >
@@ -646,7 +651,7 @@ export function Navbar() {
                               <Link
                                 href={href}
                                 className={mobileNavSubLinkClass(
-                                  pathMatchesHref(pathname, href)
+                                  navItemActive(pathname, href)
                                 )}
                                 onClick={closeMobileNav}
                               >

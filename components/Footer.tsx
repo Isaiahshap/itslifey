@@ -25,7 +25,7 @@ const programsLinks = [
     href: "/retreats/summer-by-the-sea",
     label: "Summer by the Sea",
   },
-  { href: "/retreats/past", label: "Past Retreats" },
+  { href: "/retreats", label: "All Retreats" },
   {
     href: "/events/widow-wellness-connection-experience",
     label: "Widow Wellness & Connection Experience",

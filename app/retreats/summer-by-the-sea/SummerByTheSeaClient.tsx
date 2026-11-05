@@ -468,8 +468,8 @@ export function SummerByTheSeaClient() {
                 >
                   November event
                 </Link>
-                <Link href="/retreats/past" className="sbs-link">
-                  Past retreats
+                <Link href="/retreats" className="sbs-link">
+                  All retreats
                 </Link>
               </p>
             </div>

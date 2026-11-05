@@ -240,62 +240,12 @@ export default function Home() {
       >
         <div className="home-highlights__grid" data-reveal="">
           <Link
-            href="/retreats/summer-by-the-sea"
+            href="/retreats/winter-widow-wellness"
             className="home-highlight reveal-up"
             style={delayStyle(0)}
           >
-            <p className="home-highlight__kicker">Summer Retreat 2027</p>
-            <h2 className="home-highlight__title">Summer by the Sea</h2>
-            <div className="home-highlight__meta">
-              <span className="home-highlight__arrow" aria-hidden>
-                →
-              </span>
-              <span className="home-highlight__thumb">
-                <Image
-                  src={PATHWAY_THUMBS.summer}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="72px"
-                />
-              </span>
-            </div>
-          </Link>
-
-          <Link
-            href={EVENT_PATH}
-            className="home-highlight reveal-up"
-            style={delayStyle(80)}
-          >
-            <p className="home-highlight__kicker">One-day gathering</p>
-            <h2 className="home-highlight__title">
-              November event — sold out
-            </h2>
-            <div className="home-highlight__meta">
-              <span className="home-highlight__arrow" aria-hidden>
-                →
-              </span>
-              <span className="home-highlight__thumb">
-                <Image
-                  src={EVENT_SHOWCASE_IMAGES[0]}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="72px"
-                />
-              </span>
-            </div>
-          </Link>
-
-          <Link
-            href="/retreats/winter-widow-wellness"
-            className="home-highlight reveal-up"
-            style={delayStyle(160)}
-          >
-            <p className="home-highlight__kicker">Winter Retreat 2027</p>
-            <h2 className="home-highlight__title">
-              Join the Winter Widow Wellness Retreat
-            </h2>
+            <p className="home-highlight__kicker">January 15–18, 2027</p>
+            <h2 className="home-highlight__title">Winter Retreat</h2>
             <div className="home-highlight__meta">
               <span className="home-highlight__arrow" aria-hidden>
                 →
@@ -303,6 +253,52 @@ export default function Home() {
               <span className="home-highlight__thumb">
                 <Image
                   src={PATHWAY_THUMBS.winter}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="72px"
+                />
+              </span>
+            </div>
+          </Link>
+
+          <Link
+            href="/retreats/spring-retreat-2027"
+            className="home-highlight reveal-up"
+            style={delayStyle(80)}
+          >
+            <p className="home-highlight__kicker">Interest list open</p>
+            <h2 className="home-highlight__title">Spring Retreat</h2>
+            <div className="home-highlight__meta">
+              <span className="home-highlight__arrow" aria-hidden>
+                →
+              </span>
+              <span className="home-highlight__thumb">
+                <Image
+                  src={PATHWAY_THUMBS.spring}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="72px"
+                />
+              </span>
+            </div>
+          </Link>
+
+          <Link
+            href="/retreats/summer-by-the-sea"
+            className="home-highlight reveal-up"
+            style={delayStyle(160)}
+          >
+            <p className="home-highlight__kicker">July 9–12, 2027</p>
+            <h2 className="home-highlight__title">Summer Retreat</h2>
+            <div className="home-highlight__meta">
+              <span className="home-highlight__arrow" aria-hidden>
+                →
+              </span>
+              <span className="home-highlight__thumb">
+                <Image
+                  src={PATHWAY_THUMBS.summer}
                   alt=""
                   fill
                   className="object-cover"

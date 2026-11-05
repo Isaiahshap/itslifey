@@ -18,6 +18,7 @@ function siteOrigin(): string {
 function priorityForPath(path: string): number {
   if (path === "/") return 1;
   if (
+    path === "/retreats" ||
     path === "/retreats/spring-retreat-2027" ||
     path === "/retreats/summer-by-the-sea" ||
     path === "/retreats/winter-widow-wellness" ||
@@ -52,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   };
 
-  const excludeFromSitemap = new Set(["/first-40-mockup", "/retreats"]);
+  const excludeFromSitemap = new Set(["/first-40-mockup", "/retreats/past"]);
 
   for (const p of staticPaths) {
     if (excludeFromSitemap.has(p)) continue;

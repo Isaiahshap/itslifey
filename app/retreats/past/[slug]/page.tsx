@@ -7,7 +7,6 @@ import {
   getPastRetreat,
   getPastRetreatSlugs,
 } from "@/lib/past-retreats";
-import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -70,10 +69,10 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
           <ol className="m-0 flex list-none flex-wrap items-center gap-2 p-0 text-sm text-[var(--ed-muted)]">
             <li>
               <Link
-                href="/retreats/past"
+                href="/retreats"
                 className="font-semibold text-[var(--ed-pink-deep)] underline decoration-[rgba(231,111,171,0.35)] underline-offset-2"
               >
-                Past retreats
+                Retreats
               </Link>
             </li>
             <li aria-hidden>/</li>
@@ -138,13 +137,13 @@ export default async function PastRetreatDetailPage({ params }: PageProps) {
           }}
         >
           <Link
-            href="/retreats/past"
+            href="/retreats#past"
             className="text-sm font-semibold text-[var(--ed-pink-deep)] underline decoration-[rgba(231,111,171,0.35)] underline-offset-2"
           >
-            ← All past retreats
+            ← All retreats
           </Link>
-          <Link href={EVENT_PATH} className="il-btn il-btn--solid">
-            November event — sold out
+          <Link href="/retreats" className="il-btn il-btn--solid">
+            Book It&apos;s Lifey Retreat
             <span aria-hidden className="il-btn__arrow">
               →
             </span>

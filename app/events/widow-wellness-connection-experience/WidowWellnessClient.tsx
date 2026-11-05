@@ -87,6 +87,8 @@ const LARGE_SPONSOR_LOGOS = new Set([
   "Law Mom",
   "Cove Wellness",
   "Ashley Liddle",
+  "Train Boston",
+  "Shereen Berlin",
   "A New Path Coaching",
   "Aussemista Style",
   "Ascent Capital",
@@ -432,9 +434,6 @@ export function WidowWellnessClient({
                 <p className="ww-sponsors__name">{sponsor.name}</p>
               </SponsorCard>
             ))}
-            <Link href={SPONSORSHIP_PATH} className="ww-sponsors__cta-inline">
-              Interested in sponsoring?
-            </Link>
           </div>
         </div>
       </section>
@@ -985,18 +984,15 @@ export function WidowWellnessClient({
                 id="ww-sponsor-cta-heading"
                 className="ww-sponsor-cta__title"
               >
-                Interested in supporting this experience?
+                Supported by businesses who stand with widows
               </h2>
               <div>
                 <p className="ww-sponsor-cta__copy">
-                  Help widows feel less alone while connecting your brand with
-                  women actively seeking trusted support, resources, and
-                  community. Sponsorship levels start at $250 — with meaningful
-                  visibility across the event, marketing channels, and attendee
-                  experience.
+                  This November gathering is presented with the sponsors above.
+                  Sponsor signup for this event is closed.
                 </p>
                 <Link href={SPONSORSHIP_PATH} className="ww-btn">
-                  Explore Sponsorship
+                  View sponsorship details
                 </Link>
               </div>
             </div>

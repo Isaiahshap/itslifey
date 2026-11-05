@@ -483,8 +483,8 @@ export function WinterWidowWellnessClient() {
                     Spring Retreat 2027 →
                   </Link>
                   {" · "}
-                  <Link href="/retreats/past" className="wwr-link">
-                    Past retreats
+                  <Link href="/retreats" className="wwr-link">
+                    All retreats
                   </Link>
                 </p>
               </div>

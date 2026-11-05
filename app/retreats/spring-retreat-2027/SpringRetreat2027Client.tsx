@@ -322,10 +322,10 @@ export function SpringRetreat2027Client() {
                   Summer by the Sea →
                 </Link>
                 <Link
-                  href="/retreats/past"
+                  href="/retreats"
                   className="inline-flex text-sm font-semibold text-[#b8457e] underline decoration-[#e76fab]/40 underline-offset-4 transition-colors hover:text-[#e76fab]"
                 >
-                  Browse past retreats →
+                  All retreats →
                 </Link>
               </p>
             </div>

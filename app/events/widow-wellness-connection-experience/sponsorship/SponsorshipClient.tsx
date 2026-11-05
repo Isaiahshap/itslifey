@@ -1,7 +1,6 @@
 "use client";
 
 import { WidowWellnessPixelEvents } from "@/components/WidowWellnessPixelEvents";
-import { WidowWellnessSponsorshipForm } from "@/components/WidowWellnessSponsorshipForm";
 import {
   EVENT_DATES,
   EVENT_LOCATION,
@@ -109,7 +108,7 @@ const additionalTiers = [
   {
     name: "Community Supporter",
     price: "$1,000",
-    availability: "1 slot left",
+    availability: "Signup closed",
     blurb:
       "For businesses that want to support widows and be part of the It's Lifey mission.",
     includes: [
@@ -123,7 +122,7 @@ const additionalTiers = [
   {
     name: "Healing Sponsor",
     price: "$3,500",
-    availability: "2 slots left",
+    availability: "Signup closed",
     blurb:
       "For sponsors who want a stronger presence and deeper alignment with the event experience.",
     includes: [
@@ -138,7 +137,7 @@ const additionalTiers = [
   {
     name: "Lunch Sponsor",
     price: "$1,000",
-    availability: "Only 1 available",
+    availability: "Signup closed",
     note: "Catering by Liora's Catering",
     includes: [
       "Logo on event webpage",
@@ -205,13 +204,6 @@ const whySponsor = [
     text: "Position yourself as a trusted expert serving widows — share knowledge, build credibility, and deepen trust with an audience looking for guidance.",
   },
 ] as const;
-
-function scrollToSponsorForm() {
-  document.getElementById("ww-sponsor-form")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-}
 
 export function SponsorshipClient() {
   return (
@@ -283,13 +275,12 @@ export function SponsorshipClient() {
               {EVENT_SHORT_TAGLINE}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <button
-                type="button"
-                onClick={scrollToSponsorForm}
+              <Link
+                href={EVENT_PATH}
                 className="inline-flex items-center justify-center rounded-full bg-[#e76fab] px-8 py-3.5 text-base font-semibold text-white shadow-md transition-colors hover:bg-[#d85e9a]"
               >
-                Become a sponsor
-              </button>
+                View the event
+              </Link>
               <a
                 href={SPONSORSHIP_PDF}
                 download
@@ -684,92 +675,74 @@ export function SponsorshipClient() {
         </div>
       </section>
 
-      {/* Learn more + form */}
       <section
-        id="ww-sponsor-form"
         className="border-b border-black/10 bg-[#faf8f5]"
-        aria-labelledby="sponsor-form-heading"
+        aria-labelledby="sponsor-closed-heading"
       >
         <div className={`${shell} py-14 sm:py-16 lg:py-20`}>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_min(28rem,100%)] lg:items-start lg:gap-16">
-            <motion.div {...fadeUp}>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab]">
-                Ready to stand beside widows?
-              </p>
-              <h2
-                id="sponsor-form-heading"
-                className="mt-3 text-3xl font-semibold text-[#141413] sm:text-4xl"
-              >
-                Become a sponsor
-              </h2>
-              <p className={`mt-5 ${body}`}>
-                Your sponsorship is more than brand visibility. It is a way to
-                help widows feel less alone, connect them with resources they
-                may not know they need, and bring healing, guidance, and hope
-                into a room full of women rebuilding their lives.
-              </p>
-              <p className={`mt-5 ${body}`}>
-                Choose your level below — you&apos;ll be redirected to secure
-                Stripe checkout. We&apos;ll email you the payment link as well.
-                Your sponsorship isn&apos;t confirmed until payment is complete.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link
-                  href={EVENT_PATH}
-                  className="inline-flex items-center justify-center rounded-full border-2 border-[#e76fab]/40 bg-white px-6 py-3 text-sm font-semibold text-[#b8457e] transition-colors hover:border-[#e76fab]"
-                >
-                  Learn more about the event
-                </Link>
-                <a
-                  href={SPONSORSHIP_PDF}
-                  download
-                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-black/10 bg-white px-6 py-3 text-sm font-semibold text-[#2a2928] transition-colors hover:border-[#e76fab]/40"
-                >
-                  <Download className="h-4 w-4" aria-hidden />
-                  Download sponsorship packet (PDF)
-                </a>
-              </div>
-
-              <div className="mt-8 rounded-2xl border border-black/[0.08] bg-white p-6 shadow-sm sm:p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
-                  Where to stay
-                </p>
-                <p className="mt-2 text-lg font-semibold text-[#141413]">
-                  Hotel block at {HOTEL_NAME}
-                </p>
-                <p className={`mt-4 ${body}`}>
-                  Traveling in for the event? We&apos;ve reserved a nearby hotel
-                  block at {HOTEL_NAME}. Book through our group link to reserve
-                  your room.
-                </p>
-                <a
-                  href={HOTEL_BLOCK_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center justify-center rounded-full bg-[#e76fab] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
-                >
-                  Book {HOTEL_NAME}
-                </a>
-              </div>
-
-              <p className="mt-8 text-sm text-[#666766]">
-                Questions?{" "}
-                <a
-                  href="mailto:jennifer@itslifey.com"
-                  className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2"
-                >
-                  jennifer@itslifey.com
-                </a>{" "}
-                · @itslifeyco
-              </p>
-            </motion.div>
-            <motion.div
-              {...fadeUp}
-              className="rounded-[1.75rem] border border-black/[0.08] bg-white p-6 shadow-lg shadow-black/[0.06] sm:p-8 lg:sticky lg:top-28"
+          <motion.div {...fadeUp} className="max-w-2xl">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#e76fab]">
+              Sponsorship
+            </p>
+            <h2
+              id="sponsor-closed-heading"
+              className="mt-3 text-3xl font-semibold text-[#141413] sm:text-4xl"
             >
-              <WidowWellnessSponsorshipForm />
-            </motion.div>
-          </div>
+              Sponsor signup for this event is closed
+            </h2>
+            <p className={`mt-5 ${body}`}>
+              Thank you to the businesses standing with widows for this
+              gathering. The sponsorship form is no longer open. If you have a
+              question about a confirmed sponsorship, email Jennifer.
+            </p>
+            <p className="mt-6 text-sm text-[#666766]">
+              <a
+                href="mailto:jennifer@itslifey.com"
+                className="font-semibold text-[#e76fab] underline decoration-[#e76fab]/40 underline-offset-2"
+              >
+                jennifer@itslifey.com
+              </a>{" "}
+              · @itslifeyco
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Link
+                href={EVENT_PATH}
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#e76fab]/40 bg-white px-6 py-3 text-sm font-semibold text-[#b8457e] transition-colors hover:border-[#e76fab]"
+              >
+                Learn more about the event
+              </Link>
+              <a
+                href={SPONSORSHIP_PDF}
+                download
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-black/10 bg-white px-6 py-3 text-sm font-semibold text-[#2a2928] transition-colors hover:border-[#e76fab]/40"
+              >
+                <Download className="h-4 w-4" aria-hidden />
+                Download sponsorship packet (PDF)
+              </a>
+            </div>
+
+            <div className="mt-8 rounded-2xl border border-black/[0.08] bg-white p-6 shadow-sm sm:p-7">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b8457e]">
+                Where to stay
+              </p>
+              <p className="mt-2 text-lg font-semibold text-[#141413]">
+                Hotel block at {HOTEL_NAME}
+              </p>
+              <p className={`mt-4 ${body}`}>
+                Traveling in for the event? We&apos;ve reserved a nearby hotel
+                block at {HOTEL_NAME}. Book through our group link to reserve
+                your room.
+              </p>
+              <a
+                href={HOTEL_BLOCK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center justify-center rounded-full bg-[#e76fab] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#d85e9a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]"
+              >
+                Book {HOTEL_NAME}
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
