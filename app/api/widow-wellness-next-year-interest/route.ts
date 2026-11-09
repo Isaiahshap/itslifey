@@ -191,19 +191,14 @@ export async function POST(request: Request) {
     );
   }
 
+  // Interest is saved once Jennifer's log email succeeds. Confirmation to the
+  // visitor can fail (spam filters, Resend recipient rules) without losing the lead.
   if (toApplicant.error) {
     console.error("Resend error (confirmation):", toApplicant.error);
-    return NextResponse.json(
-      {
-        error:
-          "We received your interest, but couldn’t send a confirmation email. Please check your spam folder or email us from the Contact page.",
-      },
-      { status: 502 },
-    );
   }
 
   return NextResponse.json({
     ok: true as const,
-    id: toApplicant.data?.id ?? toJennifer.data?.id ?? null,
+    id: toJennifer.data?.id ?? toApplicant.data?.id ?? null,
   });
 }
