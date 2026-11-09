@@ -5,13 +5,13 @@ import { BREAKOUT_LEADERS } from "@/lib/widow-wellness-event";
 import { WidowWellnessClient } from "./WidowWellnessClient";
 
 export const metadata: Metadata = {
-  title: "Widow Wellness & Connection Experience — November 2026",
+  title: "Widow Wellness & Connection Experience — November 2027 Interest",
   description:
-    "Sold out. A one-day gathering for widows in Reading, MA — keynotes, wellness breakouts, community, and The Hope Mic. VIP evening with Kelley Lynn. Presented by It's Lifey.",
+    "November 2026 sold out a month early — join the interest list for November 2027. See speakers, schedule, and details from this year's gathering. Presented by It's Lifey.",
   openGraph: {
     title: "Widow Wellness & Connection Experience | It's Lifey",
     description:
-      "Sold out. Real talk. Real connection. Real hope. November 13–14, 2026 at Presence & Co., Reading, Massachusetts.",
+      "Sold out for November 2026. Join the interest list for November 2027 — connection, wellness, and hope for widows.",
   },
 };
 

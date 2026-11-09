@@ -1,7 +1,11 @@
 export const EVENT_NAME = "Widow Wellness & Connection Experience";
 export const EVENT_SHORT_TAGLINE = "Real talk. Real connection. Real hope.";
 export const EVENT_DATES = "November 13–14, 2026";
+export const EVENT_YEAR = "2026";
 export const EVENT_LOCATION = "Presence & Co. · Reading, Massachusetts";
+export const NEXT_YEAR_LABEL = "November 2027";
+export const NEXT_YEAR_INTEREST_NAME =
+  "Widow Wellness & Connection Experience — November 2027";
 
 export const EVENT_PATH = "/events/widow-wellness-connection-experience";
 export const SPONSORSHIP_PATH =

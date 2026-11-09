@@ -1,5 +1,6 @@
 "use client";
 
+import { WidowWellnessNextYearInterestForm } from "@/components/WidowWellnessNextYearInterestForm";
 import { WidowWellnessPixelEvents } from "@/components/WidowWellnessPixelEvents";
 import {
   BREAKOUT_LEADERS,
@@ -8,9 +9,11 @@ import {
   EVENT_NAME,
   EVENT_SHORT_TAGLINE,
   EVENT_SPONSORS,
+  EVENT_YEAR,
   HOTEL_BLOCK_URL,
   HOTEL_NAME,
   KEYNOTE_SPEAKERS,
+  NEXT_YEAR_LABEL,
   SPONSORSHIP_PATH,
 } from "@/lib/widow-wellness-event";
 import Image from "next/image";
@@ -32,8 +35,15 @@ const afternoonBreakouts = BREAKOUT_LEADERS.filter(
   (l) => l.slot === "afternoon",
 );
 
+function scrollToInterest() {
+  document.getElementById("ww-register")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}
+
 function scrollToDetails() {
-  document.getElementById("ww-intro")?.scrollIntoView({
+  document.getElementById("ww-2026")?.scrollIntoView({
     behavior: "smooth",
     block: "start",
   });
@@ -353,17 +363,19 @@ export function WidowWellnessClient({
             healing, and women who truly understand.
           </p>
           <div className="ww-hero__meta">
-            <span className="ww-hero__date">{EVENT_DATES}</span>
-            <span>{EVENT_LOCATION}</span>
+            <span className="ww-hero__date">{EVENT_DATES} — sold out</span>
+            <span>Next gathering · {NEXT_YEAR_LABEL}</span>
           </div>
           <div className="ww-hero__actions">
-            <p className="ww-soldout">Sold out</p>
+            <button type="button" className="ww-btn" onClick={scrollToInterest}>
+              Register for next year
+            </button>
             <button
               type="button"
               className="ww-btn ww-btn--ghost"
               onClick={scrollToDetails}
             >
-              Explore the Weekend
+              See the {EVENT_YEAR} details
             </button>
           </div>
         </div>
@@ -438,7 +450,100 @@ export function WidowWellnessClient({
         </div>
       </section>
 
-      {/* 3. Intro */}
+      {/* 3. Next-year interest — pulled up */}
+      <section
+        id="ww-register"
+        ref={registerRef}
+        className="ww-register"
+        aria-labelledby="ww-register-heading"
+      >
+        <div className="ww-shell">
+          <div className="ww-register__grid">
+            <Reveal>
+              <div>
+                <p className="ww-eyebrow">{NEXT_YEAR_LABEL}</p>
+                <h2 id="ww-register-heading" className="ww-register__title">
+                  We&apos;re doing it again
+                </h2>
+                <p className="ww-body" style={{ marginTop: "1.15rem" }}>
+                  Our November Widow Wellness &amp; Connection Experience sold
+                  out a month early, so we&apos;re already planning to do it
+                  again. Get ready for another incredible day of connection,
+                  inspiration, wellness, laughter, and all the good stuff that
+                  makes It&apos;s Lifey so special.
+                </p>
+                <p className="ww-body" style={{ marginTop: "0.85rem" }}>
+                  Leave your name below and we&apos;ll reach out when{" "}
+                  {NEXT_YEAR_LABEL} registration opens.
+                </p>
+                <p className="ww-body" style={{ marginTop: "0.85rem" }}>
+                  Already coming this weekend? Write us anytime at{" "}
+                  <a href="mailto:jennifer@itslifey.com" className="ww-link">
+                    jennifer@itslifey.com
+                  </a>
+                  .
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="ww-register__form">
+              <p className="ww-register__form-label">Register here</p>
+              <WidowWellnessNextYearInterestForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. 2026 event details */}
+      <section
+        id="ww-2026"
+        className="ww-archive"
+        aria-labelledby="ww-archive-heading"
+      >
+        <div className="ww-shell">
+          <Reveal>
+            <div className="ww-archive__grid">
+              <div>
+                <p className="ww-eyebrow">November {EVENT_YEAR}</p>
+                <h2 id="ww-archive-heading" className="ww-archive__title">
+                  Here&apos;s all the info from the {EVENT_YEAR} event
+                </h2>
+                <p className="ww-body" style={{ marginTop: "1rem" }}>
+                  Speakers, schedule, breakouts, and more from the gathering that
+                  sold out — kept here so you can see what this day feels like.
+                </p>
+              </div>
+              <dl className="ww-archive__facts">
+                <div className="ww-archive__fact">
+                  <dt>When</dt>
+                  <dd>{EVENT_DATES}</dd>
+                </div>
+                <div className="ww-archive__fact">
+                  <dt>Where</dt>
+                  <dd>{EVENT_LOCATION}</dd>
+                </div>
+                <div className="ww-archive__fact">
+                  <dt>Where to stay</dt>
+                  <dd>Hotel block at {HOTEL_NAME}</dd>
+                  <p>
+                    Still traveling in for this weekend?{" "}
+                    <a
+                      href={HOTEL_BLOCK_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ww-link"
+                    >
+                      Book {HOTEL_NAME}
+                    </a>
+                  </p>
+                </div>
+              </dl>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 5. Intro */}
       <section
         id="ww-intro"
         className="ww-intro"
@@ -659,69 +764,6 @@ export function WidowWellnessClient({
               </div>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* 8. Sold out */}
-      <section
-        id="ww-register"
-        ref={registerRef}
-        className="ww-register"
-        aria-labelledby="ww-register-heading"
-      >
-        <div className="ww-shell">
-          <div className="ww-register__grid">
-            <Reveal>
-              <div>
-                <p className="ww-eyebrow">Tickets</p>
-                <h2 id="ww-register-heading" className="ww-register__title">
-                  Sold out
-                </h2>
-                <p className="ww-body" style={{ marginTop: "1.15rem" }}>
-                  Tickets for the Widow Wellness &amp; Connection Experience
-                  are sold out. Thank you — the room is full.
-                </p>
-                <p className="ww-body" style={{ marginTop: "0.85rem" }}>
-                  If you already have a spot and need anything before the
-                  weekend, write to us. We read every message with care.
-                </p>
-                <p className="ww-body" style={{ marginTop: "0.85rem" }}>
-                  <a href="mailto:jennifer@itslifey.com" className="ww-link">
-                    jennifer@itslifey.com
-                  </a>
-                </p>
-              </div>
-            </Reveal>
-
-            <div className="ww-register__form">
-              <dl className="ww-register__facts">
-                <div className="ww-register__fact">
-                  <dt>When</dt>
-                  <dd>{EVENT_DATES}</dd>
-                </div>
-                <div className="ww-register__fact">
-                  <dt>Where</dt>
-                  <dd>{EVENT_LOCATION}</dd>
-                </div>
-                <div className="ww-register__fact">
-                  <dt>Where to stay</dt>
-                  <dd>Hotel block at {HOTEL_NAME}</dd>
-                  <p>
-                    A nearby hotel block at {HOTEL_NAME} is reserved for guests
-                    traveling in for the weekend.{" "}
-                    <a
-                      href={HOTEL_BLOCK_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="ww-link"
-                    >
-                      Book {HOTEL_NAME}
-                    </a>
-                  </p>
-                </div>
-              </dl>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -1003,14 +1045,16 @@ export function WidowWellnessClient({
       {/* Sticky CTA */}
       <div
         className={`ww-sticky${stickyVisible ? " is-visible" : ""}`}
-        role="status"
-        aria-label="Tickets are sold out"
+        role="region"
+        aria-label={`Register interest for ${NEXT_YEAR_LABEL}`}
       >
         <div className="ww-sticky__meta">
-          <p>{EVENT_DATES}</p>
-          <span>{EVENT_LOCATION}</span>
+          <p>{NEXT_YEAR_LABEL}</p>
+          <span>Interest list open</span>
         </div>
-        <p className="ww-soldout ww-soldout--bar">Sold out</p>
+        <button type="button" className="ww-btn" onClick={scrollToInterest}>
+          Register here
+        </button>
       </div>
     </div>
   );
