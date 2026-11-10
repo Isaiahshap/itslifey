@@ -13,6 +13,7 @@ export function SiteFinalCta() {
     pathname.startsWith("/retreats/summer-by-the-sea") ||
     pathname.startsWith("/retreats/winter-widow-wellness") ||
     pathname.startsWith("/events/widow-wellness-connection-experience") ||
+    pathname.startsWith("/events/life-after-loss") ||
     pathname.startsWith("/resources")
   ) {
     return null;

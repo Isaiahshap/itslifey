@@ -11,13 +11,14 @@ import {
   computeHeroHeadlineFontSizePx,
   HERO_HEADLINE_LINE_HEIGHT_RATIO,
 } from "@/lib/heroHeadlineFont";
+import { EVENT_PATH } from "@/lib/widow-wellness-event";
 import {
-  EVENT_DATES,
-  EVENT_LOCATION,
-  EVENT_PATH,
-  EVENT_SHORT_TAGLINE,
-  SPONSORSHIP_PATH,
-} from "@/lib/widow-wellness-event";
+  LAL_EVENT_LOCATION,
+  LAL_EVENT_PATH,
+  LAL_EVENT_REGISTER_URL,
+  LAL_EVENT_SHORT_NAME,
+  LAL_EVENT_WHEN,
+} from "@/lib/life-after-loss-event";
 import "./home.css";
 
 const HERO_IMAGES = [
@@ -27,13 +28,6 @@ const HERO_IMAGES = [
   "/images/widowwellnessimages/IMG_4386.jpeg",
   "/images/widowwellnessimages/IMG_4575.jpeg",
   "/images/widowwellnessimages/IMG_8510.jpeg",
-] as const;
-
-/** One-day gathering energy — communal tables, real connection. */
-const EVENT_SHOWCASE_IMAGES = [
-  "/images/widowwellnessimages/IMG_2517.jpeg",
-  "/images/widowwellnessimages/IMG_4386.jpeg",
-  "/images/widowwellnessimages/IMG_0604.jpeg",
 ] as const;
 
 const PATHWAY_THUMBS = {
@@ -93,7 +87,6 @@ function CtaArrow() {
 
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
-  const [eventShowcaseIndex, setEventShowcaseIndex] = useState(0);
   const [videoIndex, setVideoIndex] = useState(0);
   const heroCopyRef = useRef<HTMLDivElement>(null);
   const [heroHeadlinePx, setHeroHeadlinePx] = useState<number | undefined>(
@@ -120,13 +113,6 @@ export default function Home() {
     const id = window.setInterval(() => {
       setHeroIndex((i) => (i + 1) % HERO_IMAGES.length);
     }, 8000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setEventShowcaseIndex((i) => (i + 1) % EVENT_SHOWCASE_IMAGES.length);
-    }, 6500);
     return () => window.clearInterval(id);
   }, []);
 
@@ -350,65 +336,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ——— EVENT FEATURE ——— */}
+      {/* ——— LIFE AFTER LOSS (compact) ——— */}
       <section
         id="support-paths"
-        className="home-section home-section--pink"
-        aria-labelledby="event-heading"
+        className="home-evening"
+        aria-labelledby="lal-home-heading"
+        data-reveal=""
       >
-        <div className="home-shell home-split home-split--flip" data-reveal="">
-          <div className="home-split__media reveal-media" style={delayStyle(40)}>
-            {EVENT_SHOWCASE_IMAGES.map((src, i) => (
-              <motion.div
-                key={src}
-                className="absolute inset-0"
-                initial={false}
-                animate={{
-                  opacity: eventShowcaseIndex === i ? 1 : 0,
-                }}
-                transition={{
-                  duration: 2.4,
-                  ease: [0.45, 0, 0.55, 1] as const,
-                }}
-              >
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 960px) 100vw, 50vw"
-                />
-              </motion.div>
-            ))}
-          </div>
-          <div className="reveal-up" style={delayStyle(120)}>
-            <p className="home-kicker">
-              Widow Wellness &amp; Connection Experience
-            </p>
-            <h2 id="event-heading" className="home-title">
-              <ClipReveal delay={0}>Sold out</ClipReveal>
+        <div className="home-shell home-evening__inner reveal-up">
+          <div className="home-evening__copy">
+            <p className="home-kicker">Upcoming evening · {LAL_EVENT_LOCATION}</p>
+            <h2 id="lal-home-heading" className="home-evening__title">
+              {LAL_EVENT_SHORT_NAME}
             </h2>
-            <p className="home-copy">
-              A one-day gathering for widows across New England — inspiration,
-              education, healing, and women who truly understand. Tickets for{" "}
-              {EVENT_DATES} are sold out. {EVENT_SHORT_TAGLINE}
+            <p className="home-evening__lede">
+              Estate planning and financial clarity for widows — a warm,
+              intimate evening with Law Mom®, Kaplan Family Financial, and
+              It&apos;s Lifey.
             </p>
-            <p className="home-meta">
-              {EVENT_DATES} · {EVENT_LOCATION}
-            </p>
-            <div className="home-actions">
-              <Link href={EVENT_PATH} className="il-btn il-btn--on-dark">
-                View the event
-                <CtaArrow />
-              </Link>
-              <Link
-                href={SPONSORSHIP_PATH}
-                className="il-btn il-btn--ghost-dark"
-              >
-                Sponsor the event
-                <CtaArrow />
-              </Link>
-            </div>
+            <p className="home-meta">{LAL_EVENT_WHEN}</p>
+          </div>
+          <div className="home-evening__actions">
+            <a
+              href={LAL_EVENT_REGISTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="il-btn il-btn--solid"
+            >
+              Reserve your seat
+              <CtaArrow />
+            </a>
+            <Link href={LAL_EVENT_PATH} className="il-link">
+              Event details
+              <CtaArrow />
+            </Link>
           </div>
         </div>
       </section>

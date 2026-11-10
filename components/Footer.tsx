@@ -27,6 +27,10 @@ const programsLinks = [
   },
   { href: "/retreats", label: "All Retreats" },
   {
+    href: "/events/life-after-loss",
+    label: "Life After Loss — Norwell",
+  },
+  {
     href: "/events/widow-wellness-connection-experience",
     label: "Widow Wellness & Connection Experience",
   },

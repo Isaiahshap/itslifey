@@ -974,6 +974,58 @@
   text-decoration-color: rgba(26, 25, 24, 0.25);
 }
 
+/* ——— Compact upcoming evening strip ——— */
+
+.home-evening {
+  padding: clamp(2.25rem, 5vw, 3.25rem) 0;
+  background: #fffcfa;
+  border-bottom: 1px solid rgba(26, 25, 24, 0.12);
+}
+
+.home-evening__inner {
+  display: grid;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+@media (min-width: 800px) {
+  .home-evening__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2.5rem;
+  }
+}
+
+.home-evening__title {
+  margin: 0.55rem 0 0;
+  max-width: 18ch;
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.home-evening__lede {
+  margin: 0.85rem 0 0;
+  max-width: 42ch;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: rgba(26, 25, 24, 0.84);
+}
+
+.home-evening__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+@media (min-width: 800px) {
+  .home-evening__actions {
+    align-items: flex-end;
+    padding-bottom: 0.15rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-hero__slide,
   .home-highlight,
