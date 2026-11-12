@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SocialMediaLinks } from "@/components/SocialMediaLinks";
+import { HHH_EVENT_NAME, HHH_EVENT_PATH } from "@/lib/home-heart-event";
+import { LAL_EVENT_PATH, LAL_NAV_LABEL } from "@/lib/life-after-loss-event";
 import { EVENT_PATH } from "@/lib/widow-wellness-event";
 
 const exploreLinks = [
@@ -27,8 +29,12 @@ const programsLinks = [
   },
   { href: "/retreats", label: "All Retreats" },
   {
-    href: "/events/life-after-loss",
-    label: "Life After Loss — Norwell",
+    href: LAL_EVENT_PATH,
+    label: LAL_NAV_LABEL,
+  },
+  {
+    href: HHH_EVENT_PATH,
+    label: HHH_EVENT_NAME,
   },
   {
     href: "/events/widow-wellness-connection-experience",
@@ -47,7 +53,7 @@ const legalLinks = [
 ] as const;
 
 function footerLinkClass() {
-  return "text-[13px] font-medium tracking-tight text-[#1a1918] transition-colors duration-150 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]";
+  return "text-[13px] font-medium leading-snug tracking-tight text-[#1a1918] transition-colors duration-150 hover:text-[#e76fab] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e76fab]";
 }
 
 function legalLinkClass() {

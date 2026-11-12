@@ -14,6 +14,7 @@ export function SiteFinalCta() {
     pathname.startsWith("/retreats/winter-widow-wellness") ||
     pathname.startsWith("/events/widow-wellness-connection-experience") ||
     pathname.startsWith("/events/life-after-loss") ||
+    pathname.startsWith("/events/home-heart-whats-next") ||
     pathname.startsWith("/resources")
   ) {
     return null;

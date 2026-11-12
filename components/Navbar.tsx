@@ -14,6 +14,8 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { SocialMediaLinks } from "@/components/SocialMediaLinks";
+import { HHH_EVENT_NAME, HHH_EVENT_PATH } from "@/lib/home-heart-event";
+import { LAL_EVENT_PATH, LAL_NAV_LABEL } from "@/lib/life-after-loss-event";
 
 const aboutSubLinks = [
   { href: "/about", label: "About Me" },
@@ -41,8 +43,12 @@ const retreatSubLinks = [
 
 const eventsSubLinks = [
   {
-    href: "/events/life-after-loss",
-    label: "Life After Loss — Norwell",
+    href: LAL_EVENT_PATH,
+    label: LAL_NAV_LABEL,
+  },
+  {
+    href: HHH_EVENT_PATH,
+    label: HHH_EVENT_NAME,
   },
   {
     href: "/events/widow-wellness-connection-experience",
@@ -106,7 +112,7 @@ const desktopMenuFlyout =
   "min-w-[14rem] overflow-hidden rounded-none border border-[#e3ddd4] border-t-0 bg-[#fffcfa] py-0 shadow-[0_18px_40px_-20px_rgba(26,25,24,0.35)]";
 
 const desktopMenuItemClass =
-  "block rounded-none border-b border-[#ebe6df] px-4 py-3.5 text-[14px] font-medium tracking-tight transition-colors duration-150 last:border-b-0";
+  "block whitespace-pre-line rounded-none border-b border-[#ebe6df] px-4 py-3.5 text-[14px] font-medium leading-snug tracking-tight transition-colors duration-150 last:border-b-0";
 
 const dropdownEase = [0.22, 1, 0.36, 1] as const;
 const dropdownExitEase = [0.4, 0, 0.2, 1] as const;
@@ -190,7 +196,7 @@ function mobileNavLinkClass(active: boolean) {
 
 function mobileNavSubLinkClass(active: boolean) {
   return [
-    "block rounded-none px-4 py-3 text-[15px] font-medium transition-colors duration-150",
+    "block whitespace-pre-line rounded-none px-4 py-3 text-[15px] font-medium leading-snug transition-colors duration-150",
     active
       ? "bg-white text-[#b84a82]"
       : "text-white hover:bg-[#c2528c] hover:text-white",
@@ -205,6 +211,8 @@ function DesktopHoverMenu({
   links,
   sectionActive,
   menuShellExtra = "",
+  menuWidthClass = "max-w-[min(22rem,calc(100vw-1.5rem))]",
+  align = "center",
 }: {
   pathname: string;
   label: string;
@@ -213,6 +221,8 @@ function DesktopHoverMenu({
   links: readonly { href: string; label: string }[];
   sectionActive: boolean;
   menuShellExtra?: string;
+  menuWidthClass?: string;
+  align?: "center" | "end";
 }) {
   const [open, setOpen] = useState(false);
 
@@ -251,7 +261,9 @@ function DesktopHoverMenu({
         />
       </button>
       <div
-        className="pointer-events-none absolute left-1/2 top-full z-10 w-max max-w-[min(22rem,calc(100vw-1.5rem))] -translate-x-1/2 overflow-hidden"
+        className={`pointer-events-none absolute top-full z-10 w-max overflow-hidden ${menuWidthClass} ${
+          align === "end" ? "right-0" : "left-1/2 -translate-x-1/2"
+        }`}
         aria-hidden={!open}
       >
         <AnimatePresence initial={false}>
@@ -263,7 +275,9 @@ function DesktopHoverMenu({
               animate="open"
               exit="closed"
               className="pointer-events-auto will-change-transform"
-              style={{ transformOrigin: "top center" }}
+              style={{
+                transformOrigin: align === "end" ? "top right" : "top center",
+              }}
             >
               <motion.ul
                 id={menuId}
@@ -427,7 +441,9 @@ export function Navbar() {
             ariaLabel="Events"
             links={eventsSubLinks}
             sectionActive={eventsSectionActive(pathname)}
-            menuShellExtra="min-w-[19rem]"
+            menuShellExtra="min-w-[23rem]"
+            menuWidthClass="max-w-[min(26rem,calc(100vw-1.5rem))]"
+            align="end"
           />
         </nav>
 

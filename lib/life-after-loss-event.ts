@@ -1,6 +1,9 @@
 export const LAL_EVENT_NAME =
   "Life After Loss: An Evening of Support & Planning";
 export const LAL_EVENT_SHORT_NAME = "Life After Loss";
+/** Menu label. The line break keeps the long title readable in the Events dropdown. */
+export const LAL_NAV_LABEL =
+  "The Stuff Nobody Tells You:\nMoney, Estate Planning & Widowhood";
 export const LAL_EVENT_DATE = "February 9, 2027";
 export const LAL_EVENT_TIME = "6–8 PM";
 export const LAL_EVENT_DATE_LONG = "Tuesday, February 9, 2027";

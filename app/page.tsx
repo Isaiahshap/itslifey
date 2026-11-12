@@ -13,6 +13,12 @@ import {
 } from "@/lib/heroHeadlineFont";
 import { EVENT_PATH } from "@/lib/widow-wellness-event";
 import {
+  HHH_EVENT_CITY,
+  HHH_EVENT_PATH,
+  HHH_EVENT_WHEN,
+  HHH_RSVP_HREF,
+} from "@/lib/home-heart-event";
+import {
   LAL_EVENT_LOCATION,
   LAL_EVENT_PATH,
   LAL_EVENT_REGISTER_URL,
@@ -367,6 +373,38 @@ export default function Home() {
               <CtaArrow />
             </a>
             <Link href={LAL_EVENT_PATH} className="il-link">
+              Event details
+              <CtaArrow />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="home-evening"
+        aria-labelledby="hhh-home-heading"
+        data-reveal=""
+      >
+        <div className="home-shell home-evening__inner reveal-up">
+          <div className="home-evening__copy">
+            <p className="home-kicker">Upcoming evening · {HHH_EVENT_CITY}</p>
+            <h2 id="hhh-home-heading" className="home-evening__title">
+              Home, Heart
+              <br />
+              &amp; What&apos;s Next
+            </h2>
+            <p className="home-evening__lede">
+              Cocktails and an honest conversation about what comes next for
+              your home — with no pressure to make a move.
+            </p>
+            <p className="home-meta">{HHH_EVENT_WHEN}</p>
+          </div>
+          <div className="home-evening__actions">
+            <a href={HHH_RSVP_HREF} className="il-btn il-btn--solid">
+              RSVP by email
+              <CtaArrow />
+            </a>
+            <Link href={HHH_EVENT_PATH} className="il-link">
               Event details
               <CtaArrow />
             </Link>
